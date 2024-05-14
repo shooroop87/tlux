@@ -5,10 +5,11 @@ import uuid
 from datetime import datetime
 
 import googlemaps
-from api.forms import DetailsForm, ExtrasForm, PaymentForm, SearchForm, VehicleForm
-from api.models import Booking, Search
 from django.conf import settings
 from django.shortcuts import redirect, render
+
+from api.forms import DetailsForm, ExtrasForm, SearchForm, VehicleForm
+from api.models import Booking, Search
 
 
 def index(request):
@@ -132,16 +133,16 @@ def vehicle(request):
             'to_time': to_time,
         }
         query = {
-                'from_short': from_short,
-                'from_hidden': from_hidden,
-                'to_short': to_short,
-                'to_hidden': to_hidden,
-                'distance': distance_km,
-                'travel_time': travel_time,
-                'to_date': to_date,
-                'to_time': to_time,
-                'session_id': session_id
-            }
+            'from_short': from_short,
+            'from_hidden': from_hidden,
+            'to_short': to_short,
+            'to_hidden': to_hidden,
+            'distance': distance_km,
+            'travel_time': travel_time,
+            'to_date': to_date,
+            'to_time': to_time,
+            'session_id': session_id
+        }
         # Save search
         instance = Search(
             from_hidden=from_hidden,
@@ -530,7 +531,7 @@ def nexi(request):
         billing_company=billing_company,
         billing_address=billing_address,
         terms=terms_
-        )
+    )
     instance.save()
     # Get booking ID
     booking_data = Booking.objects.get(session_id=session_id)

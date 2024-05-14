@@ -3,6 +3,7 @@ import os
 import sys
 from pathlib import Path
 
+from django.utils.translation import gettext_lazy as gl
 from dotenv import find_dotenv, load_dotenv
 
 load_dotenv(find_dotenv())
@@ -10,7 +11,7 @@ load_dotenv(find_dotenv())
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = str(os.getenv("DJANGO_SECRET_KEY"))
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = str(os.getenv("DJANGO_ALLOWED_HOSTS")).split(' ')
 
@@ -87,7 +88,6 @@ DATABASES = {
 }
 
 
-
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
@@ -120,11 +120,11 @@ USE_L10N = True
 USE_TZ = True
 
 LANGUAGES = [
-    ('en', _('English')),
-    ('it', _('Italian')),
-    ('es', _('Spanish')),
-    ('fr', _('French')),
-    ('ru', _('Russian')),
+    ('en', gl('English')),
+    ('it', gl('Italian')),
+    ('es', gl('Spanish')),
+    ('fr', gl('French')),
+    ('ru', gl('Russian')),
     # Добавьте больше языков при необходимости
 ]
 
