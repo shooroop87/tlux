@@ -1,0 +1,47 @@
+{% load static %}
+{% load i18n %}
+<header class="header sticky-bar">
+    <div class="container">
+      <div class="main-header">
+        <div class="header-left">
+          <div class="header-logo"><a class="d-flex" href="{% url 'api:index' %}">
+            <img alt="luxride" src="{% static 'imgs/template/logo.svg' %}"></a></div>
+          <div class="header-nav">
+            <nav class="nav-main-menu d-none d-xl-block">
+              <ul class="main-menu">
+                <li><a href="https://transferslux.com/#transferservice">{% trans "Transfer Service" %}</a>
+                <li><a href="https://transferslux.com/#fleet">{% trans "Our Fleet" %}</a></li>
+                <li><a href="{% url 'api:contacts' %}">{% trans "Contact" %}</a></li>
+              </ul>
+            </nav>
+            <div class="burger-icon burger-icon-white"><span class="burger-icon-mid"></span><span class="burger-icon-bottom"></span></div>
+          </div>
+          <div class="header-right">
+            <div class="d-none d-xxl-inline-block align-middle mr-10"><a class="text-14-medium call-phone color-white hover-up" href="tel:+393292137898">+39 (329) 213 7898</a></div>
+            <div class="d-none d-xxl-inline-block box-dropdown-cart align-middle mr-10">
+              <span class="text-14-medium icon-list icon-account">
+              <span class="text-14-medium color-white arrow-down">
+                {% if request.LANGUAGE_CODE == 'ru' %} RU 
+                {% elif request.LANGUAGE_CODE == 'en' %} EN
+                {% elif request.LANGUAGE_CODE == 'it' %} IT
+                {% elif request.LANGUAGE_CODE == 'es' %} ES
+                {% elif request.LANGUAGE_CODE == 'fr' %} FR
+                {% endif %}
+              </span></span>
+              <div class="dropdown-account">
+                <ul>
+                  <li><a class="font-md" href="/en/" hreflang="en">{% trans "English" %}</a></li>
+                  <li><a class="font-md" href="/ru/" hreflang="ru">{% trans "Russian" %}</a></li>
+                  <li><a class="font-md" href="/es/" hreflang="es">{% trans "Spanish" %}</a></li>
+                  <li><a class="font-md" href="/fr/" hreflang="fr">{% trans "French" %}</a></li>
+                  <li><a class="font-md" href="/it/" hreflang="it">{% trans "Italian" %}</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="box-button-login d-inline-block mr-10 align-middle">
+              <a class="btn btn-default hover-up" href="{% url 'api:help' %}">{% trans "Help" %}</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>

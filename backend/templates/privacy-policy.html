@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en" data-x="html" data-x-toggle="html-overflow-hidden">
+    {% load static %}
+    {% load i18n %}
+<head>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="msapplication-TileColor" content="#0E0E0E">
+    <meta name="template-color" content="#0E0E0E">
+    <meta name="description" content="Index page">
+    <meta name="keywords" content="index, page">
+    <meta name="author" content="">
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'imgs/template/favicon.png' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>TransfersLux</title>
+  </head>
+  <body>
+    {% include 'includes/preloader.html' %}
+    {% include 'includes/header.html' %}
+    {% include 'includes/mobile_menu.html' %}
+    <main class="main">
+      <div class="section pt-60 pb-60 bg-primary">
+        <div class="container-sub"> 
+          <h1 class="heading-44-medium color-white mb-5">{% trans "Privacy Policy" %}</h1>
+          <div class="box-breadcrumb">
+            <ul>
+              <li> <a href="{% url 'api:index' %}">{% trans "Home" %}</a></li>
+              <li> <a href="{% url 'api:privacy' %}">{% trans "Privacy Policy" %}</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <section class="section">
+        <div class="container-sub"> 
+          <div class="mt-60 pb-60"> 
+            <h2 class="text-16 mb-30 color-text title-fleet wow fadeInUp">1. What information do we collect and for what purposes</h2>
+            <p class="text-15 text-dark-1 mt-5">
+              TransfersLux is an online service for searching and booking transfers. 
+              <br><br>
+              We need your information for:<br><br>
+              <ul>
+                <li>registration, processing, distribution, and control over the execution of the booking</li>
+                <li>counseling and support of your booking</li>
+                <li>improvement of the service on the basis of the statistics of websites visits, sales and feedback on the service and the transfers provided</li>
+                <li>improvement of the offer, marketing, and targeted advertising</li>
+              </ul>
+            </p>
+            <p class="text-15 text-dark-1 mt-5">
+                In order to achieve the above-mentioned goals, when booking a transfer, we ask you to indicate the following personal data: first and last names, contact phone number, email address, departure/destination addresses. 
+                <br><br>
+            </p>
+            <p class="text-15 text-dark-1 mt-5">
+                We also automatically collect information about your interaction with the TransfersLux service, 
+                in particular, information about the pages you visited or content seen, made queries,
+                created bookings, and other actions on the site, as well as IP address, access time,
+                information about software and hardware, device information, device event information, unique identifiers,
+                fault information, cookie data, and information about the pages you viewed before using the TransfersLux service.
+                <br><br>
+            </p>
+
+            <h2 class="text-16 fw-500 mt-35">2. Personal data of other people you provide to us</h2>
+            <p class="text-15 text-dark-1 mt-5">
+                It is possible that you are booking a transfer not for yourself. Then you, most likely, give us the personal data of another person and make a booking on his/her behalf.
+                <br><br>
+                In doing so, you are fully responsible for the fact that the person or persons whose personal data you provided are aware of this, understand, and agree with how TransfersLux uses their data (in accordance with this Privacy Policy).
+            </p>
+
+            <h2 class="text-16 fw-500 mt-35">3. Your rights</h2>
+            <p class="text-15 text-dark-1 mt-5">
+                When creating a booking, by agreeing to the terms of this Privacy Policy, you freely and in your own interests transfer your personal data to us and give your active consent to their storage and processing.
+                <br><br>
+                You may withdraw your consent to this Privacy Policy by sending an email to support@transferslux.com.
+                <br><br>
+                The fact that the consent is withdrawn does not affect the legality of the permitted processing of data carried out prior to withdrawal.
+                <br><br>
+                In addition, you are entitled to:
+                <ul>
+                    <li>get access to your data, as well as information on the purposes of processing, the categories of data processed, recipients, the data storage period</li>
+                    <li>obtain from us the rectification of inaccurate personal data. You are responsible for the actuality of the personal data transferred to us</li>
+                    <li>require us to provide you with a copy of your personal data in a standard, structured, and machine-readable form and/or if technically possible, transmit this information to another service provider</li>
+                    <li>require the erasure of your personal data if there are special reasons (the data is no longer required for the purposes for which they were received, you withdrew your consent to the processing of personal data, there were no overriding legitimate grounds for the processing, etc.), and transmit this requirement to other controllers</li>
+                    <li>obtain from the controller restriction of processing of personal data in the presence of special conditions (the data are inaccurate, processing is illegal, but the party objects to the removal of data, etc.);</li>
+                    <li>require the termination of work with your personal data used for direct marketing</li>
+                    <li>object to be subject to a legally significant decision for you, based on automatic data processing</li>
+                </ul>
+                <br><br>
+                To exercise any of your rights, you can contact us by email at support@transferslux.com with the appropriate request or requirement.
+            </p>
+
+            <h2 class="text-16 fw-500 mt-35">4. Erasure data</h2>
+            <p class="text-15 text-dark-1 mt-5">
+                When creating a booking, by agreeing to the terms of this Privacy Policy, you freely and in your own interests transfer your personal data to us and give your active consent to their storage and processing.
+                <br><br>
+                You may withdraw your consent to this Privacy Policy by sending an email to support@transferslux.com.
+            </p>
+
+            <h2 class="text-16 fw-500 mt-35">5. Transfer of data to third parties</h2>
+            <p class="text-15 text-dark-1 mt-5">
+                It is possible that you are booking a transfer not for yourself. Then you, most likely, give us the personal data of another person and make a booking on his/her behalf.
+                <br><br>
+                After fulfilling your demand for the removal of personal data, we completely and irrevocably anonymize your personal data.
+                <br><br>
+                Please note that in the case of a request to erasure personal data, the following rules apply:
+                <ul>
+                    <li>we have the right to partially save your personal data within the legitimate interests of our business, including to combat fraud and improve security</li>
+                    <li>we have the right to store and use your personal data to the extent necessary to comply with legal requirements</li>
+                    <li>the information you gave to other people (for example, reviews, entries on the forums) may remain public even after you erase your data, but the indication of your identity will be erased.
+                        Some copies of your information can be stored in our database without any possibility of personal identification</li>
+                    <li>in connection with the implementation of the protection system against accidental or deliberate damage or loss of data,
+                        backup copies of your personal data will be erased with a certain delay</li>
+                    </ul>
+                <br><br>
+            </p>
+
+            <h2 class="text-16 fw-500 mt-35">6. Transfer of data to third parties</h2>
+            <p class="text-15 text-dark-1 mt-5">
+                With the TransfersLux service, third parties are also connected in various ways and for various reasons. The main goal is to give the carrier information about your trip in order to complete the booking. Your data can also be received by other parties which we involve in providing services to you, including financial institutions, advertising companies, and in some cases state or other competent authorities.
+                <br><br>
+                We apply the relevant corporate systems and procedures in order to protect the personal data provided to us. We also use security procedures and apply technical and physical restrictions to the use of personal data and access to them on our servers.
+                Only employees with special rights have the right to access personal data in the process of performing their duties.
+                <br><br>
+                We also have the right to carry out a cross-border transfer of personal data to the territory of a foreign state in order to fulfill the obligations of organizing the transfer.
+            </p>
+
+            <h2 class="text-16 fw-500 mt-35">7. Security</h2>
+            <p class="text-15 text-dark-1 mt-5">
+                We follow the proper security procedures to prevent unauthorized access to personal data and their misuse.
+                <br><br>
+                We apply the relevant corporate systems and procedures in order to protect the personal data provided to us. We also use security procedures and apply technical and physical restrictions to the use of personal data and access to them on our servers.
+                Only employees with special rights have the right to access personal data in the process of performing their duties.
+                <br><br>
+                We keep your personal data for as long as we deem necessary to enable you to use our services, we could provide you with our services, as part of compliance with applicable law, to resolve disputes with any parties, and for other purposes that allow us to conduct commercial activities, including detection and prevention of fraudulent or other unlawful acts. This Privacy Policy applies to all personal data stored by us. If you have any questions regarding the specific period of storage of a certain type of your personal data processed by us, you can contact us by email at support@transferslux.com.
+            </p>
+
+            <h2 class="text-16 fw-500 mt-35">8. Changes to Privacy Policy</h2>
+            <p class="text-15 text-dark-1 mt-5">
+                We reserve the right to amend this Privacy Policy at any time. The updated Privacy Policy is published on the TransfersLux website with the date of the last update.
+                We will notify you in advance of the changes made via email.
+            </p>
+
+            <h2 class="text-16 fw-500 mt-35">9. Cookies</h2>
+            <p class="text-15 text-dark-1 mt-5">
+                TransfersLux service strives to ensure that the interaction with our website is as informative as possible and meets your interests. We use cookies to do this. We believe that it is important for you to know which cookies our website uses and for what purposes. This will help to protect your personal information and ensure the maximum usability of our website for the user.<br><br>
+                Cookies contain small amounts of information and are downloaded to your computer or another device from the server of this website. Each time you visit this website, your browser sends cookies back to the server in order to be able to identify you and remember your user preferences. Cookies can be used for a variety of purposes.<br><br>
+                First, they can be required for the normal operation of the website. For example, without cookies, the website will not be able to remember that you have signed in or made a booking. Such cookies are called strictly necessary.<br><br>
+                Secondly, cookies are needed to analyze the use and improve the website, as well as to count the number of visitors. We do not associate website visit statistics and other reports with specific people. Such cookies are called analytical cookies.<br><br>
+                Thirdly, cookies for social networks are used to integrate social networks with the website so that you can use the "Like" and "Share" features in your favorite social network.<br><br>
+                Fourthly, an important field of application for cookies is online advertising. With their help, only the ads which are the most useful and interesting for you are displayed on the websites. These cookies are called adware.<br><br>
+                By using this website, you agree that we may download cookies to your computer or another device. However, you can manage cookies. Please note that deleting or blocking cookies may affect the user interface and some components of this website may become unavailable.<br><br>
+                You can find information on how to turn off cookies or change cookie settings for your browser by clicking on the following links:<br><br>
+                <ul>
+                    <li>Google Chrome: support.google.com/chrome/answer/95647</li>
+                    <li>Firefox: support.mozilla.org/en-US/kb/enable-and-disable-cookies-website-preferences</li>
+                    <li>Internet Explorer: windows.microsoft.com/en-GB/windows-vista/Block-or-allow-cookies</li>
+                    <li>Safari: help.apple.com/safari/mac/8.0/#/sfri11471</li>
+                </ul>
+                <br><br>
+                Most browsers allow you to see the cookies stored on your device and individually delete or block cookies from certain or all websites. Please note that when you delete all cookies, all of your preferences will be lost, including the preference for not using cookies, since it implies the setting of a cookie that provides this failure. More information on changing your browser's settings for blocking or filtering cookies is available at http://www.aboutcookies.org/ or http://www.cookiecentral.com/faq/.<br><br>
+                We can also use technology to track if you read, open or forward certain messages sent by us to your email. The purpose of using these technologies is to make our communication tools more useful and attractive to the user. In case you do not want us to receive information about whether you read, opened or forwarded certain emails, you should cancel your subscription. In this case, we will not be able to send you emails without the activated tracking service. You can also cancel your subscription by following the instructions that we will send you in an email.<br><br>
+            </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    {% include 'includes/footer.html' %}
+    <script src="{% static '/js/vendors/modernizr-3.6.0.min.js' %}"></script>
+    <script src="{% static '/js/vendors/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static '/js/vendors/jquery-migrate-3.3.0.min.js' %}"></script>
+    <script src="{% static '/js/vendors/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static '/js/vendors/waypoints.js' %}"></script>
+    <script src="{% static '/js/vendors/wow.js' %}"></script>
+    <script src="{% static '/js/vendors/magnific-popup.js' %}"></script>
+    <script src="{% static '/js/vendors/perfect-scrollbar.min.js' %}"></script>
+    <script src="{% static '/js/vendors/select2.min.js' %}"></script>
+    <script src="{% static '/js/vendors/isotope.js' %}"></script>
+    <script src="{% static '/js/vendors/scrollup.js' %}"></script>
+    <script src="{% static '/js/vendors/swiper-bundle.min.js' %}"></script>
+    <script src="{% static '/js/vendors/noUISlider.js' %}"></script>
+    <script src="{% static '/js/vendors/slider.js' %}"></script>
+    <!-- Count down-->
+    <script src="{% static '/js/vendors/counterup.js' %}"></script>
+    <script src="{% static '/js/vendors/jquery.countdown.min.js' %}"></script>
+    <!-- Count down--><script src="{% static '/js/vendors/jquery.elevatezoom.js' %}"></script>
+    <script src="{% static '/js/vendors/slick.js' %}"></script>
+    <script src="{% static '/js/vendors/jquery-ui.js' %}"></script>
+    <script src="{% static '/js/vendors/jquery.timepicker.min.js' %}"></script>
+    <script src="{% static '/js/main.js' %}"></script>
+  </body>
+</html>

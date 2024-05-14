@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" data-x="html" data-x-toggle="html-overflow-hidden">
+    {% load static %}
+    {% load i18n %}
+<head>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="msapplication-TileColor" content="#0E0E0E">
+    <meta name="template-color" content="#0E0E0E">
+    <meta name="description" content="Index page">
+    <meta name="keywords" content="index, page">
+    <meta name="author" content="">
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'imgs/template/favicon.png' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>TransfersLux</title>
+  </head>
+  <body>
+    {% include 'includes/preloader.html' %}
+    {% include 'includes/header.html' %}
+    {% include 'includes/mobile_menu.html' %}
+    <main class="main">
+      <section class="section">
+        <div class="container-sub"> 
+          <div class="box-completed-booking"> 
+            <div class="text-center wow fadeInUp"> <img class="mb-20" src="{% static 'imgs/page/booking/completed.png' %}" alt="Booking completed">
+              <h4 class="heading-24-medium color-text mb-10">{% trans "Your booking was submitted successfully!" %}</h4>
+              <p class="text-14 color-grey mb-40">{% trans "Booking details has been sent to" %}: {{ email }}</p>
+            </div>
+            <div class="box-info-book-border wow fadeInUp"> 
+              <div class="info-1"> <span class="color-text text-14">{% trans "Order Number" %}</span><br><span class="color-text text-14-medium">{{ booking_id }}</span></div>
+              <div class="info-1"> <span class="color-text text-14">{% trans "Today" %}</span><br><span class="color-text text-14-medium">{% now "F Y H:i" %}</span></div>
+              <div class="info-1"> <span class="color-text text-14">{% trans "Total" %}</span><br><span class="color-text text-14-medium">EUR {{ rate }}</span></div>
+              <div class="info-1"> <span class="color-text text-14">{% trans "Payment Method" %}</span><br><span class="color-text text-14-medium">{% trans "To the driver by card or cash" %}</span></div>
+              
+            </div>
+            <div class="box-booking-border wow fadeInUp"> 
+              <h6 class="heading-20-medium color-text">{% trans "Reservation Information" %}</h6>
+              <ul class="list-prices"> 
+                <li> <span class="text-top">{% trans "Pick Up Address" %}</span><span class="text-bottom">{{ from_short }}</span></li>
+                <li> <span class="text-top">{% trans "Drop Off Address" %}</span><span class="text-bottom">{{ to_short }}</span></li>
+                <li> <span class="text-top">{% trans "Pick Up Date" %}</span><span class="text-bottom">{{ to_date }}</span></li>
+                <li> <span class="text-top">{% trans "Pick Up Time" %}</span><span class="text-bottom">{{ to_time }}</span></li>
+              </ul>
+            </div>
+            <div class="box-booking-border wow fadeInUp"> 
+              <h6 class="heading-20-medium color-text">{% trans "Selected Car" %}</h6>
+              <div class="mt-20 mb-20 text-center">
+                <img src="{% if car_class == 'Economy Class' %}{% static 'imgs/page/homepage1/e-class.png' %} {% elif car_class == 'Business Class' %}{% static 'imgs/page/homepage1/eqs.png' %} {% elif car_class == 'Business Van/SUV' %}{% static 'imgs/page/homepage1/suv.png' %} {% endif %}" alt="Class of Car"></div>
+              <ul class="list-prices"> 
+                <li> <span class="text-top">{% trans "Class" %}</span><span class="text-bottom">{{ car_class }}</span></li>
+              </ul>
+            </div>
+            <div class="box-booking-border wow fadeInUp"> 
+              <h6 class="heading-20-medium color-text">{% trans "Passenger Information" %}</h6>
+              <ul class="list-prices"> 
+                <li> <span class="text-top">{% trans "First name" %}</span><span class="text-bottom">{{ name }}</span></li>
+                <li> <span class="text-top">{% trans "Last name" %}</span><span class="text-bottom">{{ lastname }}</span></li>
+                <li> <span class="text-top">{% trans "Email" %}</span><span class="text-bottom">{{ email }}</span></li>
+                <li> <span class="text-top">{% trans "Phone" %}</span><span class="text-bottom">{{ phone }}</span></li>
+                <li> <span class="text-top">{% trans "Special Requirements" %}</span><span class="text-bottom">{{ notes_details }}</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    {% include 'includes/footer.html' %}
+    <script src="{% static '/js/vendors/modernizr-3.6.0.min.js' %}"></script>
+    <script src="{% static '/js/vendors/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static '/js/vendors/jquery-migrate-3.3.0.min.js' %}"></script>
+    <script src="{% static '/js/vendors/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static '/js/vendors/waypoints.js' %}"></script>
+    <script src="{% static '/js/vendors/wow.js' %}"></script>
+    <script src="{% static '/js/vendors/magnific-popup.js' %}"></script>
+    <script src="{% static '/js/vendors/perfect-scrollbar.min.js' %}"></script>
+    <script src="{% static '/js/vendors/select2.min.js' %}"></script>
+    <script src="{% static '/js/vendors/isotope.js' %}"></script>
+    <script src="{% static '/js/vendors/scrollup.js' %}"></script>
+    <script src="{% static '/js/vendors/swiper-bundle.min.js' %}"></script>
+    <script src="{% static '/js/vendors/noUISlider.js' %}"></script>
+    <script src="{% static '/js/vendors/slider.js' %}"></script>
+    <!-- Count down-->
+    <script src="{% static '/js/vendors/counterup.js' %}"></script>
+    <script src="{% static '/js/vendors/jquery.countdown.min.js' %}"></script>
+    <!-- Count down--><script src="{% static '/js/vendors/jquery.elevatezoom.js' %}"></script>
+    <script src="{% static '/js/vendors/slick.js' %}"></script>
+    <script src="{% static '/js/vendors/jquery-ui.js' %}"></script>
+    <script src="{% static '/js/vendors/jquery.timepicker.min.js' %}"></script>
+    <script src="{% static '/js/main.js' %}"></script>
+  </body>
+</html>

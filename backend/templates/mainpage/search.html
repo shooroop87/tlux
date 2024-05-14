@@ -1,0 +1,83 @@
+{% load static %}
+{% load i18n %}
+<section class="section banner-home1">
+    <div class="box-swiper"> 
+      <div class="swiper-container swiper-banner-1 pb-0">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <div class="box-cover-image" style="background-image:url(https://andreyegorov.com/wp-content/uploads/2024/05/banner.png)"></div>
+            <div class="box-banner-info"> 
+              <p class="text-16 color-white wow fadeInUp">{% trans "Free cancellation and changes" %}</p>
+              <h2 class="heading-52-medium color-white wow fadeInUp">{% trans "Your Personal" %} <br class="d-none d-lg-block">{% trans "Transfer From Airports and Hotels in Italy" %}</h2>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="box-cover-image" style="background-image:url(https://andreyegorov.com/wp-content/uploads/2024/05/banner2.png)"></div>
+            <div class="box-banner-info"> 
+              <p class="text-16 color-white wow fadeInUp">{% trans "24/7 support in English and licensed drivers" %}</p>
+              <h2 class="heading-52-medium color-white wow fadeInUp">{% trans "Your Personal" %} <br class="d-none d-lg-block">{% trans "Transfer From Airports and Hotels in Italy" %}</h2>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="box-cover-image" style="background-image:url(https://andreyegorov.com/wp-content/uploads/2024/05/banner3.png)"></div>
+            <div class="box-banner-info"> 
+              <p class="text-16 color-white wow fadeInUp">{% trans "Wait time if your flight is delayed" %}</p>
+              <h2 class="heading-52-medium color-white wow fadeInUp">{% trans "Your Personal" %} <br class="d-none d-lg-block">{% trans "Transfer From Airports and Hotels in Italy" %}</h2>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="box-cover-image" style="background-image:url(https://andreyegorov.com/wp-content/uploads/2024/05/banner4.png)"></div>
+            <div class="box-banner-info"> 
+              <p class="text-16 color-white wow fadeInUp">{% trans "Traveling with bulky items" %} </p>
+              <h2 class="heading-52-medium color-white wow fadeInUp">{% trans "Your Personal" %} <br class="d-none d-lg-block">{% trans "Transfer From Airports and Hotels in Italy" %}</h2>
+            </div>
+          </div>
+        </div>
+        <div class="box-pagination-button">
+          <div class="swiper-button-prev swiper-button-prev-banner"></div>
+          <div class="swiper-button-next swiper-button-next-banner"></div>
+          <div class="swiper-pagination swiper-pagination-banner"></div>
+        </div>
+      </div>
+    </div>
+    <form method="post" enctype="multipart/form-data" action="{% url 'api:index' %}">
+        {% csrf_token %}
+    <div class="box-search-ride wow fadeInUp">
+      <div class="search-item search-date"> 
+        <div class="search-icon"> <span class="item-icon icon-date"> </span></div>
+        <div class="search-inputs"> 
+          <label class="text-14 color-grey">{% trans "Date" %}</label>
+          <input class="search-input datepicker" type="text" name="to_date" id="to_date" value="{% now "N j, Y" %}">
+        </div>
+      </div>
+      <div class="search-item search-time"> 
+        <div class="search-icon"> <span class="item-icon icon-time"> </span></div>
+        <div class="search-inputs"> 
+          <label class="text-14 color-grey">{% trans "Time" %}</label>
+          <input class="search-input timepicker" type="text" name="to_time" id="to_time" value="{% now "H:i" %}">
+        </div>
+      </div>
+      <div class="search-item search-from"> 
+        <div class="search-icon"> <span class="item-icon icon-from"> </span></div>
+        <div class="search-inputs"> 
+          <label class="text-14 color-grey">{% trans "From" %}</label>
+          <input class="search-input dropdown-location" id="id_from" name="from_short" type="text" placeholder="{% trans "City or Airport" %}" required>
+          <input type="hidden" id="id_from_hidden" name="from_hidden" class="form-control"/>
+          
+        </div>
+      </div>
+      <div class="search-item search-to"> 
+        <div class="search-icon"> <span class="item-icon icon-to"> </span></div>
+        <div class="search-inputs"> 
+          <label class="text-14 color-grey">{% trans "To" %}</label>
+          <input class="search-input dropdown-location" id="id_to" name="to_short" type="text" placeholder="{% trans "City or Airport" %}" required>
+          <input type="hidden" id="id_to_hidden" name="to_hidden" class="form-control"/>
+          
+        </div>
+      </div>
+      <div class="search-item search-button"> 
+        <button class="btn btn-search" type="submit"> <img src="{% static '/imgs/template/icons/search.svg' %}">{% trans "Show prices" %}</button>
+      </div>
+    </div>
+    </form>
+  </section>

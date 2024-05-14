@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" data-x="html" data-x-toggle="html-overflow-hidden">
+    {% load static %}
+    {% load i18n %}
+<head>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="msapplication-TileColor" content="#0E0E0E">
+    <meta name="template-color" content="#0E0E0E">
+    <meta name="description" content="Index page">
+    <meta name="keywords" content="index, page">
+    <meta name="author" content="">
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'imgs/template/favicon.png' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>TransfersLux</title>
+  </head>
+  <body>
+    {% include 'includes/preloader.html' %}
+    {% include 'includes/header.html' %}
+    {% include 'includes/mobile_menu.html' %}
+    <main class="main">
+      <section class="section">
+        <div class="container-sub"> 
+          <div class="box-booking-tabs"> 
+            <div class="item-tab wow fadeInUp"><a href="#">
+                <div class="box-tab-step active">
+                  <div class="icon-tab"> <span class="icon-book icon-vehicle"> </span><span class="text-tab">{% trans "Vehicle " %}</span></div>
+                  <div class="number-tab"> <span>01</span></div>
+                </div></a></div>
+            <div class="item-tab wow fadeInUp"><a href="#">
+                <div class="box-tab-step active">
+                  <div class="icon-tab"> <span class="icon-book icon-extra"> </span><span class="text-tab">{% trans "Extras " %}</span></div>
+                  <div class="number-tab"> <span>02</span></div>
+                </div></a></div>
+            <div class="item-tab wow fadeInUp"><a href="#">
+                <div class="box-tab-step active">
+                  <div class="icon-tab "> <span class="icon-book icon-pax"> </span><span class="text-tab">{% trans "Details " %}</span></div>
+                  <div class="number-tab"> <span>03</span></div>
+                </div></a></div>
+            <div class="item-tab wow fadeInUp"><a href="#">
+                <div class="box-tab-step active"> 
+                  <div class="icon-tab"> <span class="icon-book icon-payment"> </span><span class="text-tab">{% trans "Payment " %}</span></div>
+                  <div class="number-tab"> <span>04</span></div>
+                </div></a></div>
+          </div>
+          <div class="box-row-tab mt-50">
+            <div class="box-tab-left">
+              <div class="box-content-detail"> 
+              <form method="post" enctype="multipart/form-data" action="{% url 'api:nexi' %}">
+                {% csrf_token %}
+                <h3 class="heading-24-medium color-text mb-30 wow fadeInUp">{% trans "Billing Address" %}</h3>
+                <div class="form-contact form-comment wow fadeInUp"> 
+                  
+                    <div class="row"> 
+                      <div class="col-lg-6">
+                        <div class="form-group"> 
+                          <label class="form-label" for="billing_name">{% trans "Name*" %}</label>
+                          <input class="form-control" id="billing_name" name="billing_name" type="text" value="{{ name }}" required>
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group"> 
+                          <label class="form-label" for="billing_lastname">{% trans "Last Name*" %}</label>
+                          <input class="form-control" id="billing_lastname" name="billing_lastname" type="text" value="{{ lastname }}" required>
+                        </div>
+                      </div>
+                      <div class="col-lg-12">
+                        <div class="form-group"> 
+                          <label class="form-label" for="billing_company">{% trans "Company (Optional)" %}</label>
+                          <input class="form-control" id="billing_company" name="billing_company" type="text">
+                        </div>
+                      </div>
+                      <div class="col-lg-12">
+                        <div class="form-group"> 
+                          <label class="form-label" for="billing_address">{% trans "Address (Optional)" %}</label>
+                          <input class="form-control" id="billing_address" name="billing_address" type="text">
+                        </div>
+                      </div>
+                      
+                    </div>
+                  
+                  <div class="mt-30"></div>
+                  
+                  <div class="mt-30"> 
+                    <label class="mb-10 mb-15" for="agree-cb">
+                      <input class="cb-agree" id="terms" name="terms" type="checkbox" checked/>{% trans "I accept" %} <a href="{% url 'api:terms' %}">{% trans "the Terms and Conditions" %}</a> {% trans "and" %} <a href="{% url 'api:privacy' %}">{% trans "Privacy Policy" %}</a>. 
+                    </label>
+                  </div>
+                </div>
+                <div class="mt-30 mb-120 wow fadeInUp">
+                  <button class="btn btn-primary btn-primary-big w-100">{% trans "Book Now" %} 
+                    <svg class="icon-16 ml-5" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"></path>
+                    </svg>
+                  </button>
+                </div>
+              </form>
+              </div>
+            </div>
+            {% include 'booking/sidebar_after.html' %}
+          </div>
+        </div>
+      </section>
+    </main>
+    {% include 'includes/footer.html' %}
+    <script src="{% static '/js/vendors/modernizr-3.6.0.min.js' %}"></script>
+    <script src="{% static '/js/vendors/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static '/js/vendors/jquery-migrate-3.3.0.min.js' %}"></script>
+    <script src="{% static '/js/vendors/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static '/js/vendors/waypoints.js' %}"></script>
+    <script src="{% static '/js/vendors/wow.js' %}"></script>
+    <script src="{% static '/js/vendors/magnific-popup.js' %}"></script>
+    <script src="{% static '/js/vendors/perfect-scrollbar.min.js' %}"></script>
+    <script src="{% static '/js/vendors/select2.min.js' %}"></script>
+    <script src="{% static '/js/vendors/isotope.js' %}"></script>
+    <script src="{% static '/js/vendors/scrollup.js' %}"></script>
+    <script src="{% static '/js/vendors/swiper-bundle.min.js' %}"></script>
+    <script src="{% static '/js/vendors/noUISlider.js' %}"></script>
+    <script src="{% static '/js/vendors/slider.js' %}"></script>
+    <!-- Count down-->
+    <script src="{% static '/js/vendors/counterup.js' %}"></script>
+    <script src="{% static '/js/vendors/jquery.countdown.min.js' %}"></script>
+    <!-- Count down--><script src="{% static '/js/vendors/jquery.elevatezoom.js' %}"></script>
+    <script src="{% static '/js/vendors/slick.js' %}"></script>
+    <script src="{% static '/js/vendors/jquery-ui.js' %}"></script>
+    <script src="{% static '/js/vendors/jquery.timepicker.min.js' %}"></script>
+    <script src="{% static '/js/main.js' %}"></script>
+  </body>
+</html>

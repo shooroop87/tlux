@@ -1,0 +1,863 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-05-11 13:21+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\templates\404.html:33
+msgid "Oops! It looks like you're lost."
+msgstr ""
+
+#: .\templates\404.html:34
+msgid ""
+"The page you're looking for isn't available. Try to search again or use the "
+"go to."
+msgstr ""
+
+#: .\templates\404.html:35
+msgid "Go Back to Homepage"
+msgstr ""
+
+#: .\templates\about.html:31 .\templates\includes\footer.html:30
+msgid "About Us"
+msgstr ""
+
+#: .\templates\about.html:34 .\templates\contacts.html:34
+#: .\templates\includes\mobile_menu.html:10 .\templates\privacy-policy.html:34
+#: .\templates\terms-and-conditions.html:34
+msgid "Home"
+msgstr ""
+
+#: .\templates\about.html:35
+msgid "About"
+msgstr ""
+
+#: .\templates\booking\booking-extra.html:34
+#: .\templates\booking\booking-passenger.html:35
+#: .\templates\booking\booking-payment.html:34
+#: .\templates\booking\booking-vehicle.html:34
+msgid "Vehicle "
+msgstr ""
+
+#: .\templates\booking\booking-extra.html:39
+#: .\templates\booking\booking-passenger.html:40
+#: .\templates\booking\booking-payment.html:39
+#: .\templates\booking\booking-vehicle.html:39
+msgid "Extras "
+msgstr ""
+
+#: .\templates\booking\booking-extra.html:44
+#: .\templates\booking\booking-passenger.html:45
+#: .\templates\booking\booking-payment.html:44
+#: .\templates\booking\booking-vehicle.html:44
+msgid "Details "
+msgstr ""
+
+#: .\templates\booking\booking-extra.html:49
+#: .\templates\booking\booking-passenger.html:50
+#: .\templates\booking\booking-payment.html:49
+#: .\templates\booking\booking-vehicle.html:49
+msgid "Payment "
+msgstr ""
+
+#: .\templates\booking\booking-extra.html:58
+#: .\templates\booking\sidebar_after.html:40
+msgid "Extra Options"
+msgstr ""
+
+#: .\templates\booking\booking-extra.html:64
+msgid "Flight/train number (optional)"
+msgstr ""
+
+#: .\templates\booking\booking-extra.html:75
+msgid "Child Seat"
+msgstr ""
+
+#: .\templates\booking\booking-extra.html:76
+msgid "Suitable for toddlers weighing 0-18 kg (approx 0 to 4 years)."
+msgstr ""
+
+#: .\templates\booking\booking-extra.html:85
+msgid "Booster seat"
+msgstr ""
+
+#: .\templates\booking\booking-extra.html:86
+msgid "Suitable for children weighing 15-36 kg (approx 4 to 10 years)."
+msgstr ""
+
+#: .\templates\booking\booking-extra.html:96
+msgid "Bouquet of Flowers"
+msgstr ""
+
+#: .\templates\booking\booking-extra.html:97
+msgid "A bouquet of seasonal flowers prepared by a local florist."
+msgstr ""
+
+#: .\templates\booking\booking-extra.html:111
+msgid "Notes for the chauffeur"
+msgstr ""
+
+#: .\templates\booking\booking-extra.html:120
+#: .\templates\booking\booking-passenger.html:139
+msgid "Continue"
+msgstr ""
+
+#: .\templates\booking\booking-passenger.html:60
+msgid "Passenger Details"
+msgstr ""
+
+#: .\templates\booking\booking-passenger.html:65
+#: .\templates\booking\booking-payment.html:64
+msgid "Name*"
+msgstr ""
+
+#: .\templates\booking\booking-passenger.html:71
+#: .\templates\booking\booking-payment.html:70
+msgid "Last Name*"
+msgstr ""
+
+#: .\templates\booking\booking-passenger.html:77
+msgid "Email*"
+msgstr ""
+
+#: .\templates\booking\booking-passenger.html:83
+msgid "Phone Number*"
+msgstr ""
+
+#: .\templates\booking\booking-passenger.html:95
+msgid "Passengers*"
+msgstr ""
+
+#: .\templates\booking\booking-passenger.html:113
+#: .\templates\booking\booking-vehicle.html:73
+#: .\templates\booking\booking-vehicle.html:102
+#: .\templates\booking\booking-vehicle.html:131
+#: .\templates\mainpage\fleet4.html:22 .\templates\mainpage\fleet4.html:35
+#: .\templates\mainpage\fleet4.html:48
+msgid "Luggage"
+msgstr ""
+
+#: .\templates\booking\booking-passenger.html:131
+msgid "Notes to driver"
+msgstr ""
+
+#: .\templates\booking\booking-payment.html:58
+msgid "Billing Address"
+msgstr ""
+
+#: .\templates\booking\booking-payment.html:76
+msgid "Company (Optional)"
+msgstr ""
+
+#: .\templates\booking\booking-payment.html:82
+msgid "Address (Optional)"
+msgstr ""
+
+#: .\templates\booking\booking-payment.html:93
+msgid "I accept"
+msgstr ""
+
+#: .\templates\booking\booking-payment.html:93
+msgid "the Terms and Conditions"
+msgstr ""
+
+#: .\templates\booking\booking-payment.html:93
+msgid "and"
+msgstr ""
+
+#: .\templates\booking\booking-payment.html:93
+#: .\templates\privacy-policy.html:31 .\templates\privacy-policy.html:35
+msgid "Privacy Policy"
+msgstr ""
+
+#: .\templates\booking\booking-payment.html:98
+msgid "Book Now"
+msgstr ""
+
+#: .\templates\booking\booking-received.html:33
+msgid "Your booking was submitted successfully!"
+msgstr ""
+
+#: .\templates\booking\booking-received.html:34
+msgid "Booking details has been sent to"
+msgstr ""
+
+#: .\templates\booking\booking-received.html:37
+msgid "Order Number"
+msgstr ""
+
+#: .\templates\booking\booking-received.html:38
+msgid "Today"
+msgstr ""
+
+#: .\templates\booking\booking-received.html:39
+#: .\templates\booking\sidebar_after.html:48
+msgid "Total"
+msgstr ""
+
+#: .\templates\booking\booking-received.html:40
+msgid "Payment Method"
+msgstr ""
+
+#: .\templates\booking\booking-received.html:40
+msgid "To the driver by card or cash"
+msgstr ""
+
+#: .\templates\booking\booking-received.html:44
+msgid "Reservation Information"
+msgstr ""
+
+#: .\templates\booking\booking-received.html:46
+msgid "Pick Up Address"
+msgstr ""
+
+#: .\templates\booking\booking-received.html:47
+msgid "Drop Off Address"
+msgstr ""
+
+#: .\templates\booking\booking-received.html:48
+msgid "Pick Up Date"
+msgstr ""
+
+#: .\templates\booking\booking-received.html:49
+msgid "Pick Up Time"
+msgstr ""
+
+#: .\templates\booking\booking-received.html:53
+msgid "Selected Car"
+msgstr ""
+
+#: .\templates\booking\booking-received.html:57
+msgid "Class"
+msgstr ""
+
+#: .\templates\booking\booking-received.html:61
+msgid "Passenger Information"
+msgstr ""
+
+#: .\templates\booking\booking-received.html:63
+msgid "First name"
+msgstr ""
+
+#: .\templates\booking\booking-received.html:64
+msgid "Last name"
+msgstr ""
+
+#: .\templates\booking\booking-received.html:65
+msgid "Email"
+msgstr ""
+
+#: .\templates\booking\booking-received.html:66
+msgid "Phone"
+msgstr ""
+
+#: .\templates\booking\booking-received.html:67
+msgid "Special Requirements"
+msgstr ""
+
+#: .\templates\booking\booking-vehicle.html:56
+msgid "Select Your Car"
+msgstr ""
+
+#: .\templates\booking\booking-vehicle.html:64
+#: .\templates\booking\booking-vehicle.html:93
+#: .\templates\booking\booking-vehicle.html:122
+msgid "Meet & Greet included"
+msgstr ""
+
+#: .\templates\booking\booking-vehicle.html:65
+#: .\templates\booking\booking-vehicle.html:94
+#: .\templates\booking\booking-vehicle.html:123
+msgid "Free cancellation"
+msgstr ""
+
+#: .\templates\booking\booking-vehicle.html:66
+#: .\templates\booking\booking-vehicle.html:95
+#: .\templates\booking\booking-vehicle.html:124
+msgid "Free Waiting time"
+msgstr ""
+
+#: .\templates\booking\booking-vehicle.html:67
+#: .\templates\booking\booking-vehicle.html:96
+#: .\templates\booking\booking-vehicle.html:125
+msgid "Safe and secure travel"
+msgstr ""
+
+#: .\templates\booking\booking-vehicle.html:73
+#: .\templates\booking\booking-vehicle.html:102
+#: .\templates\booking\booking-vehicle.html:131
+#: .\templates\mainpage\fleet4.html:21 .\templates\mainpage\fleet4.html:34
+#: .\templates\mainpage\fleet4.html:47
+msgid "Passengers"
+msgstr ""
+
+#: .\templates\booking\booking-vehicle.html:75
+#: .\templates\booking\booking-vehicle.html:104
+#: .\templates\booking\booking-vehicle.html:133
+msgid "EUR"
+msgstr ""
+
+#: .\templates\booking\booking-vehicle.html:79
+#: .\templates\booking\booking-vehicle.html:108
+#: .\templates\booking\booking-vehicle.html:137
+msgid "All prices include VAT, fees &amp; tip."
+msgstr ""
+
+#: .\templates\booking\booking-vehicle.html:80
+#: .\templates\booking\booking-vehicle.html:109
+#: .\templates\booking\booking-vehicle.html:138
+msgid "Select"
+msgstr ""
+
+#: .\templates\booking\booking-vehicle.html:131
+msgid "up to 10"
+msgstr ""
+
+#: .\templates\booking\sidebar_after.html:6
+#: .\templates\booking\sidebar_before.html:6
+msgid "Transfer Summary"
+msgstr ""
+
+#: .\templates\booking\sidebar_after.html:12
+#: .\templates\booking\sidebar_after.html:16
+#: .\templates\booking\sidebar_before.html:12
+#: .\templates\booking\sidebar_before.html:16
+#: .\templates\mainpage\search.html:64 .\templates\mainpage\search.html:73
+msgid "City or Airport"
+msgstr ""
+
+#: .\templates\booking\sidebar_after.html:29
+#: .\templates\booking\sidebar_before.html:29
+msgid "Total Distance"
+msgstr ""
+
+#: .\templates\booking\sidebar_after.html:29
+#: .\templates\booking\sidebar_before.html:29
+msgid "km"
+msgstr ""
+
+#: .\templates\booking\sidebar_after.html:31
+#: .\templates\booking\sidebar_before.html:31
+msgid "Total Time"
+msgstr ""
+
+#: .\templates\booking\sidebar_after.html:31
+msgid "min"
+msgstr ""
+
+#: .\templates\booking\sidebar_after.html:36
+msgid "Vehicle"
+msgstr ""
+
+#: .\templates\booking\sidebar_after.html:44
+msgid "Selected vehicle"
+msgstr ""
+
+#: .\templates\booking\sidebar_before.html:37
+msgid "+500.000 passengers transported"
+msgstr ""
+
+#: .\templates\booking\sidebar_before.html:38
+msgid "Instant confirmation"
+msgstr ""
+
+#: .\templates\booking\sidebar_before.html:39
+msgid "All-inclusive pricing"
+msgstr ""
+
+#: .\templates\booking\sidebar_before.html:40
+msgid "Secure Payment by credit card"
+msgstr ""
+
+#: .\templates\contacts.html:31 .\templates\contacts.html:35
+#: .\templates\includes\footer.html:33
+msgid "Contacts"
+msgstr ""
+
+#: .\templates\contacts.html:45
+msgid "For customers"
+msgstr ""
+
+#: .\templates\contacts.html:50
+msgid "We are available 24/7"
+msgstr ""
+
+#: .\templates\contacts.html:62
+msgid "For partners"
+msgstr ""
+
+#: .\templates\contacts.html:67
+msgid "For travel agencies and corporate clients"
+msgstr ""
+
+#: .\templates\contacts.html:76
+msgid "For taxi companies"
+msgstr ""
+
+#: .\templates\help-center.html:33 .\templates\mainpage\faq.html:7
+msgid "Frequently Asked Questions"
+msgstr ""
+
+#: .\templates\help-center.html:39 .\templates\mainpage\faq.html:13
+msgid "How do I book a transfer?"
+msgstr ""
+
+#: .\templates\help-center.html:43 .\templates\mainpage\faq.html:17
+msgid ""
+"Please choose your starting location in the <b>Pick up location</b> field "
+"and your destination in the <b>Drop off location</b> field."
+msgstr ""
+
+#: .\templates\help-center.html:44 .\templates\mainpage\faq.html:18
+msgid ""
+"You have the option to either type the name of the place or provide the "
+"specific address."
+msgstr ""
+
+#: .\templates\help-center.html:45 .\templates\mainpage\faq.html:19
+msgid ""
+"Utilize the dropdown suggestions to streamline and simplify your search "
+"process."
+msgstr ""
+
+#: .\templates\help-center.html:46 .\templates\mainpage\faq.html:20
+msgid ""
+"Afterward, proceed by clicking on the <b>Show Prices</b> button. Choose the "
+"desired transfer class and select <b>Book</b> to proceed with your "
+"reservation."
+msgstr ""
+
+#: .\templates\help-center.html:52 .\templates\mainpage\faq.html:26
+msgid "How can I verify if my order has been successfully processed?"
+msgstr ""
+
+#: .\templates\help-center.html:56 .\templates\mainpage\faq.html:30
+msgid ""
+"After finalizing your booking, you will receive an email confirmation "
+"containing a voucher."
+msgstr ""
+
+#: .\templates\help-center.html:57 .\templates\mainpage\faq.html:31
+msgid ""
+"This voucher will include your booking number and all necessary details for "
+"your upcoming trip."
+msgstr ""
+
+#: .\templates\help-center.html:58 .\templates\mainpage\faq.html:32
+msgid ""
+"If you do not receive the confirmation email, please reach out to our "
+"manager via email at "
+msgstr ""
+
+#: .\templates\help-center.html:58 .\templates\mainpage\faq.html:32
+msgid " or through our online chat support."
+msgstr ""
+
+#: .\templates\help-center.html:64 .\templates\mainpage\faq.html:38
+msgid "How can I find my driver?"
+msgstr ""
+
+#: .\templates\help-center.html:68 .\templates\mainpage\faq.html:42
+msgid ""
+"Important Note: Your designated driver will greet you with a name sign "
+"showing the first and last names you specified during your reservation."
+msgstr ""
+
+#: .\templates\help-center.html:69 .\templates\mainpage\faq.html:43
+msgid ""
+"During airport transfers, your driver will be awaiting your arrival at the "
+"exit of the arrivals area, following the passport control and baggage claim "
+"sections."
+msgstr ""
+
+#: .\templates\help-center.html:70 .\templates\mainpage\faq.html:44
+msgid "For hotel transfers, your driver will be positioned in the lobby area."
+msgstr ""
+
+#: .\templates\help-center.html:71 .\templates\mainpage\faq.html:45
+msgid ""
+"Comprehensive instructions for the meeting point can be accessed in your "
+"trip confirmation voucher. Additionally, you will find the driver's contact "
+"number provided therein."
+msgstr ""
+
+#: .\templates\help-center.html:76 .\templates\mainpage\faq.html:50
+msgid "What happens if my flight details change or is seriosly delayed?"
+msgstr ""
+
+#: .\templates\help-center.html:81 .\templates\mainpage\faq.html:55
+msgid "We monitor all flights so we will do our best to arrive in time."
+msgstr ""
+
+#: .\templates\help-center.html:84 .\templates\mainpage\faq.html:58
+msgid ""
+"If your flight is seriosly delayed just email or call us and keep in touch "
+"until we have the new details."
+msgstr ""
+
+#: .\templates\help-center.html:87 .\templates\mainpage\faq.html:61
+msgid ""
+"If your fligth details is changed please call or email us and we will update "
+"your booking with new details."
+msgstr ""
+
+#: .\templates\help-center.html:93 .\templates\mainpage\faq.html:67
+msgid "Will my driver carry my luggage?"
+msgstr ""
+
+#: .\templates\help-center.html:97 .\templates\mainpage\faq.html:71
+msgid "Yes, your driver will always offer to help carry your bags and luggage."
+msgstr ""
+
+#: .\templates\includes\footer.html:18
+msgid "Follow Us"
+msgstr ""
+
+#: .\templates\includes\footer.html:28
+msgid "Company"
+msgstr ""
+
+#: .\templates\includes\footer.html:31
+#: .\templates\includes\mobile_menu.html:11
+msgid "Transfer service"
+msgstr ""
+
+#: .\templates\includes\footer.html:32
+msgid "FAQ"
+msgstr ""
+
+#: .\templates\includes\footer.html:37
+msgid "Popular transfers"
+msgstr ""
+
+#: .\templates\includes\footer.html:39
+msgid "Airport Malpensa - Milan"
+msgstr ""
+
+#: .\templates\includes\footer.html:40
+msgid "Airport Malpensa - Cannes"
+msgstr ""
+
+#: .\templates\includes\footer.html:41
+msgid "Airport Bergamo - Milan"
+msgstr ""
+
+#: .\templates\includes\footer.html:42
+msgid "Serravalle Outlet - Milan"
+msgstr ""
+
+#: .\templates\includes\footer.html:46
+msgid "Popular Airports"
+msgstr ""
+
+#: .\templates\includes\footer.html:48
+msgid "Milan Malpensa (MXP)"
+msgstr ""
+
+#: .\templates\includes\footer.html:49
+msgid "Bergamo Orio al Serio (BGY)"
+msgstr ""
+
+#: .\templates\includes\footer.html:50
+msgid "Milan Linate (LIN)"
+msgstr ""
+
+#: .\templates\includes\footer.html:51
+msgid "Venice Marco Polo (VCE)"
+msgstr ""
+
+#: .\templates\includes\footer.html:55
+msgid "Transfers from Milan"
+msgstr ""
+
+#: .\templates\includes\footer.html:57
+msgid "Milan - St. Moritz"
+msgstr ""
+
+#: .\templates\includes\footer.html:58
+msgid "Milan - Lugano"
+msgstr ""
+
+#: .\templates\includes\footer.html:59
+msgid "Milan - Nice"
+msgstr ""
+
+#: .\templates\includes\footer.html:60
+msgid "Milan - Zermatt"
+msgstr ""
+
+#: .\templates\includes\footer.html:64
+msgid "Popular Cities"
+msgstr ""
+
+#: .\templates\includes\footer.html:66
+msgid "Milan"
+msgstr ""
+
+#: .\templates\includes\footer.html:67
+msgid "Bergamo"
+msgstr ""
+
+#: .\templates\includes\footer.html:68
+msgid "Turin"
+msgstr ""
+
+#: .\templates\includes\footer.html:69
+msgid "Venice"
+msgstr ""
+
+#: .\templates\includes\footer.html:79
+msgid "All rights reserved"
+msgstr ""
+
+#: .\templates\includes\footer.html:81
+msgid "Terms"
+msgstr ""
+
+#: .\templates\includes\footer.html:82
+msgid "Privacy"
+msgstr ""
+
+#: .\templates\includes\footer.html:86
+msgid "Book via Chat"
+msgstr ""
+
+#: .\templates\includes\header.html:12
+msgid "Transfer Service"
+msgstr ""
+
+#: .\templates\includes\header.html:13
+#: .\templates\includes\mobile_menu.html:12
+#: .\templates\mainpage\fleet4.html:8
+msgid "Our Fleet"
+msgstr ""
+
+#: .\templates\includes\header.html:14
+#: .\templates\includes\mobile_menu.html:14
+msgid "Contact"
+msgstr ""
+
+#: .\templates\includes\header.html:33 .\transferslux\settings.py:128
+msgid "English"
+msgstr ""
+
+#: .\templates\includes\header.html:34 .\transferslux\settings.py:132
+msgid "Russian"
+msgstr ""
+
+#: .\templates\includes\header.html:35 .\transferslux\settings.py:130
+msgid "Spanish"
+msgstr ""
+
+#: .\templates\includes\header.html:36 .\transferslux\settings.py:131
+msgid "French"
+msgstr ""
+
+#: .\templates\includes\header.html:37 .\transferslux\settings.py:129
+msgid "Italian"
+msgstr ""
+
+#: .\templates\includes\header.html:42
+#: .\templates\includes\mobile_menu.html:13
+msgid "Help"
+msgstr ""
+
+#: .\templates\index.html:11
+msgid "Comfortable transfers from airports and hotels in Italy"
+msgstr ""
+
+#: .\templates\index.html:12
+msgid "transfer, italy, private transfers, airport transfer"
+msgstr ""
+
+#: .\templates\index.html:20
+msgid "TransfersLux – Comfortable transfers from airports and hotels in Italy"
+msgstr ""
+
+#: .\templates\mainpage\fleet4.html:17
+msgid "For a couple or a family with a child"
+msgstr ""
+
+#: .\templates\mainpage\fleet4.html:30
+msgid "For comfortable business trips"
+msgstr ""
+
+#: .\templates\mainpage\fleet4.html:43
+msgid "For up to 10 people or large baggage"
+msgstr ""
+
+#: .\templates\mainpage\fleet4.html:47
+msgid "up 10"
+msgstr ""
+
+#: .\templates\mainpage\how-it-works3.html:6
+msgid "How It Works"
+msgstr ""
+
+#: .\templates\mainpage\how-it-works3.html:13
+msgid "Choose Your Route and Vehicle"
+msgstr ""
+
+#: .\templates\mainpage\how-it-works3.html:16
+msgid ""
+"Enter your pickup &amp; dropoff locations and choose a vehicle of any "
+"capacity."
+msgstr ""
+
+#: .\templates\mainpage\how-it-works3.html:24
+msgid "Complete the Booking Form"
+msgstr ""
+
+#: .\templates\mainpage\how-it-works3.html:27
+msgid ""
+"As soon as your booking is complete, you will receive an email about you "
+"ride."
+msgstr ""
+
+#: .\templates\mainpage\how-it-works3.html:35
+msgid "Enjoy Your Ride"
+msgstr ""
+
+#: .\templates\mainpage\how-it-works3.html:38
+msgid ""
+"After your ride has taken place, we would appreciate it if you could rate "
+"your car and driver."
+msgstr ""
+
+#: .\templates\mainpage\search.html:10
+msgid "Free cancellation and changes"
+msgstr ""
+
+#: .\templates\mainpage\search.html:11 .\templates\mainpage\search.html:18
+#: .\templates\mainpage\search.html:25 .\templates\mainpage\search.html:32
+msgid "Your Personal"
+msgstr ""
+
+#: .\templates\mainpage\search.html:11 .\templates\mainpage\search.html:18
+#: .\templates\mainpage\search.html:25 .\templates\mainpage\search.html:32
+msgid "Transfer From Airports and Hotels in Italy"
+msgstr ""
+
+#: .\templates\mainpage\search.html:17
+msgid "24/7 support in English and licensed drivers"
+msgstr ""
+
+#: .\templates\mainpage\search.html:24
+msgid "Wait time if your flight is delayed"
+msgstr ""
+
+#: .\templates\mainpage\search.html:31
+msgid "Traveling with bulky items"
+msgstr ""
+
+#: .\templates\mainpage\search.html:49
+msgid "Date"
+msgstr ""
+
+#: .\templates\mainpage\search.html:56
+msgid "Time"
+msgstr ""
+
+#: .\templates\mainpage\search.html:63
+msgid "From"
+msgstr ""
+
+#: .\templates\mainpage\search.html:72
+msgid "To"
+msgstr ""
+
+#: .\templates\mainpage\search.html:79
+msgid "Show prices"
+msgstr ""
+
+#: .\templates\mainpage\testimonials2.html:8
+msgid "Hear what our amazing customers say"
+msgstr ""
+
+#: .\templates\mainpage\testimonials2.html:10
+msgid ""
+"People and companies from more than 50 countries trust us with their trip "
+"for a comfortable transfer in Italy"
+msgstr ""
+
+#: .\templates\mainpage\testimonials2.html:13
+msgid "See all reviews"
+msgstr ""
+
+#: .\templates\mainpage\why-us2.html:8
+msgid "We make sure that your every trip is comfortable"
+msgstr ""
+
+#: .\templates\mainpage\why-us2.html:13
+msgid ""
+"A transfer service, akin to a tourist service, where you can book a private "
+"transfer from airports, train stations, or hotels, with a professional "
+"driver."
+msgstr ""
+
+#: .\templates\mainpage\why-us2.html:22
+msgid "Luxury Cars"
+msgstr ""
+
+#: .\templates\mainpage\why-us2.html:22
+msgid "Selection"
+msgstr ""
+
+#: .\templates\mainpage\why-us2.html:30
+msgid "24/7 Order"
+msgstr ""
+
+#: .\templates\mainpage\why-us2.html:30
+msgid "Available"
+msgstr ""
+
+#: .\templates\mainpage\why-us2.html:38
+msgid "Fast Car Delivery"
+msgstr ""
+
+#: .\templates\mainpage\why-us2.html:38
+msgid "Service"
+msgstr ""
+
+#: .\templates\mainpage\why-us2.html:46
+msgid "High Safety"
+msgstr ""
+
+#: .\templates\mainpage\why-us2.html:46
+msgid "and Nurity"
+msgstr ""
+
+#: .\templates\mainpage\why-us2.html:54
+msgid "Fixed Price &"
+msgstr ""
+
+#: .\templates\mainpage\why-us2.html:54
+msgid "Bonus System"
+msgstr ""
+
+#: .\templates\mainpage\why-us2.html:62
+msgid "Professional"
+msgstr ""
+
+#: .\templates\mainpage\why-us2.html:62
+msgid "Car Drivers"
+msgstr ""
+
+#: .\templates\terms-and-conditions.html:31
+#: .\templates\terms-and-conditions.html:35
+msgid "Term and Conditions"
+msgstr ""

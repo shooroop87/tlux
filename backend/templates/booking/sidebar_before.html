@@ -1,0 +1,43 @@
+{% load static %}
+{% load i18n %}
+<div class="box-tab-right">
+    <div class="sidebar"> 
+      <div class="d-flex align-items-center justify-content-between wow fadeInUp"> 
+        <h6 class="text-20-medium color-text">{% trans "Transfer Summary" %}</h6>
+      </div>
+      <div class="mt-20 wow fadeInUp"> 
+        <ul class="list-routes"> 
+          <li> <span class="location-item">A </span>
+            <span class="info-location text-14-medium"> 
+              {% if from_short %} {{ from_short }} {% else %} {% trans "City or Airport" %} {% endif %}
+            </span></li>
+          <li> <span class="location-item">B </span>
+            <span class="info-location text-14-medium">
+              {% if to_short %} {{ to_short }} {% else %} {% trans "City or Airport" %} {% endif %}
+            </span></li>
+        </ul>
+      </div>
+      <div class="mt-20 wow fadeInUp"> 
+        <ul class="list-icons"> 
+          <li> <span class="icon-item icon-plan"></span><span class="info-location text-14-medium">{{ to_date }}</span></li>
+          <li> <span class="icon-item icon-time"></span><span class="info-location text-14-medium">{{ to_time }}</span></li>
+        </ul>
+      </div>
+      <div class="mt-20 wow fadeInUp">
+        <div class="box-info-route"> 
+          <div class="info-route-left">
+            <span class="text-14 color-grey">{% trans "Total Distance" %}</span><span class="text-14-medium color-text">{{ distance }} {% trans "km" %}</span></div>
+          <div class="info-route-left">
+            <span class="text-14 color-grey">{% trans "Total Time" %}</span><span class="text-14-medium color-text">{{ travel_time }}</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="sidebar wow fadeInUp"> 
+      <ul class="list-ticks list-ticks-small list-ticks-small-booking">
+        <li class="text-14 mb-20">{% trans "+500.000 passengers transported" %}</li>
+        <li class="text-14 mb-20">{% trans "Instant confirmation" %}</li>
+        <li class="text-14 mb-20">{% trans "All-inclusive pricing" %}</li>
+        <li class="text-14 mb-20">{% trans "Secure Payment by credit card" %}</li>
+      </ul>
+    </div>
+  </div>

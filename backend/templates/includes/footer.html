@@ -1,0 +1,92 @@
+{% load static %}
+{% load i18n %}
+<footer class="footer">
+    <div class="footer-1">
+      <div class="container-sub">
+        <div class="box-footer-top">
+          <div class="row align-items-center">
+            <div class="col-lg-8 col-md-6 text-md-start text-center mb-15 wow fadeInUp">
+              <div class="d-flex align-items-center justify-content-md-start justify-content-center">
+                <a class="mr-30" href="{% url 'api:index' %}">
+                  <img src="{% static 'imgs/template/logo.svg' %}" alt="TransfersLux logo">
+                </a>
+                <a class="text-14-medium call-phone color-white hover-up" href="tel:+393292137898">+39 (329) 213 7898</a>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6 text-md-end text-center mb-15 wow fadeInUp">
+              <div class="d-flex align-items-center justify-content-md-end justify-content-center">
+                <span class="text-18-medium color-white mr-10">{% trans "Follow Us" %}</span>
+                <a class="icon-socials icon-facebook" href="#"></a>
+                <a class="icon-socials icon-instagram" href="#"></a>
+                <a class="icon-socials icon-whatsapp" href="https://api.whatsapp.com/send?phone=393292137898"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-40">
+          <div class="col-lg-3 width-20">
+            <h5 class="text-18-medium color-white mb-20 wow fadeInUp">{% trans "Company" %}</h5>
+            <ul class="menu-footer wow fadeInUp">
+              <li><a href="{% url 'api:about' %}">{% trans "About Us" %}</a></li>
+              <li><a href="https://transferslux.com/#transferservice">{% trans "Transfer service" %}</a></li>
+              <li><a href="{% url 'api:help' %}">{% trans "FAQ" %}</a></li>
+              <li><a href="{% url 'api:contacts' %}">{% trans "Contacts" %}</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-3 width-20 mb-30">
+            <h5 class="text-18-medium color-white mb-20 wow fadeInUp">{% trans "Popular transfers" %}</h5>
+            <ul class="menu-footer wow fadeInUp">
+              <li><a href="#">{% trans "Airport Malpensa - Milan" %}</a></li>
+              <li><a href="#">{% trans "Airport Malpensa - Cannes" %}</a></li>
+              <li><a href="#">{% trans "Airport Bergamo - Milan" %}</a></li>
+              <li><a href="#">{% trans "Serravalle Outlet - Milan" %}</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-3 width-20 mb-30">
+            <h5 class="text-18-medium color-white mb-20 wow fadeInUp">{% trans "Popular Airports" %}</h5>
+            <ul class="menu-footer wow fadeInUp">
+              <li><a href="#">{% trans "Milan Malpensa (MXP)" %}</a></li>
+              <li><a href="#">{% trans "Bergamo Orio al Serio (BGY)" %}</a></li>
+              <li><a href="#">{% trans "Milan Linate (LIN)" %}</a></li>
+              <li><a href="#">{% trans "Venice Marco Polo (VCE)" %}</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-3 width-20 mb-30">
+            <h5 class="text-18-medium color-white mb-20 wow fadeInUp">{% trans "Transfers from Milan" %}</h5>
+            <ul class="menu-footer wow fadeInUp">
+              <li><a href="#">{% trans "Milan - St. Moritz" %}</a></li>
+              <li><a href="#">{% trans "Milan - Lugano" %}</a></li>
+              <li><a href="#">{% trans "Milan - Nice" %}</a></li>
+              <li><a href="#">{% trans "Milan - Zermatt" %}</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-3 width-20">
+            <h5 class="text-18-medium color-white mb-20 wow fadeInUp">{% trans "Popular Cities" %}</h5>
+            <ul class="menu-footer wow fadeInUp">
+              <li><a href="#">{% trans "Milan" %}</a></li>
+              <li><a href="#">{% trans "Bergamo" %}</a></li>
+              <li><a href="#">{% trans "Turin" %}</a></li>
+              <li><a href="#">{% trans "Venice" %}</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-2">
+      <div class="container-sub">
+        <div class="footer-bottom">
+          <div class="row align-items-center">
+            <div class="col-lg-10 col-md-12 text-center text-lg-start"><span class="text-14 color-white mr-50">© 2024 TransfersLux. {% trans "All rights reserved" %}.</span>
+              <ul class="menu-bottom">
+                <li><a href="{% url 'api:terms' %}">{% trans "Terms" %}</a></li>
+                <li><a href="{% url 'api:privacy' %}">{% trans "Privacy" %}</a></li>
+              </ul>
+            </div>
+            <div class="col-lg-2 col-md-12 text-center text-lg-end">
+                <a class="btn btn-link-globe active" href="javascript:jivo_api.open() ">{% trans "Book via Chat" %}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>

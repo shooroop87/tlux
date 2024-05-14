@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" data-x="html" data-x-toggle="html-overflow-hidden">
+    {% load static %}
+    {% load i18n %}
+<head>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="msapplication-TileColor" content="#0E0E0E">
+    <meta name="template-color" content="#0E0E0E">
+    <meta name="description" content="Index page">
+    <meta name="keywords" content="index, page">
+    <meta name="author" content="">
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'imgs/template/favicon.png' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>TransfersLux</title>
+  </head>
+  <body>
+    {% include 'includes/preloader.html' %}
+    {% include 'includes/header.html' %}
+    {% include 'includes/mobile_menu.html' %}
+    <main class="main">
+<section class="section pt-80 bg-faqs pb-60">
+    <div class="container-sub">
+      <div class="box-faqs">
+        <div class="text-center"> 
+          <h2 class="color-brand-1 mb-20 wow fadeInUp">{% trans "Frequently Asked Questions" %}</h2>
+        </div>
+        <div class="mt-60 mb-40">
+          <div class="accordion wow fadeInUp" id="accordionFAQ">
+            <div class="accordion-item">
+              <h5 class="accordion-header" id="headingOne">
+                <button class="accordion-button text-heading-5" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">{% trans "How do I book a transfer?" %}</button>
+              </h5>
+              <div class="accordion-collapse collapse show" id="collapseOne" aria-labelledby="headingOne" data-bs-parent="#accordionFAQ">
+                <div class="accordion-body">
+                  {% trans "Please choose your starting location in the <b>Pick up location</b> field and your destination in the <b>Drop off location</b> field." %}
+                  {% trans "You have the option to either type the name of the place or provide the specific address." %}
+                  {% trans "Utilize the dropdown suggestions to streamline and simplify your search process." %}
+                  {% trans "Afterward, proceed by clicking on the <b>Show Prices</b> button. Choose the desired transfer class and select <b>Book</b> to proceed with your reservation." %}
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h5 class="accordion-header" id="headingTwo">
+                <button class="accordion-button text-heading-5 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">{% trans "How can I verify if my order has been successfully processed?" %}</button>
+              </h5>
+              <div class="accordion-collapse collapse" id="collapseTwo" aria-labelledby="headingTwo" data-bs-parent="#accordionFAQ">
+                <div class="accordion-body">
+                  {% trans "After finalizing your booking, you will receive an email confirmation containing a voucher." %}
+                  {% trans "This voucher will include your booking number and all necessary details for your upcoming trip." %}
+                  {% trans "If you do not receive the confirmation email, please reach out to our manager via email at " %}<a href="mailto:support@transfersLux.com">support@transfersLux.com</a>{% trans " or through our online chat support." %}
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h5 class="accordion-header" id="headingThree">
+                <button class="accordion-button text-heading-5 collapsed text-heading-5 type=" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">{% trans "How can I find my driver?" %}</button>
+              </h5>
+              <div class="accordion-collapse collapse" id="collapseThree" aria-labelledby="headingThree" data-bs-parent="#accordionFAQ">
+                <div class="accordion-body">
+                  {% trans "Important Note: Your designated driver will greet you with a name sign showing the first and last names you specified during your reservation." %}
+                  {% trans "During airport transfers, your driver will be awaiting your arrival at the exit of the arrivals area, following the passport control and baggage claim sections." %}
+                  {% trans "For hotel transfers, your driver will be positioned in the lobby area." %}
+                  {% trans "Comprehensive instructions for the meeting point can be accessed in your trip confirmation voucher. Additionally, you will find the driver's contact number provided therein." %}
+                </div>
+            </div>
+            <div class="accordion-item">
+              <h5 class="accordion-header" id="headingFour">
+                <button class="accordion-button text-heading-5 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">{% trans "What happens if my flight details change or is seriosly delayed?" %}</button>
+              </h5>
+              <div class="accordion-collapse collapse" id="collapseFour" aria-labelledby="headingFour" data-bs-parent="#accordionFAQ">
+                <div class="accordion-body">
+                    <p class="text-15">
+                      {% trans "We monitor all flights so we will do our best to arrive in time." %}
+                    </p>
+                    <p class="text-15">
+                      {% trans "If your flight is seriosly delayed just email or call us and keep in touch until we have the new details." %}
+                    </p>
+                    <p class="text-15">
+                      {% trans "If your fligth details is changed please call or email us and we will update your booking with new details." %}
+                    </p>
+                  </div>
+            </div>
+            <div class="accordion-item">
+              <h5 class="accordion-header" id="headingFive">
+                <button class="accordion-button text-heading-5 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">{% trans "Will my driver carry my luggage?" %}</button>
+              </h5>
+              <div class="accordion-collapse collapse" id="collapseFive" aria-labelledby="headingFive" data-bs-parent="#accordionFAQ">
+                <div class="accordion-body">
+                  {% trans "Yes, your driver will always offer to help carry your bags and luggage." %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+{% include 'includes/footer.html' %}
+<script src="{% static '/js/vendors/modernizr-3.6.0.min.js' %}"></script>
+<script src="{% static '/js/vendors/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static '/js/vendors/jquery-migrate-3.3.0.min.js' %}"></script>
+<script src="{% static '/js/vendors/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static '/js/vendors/waypoints.js' %}"></script>
+<script src="{% static '/js/vendors/wow.js' %}"></script>
+<script src="{% static '/js/vendors/magnific-popup.js' %}"></script>
+<script src="{% static '/js/vendors/perfect-scrollbar.min.js' %}"></script>
+<script src="{% static '/js/vendors/select2.min.js' %}"></script>
+<script src="{% static '/js/vendors/isotope.js' %}"></script>
+<script src="{% static '/js/vendors/scrollup.js' %}"></script>
+<script src="{% static '/js/vendors/swiper-bundle.min.js' %}"></script>
+<script src="{% static '/js/vendors/noUISlider.js' %}"></script>
+<script src="{% static '/js/vendors/slider.js' %}"></script>
+<!-- Count down-->
+<script src="{% static '/js/vendors/counterup.js' %}"></script>
+<script src="{% static '/js/vendors/jquery.countdown.min.js' %}"></script>
+<!-- Count down--><script src="{% static '/js/vendors/jquery.elevatezoom.js' %}"></script>
+<script src="{% static '/js/vendors/slick.js' %}"></script>
+<script src="{% static '/js/vendors/jquery-ui.js' %}"></script>
+<script src="{% static '/js/vendors/jquery.timepicker.min.js' %}"></script>
+<script src="{% static '/js/main.js' %}"></script>
+</body>
+</html>

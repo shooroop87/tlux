@@ -1,0 +1,51 @@
+{% load static %}
+{% load i18n %}
+<div class="box-tab-right">
+    <div class="sidebar"> 
+      <div class="d-flex align-items-center justify-content-between wow fadeInUp"> 
+        <h6 class="text-20-medium color-text">{% trans "Transfer Summary" %}</h6>
+      </div>
+      <div class="mt-20 wow fadeInUp"> 
+        <ul class="list-routes"> 
+          <li> <span class="location-item">A </span>
+            <span class="info-location text-14-medium"> 
+              {% if from_short %} {{ from_short }} {% else %} {% trans "City or Airport" %} {% endif %}
+            </span></li>
+          <li> <span class="location-item">B </span>
+            <span class="info-location text-14-medium">
+              {% if to_short %} {{ to_short }} {% else %} {% trans "City or Airport" %} {% endif %}
+            </span></li>
+        </ul>
+      </div>
+      <div class="mt-20 wow fadeInUp"> 
+        <ul class="list-icons"> 
+          <li> <span class="icon-item icon-plan"> </span><span class="info-location text-14-medium">{{ to_date }}</span></li>
+          <li> <span class="icon-item icon-time"></span><span class="info-location text-14-medium">{{ to_time }}</span></li>
+        </ul>
+      </div>
+      <div class="mt-20 wow fadeInUp">
+        <div class="box-info-route"> 
+          <div class="info-route-left">
+            <span class="text-14 color-grey">{% trans "Total Distance" %}</span><span class="text-14-medium color-text">{{ distance }} {% trans "km" %}</span></div>
+          <div class="info-route-left">
+            <span class="text-14 color-grey">{% trans "Total Time" %}</span><span class="text-14-medium color-text">{{ travel_time }} {% trans "min" %}</span></div>
+        </div>
+      </div>
+    <div class="border-bottom mt-30 mb-25"> </div>
+    <div class="mt-0">
+      <span class="text-14 color-grey">{% trans "Vehicle" %}</span><br>
+      <span class="text-14-medium color-text">{{ car_class }}</span>
+    </div>
+    <div class="border-bottom mt-30 mb-25"> </div>
+    <div class="mt-0"> <span class="text-14 color-grey">{% trans "Extra Options" %}</span><br></div>
+  </div>
+  <div class="sidebar wow fadeInUp"> 
+    <ul class="list-prices list-prices-2"> 
+      <li> <span class="text">{% trans "Selected vehicle" %}</span><span class="price">EUR {{ rate }}</span></li>
+    </ul>
+    <div class="border-bottom mt-30 mb-15"> </div>
+    <ul class="list-prices"> 
+      <li> <span class="text text-20-medium">{% trans "Total" %}</span><span class="price text-20-medium">EUR {{ rate }}</span></li>
+    </ul>
+  </div>
+</div>

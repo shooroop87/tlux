@@ -1,0 +1,55 @@
+{% load static %}
+{% load i18n %}
+<section class="section pt-120 box-fleet-cover" id="fleet">
+  <div class="box-fleet-padding">
+    <div class="container-sub"> 
+      <div class="row align-items-center">
+        <div class="col-lg-6 col-7">
+          <h2 class="heading-44-medium title-fleet wow fadeInUp">{% trans "Our Fleet" %}</h2>
+        </div>
+        
+      </div>
+      <div class="row mt-50"> 
+        <div class="col-lg-4"> 
+          <div class="cardFleet cardFleetStyle2 wow fadeInUp">
+            <div class="cardInfo">
+                <h3 class="text-20-medium color-text mb-10">Economy Class</p></h3>
+                <p class="text-14 color-text mb-30">{% trans "For a couple or a family with a child" %}</p>
+            </div>
+            <div class="cardImage mb-30"><img src="{% static 'imgs/page/homepage1/e-class.png' %}" alt="Economy Class - Mercedes-Benz E-Class"></div>
+            <div class="cardInfoBottom">
+              <div class="passenger"><span class="icon-circle icon-passenger"></span><span class="text-14">{% trans "Passengers" %} <span>4</span></span></div>
+              <div class="luggage"><span class="icon-circle icon-luggage"></span><span class="text-14">{% trans "Luggage" %} <span>2</span></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4"> 
+          <div class="cardFleet cardFleetStyle2 wow fadeInUp">
+            <div class="cardInfo">
+                <h3 class="text-20-medium color-text mb-10">Business Class</h3>
+              <p class="text-14 color-text mb-30">{% trans "For comfortable business trips" %}</p>
+            </div>
+            <div class="cardImage mb-30"><img src="{% static 'imgs/page/homepage1/eqs.png' %}" alt="Business Class - Mercedes-Benz S-Class"></div>
+            <div class="cardInfoBottom">
+              <div class="passenger"><span class="icon-circle icon-passenger"></span><span class="text-14">{% trans "Passengers" %} <span>4</span></span></div>
+              <div class="luggage"><span class="icon-circle icon-luggage"></span><span class="text-14">{% trans "Luggage" %} <span>2</span></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4"> 
+          <div class="cardFleet cardFleetStyle2 wow fadeInUp">
+            <div class="cardInfo">
+                <h3 class="text-20-medium color-text mb-10">Business Van/SUV</h3>
+                <p class="text-14 color-text mb-30">{% trans "For up to 10 people or large baggage" %}</p>
+            </div>
+            <div class="cardImage mb-30"><img src="{% static 'imgs/page/homepage1/suv.png' %}" alt="Business Van/SUV - Mercedes-Benz V-Class"></div>
+            <div class="cardInfoBottom">
+              <div class="passenger"><span class="icon-circle icon-passenger"></span><span class="text-14">{% trans "Passengers" %} <span>{% trans "up 10" %}</span></span></div>
+              <div class="luggage"><span class="icon-circle icon-luggage"></span><span class="text-14">{% trans "Luggage" %} <span>2</span></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
