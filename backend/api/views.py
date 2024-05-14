@@ -5,11 +5,10 @@ import uuid
 from datetime import datetime
 
 import googlemaps
-from django.conf import settings
-from django.shortcuts import redirect, render
-
 from api.forms import DetailsForm, ExtrasForm, SearchForm, VehicleForm
 from api.models import Booking, Search
+from django.conf import settings
+from django.shortcuts import redirect, render
 
 
 def index(request):
