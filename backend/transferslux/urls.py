@@ -1,4 +1,3 @@
-from api import views
 from api.sitemaps import StaticViewSitemap
 from django.conf import settings
 from django.conf.urls import handler404
@@ -9,7 +8,6 @@ from django.contrib.sitemaps.views import sitemap
 from django.urls import include, path
 
 handler404 = 'api.views.page_not_found'
-
 
 sitemaps = {
     'static': StaticViewSitemap

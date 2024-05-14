@@ -1,6 +1,4 @@
-from api.models import Booking
 from django import forms
-from django.forms import ModelForm
 
 
 class SearchForm(forms.Form):

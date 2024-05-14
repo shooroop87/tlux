@@ -8,22 +8,14 @@ import googlemaps
 from api.forms import DetailsForm, ExtrasForm, PaymentForm, SearchForm, VehicleForm
 from api.models import Booking, Search
 from django.conf import settings
-from django.core.mail import EmailMultiAlternatives
-from django.http import HttpResponse
-from django.shortcuts import get_object_or_404, redirect, render
-from django.template import RequestContext
-from django.template.loader import render_to_string
-from django.utils.decorators import method_decorator
-from django.utils.html import strip_tags
-from django.views import View
-from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import redirect, render
 
 
 def index(request):
     if request.method == 'POST':
         form = SearchForm(request.POST)
-        #breakpoint()
-        #print(form)
+        # breakpoint()
+        # print(form)
         if form.is_valid():
             from_short = form.cleaned_data["from_short"]
             from_hidden = form.cleaned_data["from_hidden"]
@@ -42,8 +34,8 @@ def index(request):
                 'to_time': to_time,
                 'session_id': str(session_id),
             }
-            #print(query)
-            #breakpoint()
+            # print(query)
+            # breakpoint()
 
             # Store the query in the session
             request.session['search_query'] = query
@@ -70,26 +62,26 @@ def vehicle(request):
         gmaps = googlemaps.Client(key=settings.GOOGLE_API_KEY)
         now = datetime.now()
         calculate = json.dumps(gmaps.distance_matrix(from_hidden,
-                            to_hidden,
-                            mode="driving",
-                            departure_time=now))
+                                                     to_hidden,
+                                                     mode="driving",
+                                                     departure_time=now))
         calculate2 = json.loads(calculate)
         distance = calculate2['rows'][0]['elements'][0]['distance']['value']
         # km
-        distance_km = round(distance/1000,1)
-        cost = math.ceil((distance/1000) * 2)
+        distance_km = round(distance / 1000, 1)
+        cost = math.ceil((distance / 1000) * 2)
 
-        directions_result = gmaps.directions(from_hidden, to_hidden, mode='driving')
+        directions_result = gmaps.directions(from_hidden,
+                                             to_hidden,
+                                             mode='driving')
 
         # Extract travel time from the directions result
         if directions_result:
-            route = directions_result[0]['legs'][0]  # First route and first leg
-            travel_time = route['duration']['text']  # Travel time in text format
-            #travel_time_value = route['duration']['value'] # in seconds
-            #travel_time_h = math.floor(travel_time_value/3600)
-            #travel_time_m = 
-            #print(travel_time_h)
-            #travel_time_min = re.findall('\d+', travel_time)[0]
+            route = directions_result[0]['legs'][0]
+            travel_time = route['duration']['text']
+            # travel_time_h = math.floor(travel_time_value/3600)
+            # print(travel_time_h)
+            # travel_time_min = re.findall('\d+', travel_time)[0]
 
         milan_bergamo_rule = ['Milan',
                               'milan',
@@ -132,8 +124,8 @@ def vehicle(request):
             'to_short': to_short,
             'to_hidden': to_hidden,
             'cost_e': cost,
-            'cost_s': cost*2,
-            'cost_v': cost*3,
+            'cost_s': cost * 2,
+            'cost_v': cost * 3,
             'distance': distance_km,
             'travel_time': travel_time,
             'to_date': to_date,
@@ -151,7 +143,7 @@ def vehicle(request):
                 'session_id': session_id
             }
         # Save search
-        instance=Search(
+        instance = Search(
             from_hidden=from_hidden,
             to_hidden=to_hidden,
             from_short=from_short,
@@ -227,8 +219,8 @@ def extras(request):
 def details(request):
     if request.method == 'POST':
         form = ExtrasForm(request.POST)
-        #breakpoint()
-        #print(form)
+        # breakpoint()
+        # print(form)
         if form.is_valid():
             flight = form.cleaned_data["flight"]
             child_seat = form.cleaned_data["child_seat"]
@@ -322,9 +314,9 @@ def details(request):
 def payment(request):
     if request.method == 'POST':
         form = DetailsForm(request.POST)
-        #breakpoint()
-        #print(form)
-        #print(form.is_valid())
+        # breakpoint()
+        # print(form)
+        # print(form.is_valid())
         if form.is_valid():
             name = form.cleaned_data["name"]
             lastname = form.cleaned_data["lastname"]
@@ -473,18 +465,18 @@ def nexi(request):
         terms_ = True
     else:
         terms_ = False
-    #print(terms)
-    #breakpoint()
+    # print(terms)
+    # breakpoint()
     billing_name = request.POST.get("billing_name")
-    #breakpoint()
-    #print(billing_name)
+    # breakpoint()
+    # print(billing_name)
     billing_lastname = request.POST.get("billing_lastname")
     billing_company = request.POST.get("billing_company")
     billing_address = request.POST.get("billing_address")
     # Query
     query = request.session['search_query']
-    #breakpoint()
-    #print(query)
+    # breakpoint()
+    # print(query)
     from_short = query.get('from_short')
     from_hidden = query.get('from_hidden')
     to_short = query.get('to_short')
@@ -509,7 +501,7 @@ def nexi(request):
     notes_details = query.get('notes_details')
     session_id = query.get('session_id')
     # Save Booking
-    instance=Booking(
+    instance = Booking(
         session_id=session_id,
         from_hidden=from_hidden,
         to_hidden=to_hidden,
@@ -542,11 +534,11 @@ def nexi(request):
     instance.save()
     # Get booking ID
     booking_data = Booking.objects.get(session_id=session_id)
-    #breakpoint()
+    # breakpoint()
     field_name = booking_data._meta.fields[0].name
-    #print(field_name)
+    # print(field_name)
     booking_id = getattr(booking_data, field_name)
-    #print(booking_id)
+    # print(booking_id)
     # Make context
     context = {
         'booking_id': booking_id,
@@ -579,9 +571,9 @@ def nexi(request):
         'billing_address': billing_address,
         'terms': terms
     }
-    #breakpoint()
-    #print(context)
-    #Render successful booking
+    # breakpoint()
+    # print(context)
+    # Render successful booking
     return render(request, 'booking/booking-received.html', context)
 
 

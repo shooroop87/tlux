@@ -50,7 +50,7 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 # Путь к переводам:
 LOCALE_PATHS = [os.path.join(BASE_DIR, 'locale')]
 
-#Google API
+# Google API
 GOOGLE_MAPS_API_KEY = str(os.getenv("GOOGLE_API_KEY"))
 
 TEMPLATES = [
@@ -138,7 +138,7 @@ STATIC_URL = '/static/'
 # в контейнере это будет /app/collected_static
 STATIC_ROOT = BASE_DIR / 'collected_static'
 # Теперь при вызове команды python manage.py collectstatic
-# Django будет копировать все статические файлы в директорию collected_static 
+# Django будет копировать все статические файлы в директорию collected_static
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -148,7 +148,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#  подключаем движок filebased.EmailBackend
+# подключаем движок filebased.EmailBackend
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 # указываем директорию, в которую будут складываться файлы писем
 EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'sent_emails')
@@ -164,14 +164,3 @@ CACHES = {
 }
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
-
-# Test email
-#EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-# Prod email
-#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-#EMAIL_HOST = 'smtp.example.com'
-#EMAIL_PORT = 587
-#EMAIL_USE_TLS = True
-#EMAIL_HOST_USER = 'your_email@example.com'
-#EMAIL_HOST_PASSWORD = 'your_password'
-#DEFAULT_FROM_EMAIL = 'your_email@example.com'
