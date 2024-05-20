@@ -1,4 +1,4 @@
-name: Main Taski workflow
+name: Main Transferslux workflow
 
 on:
   push:
@@ -152,7 +152,7 @@ jobs:
         # которые нужно выполнить на сервере, 
         # с которым установлено соединение
         script: |
-          cd taski
+          cd transferslux
           # Выполняет pull образов с Docker Hub
           sudo docker compose -f docker-compose.production.yml pull
           # Перезапускает все контейнеры в Docker Compose
