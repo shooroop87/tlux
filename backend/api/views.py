@@ -10,7 +10,7 @@ from api.models import Booking, Search
 from django.conf import settings
 from django.shortcuts import redirect, render
 
-google_api_key = settings.GOOGLE_API_KEY
+google_api_key = settings.GOOGLE_MAPS_API_KEY
 
 
 def index(request):
