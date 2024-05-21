@@ -10,6 +10,8 @@ from api.models import Booking, Search
 from django.conf import settings
 from django.shortcuts import redirect, render
 
+google_api_key = settings.GOOGLE_API_KEY
+
 
 def index(request):
     if request.method == 'POST':
@@ -59,7 +61,7 @@ def vehicle(request):
         to_time = query.get('to_time')
         session_id = query.get('session_id')
         # Perform your search logic here based on the query
-        gmaps = googlemaps.Client(key=settings.GOOGLE_API_KEY)
+        gmaps = googlemaps.Client(key=google_api_key)
         now = datetime.now()
         calculate = json.dumps(gmaps.distance_matrix(from_hidden,
                                                      to_hidden,
