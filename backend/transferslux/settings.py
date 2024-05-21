@@ -15,6 +15,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = str(os.getenv("DJANGO_ALLOWED_HOSTS")).split(' ')
 
+CSRF_TRUSTED_ORIGINS = ['https://transferslux.com/']
 
 # Application definition
 
