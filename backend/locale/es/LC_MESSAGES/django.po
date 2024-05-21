@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-11 13:21+0300\n"
+"POT-Creation-Date: 2024-05-21 11:39+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,7 +32,7 @@ msgstr ""
 msgid "Go Back to Homepage"
 msgstr ""
 
-#: .\templates\about.html:31 .\templates\includes\footer.html:30
+#: .\templates\about.html:31 .\templates\includes\footer.html:29
 msgid "About Us"
 msgstr ""
 
@@ -384,7 +384,7 @@ msgid "Secure Payment by credit card"
 msgstr ""
 
 #: .\templates\contacts.html:31 .\templates\contacts.html:35
-#: .\templates\includes\footer.html:33
+#: .\templates\includes\footer.html:32
 msgid "Contacts"
 msgstr ""
 
@@ -527,112 +527,112 @@ msgstr ""
 msgid "Follow Us"
 msgstr ""
 
-#: .\templates\includes\footer.html:28
+#: .\templates\includes\footer.html:27
 msgid "Company"
 msgstr ""
 
-#: .\templates\includes\footer.html:31
+#: .\templates\includes\footer.html:30
 #: .\templates\includes\mobile_menu.html:11
 msgid "Transfer service"
 msgstr ""
 
-#: .\templates\includes\footer.html:32
+#: .\templates\includes\footer.html:31
 msgid "FAQ"
 msgstr ""
 
-#: .\templates\includes\footer.html:37
+#: .\templates\includes\footer.html:36
 msgid "Popular transfers"
 msgstr ""
 
-#: .\templates\includes\footer.html:39
+#: .\templates\includes\footer.html:38
 msgid "Airport Malpensa - Milan"
 msgstr ""
 
-#: .\templates\includes\footer.html:40
+#: .\templates\includes\footer.html:39
 msgid "Airport Malpensa - Cannes"
 msgstr ""
 
-#: .\templates\includes\footer.html:41
+#: .\templates\includes\footer.html:40
 msgid "Airport Bergamo - Milan"
 msgstr ""
 
-#: .\templates\includes\footer.html:42
+#: .\templates\includes\footer.html:41
 msgid "Serravalle Outlet - Milan"
 msgstr ""
 
-#: .\templates\includes\footer.html:46
+#: .\templates\includes\footer.html:45
 msgid "Popular Airports"
 msgstr ""
 
-#: .\templates\includes\footer.html:48
+#: .\templates\includes\footer.html:47
 msgid "Milan Malpensa (MXP)"
 msgstr ""
 
-#: .\templates\includes\footer.html:49
+#: .\templates\includes\footer.html:48
 msgid "Bergamo Orio al Serio (BGY)"
 msgstr ""
 
-#: .\templates\includes\footer.html:50
+#: .\templates\includes\footer.html:49
 msgid "Milan Linate (LIN)"
 msgstr ""
 
-#: .\templates\includes\footer.html:51
+#: .\templates\includes\footer.html:50
 msgid "Venice Marco Polo (VCE)"
 msgstr ""
 
-#: .\templates\includes\footer.html:55
+#: .\templates\includes\footer.html:54
 msgid "Transfers from Milan"
 msgstr ""
 
-#: .\templates\includes\footer.html:57
+#: .\templates\includes\footer.html:56
 msgid "Milan - St. Moritz"
 msgstr ""
 
-#: .\templates\includes\footer.html:58
+#: .\templates\includes\footer.html:57
 msgid "Milan - Lugano"
 msgstr ""
 
-#: .\templates\includes\footer.html:59
+#: .\templates\includes\footer.html:58
 msgid "Milan - Nice"
 msgstr ""
 
-#: .\templates\includes\footer.html:60
+#: .\templates\includes\footer.html:59
 msgid "Milan - Zermatt"
 msgstr ""
 
-#: .\templates\includes\footer.html:64
+#: .\templates\includes\footer.html:63
 msgid "Popular Cities"
 msgstr ""
 
-#: .\templates\includes\footer.html:66
+#: .\templates\includes\footer.html:65
 msgid "Milan"
 msgstr ""
 
-#: .\templates\includes\footer.html:67
+#: .\templates\includes\footer.html:66
 msgid "Bergamo"
 msgstr ""
 
-#: .\templates\includes\footer.html:68
+#: .\templates\includes\footer.html:67
 msgid "Turin"
 msgstr ""
 
-#: .\templates\includes\footer.html:69
+#: .\templates\includes\footer.html:68
 msgid "Venice"
 msgstr ""
 
-#: .\templates\includes\footer.html:79
+#: .\templates\includes\footer.html:78
 msgid "All rights reserved"
 msgstr ""
 
-#: .\templates\includes\footer.html:81
+#: .\templates\includes\footer.html:80
 msgid "Terms"
 msgstr ""
 
-#: .\templates\includes\footer.html:82
+#: .\templates\includes\footer.html:81
 msgid "Privacy"
 msgstr ""
 
-#: .\templates\includes\footer.html:86
+#: .\templates\includes\footer.html:85
 msgid "Book via Chat"
 msgstr ""
 
@@ -651,23 +651,23 @@ msgstr ""
 msgid "Contact"
 msgstr ""
 
-#: .\templates\includes\header.html:33 .\transferslux\settings.py:128
+#: .\templates\includes\header.html:33 .\transferslux\settings.py:130
 msgid "English"
 msgstr ""
 
-#: .\templates\includes\header.html:34 .\transferslux\settings.py:132
+#: .\templates\includes\header.html:34 .\transferslux\settings.py:134
 msgid "Russian"
 msgstr ""
 
-#: .\templates\includes\header.html:35 .\transferslux\settings.py:130
+#: .\templates\includes\header.html:35 .\transferslux\settings.py:132
 msgid "Spanish"
 msgstr ""
 
-#: .\templates\includes\header.html:36 .\transferslux\settings.py:131
+#: .\templates\includes\header.html:36 .\transferslux\settings.py:133
 msgid "French"
 msgstr ""
 
-#: .\templates\includes\header.html:37 .\transferslux\settings.py:129
+#: .\templates\includes\header.html:37 .\transferslux\settings.py:131
 msgid "Italian"
 msgstr ""
 

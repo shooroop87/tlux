@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-11 13:21+0300\n"
+"POT-Creation-Date: 2024-05-21 11:39+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,7 +34,7 @@ msgstr "Страница, которую вы ищете, недоступна."
 msgid "Go Back to Homepage"
 msgstr "Вернуться на главную страницу"
 
-#: .\templates\about.html:31 .\templates\includes\footer.html:30
+#: .\templates\about.html:31 .\templates\includes\footer.html:29
 msgid "About Us"
 msgstr "О нас"
 
@@ -386,7 +386,7 @@ msgid "Secure Payment by credit card"
 msgstr "Безопасная оплата кредитной картой"
 
 #: .\templates\contacts.html:31 .\templates\contacts.html:35
-#: .\templates\includes\footer.html:33
+#: .\templates\includes\footer.html:32
 msgid "Contacts"
 msgstr "Контакты"
 
@@ -558,112 +558,112 @@ msgstr "Да, ваш водитель всегда предложит помоч
 msgid "Follow Us"
 msgstr "Мы в сети"
 
-#: .\templates\includes\footer.html:28
+#: .\templates\includes\footer.html:27
 msgid "Company"
 msgstr "Компания"
 
-#: .\templates\includes\footer.html:31
+#: .\templates\includes\footer.html:30
 #: .\templates\includes\mobile_menu.html:11
 msgid "Transfer service"
 msgstr "Услуга трансфера"
 
-#: .\templates\includes\footer.html:32
+#: .\templates\includes\footer.html:31
 msgid "FAQ"
 msgstr "Помощь / FAQ"
 
-#: .\templates\includes\footer.html:37
+#: .\templates\includes\footer.html:36
 msgid "Popular transfers"
 msgstr "Популярные машруты"
 
-#: .\templates\includes\footer.html:39
+#: .\templates\includes\footer.html:38
 msgid "Airport Malpensa - Milan"
 msgstr "Аэропорт Мальпенса - Милан"
 
-#: .\templates\includes\footer.html:40
+#: .\templates\includes\footer.html:39
 msgid "Airport Malpensa - Cannes"
 msgstr "Аэропорт Мальпенса - Канны"
 
-#: .\templates\includes\footer.html:41
+#: .\templates\includes\footer.html:40
 msgid "Airport Bergamo - Milan"
 msgstr "Аэропорт Бергам - Милан"
 
-#: .\templates\includes\footer.html:42
+#: .\templates\includes\footer.html:41
 msgid "Serravalle Outlet - Milan"
 msgstr "Серравалле аутлет - Милан"
 
-#: .\templates\includes\footer.html:46
+#: .\templates\includes\footer.html:45
 msgid "Popular Airports"
 msgstr "Популярные аэропорты"
 
-#: .\templates\includes\footer.html:48
+#: .\templates\includes\footer.html:47
 msgid "Milan Malpensa (MXP)"
 msgstr "Милан Мальпенса (MXP)"
 
-#: .\templates\includes\footer.html:49
+#: .\templates\includes\footer.html:48
 msgid "Bergamo Orio al Serio (BGY)"
 msgstr "Бергамо Orio al Serio (BGY)"
 
-#: .\templates\includes\footer.html:50
+#: .\templates\includes\footer.html:49
 msgid "Milan Linate (LIN)"
 msgstr "Милан Линате (LIN)"
 
-#: .\templates\includes\footer.html:51
+#: .\templates\includes\footer.html:50
 msgid "Venice Marco Polo (VCE)"
 msgstr "Венеция Марко Поло (VCE)"
 
-#: .\templates\includes\footer.html:55
+#: .\templates\includes\footer.html:54
 msgid "Transfers from Milan"
 msgstr "Трансферы из Милана"
 
-#: .\templates\includes\footer.html:57
+#: .\templates\includes\footer.html:56
 msgid "Milan - St. Moritz"
 msgstr "Милан - Санкт-Мориц"
 
-#: .\templates\includes\footer.html:58
+#: .\templates\includes\footer.html:57
 msgid "Milan - Lugano"
 msgstr "Милан - Лугано"
 
-#: .\templates\includes\footer.html:59
+#: .\templates\includes\footer.html:58
 msgid "Milan - Nice"
 msgstr "Милан - Ницца"
 
-#: .\templates\includes\footer.html:60
+#: .\templates\includes\footer.html:59
 msgid "Milan - Zermatt"
 msgstr "Милан - Цермат"
 
-#: .\templates\includes\footer.html:64
+#: .\templates\includes\footer.html:63
 msgid "Popular Cities"
 msgstr "Популярные города"
 
-#: .\templates\includes\footer.html:66
+#: .\templates\includes\footer.html:65
 msgid "Milan"
 msgstr "Милан"
 
-#: .\templates\includes\footer.html:67
+#: .\templates\includes\footer.html:66
 msgid "Bergamo"
 msgstr "Бергамо"
 
-#: .\templates\includes\footer.html:68
+#: .\templates\includes\footer.html:67
 msgid "Turin"
 msgstr "Турин"
 
-#: .\templates\includes\footer.html:69
+#: .\templates\includes\footer.html:68
 msgid "Venice"
 msgstr "Венеция"
 
-#: .\templates\includes\footer.html:79
+#: .\templates\includes\footer.html:78
 msgid "All rights reserved"
 msgstr "Все права защищены"
 
-#: .\templates\includes\footer.html:81
+#: .\templates\includes\footer.html:80
 msgid "Terms"
 msgstr "Правила и условия"
 
-#: .\templates\includes\footer.html:82
+#: .\templates\includes\footer.html:81
 msgid "Privacy"
 msgstr "Политика конфиденциальности"
 
-#: .\templates\includes\footer.html:86
+#: .\templates\includes\footer.html:85
 msgid "Book via Chat"
 msgstr "Онлайн чат"
 
@@ -682,23 +682,23 @@ msgstr "Автомобили"
 msgid "Contact"
 msgstr "Контакты"
 
-#: .\templates\includes\header.html:33 .\transferslux\settings.py:128
+#: .\templates\includes\header.html:33 .\transferslux\settings.py:130
 msgid "English"
 msgstr "Английский"
 
-#: .\templates\includes\header.html:34 .\transferslux\settings.py:132
+#: .\templates\includes\header.html:34 .\transferslux\settings.py:134
 msgid "Russian"
 msgstr "Русский"
 
-#: .\templates\includes\header.html:35 .\transferslux\settings.py:130
+#: .\templates\includes\header.html:35 .\transferslux\settings.py:132
 msgid "Spanish"
 msgstr "Испанский"
 
-#: .\templates\includes\header.html:36 .\transferslux\settings.py:131
+#: .\templates\includes\header.html:36 .\transferslux\settings.py:133
 msgid "French"
 msgstr "Французский"
 
-#: .\templates\includes\header.html:37 .\transferslux\settings.py:129
+#: .\templates\includes\header.html:37 .\transferslux\settings.py:131
 msgid "Italian"
 msgstr "Итальянский"
 
@@ -713,7 +713,7 @@ msgstr "Комфортабельный трансфер из аэропорто�
 
 #: .\templates\index.html:12
 msgid "transfer, italy, private transfers, airport transfer"
-msgstr ""
+msgstr "трансфер, Италия, частные трансферы, трансфер из аэропорта"
 
 #: .\templates\index.html:20
 msgid "TransfersLux – Comfortable transfers from airports and hotels in Italy"
