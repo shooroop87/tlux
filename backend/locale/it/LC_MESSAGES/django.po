@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-21 16:47+0300\n"
+"POT-Creation-Date: 2024-05-21 17:37+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -667,7 +667,7 @@ msgstr "Privacy"
 
 #: .\templates\includes\footer.html:85
 msgid "Book via Chat"
-msgstr "Prenota tramite chat"
+msgstr "Prenota in chat"
 
 #: .\templates\includes\header.html:12
 msgid "Transfer Service"
@@ -730,12 +730,12 @@ msgid "For comfortable business trips"
 msgstr "Per comodi viaggi d'affari"
 
 #: .\templates\mainpage\fleet4.html:43
-msgid "For up to 10 people or large baggage"
-msgstr "Per un massimo di 10 persone o bagagli di grandi dimensioni"
+msgid "For up to 8 people or large baggage"
+msgstr "Per un massimo di 8 persone"
 
 #: .\templates\mainpage\fleet4.html:47
-msgid "up 10"
-msgstr "su 10"
+msgid "up 8"
+msgstr ""
 
 #: .\templates\mainpage\how-it-works3.html:6
 msgid "How It Works"
@@ -905,3 +905,6 @@ msgstr "professionisti"
 #: .\templates\terms-and-conditions.html:35
 msgid "Term and Conditions"
 msgstr "Termini e condizioni"
+
+#~ msgid "up 10"
+#~ msgstr "su 10"

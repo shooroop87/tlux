@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-21 16:47+0300\n"
+"POT-Creation-Date: 2024-05-21 17:37+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -728,12 +728,14 @@ msgid "For comfortable business trips"
 msgstr "Для деловых поездок с комфортом"
 
 #: .\templates\mainpage\fleet4.html:43
-msgid "For up to 10 people or large baggage"
+#, fuzzy
+#| msgid "For up to 10 people or large baggage"
+msgid "For up to 8 people or large baggage"
 msgstr "Для групп до 10 человек c багажом"
 
 #: .\templates\mainpage\fleet4.html:47
-msgid "up 10"
-msgstr "до 10"
+msgid "up 8"
+msgstr ""
 
 #: .\templates\mainpage\how-it-works3.html:6
 msgid "How It Works"
@@ -901,6 +903,9 @@ msgstr "с лицензией"
 #: .\templates\terms-and-conditions.html:35
 msgid "Term and Conditions"
 msgstr "Условиями и положениями"
+
+#~ msgid "up 10"
+#~ msgstr "до 10"
 
 #~ msgid "Options*"
 #~ msgstr "Опции"
