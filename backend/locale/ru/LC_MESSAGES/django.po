@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-21 11:39+0300\n"
+"POT-Creation-Date: 2024-05-21 16:47+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -682,23 +682,23 @@ msgstr "Автомобили"
 msgid "Contact"
 msgstr "Контакты"
 
-#: .\templates\includes\header.html:33 .\transferslux\settings.py:130
+#: .\templates\includes\header.html:33
 msgid "English"
 msgstr "Английский"
 
-#: .\templates\includes\header.html:34 .\transferslux\settings.py:134
+#: .\templates\includes\header.html:34
 msgid "Russian"
 msgstr "Русский"
 
-#: .\templates\includes\header.html:35 .\transferslux\settings.py:132
+#: .\templates\includes\header.html:35
 msgid "Spanish"
 msgstr "Испанский"
 
-#: .\templates\includes\header.html:36 .\transferslux\settings.py:133
+#: .\templates\includes\header.html:36
 msgid "French"
 msgstr "Французский"
 
-#: .\templates\includes\header.html:37 .\transferslux\settings.py:131
+#: .\templates\includes\header.html:37
 msgid "Italian"
 msgstr "Итальянский"
 
