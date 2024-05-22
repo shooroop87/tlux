@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-22 07:50+0300\n"
+"POT-Creation-Date: 2024-05-22 08:09+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -114,7 +114,7 @@ msgid "Notes for the chauffeur"
 msgstr "Note per l'autista"
 
 #: .\templates\booking\booking-extra.html:120
-#: .\templates\booking\booking-passenger.html:139
+#: .\templates\booking\booking-passenger.html:131
 msgid "Continue"
 msgstr "Continua"
 
@@ -144,7 +144,7 @@ msgstr "Numero di telefono*"
 msgid "Passengers*"
 msgstr "Passeggeri*"
 
-#: .\templates\booking\booking-passenger.html:113
+#: .\templates\booking\booking-passenger.html:111
 #: .\templates\booking\booking-vehicle.html:73
 #: .\templates\booking\booking-vehicle.html:102
 #: .\templates\booking\booking-vehicle.html:131
@@ -153,7 +153,7 @@ msgstr "Passeggeri*"
 msgid "Luggage"
 msgstr "Bagaglio"
 
-#: .\templates\booking\booking-passenger.html:131
+#: .\templates\booking\booking-passenger.html:123
 msgid "Notes to driver"
 msgstr "Note per l'autista"
 
@@ -326,7 +326,9 @@ msgid "Select"
 msgstr "Selezionare"
 
 #: .\templates\booking\booking-vehicle.html:131
-msgid "up to 10"
+#, fuzzy
+#| msgid "up to 10"
+msgid "up to 8"
 msgstr "fino a 10"
 
 #: .\templates\booking\sidebar_after.html:6
@@ -735,7 +737,7 @@ msgstr "Per un massimo di 8 persone"
 
 #: .\templates\mainpage\fleet4.html:47
 msgid "up 8"
-msgstr ""
+msgstr "fino a 8"
 
 #: .\templates\mainpage\how-it-works3.html:6
 msgid "How It Works"
@@ -905,6 +907,3 @@ msgstr "professionisti"
 #: .\templates\terms-and-conditions.html:35
 msgid "Term and Conditions"
 msgstr "Termini e condizioni"
-
-#~ msgid "up 10"
-#~ msgstr "su 10"

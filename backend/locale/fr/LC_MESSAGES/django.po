@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-22 07:50+0300\n"
+"POT-Creation-Date: 2024-05-22 08:09+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -112,7 +112,7 @@ msgid "Notes for the chauffeur"
 msgstr ""
 
 #: .\templates\booking\booking-extra.html:120
-#: .\templates\booking\booking-passenger.html:139
+#: .\templates\booking\booking-passenger.html:131
 msgid "Continue"
 msgstr ""
 
@@ -142,7 +142,7 @@ msgstr ""
 msgid "Passengers*"
 msgstr ""
 
-#: .\templates\booking\booking-passenger.html:113
+#: .\templates\booking\booking-passenger.html:111
 #: .\templates\booking\booking-vehicle.html:73
 #: .\templates\booking\booking-vehicle.html:102
 #: .\templates\booking\booking-vehicle.html:131
@@ -151,7 +151,7 @@ msgstr ""
 msgid "Luggage"
 msgstr ""
 
-#: .\templates\booking\booking-passenger.html:131
+#: .\templates\booking\booking-passenger.html:123
 msgid "Notes to driver"
 msgstr ""
 
@@ -324,7 +324,7 @@ msgid "Select"
 msgstr ""
 
 #: .\templates\booking\booking-vehicle.html:131
-msgid "up to 10"
+msgid "up to 8"
 msgstr ""
 
 #: .\templates\booking\sidebar_after.html:6
