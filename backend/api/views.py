@@ -8,7 +8,7 @@ import googlemaps
 from api.forms import DetailsForm, ExtrasForm, SearchForm, VehicleForm
 from api.models import Booking, Search
 from django.conf import settings
-from django.core.mail import EmailMultiAlternatives, send_mail
+from django.core.mail import EmailMultiAlternatives
 from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
 
@@ -581,6 +581,7 @@ def nexi(request):
     # Рендеринг HTML-шаблона
     html_content = render_to_string('booking/booking-raceived.html', context)
     msg = EmailMultiAlternatives(subject, from_email, to)
+    msg.attach_alternative(html_content, "text/html")   
     msg.send()
     # breakpoint()
     # print(context)
