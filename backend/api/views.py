@@ -579,7 +579,7 @@ def nexi(request):
     from_email = settings.DEFAULT_FROM_EMAIL
     to = [email, from_email]
     # Рендеринг HTML-шаблона
-    html_content = render_to_string('booking/booking-raceived.html', context)
+    html_content = render_to_string('booking/booking-received.html', context)
     msg = EmailMultiAlternatives(subject, from_email, to)
     msg.attach_alternative(html_content, "text/html")
     msg.send()

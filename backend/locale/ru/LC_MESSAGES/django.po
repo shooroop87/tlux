@@ -291,7 +291,7 @@ msgstr "Бесплатная отмена"
 #: .\templates\booking\booking-vehicle.html:95
 #: .\templates\booking\booking-vehicle.html:124
 msgid "Free Waiting time"
-msgstr "90 минут ожидания включено"
+msgstr "60 минут ожидания включено"
 
 #: .\templates\booking\booking-vehicle.html:67
 #: .\templates\booking\booking-vehicle.html:96
@@ -326,10 +326,8 @@ msgid "Select"
 msgstr "Выбрать"
 
 #: .\templates\booking\booking-vehicle.html:131
-#, fuzzy
-#| msgid "up to 10"
 msgid "up to 8"
-msgstr "до 10 человек"
+msgstr "до 8"
 
 #: .\templates\booking\sidebar_after.html:6
 #: .\templates\booking\sidebar_before.html:6
