@@ -8,7 +8,9 @@ import googlemaps
 from api.forms import DetailsForm, ExtrasForm, SearchForm, VehicleForm
 from api.models import Booking, Search
 from django.conf import settings
+from django.core.mail import EmailMultiAlternatives, send_mail
 from django.shortcuts import redirect, render
+from django.template.loader import render_to_string
 
 google_api_key = settings.GOOGLE_MAPS_API_KEY
 
@@ -573,6 +575,13 @@ def nexi(request):
         'billing_address': billing_address,
         'terms': terms
     }
+    subject = 'Your booking was submitted successfully'
+    from_email = settings.DEFAULT_FROM_EMAIL
+    to = [email, from_email]
+    # Рендеринг HTML-шаблона
+    html_content = render_to_string('booking/booking-raceived.html', context)
+    msg = EmailMultiAlternatives(subject, from_email, to)
+    msg.send()
     # breakpoint()
     # print(context)
     # Render successful booking

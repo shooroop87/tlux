@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-22 08:09+0300\n"
+"POT-Creation-Date: 2024-05-23 14:21+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,80 +20,79 @@ msgstr ""
 
 #: .\templates\404.html:33
 msgid "Oops! It looks like you're lost."
-msgstr ""
+msgstr "Oops! On dirait que tu es perdu."
 
 #: .\templates\404.html:34
 msgid ""
-"The page you're looking for isn't available. Try to search again or use the "
-"go to."
-msgstr ""
+"The page you're looking for isn't available. Try to search again or use the go to."
+msgstr "La page que vous recherchez n'est pas disponible. Essayez de chercher à nouveau."
 
 #: .\templates\404.html:35
 msgid "Go Back to Homepage"
-msgstr ""
+msgstr "Retournez à la page d'accueil"
 
 #: .\templates\about.html:31 .\templates\includes\footer.html:29
 msgid "About Us"
-msgstr ""
+msgstr "À propos de nous"
 
 #: .\templates\about.html:34 .\templates\contacts.html:34
 #: .\templates\includes\mobile_menu.html:10 .\templates\privacy-policy.html:34
 #: .\templates\terms-and-conditions.html:34
 msgid "Home"
-msgstr ""
+msgstr "Maison"
 
 #: .\templates\about.html:35
 msgid "About"
-msgstr ""
+msgstr "À propos de nous"
 
 #: .\templates\booking\booking-extra.html:34
 #: .\templates\booking\booking-passenger.html:35
 #: .\templates\booking\booking-payment.html:34
 #: .\templates\booking\booking-vehicle.html:34
 msgid "Vehicle "
-msgstr ""
+msgstr "Véhicule "
 
 #: .\templates\booking\booking-extra.html:39
 #: .\templates\booking\booking-passenger.html:40
 #: .\templates\booking\booking-payment.html:39
 #: .\templates\booking\booking-vehicle.html:39
 msgid "Extras "
-msgstr ""
+msgstr "Suppléments "
 
 #: .\templates\booking\booking-extra.html:44
 #: .\templates\booking\booking-passenger.html:45
 #: .\templates\booking\booking-payment.html:44
 #: .\templates\booking\booking-vehicle.html:44
 msgid "Details "
-msgstr ""
+msgstr "Détails "
 
 #: .\templates\booking\booking-extra.html:49
 #: .\templates\booking\booking-passenger.html:50
 #: .\templates\booking\booking-payment.html:49
 #: .\templates\booking\booking-vehicle.html:49
 msgid "Payment "
-msgstr ""
+msgstr "Paiement "
 
 #: .\templates\booking\booking-extra.html:58
 #: .\templates\booking\sidebar_after.html:40
 msgid "Extra Options"
-msgstr ""
+msgstr "Options supplémentaires"
 
 #: .\templates\booking\booking-extra.html:64
 msgid "Flight/train number (optional)"
-msgstr ""
+msgstr "Numéro de vol/train (facultatif)"
 
 #: .\templates\booking\booking-extra.html:75
 msgid "Child Seat"
-msgstr ""
+msgstr "Siège d'enfant"
 
 #: .\templates\booking\booking-extra.html:76
 msgid "Suitable for toddlers weighing 0-18 kg (approx 0 to 4 years)."
-msgstr ""
+msgstr "Convient aux tout-petits pesant 0 à 18 kg (environ 0 à 4 ans)."
 
 #: .\templates\booking\booking-extra.html:85
 msgid "Booster seat"
-msgstr ""
+msgstr "Siège d'appoint"
 
 #: .\templates\booking\booking-extra.html:86
 msgid "Suitable for children weighing 15-36 kg (approx 4 to 10 years)."
