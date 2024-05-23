@@ -581,7 +581,7 @@ def nexi(request):
     # Рендеринг HTML-шаблона
     html_content = render_to_string('booking/booking-raceived.html', context)
     msg = EmailMultiAlternatives(subject, from_email, to)
-    msg.attach_alternative(html_content, "text/html") 
+    msg.attach_alternative(html_content, "text/html")
     msg.send()
     # breakpoint()
     # print(context)
