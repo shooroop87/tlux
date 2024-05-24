@@ -11,7 +11,7 @@ load_dotenv(find_dotenv())
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = str(os.getenv("DJANGO_SECRET_KEY"))
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = str(os.getenv("DJANGO_ALLOWED_HOSTS")).split(' ')
 
@@ -156,7 +156,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# подключаем движок filebased.EmailBackend_
+# подключаем движок filebased.EmailBackend_1
 # EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 # указываем директорию, в которую будут складываться файлы писем
 # EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'sent_emails')
