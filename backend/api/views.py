@@ -13,7 +13,8 @@ from django.conf import settings
 
 # from django.core.mail import EmailMultiAlternatives
 from django.shortcuts import redirect, render
-from django.template.loader import get_template, render_to_string
+
+# from django.template.loader import get_template, render_to_string
 
 # from weasyprint import HTML
 
