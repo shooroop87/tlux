@@ -11,7 +11,7 @@ load_dotenv(find_dotenv())
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = str(os.getenv("DJANGO_SECRET_KEY"))
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = str(os.getenv("DJANGO_ALLOWED_HOSTS")).split(' ')
 
@@ -34,7 +34,8 @@ INSTALLED_APPS = [
     'django.contrib.humanize',  # Для переводов чисел, дат и т.д.
     'django.contrib.sitemaps',
     'api.apps.ApiConfig',
-    'debug_toolbar'
+    'debug_toolbar',
+    'easy_pdf'
 ]
 
 MIDDLEWARE = [
