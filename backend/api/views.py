@@ -1,7 +1,8 @@
 import json
 import math
 import re
-import tempfile
+
+# import tempfile
 import uuid
 from datetime import datetime
 
@@ -9,7 +10,8 @@ import googlemaps
 from api.forms import DetailsForm, ExtrasForm, SearchForm, VehicleForm
 from api.models import Booking, Search
 from django.conf import settings
-from django.core.mail import EmailMultiAlternatives
+
+# from django.core.mail import EmailMultiAlternatives
 from django.shortcuts import redirect, render
 from django.template.loader import get_template, render_to_string
 
@@ -578,11 +580,11 @@ def nexi(request):
         'billing_address': billing_address,
         'terms': terms
     }
-    subject = 'Your booking was submitted successfully'
-    from_email = settings.DEFAULT_FROM_EMAIL
-    to = [email, from_email]
+    # subject = 'Your booking was submitted successfully'
+    # from_email = settings.DEFAULT_FROM_EMAIL
+    # to = [email, from_email]
     # Рендеринг HTML-шаблона
-    html_content = render_to_string('booking/booking-received.html', context)
+    # html_content = render_to_string('booking/booking-received.html', context)
     # Отправка письма
     # send_mail(
     #    subject=subject,
@@ -600,8 +602,8 @@ def nexi(request):
     # print(context)
     # Render successful booking
     # Load the template
-    template = get_template('booking/booking-received.html')
-    html = template.render(context)
+    # template = get_template('booking/booking-received.html')
+    # html = template.render(context)
     # Generate PDF
     # pdf_file = tempfile.NamedTemporaryFile(delete=True)
     # HTML(string=html).write_pdf(target=pdf_file.name)
