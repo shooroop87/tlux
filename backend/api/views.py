@@ -9,8 +9,7 @@ import googlemaps
 from api.forms import DetailsForm, ExtrasForm, SearchForm, VehicleForm
 from api.models import Booking, Search
 from django.conf import settings
-from django.core.mail import EmailMessage, EmailMultiAlternatives
-from django.http import HttpResponse
+from django.core.mail import EmailMultiAlternatives
 from django.shortcuts import redirect, render
 from django.template.loader import get_template, render_to_string
 from weasyprint import HTML
