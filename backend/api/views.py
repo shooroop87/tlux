@@ -12,7 +12,8 @@ from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.shortcuts import redirect, render
 from django.template.loader import get_template, render_to_string
-from weasyprint import HTML
+
+# from weasyprint import HTML
 
 google_api_key = settings.GOOGLE_MAPS_API_KEY
 
@@ -602,14 +603,14 @@ def nexi(request):
     template = get_template('booking/booking-received.html')
     html = template.render(context)
     # Generate PDF
-    pdf_file = tempfile.NamedTemporaryFile(delete=True)
-    HTML(string=html).write_pdf(target=pdf_file.name)
-    msg = EmailMultiAlternatives(subject, settings.DEFAULT_FROM_EMAIL, to)
-    msg.attach_alternative(html_content, "text/html")
-    msg.attach('voucher.pdf', pdf_file.read(), 'application/pdf')
-    msg.send()
+    # pdf_file = tempfile.NamedTemporaryFile(delete=True)
+    # HTML(string=html).write_pdf(target=pdf_file.name)
+    # msg = EmailMultiAlternatives(subject, settings.DEFAULT_FROM_EMAIL, to)
+    # msg.attach_alternative(html_content, "text/html")
+    # msg.attach('voucher.pdf', pdf_file.read(), 'application/pdf')
+    # msg.send()
     # Close the PDF file
-    pdf_file.close()
+    # pdf_file.close()
     return render(request, 'booking/booking-received.html', context)
 
 

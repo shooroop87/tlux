@@ -34,7 +34,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',  # Для переводов чисел, дат и т.д.
     'django.contrib.sitemaps',
     'api.apps.ApiConfig',
-    'debug_toolbar',
+    'debug_toolbar'
 ]
 
 MIDDLEWARE = [
@@ -156,7 +156,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# подключаем движок filebased.EmailBackend_1
+# подключаем движок filebased.EmailBackend_1cd ..
+
 # EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 # указываем директорию, в которую будут складываться файлы писем
 # EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'sent_emails')
