@@ -8,7 +8,7 @@ import googlemaps
 from api.forms import DetailsForm, ExtrasForm, SearchForm, VehicleForm
 from api.models import Booking, Search
 from django.conf import settings
-from django.core.mail import EmailMultiAlternatives
+from django.core.mail import send_mail
 from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
 
@@ -580,9 +580,19 @@ def nexi(request):
     to = [email, from_email]
     # Рендеринг HTML-шаблона
     html_content = render_to_string('booking/booking-received.html', context)
-    msg = EmailMultiAlternatives(subject, from_email, to)
-    msg.attach_alternative(html_content, "text/html")
-    msg.send()
+    # Отправка письма
+    send_mail(
+        subject=subject,
+        message='',  # Текстовое сообщение для старых клиентов, которые не поддерживают HTML
+        from_email=settings.DEFAULT_FROM_EMAIL,
+        recipient_list=to,
+        html_message=html_content,
+        fail_silently=False,
+    )
+
+    # msg = EmailMultiAlternatives(subject, from_email, to)
+    # msg.attach_alternative(html_content, "text/html")
+    # msg.send()
     # breakpoint()
     # print(context)
     # Render successful booking
