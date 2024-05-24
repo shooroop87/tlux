@@ -583,7 +583,7 @@ def nexi(request):
     # Отправка письма
     send_mail(
         subject=subject,
-        message='',  # Текстовое сообщение для старых клиентов, которые не поддерживают HTML
+        message='',  # Текстовое сообщение которые не поддерживают HTML
         from_email=settings.DEFAULT_FROM_EMAIL,
         recipient_list=to,
         html_message=html_content,
