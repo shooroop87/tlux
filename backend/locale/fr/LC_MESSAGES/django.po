@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-23 14:21+0300\n"
+"POT-Creation-Date: 2024-05-24 14:02+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,8 +24,11 @@ msgstr "Oops! On dirait que tu es perdu."
 
 #: .\templates\404.html:34
 msgid ""
-"The page you're looking for isn't available. Try to search again or use the go to."
-msgstr "La page que vous recherchez n'est pas disponible. Essayez de chercher à nouveau."
+"The page you're looking for isn't available. Try to search again or use the "
+"go to."
+msgstr ""
+"La page que vous recherchez n'est pas disponible. Essayez de chercher à "
+"nouveau."
 
 #: .\templates\404.html:35
 msgid "Go Back to Homepage"
