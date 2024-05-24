@@ -1,8 +1,6 @@
 import json
 import math
 import re
-
-# import tempfile
 import uuid
 from datetime import datetime
 
@@ -10,12 +8,10 @@ import googlemaps
 from api.forms import DetailsForm, ExtrasForm, SearchForm, VehicleForm
 from api.models import Booking, Search
 from django.conf import settings
-
-# from django.core.mail import EmailMultiAlternatives
 from django.shortcuts import redirect, render
 
+# from django.core.mail import EmailMultiAlternatives
 # from django.template.loader import get_template, render_to_string
-
 # from weasyprint import HTML
 
 google_api_key = settings.GOOGLE_MAPS_API_KEY
