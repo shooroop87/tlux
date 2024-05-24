@@ -584,7 +584,7 @@ def nexi(request):
     template = get_template('booking/booking-received.html')
     html = template.render(context)
     result = BytesIO()
-    pdf = pisa.pisaDocument(BytesIO(html.encode("ISO-8859-1")), result)
+    pdf = pisa.pisaDocument(BytesIO(html.encode("UTF-8")), result)
     if pdf.err:
         return HttpResponse("Invalid PDF",
                             status_code=400,
