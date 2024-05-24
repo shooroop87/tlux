@@ -35,7 +35,6 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     'api.apps.ApiConfig',
     'debug_toolbar',
-    'easy_pdf'
 ]
 
 MIDDLEWARE = [

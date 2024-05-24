@@ -1,6 +1,7 @@
 import json
 import math
 import re
+import tempfile
 import uuid
 from datetime import datetime
 
@@ -8,10 +9,11 @@ import googlemaps
 from api.forms import DetailsForm, ExtrasForm, SearchForm, VehicleForm
 from api.models import Booking, Search
 from django.conf import settings
-from django.core.mail import EmailMultiAlternatives
+from django.core.mail import EmailMessage, EmailMultiAlternatives
+from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from django.template.loader import render_to_string
-from easy_pdf.rendering import render_to_pdf
+from django.template.loader import get_template, render_to_string
+from weasyprint import HTML
 
 google_api_key = settings.GOOGLE_MAPS_API_KEY
 
@@ -597,11 +599,18 @@ def nexi(request):
     # breakpoint()
     # print(context)
     # Render successful booking
+    # Load the template
+    template = get_template('booking/booking-received.html')
+    html = template.render(context)
+    # Generate PDF
+    pdf_file = tempfile.NamedTemporaryFile(delete=True)
+    HTML(string=html).write_pdf(target=pdf_file.name)
     msg = EmailMultiAlternatives(subject, settings.DEFAULT_FROM_EMAIL, to)
     msg.attach_alternative(html_content, "text/html")
-    pdf = render_to_pdf('booking/booking-received.html', context)
-    msg.attach('invoice.pdf', pdf)
+    msg.attach('voucher.pdf', pdf_file.read(), 'application/pdf')
     msg.send()
+    # Close the PDF file
+    pdf_file.close()
     return render(request, 'booking/booking-received.html', context)
 
 
