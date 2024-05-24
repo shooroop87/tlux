@@ -12,7 +12,7 @@ from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from django.template.loader import get_template, render_to_string
+from django.template.loader import get_template
 from xhtml2pdf import pisa
 
 google_api_key = settings.GOOGLE_MAPS_API_KEY
@@ -586,7 +586,9 @@ def nexi(request):
     result = BytesIO()
     pdf = pisa.pisaDocument(BytesIO(html.encode("ISO-8859-1")), result)
     if pdf.err:
-        return HttpResponse("Invalid PDF", status_code=400, content_type='text/plain')
+        return HttpResponse("Invalid PDF",
+                            status_code=400,
+                            content_type='text/plain')
     # Отправка письма
     msg = EmailMultiAlternatives(subject, settings.DEFAULT_FROM_EMAIL, to)
     msg.attach_alternative(html, "text/html")
