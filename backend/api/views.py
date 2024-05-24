@@ -3,16 +3,17 @@ import math
 import re
 import uuid
 from datetime import datetime
+from io import BytesIO
 
 import googlemaps
 from api.forms import DetailsForm, ExtrasForm, SearchForm, VehicleForm
 from api.models import Booking, Search
 from django.conf import settings
+from django.core.mail import EmailMultiAlternatives
+from django.http import HttpResponse
 from django.shortcuts import redirect, render
-
-# from django.core.mail import EmailMultiAlternatives
-# from django.template.loader import get_template, render_to_string
-# from weasyprint import HTML
+from django.template.loader import get_template, render_to_string
+from xhtml2pdf import pisa
 
 google_api_key = settings.GOOGLE_MAPS_API_KEY
 
@@ -577,6 +578,20 @@ def nexi(request):
         'billing_address': billing_address,
         'terms': terms
     }
+    subject = 'Your booking was submitted successfully'
+    from_email = settings.DEFAULT_FROM_EMAIL
+    to = [email, from_email]
+    template = get_template('booking/booking-received.html')
+    html = template.render(context)
+    result = BytesIO()
+    pdf = pisa.pisaDocument(BytesIO(html.encode("ISO-8859-1")), result)
+    if pdf.err:
+        return HttpResponse("Invalid PDF", status_code=400, content_type='text/plain')
+    # Отправка письма
+    msg = EmailMultiAlternatives(subject, settings.DEFAULT_FROM_EMAIL, to)
+    msg.attach_alternative(html, "text/html")
+    msg.attach('voucher.pdf', pdf.read(), 'application/pdf')
+    msg.send()
     # subject = 'Your booking was submitted successfully'
     # from_email = settings.DEFAULT_FROM_EMAIL
     # to = [email, from_email]
