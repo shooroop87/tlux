@@ -578,7 +578,6 @@ def nexi(request):
     # Генерация PDF и сохранение в MEDIA_ROOT
     # str_id = str(session_id)
     # voucher_name = f"voucher_{str_id}.pdf"
-    html = render_to_string('booking/booking-received.html', context)
     subject = 'Your booking was submitted successfully'
     from_email = settings.DEFAULT_FROM_EMAIL
     to = [email, from_email]
