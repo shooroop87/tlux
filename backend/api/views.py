@@ -1,19 +1,20 @@
 import json
 import math
+import os
 import re
 import uuid
 from datetime import datetime
 from io import BytesIO
 
 import googlemaps
+import xhtml2pdf.pisa as pisa
 from api.forms import DetailsForm, ExtrasForm, SearchForm, VehicleForm
 from api.models import Booking, Search
 from django.conf import settings
-from django.core.mail import EmailMultiAlternatives
+from django.core.mail import EmailMessage, EmailMultiAlternatives
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from django.template.loader import get_template
-from xhtml2pdf import pisa
+from django.template.loader import get_template, render_to_string
 
 google_api_key = settings.GOOGLE_MAPS_API_KEY
 
@@ -578,21 +579,25 @@ def nexi(request):
         'billing_address': billing_address,
         'terms': terms
     }
+    # Генерация PDF и сохранение в MEDIA_ROOT
+    voucher_name = 'voucher_' + booking_id + '.pdf'
+    file_path = os.path.join(settings.MEDIA_ROOT, voucher_name)
+    html = render_to_string('booking/booking-received.html', context)
+    result = BytesIO()
+    pisa.pisaDocument(BytesIO(html.encode("UTF-8")),
+                      result,
+                      encoding='utf-8',
+                      path=file_path)
     subject = 'Your booking was submitted successfully'
     from_email = settings.DEFAULT_FROM_EMAIL
     to = [email, from_email]
-    template = get_template('booking/booking-received.html')
-    html = template.render(context)
-    result = BytesIO()
-    pdf_status = pisa.pisaDocument(BytesIO(html.encode("UTF-8")), result)
-    if pdf_status.err:
-        return HttpResponse("Invalid PDF",
-                            status_code=400,
-                            content_type='text/plain')
     # Отправка письма
-    msg = EmailMultiAlternatives(subject, settings.DEFAULT_FROM_EMAIL, to)
+    msg = EmailMultiAlternatives(subject, from_email, to)
     msg.attach_alternative(html, "text/html")
-    msg.attach('voucher.pdf', result.getvalue(), 'application/pdf')
+    with open(file_path, 'rb') as f:
+        msg.attach(voucher_name, f.read(), 'application/pdf')
+    msg.content_subtype = "html"
+    msg.encoding = 'UTF-8'
     msg.send()
     # subject = 'Your booking was submitted successfully'
     # from_email = settings.DEFAULT_FROM_EMAIL
