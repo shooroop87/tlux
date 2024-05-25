@@ -579,7 +579,8 @@ def nexi(request):
         'terms': terms
     }
     # Генерация PDF и сохранение в MEDIA_ROOT
-    voucher_name = f"voucher_{booking_id}.pdf"
+    str_id = str(booking_id)
+    voucher_name = f"voucher_{str_id}.pdf"
     file_path = os.path.join(settings.MEDIA_ROOT, voucher_name)
     html = render_to_string('booking/booking-received.html', context)
     result = BytesIO()
