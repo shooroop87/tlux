@@ -584,15 +584,15 @@ def nexi(request):
     template = get_template('booking/booking-received.html')
     html = template.render(context)
     result = BytesIO()
-    pdf = pisa.pisaDocument(BytesIO(html.encode("UTF-8")), result)
-    if pdf.err:
+    pdf_status = pisa.pisaDocument(BytesIO(html.encode("UTF-8")), result)
+    if pdf_status.err:
         return HttpResponse("Invalid PDF",
                             status_code=400,
                             content_type='text/plain')
     # Отправка письма
     msg = EmailMultiAlternatives(subject, settings.DEFAULT_FROM_EMAIL, to)
     msg.attach_alternative(html, "text/html")
-    msg.attach('voucher.pdf', pdf.read(), 'application/pdf')
+    msg.attach('voucher.pdf', result.getvalue(), 'application/pdf')
     msg.send()
     # subject = 'Your booking was submitted successfully'
     # from_email = settings.DEFAULT_FROM_EMAIL
