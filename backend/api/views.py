@@ -12,6 +12,7 @@ from api.forms import DetailsForm, ExtrasForm, SearchForm, VehicleForm
 from api.models import Booking, Search
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
+from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
 
@@ -582,23 +583,32 @@ def nexi(request):
     str_id = str(session_id)
     voucher_name = f"voucher_{str_id}.pdf"
     file_path = os.path.join(settings.MEDIA_ROOT, voucher_name)
+    # Убедитесь, что директория MEDIA_ROOT существует
+    if not os.path.exists(settings.MEDIA_ROOT):
+        os.makedirs(settings.MEDIA_ROOT)
+    # Генерация HTML и сохранение в PDF
     html = render_to_string('booking/booking-received.html', context)
-    result = BytesIO()
-    pisa.pisaDocument(BytesIO(html.encode("UTF-8")),
-                      result,
-                      encoding='utf-8',
-                      path=file_path)
+    with open(file_path, "w+b") as result_file:
+        pdf_status = pisa.pisaDocument(BytesIO(html.encode("UTF-8")),
+                                       result_file)
+    if pdf_status.err:
+        return HttpResponse("Error generating PDF", status=500)
+    # Отправка письма с вложением
     subject = 'Your booking was submitted successfully'
     from_email = settings.DEFAULT_FROM_EMAIL
     to = [email, from_email]
     # Отправка письма
     msg = EmailMultiAlternatives(subject, from_email, to)
     msg.attach_alternative(html, "text/html")
-    with open(file_path, 'rb') as f:
-        msg.attach(voucher_name, f.read(), 'application/pdf')
+    msg.attach_file(file_path)
     msg.content_subtype = "html"
     msg.encoding = 'UTF-8'
     msg.send()
+    # Удаление PDF файла после отправки
+    try:
+        os.remove(file_path)
+    except OSError as e:
+        print(f"Error deleting the file: {e}")
     # subject = 'Your booking was submitted successfully'
     # from_email = settings.DEFAULT_FROM_EMAIL
     # to = [email, from_email]
