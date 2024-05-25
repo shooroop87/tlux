@@ -434,84 +434,72 @@ msgstr ""
 
 #: .\templates\help-center.html:46 .\templates\mainpage\faq.html:20
 msgid ""
-"Afterward, proceed by clicking on the <b>Show Prices</b> button. Choose the "
-"desired transfer class and select <b>Book</b> to proceed with your "
-"reservation."
-msgstr ""
+"Afterward, proceed by clicking on the <b>Show Prices</b> button. Choose the desired transfer class and select <b>Book</b> to proceed with your reservation."
+msgstr "Luego, continúe haciendo clic en el botón <b>Mostrar precios</b>. Elija la clase de traslado deseada y seleccione <b>Reservar</b> para continuar con su reserva."
 
 #: .\templates\help-center.html:52 .\templates\mainpage\faq.html:26
 msgid "How can I verify if my order has been successfully processed?"
-msgstr ""
+msgstr "¿Cómo puedo verificar si mi pedido ha sido procesado exitosamente?"
 
 #: .\templates\help-center.html:56 .\templates\mainpage\faq.html:30
 msgid ""
-"After finalizing your booking, you will receive an email confirmation "
-"containing a voucher."
-msgstr ""
+"After finalizing your booking, you will receive an email confirmation containing a voucher."
+msgstr "Después de finalizar su reserva, recibirá un correo electrónico de confirmación que contiene un bono."
 
 #: .\templates\help-center.html:57 .\templates\mainpage\faq.html:31
 msgid ""
-"This voucher will include your booking number and all necessary details for "
-"your upcoming trip."
-msgstr ""
+"This voucher will include your booking number and all necessary details for your upcoming trip."
+msgstr "Este bono incluirá su número de reserva y todos los detalles necesarios para su próximo viaje."
 
 #: .\templates\help-center.html:58 .\templates\mainpage\faq.html:32
 msgid ""
-"If you do not receive the confirmation email, please reach out to our "
-"manager via email at "
-msgstr ""
+"If you do not receive the confirmation email, please reach out to our manager via email at "
+msgstr "Si no recibe el correo electrónico de confirmación, comuníquese con nuestro gerente por correo electrónico a "
 
 #: .\templates\help-center.html:58 .\templates\mainpage\faq.html:32
 msgid " or through our online chat support."
-msgstr ""
+msgstr " o a través de nuestro soporte por chat en línea."
 
 #: .\templates\help-center.html:64 .\templates\mainpage\faq.html:38
 msgid "How can I find my driver?"
-msgstr ""
+msgstr "¿Cómo puedo encontrar a mi conductora?"
 
 #: .\templates\help-center.html:68 .\templates\mainpage\faq.html:42
 msgid ""
-"Important Note: Your designated driver will greet you with a name sign "
-"showing the first and last names you specified during your reservation."
-msgstr ""
+"Important Note: Your designated driver will greet you with a name sign showing the first and last names you specified during your reservation."
+msgstr "Nota importante: su conductor designado lo recibirá con un cartel con su nombre que muestra el nombre y apellido que especificó durante su reserva."
 
 #: .\templates\help-center.html:69 .\templates\mainpage\faq.html:43
 msgid ""
-"During airport transfers, your driver will be awaiting your arrival at the "
-"exit of the arrivals area, following the passport control and baggage claim "
-"sections."
-msgstr ""
+"During airport transfers, your driver will be awaiting your arrival at the exit of the arrivals area, following the passport control and baggage claim sections."
+msgstr "Durante los traslados al aeropuerto, su conductor estará esperando su llegada en la salida del área de llegadas, siguiendo las secciones de control de pasaportes y recogida de equipaje."
 
 #: .\templates\help-center.html:70 .\templates\mainpage\faq.html:44
 msgid "For hotel transfers, your driver will be positioned in the lobby area."
-msgstr ""
+msgstr "Para traslados al hotel, su conductor se ubicará en el área del lobby."
 
 #: .\templates\help-center.html:71 .\templates\mainpage\faq.html:45
 msgid ""
-"Comprehensive instructions for the meeting point can be accessed in your "
-"trip confirmation voucher. Additionally, you will find the driver's contact "
-"number provided therein."
-msgstr ""
+"Comprehensive instructions for the meeting point can be accessed in your trip confirmation voucher. Additionally, you will find the driver's contact number provided therein."
+msgstr "Puede acceder a instrucciones completas para el punto de encuentro en su bono de confirmación de viaje. Además, allí encontrará el número de contacto del conductor."
 
 #: .\templates\help-center.html:76 .\templates\mainpage\faq.html:50
 msgid "What happens if my flight details change or is seriosly delayed?"
-msgstr ""
+msgstr "¿Qué pasa si los datos de mi vuelo cambian o sufre un retraso importante?"
 
 #: .\templates\help-center.html:81 .\templates\mainpage\faq.html:55
 msgid "We monitor all flights so we will do our best to arrive in time."
-msgstr ""
+msgstr "Monitoreamos todos los vuelos por lo que haremos todo lo posible para llegar a tiempo."
 
 #: .\templates\help-center.html:84 .\templates\mainpage\faq.html:58
 msgid ""
-"If your flight is seriosly delayed just email or call us and keep in touch "
-"until we have the new details."
-msgstr ""
+"If your flight is seriosly delayed just email or call us and keep in touch until we have the new details."
+msgstr "Si su vuelo sufre un retraso importante, envíenos un correo electrónico o llámenos y manténgase en contacto hasta que tengamos los nuevos detalles."
 
 #: .\templates\help-center.html:87 .\templates\mainpage\faq.html:61
 msgid ""
-"If your fligth details is changed please call or email us and we will update "
-"your booking with new details."
-msgstr ""
+"If your fligth details is changed please call or email us and we will update your booking with new details."
+msgstr "Si se modifican los detalles de su vuelo, llámenos o envíenos un correo electrónico y actualizaremos su reserva con nuevos detalles."
 
 #: .\templates\help-center.html:93 .\templates\mainpage\faq.html:67
 msgid "Will my driver carry my luggage?"
@@ -781,78 +769,75 @@ msgstr "Mostrar precios"
 
 #: .\templates\mainpage\testimonials2.html:8
 msgid "Hear what our amazing customers say"
-msgstr ""
+msgstr "Escucha lo que dicen nuestras increíbles clientes"
 
 #: .\templates\mainpage\testimonials2.html:10
 msgid ""
-"People and companies from more than 50 countries trust us with their trip "
-"for a comfortable transfer in Italy"
-msgstr ""
+"People and companies from more than 50 countries trust us with their trip for a comfortable transfer in Italy"
+msgstr "Personas y empresas de más de 50 países nos confían su viaje para un cómodo traslado en Italia"
 
 #: .\templates\mainpage\testimonials2.html:13
 msgid "See all reviews"
-msgstr ""
+msgstr "Ver todas las reseñas"
 
 #: .\templates\mainpage\why-us2.html:8
 msgid "We make sure that your every trip is comfortable"
-msgstr ""
+msgstr "Nos aseguramos de que cada viaje sea cómodo."
 
 #: .\templates\mainpage\why-us2.html:13
 msgid ""
-"A transfer service, akin to a tourist service, where you can book a private "
-"transfer from airports, train stations, or hotels, with a professional "
-"driver."
-msgstr ""
+"A transfer service, akin to a tourist service, where you can book a private transfer from airports, train stations, or hotels, with a professional driver."
+msgstr "Un servicio de transfer, a modo de servicio turístico, donde podrás reservar un transfer privado desde aeropuertos, estaciones de tren u hoteles, con un conductor profesional."
 
 #: .\templates\mainpage\why-us2.html:22
 msgid "Luxury Cars"
-msgstr ""
+msgstr "Carros de lujo"
 
 #: .\templates\mainpage\why-us2.html:22
 msgid "Selection"
-msgstr ""
+msgstr "Selección"
 
 #: .\templates\mainpage\why-us2.html:30
 msgid "24/7 Order"
-msgstr ""
+msgstr "24/7 Orden"
 
 #: .\templates\mainpage\why-us2.html:30
 msgid "Available"
-msgstr ""
+msgstr "Disponible"
 
 #: .\templates\mainpage\why-us2.html:38
 msgid "Fast Car Delivery"
-msgstr ""
+msgstr "Entrega rápida de automóviles"
 
 #: .\templates\mainpage\why-us2.html:38
 msgid "Service"
-msgstr ""
+msgstr "Servicio"
 
 #: .\templates\mainpage\why-us2.html:46
 msgid "High Safety"
-msgstr ""
+msgstr "Alta Seguridad"
 
 #: .\templates\mainpage\why-us2.html:46
 msgid "and Nurity"
-msgstr ""
+msgstr "y Nutrición"
 
 #: .\templates\mainpage\why-us2.html:54
 msgid "Fixed Price &"
-msgstr ""
+msgstr "Precio fijo &"
 
 #: .\templates\mainpage\why-us2.html:54
 msgid "Bonus System"
-msgstr ""
+msgstr "Sistema de bonificación"
 
 #: .\templates\mainpage\why-us2.html:62
 msgid "Professional"
-msgstr ""
+msgstr "Profesional"
 
 #: .\templates\mainpage\why-us2.html:62
 msgid "Car Drivers"
-msgstr ""
+msgstr "Conductores de automóviles"
 
 #: .\templates\terms-and-conditions.html:31
 #: .\templates\terms-and-conditions.html:35
 msgid "Term and Conditions"
-msgstr ""
+msgstr "Términos y Condiciones"
