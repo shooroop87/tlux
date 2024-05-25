@@ -602,7 +602,7 @@ def nexi(request):
     # subject = 'Your booking was submitted successfully'
     # from_email = settings.DEFAULT_FROM_EMAIL
     # to = [email, from_email]
-    # Рендеринг HTML-шаблона
+    # Рендеринг HTML-шаблона1
     # html_content = render_to_string('booking/booking-received.html', context)
     # Отправка письма
     # send_mail(
