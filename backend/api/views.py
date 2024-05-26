@@ -124,8 +124,8 @@ def vehicle(request):
             cost = 100
         if cost <= 50:
             cost_e = 50
-            cost_s = 50*1.5
-            cost_v = 50*1.2
+            cost_s = 50 * 1.5
+            cost_v = 50 * 1.2
         else:
             cost_e = cost
             cost_s = cost * 1.5
