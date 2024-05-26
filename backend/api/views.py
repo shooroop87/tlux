@@ -122,14 +122,22 @@ def vehicle(request):
                 checked = 'True'
         if checked == 'True':
             cost = 100
+        if cost <= 50:
+            cost_e = 50
+            cost_s = 50*1.5
+            cost_v = 50*1.2
+        else:
+            cost_e = cost
+            cost_s = cost * 1.5
+            cost_v = cost * 1.2
         context = {
             'from_short': from_short,
             'from_hidden': from_hidden,
             'to_short': to_short,
             'to_hidden': to_hidden,
-            'cost_e': cost,
-            'cost_s': cost * 1.5,
-            'cost_v': cost * 1.2,
+            'cost_e': cost_e,
+            'cost_s': cost_s,
+            'cost_v': cost_v,
             'distance': distance_km,
             'travel_time': travel_time,
             'to_date': to_date,
@@ -596,6 +604,10 @@ def nexi(request):
         fail_silently=False,
     )
     return render(request, 'booking/booking-received.html', context)
+
+
+def emailtest(request):
+    return render(request, 'booking/booking-received.html')
 
 
 def about(request):
