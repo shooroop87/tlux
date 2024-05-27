@@ -15,6 +15,7 @@ from django.core.mail import EmailMultiAlternatives, send_mail
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.template.loader import get_template, render_to_string
+from django.utils.html import strip_tags
 from xhtml2pdf import pisa
 
 google_api_key = settings.GOOGLE_MAPS_API_KEY
@@ -638,10 +639,11 @@ def link_callback(uri, rel):
 
 def emailtest(request):
     # PDF xhtml2pdf
+    # HTML
     context = {}
-    html = render_to_string("booking/booking-received.html", context)
-    response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename="report.pdf"'
+    html_content = render_to_string("booking/booking-received.html", context)
+    text_content = strip_tags(html_content)
+    # PDF
     template = get_template("booking/booking-received.html")
     html = template.render(context)
     result = BytesIO()
@@ -651,8 +653,8 @@ def emailtest(request):
     if pdf.err:
         return HttpResponse('Error occurred while generating PDF', status=500)
     pdf_value = result.getvalue()
+    result.close()
     subject = 'TEST PDF'
-    text_content = 'TEST PDF'
     from_email = 'support@transferslux.com'
     recepients = 'shooroop87@mail.ru'
     email_message = EmailMultiAlternatives(subject,
