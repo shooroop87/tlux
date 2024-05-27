@@ -618,12 +618,12 @@ def link_callback(uri, rel):
             result = [result]
             result = list(os.path.realpath(path) for path in result)
             path = result[0]
-        else:
-            sUrl = settings.STATIC_URL
-            sRoot = settings.STATIC_ROOT
-            mUrl = settings.MEDIA_URL
-            mRoot = settings.MEDIA_ROOT
-
+    else:
+        sUrl = settings.STATIC_URL
+        sRoot = settings.STATIC_ROOT
+        mUrl = settings.MEDIA_URL
+        mRoot = settings.MEDIA_ROOT
+        
         if uri.startswith(mUrl):
             path = os.path.join(mRoot, uri.replace(mUrl, ""))
         elif uri.startswith(sUrl):
@@ -635,7 +635,7 @@ def link_callback(uri, rel):
         if not os.path.isfile(path):
             raise RuntimeError(
                 'media URI must start with %s or %s' % (sUrl, mUrl))
-        return path
+    return path
 
 
 def emailtest(request):
