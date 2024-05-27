@@ -1,20 +1,17 @@
-import io
 import json
 import math
 import os
 import re
-import sys
 import uuid
 from datetime import datetime
 from io import BytesIO
-from pathlib import Path
 
 import googlemaps
 from api.forms import DetailsForm, ExtrasForm, SearchForm, VehicleForm
 from api.models import Booking, Search
 from django.conf import settings
 from django.contrib.staticfiles import finders
-from django.core.mail import EmailMessage, EmailMultiAlternatives, send_mail
+from django.core.mail import EmailMultiAlternatives, send_mail
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.template.loader import get_template, render_to_string
@@ -620,12 +617,12 @@ def link_callback(uri, rel):
         if not isinstance(result, (list, tuple)):
             result = [result]
             result = list(os.path.realpath(path) for path in result)
-            path=result[0]
+            path = result[0]
         else:
-            sUrl = settings.STATIC_URL        # /static/
-            sRoot = settings.STATIC_ROOT      # /home/userX/project_static/
-            mUrl = settings.MEDIA_URL         # /media/
-            mRoot = settings.MEDIA_ROOT       # /home/userX/project_static/media/
+            sUrl = settings.STATIC_URL
+            sRoot = settings.STATIC_ROOT
+            mUrl = settings.MEDIA_URL
+            mRoot = settings.MEDIA_ROOT
 
         if uri.startswith(mUrl):
             path = os.path.join(mRoot, uri.replace(mUrl, ""))
@@ -637,8 +634,7 @@ def link_callback(uri, rel):
         # make sure that file exists
         if not os.path.isfile(path):
             raise RuntimeError(
-                'media URI must start with %s or %s' % (sUrl, mUrl)
-                )
+                'media URI must start with %s or %s' % (sUrl, mUrl))
         return path
 
 
