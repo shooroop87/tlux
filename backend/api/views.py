@@ -1,16 +1,24 @@
+import io
 import json
 import math
+import os
 import re
+import sys
 import uuid
 from datetime import datetime
+from io import BytesIO
+from pathlib import Path
 
 import googlemaps
 from api.forms import DetailsForm, ExtrasForm, SearchForm, VehicleForm
 from api.models import Booking, Search
 from django.conf import settings
-from django.core.mail import send_mail
+from django.contrib.staticfiles import finders
+from django.core.mail import EmailMessage, EmailMultiAlternatives, send_mail
+from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from django.template.loader import render_to_string
+from django.template.loader import get_template, render_to_string
+from xhtml2pdf import pisa
 
 google_api_key = settings.GOOGLE_MAPS_API_KEY
 
@@ -606,8 +614,62 @@ def nexi(request):
     return render(request, 'booking/booking-received.html', context)
 
 
+def link_callback(uri, rel):
+    result = finders.find(uri)
+    if result:
+        if not isinstance(result, (list, tuple)):
+            result = [result]
+            result = list(os.path.realpath(path) for path in result)
+            path=result[0]
+        else:
+            sUrl = settings.STATIC_URL        # /static/
+            sRoot = settings.STATIC_ROOT      # /home/userX/project_static/
+            mUrl = settings.MEDIA_URL         # /media/
+            mRoot = settings.MEDIA_ROOT       # /home/userX/project_static/media/
+
+        if uri.startswith(mUrl):
+            path = os.path.join(mRoot, uri.replace(mUrl, ""))
+        elif uri.startswith(sUrl):
+            path = os.path.join(sRoot, uri.replace(sUrl, ""))
+        else:
+            return uri
+
+        # make sure that file exists
+        if not os.path.isfile(path):
+            raise RuntimeError(
+                'media URI must start with %s or %s' % (sUrl, mUrl)
+                )
+        return path
+
+
 def emailtest(request):
-    return render(request, 'booking/booking-received.html')
+    # PDF xhtml2pdf
+    context = {}
+    html = render_to_string("booking/booking-received.html", context)
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="report.pdf"'
+    template = get_template("booking/booking-received.html")
+    html = template.render(context)
+    result = BytesIO()
+    pdf = pisa.CreatePDF(BytesIO(html.encode("UTF-8")),
+                         dest=result,
+                         link_callback=link_callback)
+    if pdf.err:
+        return HttpResponse('Error occurred while generating PDF', status=500)
+    pdf_value = result.getvalue()
+    subject = 'TEST PDF'
+    text_content = 'TEST PDF'
+    from_email = 'support@transferslux.com'
+    recepients = 'shooroop87@mail.ru'
+    email_message = EmailMultiAlternatives(subject,
+                                           text_content,
+                                           from_email,
+                                           to=[recepients])
+    # Attach the PDF file
+    email_message.content_subtype = 'html'
+    email_message.attach('report.pdf', pdf_value, 'application/pdf')
+    email_message.send()
+    return render(request, 'index.html')
 
 
 def about(request):
