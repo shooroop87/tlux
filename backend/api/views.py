@@ -11,6 +11,7 @@ from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
+from django.utils.translation import get_language_from_request
 
 google_api_key = settings.GOOGLE_MAPS_API_KEY
 
@@ -586,13 +587,14 @@ def nexi(request):
     # Генерация PDF и сохранение в MEDIA_ROOT
     # str_id = str(session_id)
     # voucher_name = f"voucher_{str_id}.pdf"
-    if request.language_code == 'it':
+    language_code = get_language_from_request(request)
+    if language_code == 'it':
         subject = 'La tua prenotazione è stata inviata con successo'
-    elif request.language_code == 'fr':
+    elif language_code == 'fr':
         subject = 'Votre réservation a été soumise avec succès'
-    elif request.language_code == 'es':
+    elif language_code == 'es':
         subject = 'Su reserva fue enviada exitosamente'
-    elif request.language_code == 'ru':
+    elif language_code == 'ru':
         subject = 'Ваше бронирование было успешно отправлено'
     else:
         subject = 'Your booking was submitted successfully'
