@@ -79,7 +79,7 @@ msgstr "Оплата "
 #: .\templates\booking\booking-extra.html:58
 #: .\templates\booking\sidebar_after.html:41
 msgid "Extra Options"
-msgstr "Дополнительная информация/Опции"
+msgstr "Дополнительные услуги"
 
 #: .\templates\booking\booking-extra.html:64
 msgid "Flight/train number (optional)"
