@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-28 20:51+0300\n"
+"POT-Creation-Date: 2024-05-28 22:38+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -85,6 +85,7 @@ msgid "Flight/train number (optional)"
 msgstr "Número de vuelo/tren (opcional)"
 
 #: .\templates\booking\booking-extra.html:75
+#: .\templates\booking\sidebar_after.html:43
 msgid "Child Seat"
 msgstr "Asiento para niños"
 
@@ -416,9 +417,21 @@ msgstr "min"
 msgid "Vehicle"
 msgstr "Vehículo"
 
+#: .\templates\booking\sidebar_after.html:46
+msgid "Booster Seat"
+msgstr "Asiento elevador"
+
+#: .\templates\booking\sidebar_after.html:49
+msgid "Flowers"
+msgstr "Flores"
+
 #: .\templates\booking\sidebar_after.html:56
 msgid "Selected vehicle"
 msgstr "Vehículo seleccionado"
+
+#: .\templates\booking\sidebar_after.html:57
+msgid "Extra options"
+msgstr "Opciones adicionales"
 
 #: .\templates\booking\sidebar_before.html:37
 msgid "+500.000 passengers transported"
@@ -474,8 +487,8 @@ msgid "Comfortable transfers in Italy"
 msgstr "Traslados cómodos en Italia"
 
 #: .\templates\email\email.html:142
-msgid "Hello, "
-msgstr "Hola, "
+msgid "Hello,"
+msgstr "Hola,"
 
 #: .\templates\email\email.html:143
 msgid "Thank you for booking. See your order confirmation below."

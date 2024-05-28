@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-28 20:51+0300\n"
+"POT-Creation-Date: 2024-05-28 22:38+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -86,6 +86,7 @@ msgid "Flight/train number (optional)"
 msgstr "Рейс/Номер поезда (опционально)"
 
 #: .\templates\booking\booking-extra.html:75
+#: .\templates\booking\sidebar_after.html:43
 msgid "Child Seat"
 msgstr "Детское кресло"
 
@@ -339,7 +340,6 @@ msgstr "Бесплатная отмена"
 #: .\templates\booking\booking-vehicle.html:66
 #: .\templates\booking\booking-vehicle.html:95
 #: .\templates\booking\booking-vehicle.html:124
-#| msgid "Free Waiting time"
 msgid "60 min Free Waiting time"
 msgstr "60 минут ожидания включено"
 
@@ -366,7 +366,6 @@ msgstr "EUR"
 #: .\templates\booking\booking-vehicle.html:79
 #: .\templates\booking\booking-vehicle.html:108
 #: .\templates\booking\booking-vehicle.html:137
-#| msgid "All prices include VAT, fees &amp; tip."
 msgid "All prices include VAT and fees"
 msgstr "Все цены включают НДС и сборы"
 
@@ -416,9 +415,21 @@ msgstr "мин"
 msgid "Vehicle"
 msgstr "Автомобиль "
 
+#: .\templates\booking\sidebar_after.html:46
+msgid "Booster Seat"
+msgstr "Дополнительное сиденье"
+
+#: .\templates\booking\sidebar_after.html:49
+msgid "Flowers"
+msgstr "Букет цветов"
+
 #: .\templates\booking\sidebar_after.html:56
 msgid "Selected vehicle"
 msgstr "Выбранный автомобиль"
+
+#: .\templates\booking\sidebar_after.html:57
+msgid "Extra options"
+msgstr "Дополнительная информация/Опции"
 
 #: .\templates\booking\sidebar_before.html:37
 msgid "+500.000 passengers transported"
@@ -554,7 +565,6 @@ msgid "Help Center"
 msgstr "Помощь"
 
 #: .\templates\email\email.html:280
-#| msgid "All rights reserved"
 msgid "All rights reserved."
 msgstr "Все права защищены"
 
