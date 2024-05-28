@@ -256,6 +256,10 @@ def details(request):
             session_id = query.get('session_id')
 
             total = rate + child_seat * 15 + booster_seat * 20 + flowers * 70
+            child_seat_total = child_seat * 15
+            booster_seat_total = booster_seat * 20
+            flowers_total = flowers * 70
+            extra_total = child_seat_total + booster_seat_total + flowers_total
 
             # Create a dictionary with the fields
             query = {
@@ -266,6 +270,10 @@ def details(request):
                 'car_class': car_class,
                 'rate': rate,
                 'total': total,
+                'child_seat_total': child_seat_total,
+                'booster_seat_total': booster_seat_total,
+                'flowers_total': flowers_total,
+                'extra_total': extra_total,         
                 'distance': distance,
                 'travel_time': travel_time,
                 'to_date': to_date,
@@ -285,6 +293,10 @@ def details(request):
                 'car_class': car_class,
                 'rate': rate,
                 'total': total,
+                'child_seat_total': child_seat_total,
+                'booster_seat_total': booster_seat_total,
+                'flowers_total': flowers_total,
+                'extra_total': extra_total,
                 'distance': distance,
                 'travel_time': travel_time,
                 'to_date': to_date,
@@ -352,9 +364,13 @@ def payment(request):
             to_hidden = query.get('to_hidden')
             to_date = query.get('to_date')
             to_time = query.get('to_time')
-            total = query.get('total')
             car_class = query.get('car_class')
             rate = query.get('rate')
+            total = query.get('total')
+            child_seat_total = query.get('child_seat_total')
+            booster_seat_total = query.get('booster_seat_total')
+            flowers_total = query.get('flowers_total')
+            extra_total = query.get('extra_total')
             distance = query.get('distance')
             travel_time = query.get('travel_time')
             flight = query.get('flight')
@@ -373,6 +389,10 @@ def payment(request):
                 'car_class': car_class,
                 'rate': rate,
                 'total': total,
+                'child_seat_total': child_seat_total,
+                'booster_seat_total': booster_seat_total,
+                'flowers_total': flowers_total,
+                'extra_total': extra_total,
                 'distance': distance,
                 'travel_time': travel_time,
                 'to_date': to_date,
@@ -399,6 +419,10 @@ def payment(request):
                 'car_class': car_class,
                 'rate': rate,
                 'total': total,
+                'child_seat_total': child_seat_total,
+                'booster_seat_total': booster_seat_total,
+                'flowers_total': flowers_total,
+                'extra_total': extra_total,
                 'distance': distance,
                 'travel_time': travel_time,
                 'to_date': to_date,
@@ -430,9 +454,13 @@ def payment(request):
             to_hidden = query.get('to_hidden')
             to_date = query.get('to_date')
             to_time = query.get('to_time')
-            total = query.get('total')
-            car_class = query.get('car_class')
             rate = query.get('rate')
+            total = query.get('total')
+            child_seat_total = query.get('child_seat_total')
+            booster_seat_total = query.get('booster_seat_total')
+            flowers_total = query.get('flowers_total')
+            extra_total = query.get('extra_total')
+            car_class = query.get('car_class')
             distance = query.get('distance')
             travel_time = query.get('travel_time')
             context = {
@@ -443,6 +471,10 @@ def payment(request):
                 'car_class': car_class,
                 'rate': rate,
                 'total': total,
+                'child_seat_total': child_seat_total,
+                'booster_seat_total': booster_seat_total,
+                'flowers_total': flowers_total,
+                'extra_total': extra_total,
                 'distance': distance,
                 'travel_time': travel_time,
                 'to_date': to_date,
@@ -463,6 +495,11 @@ def payment(request):
     to_time = query.get('to_time')
     car_class = query.get('car_class')
     rate = query.get('rate')
+    total = query.get('total')
+    child_seat_total = query.get('child_seat_total')
+    booster_seat_total = query.get('booster_seat_total')
+    flowers_total = query.get('flowers_total')
+    extra_total = query.get('extra_total')
     distance = query.get('distance')
     travel_time = query.get('travel_time')
     context = {
@@ -473,6 +510,10 @@ def payment(request):
         'car_class': car_class,
         'rate': rate,
         'total': total,
+        'child_seat_total': child_seat_total,
+        'booster_seat_total': booster_seat_total,
+        'flowers_total': flowers_total,
+        'extra_total': extra_total,
         'distance': distance,
         'travel_time': travel_time,
         'to_date': to_date,
@@ -510,6 +551,10 @@ def nexi(request):
     car_class = query.get('car_class')
     rate = query.get('rate')
     total = query.get('total')
+    child_seat_total = query.get('child_seat_total')
+    booster_seat_total = query.get('booster_seat_total')
+    flowers_total = query.get('flowers_total')
+    extra_total = query.get('extra_total')
     distance = query.get('distance')
     travel_time = query.get('travel_time')
     flight = query.get('flight')
@@ -576,6 +621,10 @@ def nexi(request):
         'car_class': car_class,
         'rate': rate,
         'total': total,
+        'child_seat_total': child_seat_total,
+        'booster_seat_total': booster_seat_total,
+        'flowers_total': flowers_total,
+        'extra_total': extra_total,
         'distance': distance,
         'travel_time': travel_time,
         'to_date': to_date,
