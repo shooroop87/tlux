@@ -257,8 +257,8 @@ def details(request):
             child_seat_total = int(child_seat) * 15
             booster_seat_total = int(booster_seat) * 20
             flowers_total = int(flowers) * 70
-            extra_total = (int(child_seat_total) + \
-                           int(booster_seat_total) + \
+            extra_total = (int(child_seat_total) +
+                           int(booster_seat_total) +
                            int(flowers_total))
             total = rate + extra_total
             # Create a dictionary with the fields
