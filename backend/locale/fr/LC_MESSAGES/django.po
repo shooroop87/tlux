@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-28 17:00+0300\n"
+"POT-Creation-Date: 2024-05-28 20:51+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -77,7 +77,7 @@ msgid "Payment "
 msgstr "Paiement "
 
 #: .\templates\booking\booking-extra.html:58
-#: .\templates\booking\sidebar_after.html:40
+#: .\templates\booking\sidebar_after.html:41
 msgid "Extra Options"
 msgstr "Options supplémentaires"
 
@@ -114,7 +114,7 @@ msgid "Notes for the chauffeur"
 msgstr "Notes pour le chauffeur"
 
 #: .\templates\booking\booking-extra.html:120
-#: .\templates\booking\booking-passenger.html:133
+#: .\templates\booking\booking-passenger.html:144
 msgid "Continue"
 msgstr "Continuer"
 
@@ -144,7 +144,7 @@ msgstr "Numéro de téléphone*"
 msgid "Passengers*"
 msgstr "Passagères*"
 
-#: .\templates\booking\booking-passenger.html:110
+#: .\templates\booking\booking-passenger.html:116
 #: .\templates\booking\booking-vehicle.html:73
 #: .\templates\booking\booking-vehicle.html:102
 #: .\templates\booking\booking-vehicle.html:131
@@ -153,7 +153,7 @@ msgstr "Passagères*"
 msgid "Luggage"
 msgstr "Bagage"
 
-#: .\templates\booking\booking-passenger.html:125
+#: .\templates\booking\booking-passenger.html:136
 msgid "Notes to driver"
 msgstr "Notes au conducteur"
 
@@ -256,7 +256,7 @@ msgid "Today"
 msgstr "Aujourd'hui"
 
 #: .\templates\booking\booking-received.html:83
-#: .\templates\booking\sidebar_after.html:48
+#: .\templates\booking\sidebar_after.html:61
 msgid "Total"
 msgstr "Totale"
 
@@ -290,7 +290,7 @@ msgstr "Heure de prise en charge"
 
 #: .\templates\booking\booking-received.html:97
 msgid "Selected Car"
-msgstr ""
+msgstr "Voiture sélectionnée"
 
 #: .\templates\booking\booking-received.html:101
 msgid "Class"
@@ -339,7 +339,7 @@ msgstr "Annulation gratuite"
 #: .\templates\booking\booking-vehicle.html:66
 #: .\templates\booking\booking-vehicle.html:95
 #: .\templates\booking\booking-vehicle.html:124
-msgid "Free Waiting time"
+msgid "60 min Free Waiting time"
 msgstr "60 min Gratuit Temps d'attente"
 
 #: .\templates\booking\booking-vehicle.html:67
@@ -365,7 +365,7 @@ msgstr "EUR"
 #: .\templates\booking\booking-vehicle.html:79
 #: .\templates\booking\booking-vehicle.html:108
 #: .\templates\booking\booking-vehicle.html:137
-msgid "All prices include VAT, fees &amp; tip."
+msgid "All prices include VAT and fees"
 msgstr "Tous les prix incluent la TVA et les frais"
 
 #: .\templates\booking\booking-vehicle.html:80
@@ -414,7 +414,7 @@ msgstr "min"
 msgid "Vehicle"
 msgstr "Véhicule"
 
-#: .\templates\booking\sidebar_after.html:44
+#: .\templates\booking\sidebar_after.html:56
 msgid "Selected vehicle"
 msgstr "Véhicule sélectionné"
 
@@ -435,7 +435,7 @@ msgid "Secure Payment by credit card"
 msgstr "Paiement sécurisé par carte bancaire"
 
 #: .\templates\contacts.html:31 .\templates\contacts.html:35
-#: .\templates\includes\footer.html:32
+#: .\templates\email\email.html:271 .\templates\includes\footer.html:32
 msgid "Contacts"
 msgstr "Contacts"
 
@@ -459,89 +459,102 @@ msgstr "Pour les agences de voyages et les entreprises clientes"
 msgid "For taxi companies"
 msgstr "Pour les compagnies de taxi"
 
-#: .\templates\email\email.html:94
-#, fuzzy
-#| msgid "Comfortable transfers from airports and hotels in Italy"
+#: .\templates\email\email.html:10
+msgid "Order Confirmation"
+msgstr "Confirmation de commande"
+
+#: .\templates\email\email.html:67
+msgid "Email Summary (Hidden)"
+msgstr "Résumé de l'e-mail (caché)"
+
+#: .\templates\email\email.html:96
 msgid "Comfortable transfers in Italy"
-msgstr "Transferts confortables depuis les aéroports et les hôtels en Italie"
+msgstr "Transferts confortables en Italie"
 
-#: .\templates\email\email.html:140
-msgid "Hello,"
-msgstr "Bonjour,"
+#: .\templates\email\email.html:142
+msgid "Hello, "
+msgstr "Bonjour, "
 
-#: .\templates\email\email.html:141
+#: .\templates\email\email.html:143
 msgid "Thank you for booking. See your order confirmation below."
 msgstr ""
 "Merci d'avoir réservé. Consultez votre confirmation de commande ci-dessous."
 
-#: .\templates\email\email.html:146
+#: .\templates\email\email.html:148
 msgid "Your booking order"
 msgstr "Votre ordre de réservation"
 
-#: .\templates\email\email.html:173
+#: .\templates\email\email.html:175
 msgid "Passengers details"
 msgstr "Détails du passager"
 
-#: .\templates\email\email.html:174
+#: .\templates\email\email.html:176
 msgid "Name:"
 msgstr "Nom:"
 
-#: .\templates\email\email.html:175
+#: .\templates\email\email.html:177
 msgid "Surname:"
 msgstr "Nom de famille:"
 
-#: .\templates\email\email.html:176
+#: .\templates\email\email.html:178
 msgid "Phone:"
 msgstr "Téléphone:"
 
-#: .\templates\email\email.html:177
+#: .\templates\email\email.html:179
 msgid "Email:"
 msgstr "Email:"
 
-#: .\templates\email\email.html:198
-#| msgid "Passengers details"
+#: .\templates\email\email.html:200
 msgid "Transfer details"
 msgstr "Détails du transfert"
 
-#: .\templates\email\email.html:199
+#: .\templates\email\email.html:201
 msgid "From:"
 msgstr "Depuis:"
 
-#: .\templates\email\email.html:200
+#: .\templates\email\email.html:202
 msgid "To:"
 msgstr "À:"
 
-#: .\templates\email\email.html:201
+#: .\templates\email\email.html:203
 msgid "Date:"
 msgstr "Date:"
 
-#: .\templates\email\email.html:202
+#: .\templates\email\email.html:204
 msgid "Time:"
 msgstr "Temps:"
 
-#: .\templates\email\email.html:203
+#: .\templates\email\email.html:205
 msgid "Car class:"
 msgstr "Classe de voiture:"
 
-#: .\templates\email\email.html:204
+#: .\templates\email\email.html:206
 msgid "Total price:"
-msgstr "Temps total"
+msgstr "Prix ​​total:"
 
-#: .\templates\email\email.html:205
+#: .\templates\email\email.html:207
 msgid "N. passengers:"
 msgstr "Passagères"
 
-#: .\templates\email\email.html:206
+#: .\templates\email\email.html:208
 msgid "N. luggage:"
 msgstr "Bagage"
 
-#: .\templates\email\email.html:207
+#: .\templates\email\email.html:209
 msgid "Flight/Train:"
 msgstr "Vol/Train:"
 
-#: .\templates\email\email.html:208
+#: .\templates\email\email.html:210
 msgid "Notes:"
 msgstr "Remarques:"
+
+#: .\templates\email\email.html:254
+msgid "Help Center"
+msgstr "Centre d'aide"
+
+#: .\templates\email\email.html:280
+msgid "All rights reserved."
+msgstr "Tous droits réservés"
 
 #: .\templates\help-center.html:33 .\templates\mainpage\faq.html:7
 msgid "Frequently Asked Questions"
@@ -718,23 +731,23 @@ msgstr "Transferts populaires"
 
 #: .\templates\includes\footer.html:38
 msgid "Airport Malpensa - Milan"
-msgstr ""
+msgstr "Aéroport Malpensa - Milan"
 
 #: .\templates\includes\footer.html:39
 msgid "Airport Malpensa - Cannes"
-msgstr ""
+msgstr "Aéroport Malpensa - Cannes"
 
 #: .\templates\includes\footer.html:40
 msgid "Airport Bergamo - Milan"
-msgstr ""
+msgstr "Aéroport Bergame - Milan"
 
 #: .\templates\includes\footer.html:41
 msgid "Serravalle Outlet - Milan"
-msgstr ""
+msgstr "Serravalle Outlet - Milan"
 
 #: .\templates\includes\footer.html:45
 msgid "Popular Airports"
-msgstr ""
+msgstr "Aéroports populaires"
 
 #: .\templates\includes\footer.html:47
 msgid "Milan Malpensa (MXP)"
@@ -828,7 +841,7 @@ msgstr "Pour un couple ou une famille avec un enfant"
 
 #: .\templates\mainpage\fleet4.html:30
 msgid "For comfortable business trips"
-msgstr ""
+msgstr "Pour des voyages d'affaires confortables"
 
 #: .\templates\mainpage\fleet4.html:43
 msgid "For up to 8 people or large baggage"

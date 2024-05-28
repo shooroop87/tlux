@@ -37,15 +37,28 @@
       <span class="text-14-medium color-text">{{ car_class }}</span>
     </div>
     <div class="border-bottom mt-30 mb-25"> </div>
-    <div class="mt-0"> <span class="text-14 color-grey">{% trans "Extra Options" %}</span><br></div>
+    <div class="mt-0">
+      <span class="text-14 color-grey">{% trans "Extra Options" %}</span><br>
+      {% if child_seat > 0 %}
+      <span class="text-14-medium color-text">{{ child_seat }} x Child Seat - {{ child_seat*15 }}EUR</span><br>
+      {% endif %}
+      {% if booster_seat > 0 %}
+      <span class="text-14-medium color-text">{{ booster_seat }} x Booster Seat - {{ booster_seat*20 }}EUR</span><br>
+      {% endif %}
+      {% if flowers > 0 %}
+      <span class="text-14-medium color-text">{{ flowers }} x Flowers - {{ flowers*70 }}EUR</span>
+      {% endif %}          
+    </div>
+
   </div>
   <div class="sidebar wow fadeInUp"> 
     <ul class="list-prices list-prices-2"> 
       <li> <span class="text">{% trans "Selected vehicle" %}</span><span class="price">EUR {{ rate }}</span></li>
+      <li> <span class="text">Extra options</span><span class="price"></span>EUR {{ child_seat*15+booster_seat*20+flowers*70}}</li>
     </ul>
     <div class="border-bottom mt-30 mb-15"> </div>
     <ul class="list-prices"> 
-      <li> <span class="text text-20-medium">{% trans "Total" %}</span><span class="price text-20-medium">EUR {{ rate }}</span></li>
+      <li> <span class="text text-20-medium">{% trans "Total" %}</span><span class="price text-20-medium">EUR {{ total }}</span></li>
     </ul>
   </div>
 </div>
