@@ -254,12 +254,10 @@ def details(request):
             to_date = query.get('to_date')
             to_time = query.get('to_time')
             session_id = query.get('session_id')
-            child_seat_total = int(child_seat) * 15
-            booster_seat_total = int(booster_seat) * 20
-            flowers_total = int(flowers) * 70
-            extra_total = (int(child_seat_total) +
-                           int(booster_seat_total) +
-                           int(flowers_total))
+            cst = int(child_seat) * 15
+            bst = int(booster_seat) * 20
+            fl = int(flowers) * 70
+            extra_total = int(cst) + int(bst) + int(fl)
             total = rate + extra_total
             # Create a dictionary with the fields
             query = {
@@ -270,9 +268,9 @@ def details(request):
                 'car_class': car_class,
                 'rate': rate,
                 'total': total,
-                'child_seat_total': child_seat_total,
-                'booster_seat_total': booster_seat_total,
-                'flowers_total': flowers_total,
+                'child_seat_total': cst,
+                'booster_seat_total': bst,
+                'flowers_total': fl,
                 'extra_total': extra_total,
                 'distance': distance,
                 'travel_time': travel_time,
@@ -293,9 +291,9 @@ def details(request):
                 'car_class': car_class,
                 'rate': rate,
                 'total': total,
-                'child_seat_total': child_seat_total,
-                'booster_seat_total': booster_seat_total,
-                'flowers_total': flowers_total,
+                'child_seat_total': cst,
+                'booster_seat_total': bst,
+                'flowers_total': fl,
                 'extra_total': extra_total,
                 'distance': distance,
                 'travel_time': travel_time,
