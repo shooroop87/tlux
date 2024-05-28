@@ -273,7 +273,7 @@ def details(request):
                 'child_seat_total': child_seat_total,
                 'booster_seat_total': booster_seat_total,
                 'flowers_total': flowers_total,
-                'extra_total': extra_total,        
+                'extra_total': extra_total,
                 'distance': distance,
                 'travel_time': travel_time,
                 'to_date': to_date,
