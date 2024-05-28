@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-26 16:34+0300\n"
+"POT-Creation-Date: 2024-05-28 17:00+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,14 +17,18 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
 #: .\templates\404.html:33
 msgid "Oops! It looks like you're lost."
 msgstr "Oops! On dirait que tu es perdu."
 
 #: .\templates\404.html:34
 msgid ""
-"The page you're looking for isn't available. Try to search again or use the go to."
-msgstr "La page que vous recherchez n'est pas disponible. Essayez de chercher à nouveau."
+"The page you're looking for isn't available. Try to search again or use the "
+"go to."
+msgstr ""
+"La page que vous recherchez n'est pas disponible. Essayez de chercher à "
+"nouveau."
 
 #: .\templates\404.html:35
 msgid "Go Back to Homepage"
@@ -110,7 +114,7 @@ msgid "Notes for the chauffeur"
 msgstr "Notes pour le chauffeur"
 
 #: .\templates\booking\booking-extra.html:120
-#: .\templates\booking\booking-passenger.html:129
+#: .\templates\booking\booking-passenger.html:133
 msgid "Continue"
 msgstr "Continuer"
 
@@ -130,11 +134,11 @@ msgstr "Nom de famille*"
 
 #: .\templates\booking\booking-passenger.html:77
 msgid "Email*"
-msgstr ""
+msgstr "Email*"
 
 #: .\templates\booking\booking-passenger.html:83
 msgid "Phone Number*"
-msgstr ""
+msgstr "Numéro de téléphone*"
 
 #: .\templates\booking\booking-passenger.html:95
 msgid "Passengers*"
@@ -149,7 +153,7 @@ msgstr "Passagères*"
 msgid "Luggage"
 msgstr "Bagage"
 
-#: .\templates\booking\booking-passenger.html:121
+#: .\templates\booking\booking-passenger.html:125
 msgid "Notes to driver"
 msgstr "Notes au conducteur"
 
@@ -184,86 +188,135 @@ msgstr "politique de confidentialité"
 
 #: .\templates\booking\booking-payment.html:98
 msgid "Book Now"
-msgstr ""
+msgstr "Reserve maintenant"
 
-#: .\templates\booking\booking-received.html:33
+#: .\templates\booking\booking-received.html:35
+#: .\templates\includes\header.html:12
+msgid "Transfer Service"
+msgstr "Service de transfert"
+
+#: .\templates\booking\booking-received.html:36
+#: .\templates\includes\header.html:13
+#: .\templates\includes\mobile_menu.html:12
+#: .\templates\mainpage\fleet4.html:8
+msgid "Our Fleet"
+msgstr "Notre flotte"
+
+#: .\templates\booking\booking-received.html:37
+#: .\templates\includes\header.html:14
+#: .\templates\includes\mobile_menu.html:14
+msgid "Contact"
+msgstr "Contact"
+
+#: .\templates\booking\booking-received.html:56
+#: .\templates\includes\header.html:33
+msgid "English"
+msgstr "Anglais"
+
+#: .\templates\booking\booking-received.html:57
+#: .\templates\includes\header.html:34
+msgid "Russian"
+msgstr "Russe"
+
+#: .\templates\booking\booking-received.html:58
+#: .\templates\includes\header.html:35
+msgid "Spanish"
+msgstr "Espagnol"
+
+#: .\templates\booking\booking-received.html:59
+#: .\templates\includes\header.html:36
+msgid "French"
+msgstr "Français"
+
+#: .\templates\booking\booking-received.html:60
+#: .\templates\includes\header.html:37
+msgid "Italian"
+msgstr "Italien"
+
+#: .\templates\booking\booking-received.html:65
+#: .\templates\includes\header.html:42
+#: .\templates\includes\mobile_menu.html:13
+msgid "Help"
+msgstr "Aide"
+
+#: .\templates\booking\booking-received.html:77
 msgid "Your booking was submitted successfully!"
 msgstr "Votre réservation a été soumise avec succès !"
 
-#: .\templates\booking\booking-received.html:34
+#: .\templates\booking\booking-received.html:78
 msgid "Booking details has been sent to"
 msgstr "Les détails de la réservation ont été envoyés à"
 
-#: .\templates\booking\booking-received.html:37
+#: .\templates\booking\booking-received.html:81
 msgid "Order Number"
 msgstr "Numéro de commande"
 
-#: .\templates\booking\booking-received.html:38
+#: .\templates\booking\booking-received.html:82
 msgid "Today"
 msgstr "Aujourd'hui"
 
-#: .\templates\booking\booking-received.html:39
+#: .\templates\booking\booking-received.html:83
 #: .\templates\booking\sidebar_after.html:48
 msgid "Total"
 msgstr "Totale"
 
-#: .\templates\booking\booking-received.html:40
+#: .\templates\booking\booking-received.html:84
 msgid "Payment Method"
 msgstr "Mode de paiement"
 
-#: .\templates\booking\booking-received.html:40
+#: .\templates\booking\booking-received.html:84
 msgid "To the driver by card or cash"
 msgstr "Au chauffeur par carte ou espèces"
 
-#: .\templates\booking\booking-received.html:44
+#: .\templates\booking\booking-received.html:88
 msgid "Reservation Information"
 msgstr "Informations de réservation"
 
-#: .\templates\booking\booking-received.html:46
+#: .\templates\booking\booking-received.html:90
 msgid "Pick Up Address"
 msgstr "Adresse de prise en charge"
 
-#: .\templates\booking\booking-received.html:47
+#: .\templates\booking\booking-received.html:91
 msgid "Drop Off Address"
 msgstr "Adresse de dépôt"
 
-#: .\templates\booking\booking-received.html:48
+#: .\templates\booking\booking-received.html:92
 msgid "Pick Up Date"
 msgstr "Date de ramassage"
 
-#: .\templates\booking\booking-received.html:49
+#: .\templates\booking\booking-received.html:93
 msgid "Pick Up Time"
 msgstr "Heure de prise en charge"
 
-#: .\templates\booking\booking-received.html:53
+#: .\templates\booking\booking-received.html:97
 msgid "Selected Car"
 msgstr ""
 
-#: .\templates\booking\booking-received.html:57
+#: .\templates\booking\booking-received.html:101
 msgid "Class"
-msgstr ""
+msgstr "Classe"
 
-#: .\templates\booking\booking-received.html:61
+#: .\templates\booking\booking-received.html:105
 msgid "Passenger Information"
 msgstr "Informations passagers"
 
-#: .\templates\booking\booking-received.html:63
+#: .\templates\booking\booking-received.html:107
 msgid "First name"
 msgstr "Nom"
 
-#: .\templates\booking\booking-received.html:64
+#: .\templates\booking\booking-received.html:108
 msgid "Last name"
 msgstr "Nom de famille"
 
-#: .\templates\booking\booking-received.html:65
+#: .\templates\booking\booking-received.html:109
 msgid "Email"
-msgstr ""
+msgstr "Email"
 
-#: .\templates\booking\booking-received.html:66
+#: .\templates\booking\booking-received.html:110
 msgid "Phone"
 msgstr "Téléphone"
 
-#: .\templates\booking\booking-received.html:67
+#: .\templates\booking\booking-received.html:111
 msgid "Special Requirements"
 msgstr "Besoins spéciaux"
 
@@ -307,7 +360,7 @@ msgstr "Passagères"
 #: .\templates\booking\booking-vehicle.html:104
 #: .\templates\booking\booking-vehicle.html:133
 msgid "EUR"
-msgstr ""
+msgstr "EUR"
 
 #: .\templates\booking\booking-vehicle.html:79
 #: .\templates\booking\booking-vehicle.html:108
@@ -346,7 +399,7 @@ msgstr "Distance totale"
 #: .\templates\booking\sidebar_after.html:29
 #: .\templates\booking\sidebar_before.html:29
 msgid "km"
-msgstr ""
+msgstr "km"
 
 #: .\templates\booking\sidebar_after.html:31
 #: .\templates\booking\sidebar_before.html:31
@@ -355,7 +408,7 @@ msgstr "Temps total"
 
 #: .\templates\booking\sidebar_after.html:31
 msgid "min"
-msgstr ""
+msgstr "min"
 
 #: .\templates\booking\sidebar_after.html:36
 msgid "Vehicle"
@@ -406,6 +459,90 @@ msgstr "Pour les agences de voyages et les entreprises clientes"
 msgid "For taxi companies"
 msgstr "Pour les compagnies de taxi"
 
+#: .\templates\email\email.html:94
+#, fuzzy
+#| msgid "Comfortable transfers from airports and hotels in Italy"
+msgid "Comfortable transfers in Italy"
+msgstr "Transferts confortables depuis les aéroports et les hôtels en Italie"
+
+#: .\templates\email\email.html:140
+msgid "Hello,"
+msgstr "Bonjour,"
+
+#: .\templates\email\email.html:141
+msgid "Thank you for booking. See your order confirmation below."
+msgstr ""
+"Merci d'avoir réservé. Consultez votre confirmation de commande ci-dessous."
+
+#: .\templates\email\email.html:146
+msgid "Your booking order"
+msgstr "Votre ordre de réservation"
+
+#: .\templates\email\email.html:173
+msgid "Passengers details"
+msgstr "Détails du passager"
+
+#: .\templates\email\email.html:174
+msgid "Name:"
+msgstr "Nom:"
+
+#: .\templates\email\email.html:175
+msgid "Surname:"
+msgstr "Nom de famille:"
+
+#: .\templates\email\email.html:176
+msgid "Phone:"
+msgstr "Téléphone:"
+
+#: .\templates\email\email.html:177
+msgid "Email:"
+msgstr "Email:"
+
+#: .\templates\email\email.html:198
+#| msgid "Passengers details"
+msgid "Transfer details"
+msgstr "Détails du transfert"
+
+#: .\templates\email\email.html:199
+msgid "From:"
+msgstr "Depuis:"
+
+#: .\templates\email\email.html:200
+msgid "To:"
+msgstr "À:"
+
+#: .\templates\email\email.html:201
+msgid "Date:"
+msgstr "Date:"
+
+#: .\templates\email\email.html:202
+msgid "Time:"
+msgstr "Temps:"
+
+#: .\templates\email\email.html:203
+msgid "Car class:"
+msgstr "Classe de voiture:"
+
+#: .\templates\email\email.html:204
+msgid "Total price:"
+msgstr "Temps total"
+
+#: .\templates\email\email.html:205
+msgid "N. passengers:"
+msgstr "Passagères"
+
+#: .\templates\email\email.html:206
+msgid "N. luggage:"
+msgstr "Bagage"
+
+#: .\templates\email\email.html:207
+msgid "Flight/Train:"
+msgstr "Vol/Train:"
+
+#: .\templates\email\email.html:208
+msgid "Notes:"
+msgstr "Remarques:"
+
 #: .\templates\help-center.html:33 .\templates\mainpage\faq.html:7
 msgid "Frequently Asked Questions"
 msgstr "Questions fréquemment posées"
@@ -416,23 +553,37 @@ msgstr "Comment réserver un transfert?"
 
 #: .\templates\help-center.html:43 .\templates\mainpage\faq.html:17
 msgid ""
-"Please choose your starting location in the <b>Pick up location</b> field and your destination in the <b>Drop off location</b> field."
-msgstr "Veuillez choisir votre lieu de départ dans le champ <b>Lieu de prise en charge</b> et votre destination dans le champ <b>Lieu de dépôt</b>."
+"Please choose your starting location in the <b>Pick up location</b> field "
+"and your destination in the <b>Drop off location</b> field."
+msgstr ""
+"Veuillez choisir votre lieu de départ dans le champ <b>Lieu de prise en "
+"charge</b> et votre destination dans le champ <b>Lieu de dépôt</b>."
 
 #: .\templates\help-center.html:44 .\templates\mainpage\faq.html:18
 msgid ""
-"You have the option to either type the name of the place or provide the specific address."
-msgstr "Vous avez la possibilité de saisir le nom du lieu ou de fournir l'adresse spécifique."
+"You have the option to either type the name of the place or provide the "
+"specific address."
+msgstr ""
+"Vous avez la possibilité de saisir le nom du lieu ou de fournir l'adresse "
+"spécifique."
 
 #: .\templates\help-center.html:45 .\templates\mainpage\faq.html:19
 msgid ""
-"Utilize the dropdown suggestions to streamline and simplify your search process."
-msgstr "Utilisez les suggestions déroulantes pour rationaliser et simplifier votre processus de recherche."
+"Utilize the dropdown suggestions to streamline and simplify your search "
+"process."
+msgstr ""
+"Utilisez les suggestions déroulantes pour rationaliser et simplifier votre "
+"processus de recherche."
 
 #: .\templates\help-center.html:46 .\templates\mainpage\faq.html:20
 msgid ""
-"Afterward, proceed by clicking on the <b>Show Prices</b> button. Choose the desired transfer class and select <b>Book</b> to proceed with your reservation."
-msgstr "Ensuite, continuez en cliquant sur le bouton <b>Afficher les prix</b>. Choisissez la classe de transfert souhaitée et sélectionnez <b>Réserver</b> pour procéder à votre réservation."
+"Afterward, proceed by clicking on the <b>Show Prices</b> button. Choose the "
+"desired transfer class and select <b>Book</b> to proceed with your "
+"reservation."
+msgstr ""
+"Ensuite, continuez en cliquant sur le bouton <b>Afficher les prix</b>. "
+"Choisissez la classe de transfert souhaitée et sélectionnez <b>Réserver</b> "
+"pour procéder à votre réservation."
 
 #: .\templates\help-center.html:52 .\templates\mainpage\faq.html:26
 msgid "How can I verify if my order has been successfully processed?"
@@ -440,18 +591,27 @@ msgstr "Comment puis-je vérifier si ma commande a été traitée avec succès?"
 
 #: .\templates\help-center.html:56 .\templates\mainpage\faq.html:30
 msgid ""
-"After finalizing your booking, you will receive an email confirmation containing a voucher."
-msgstr "Après avoir finalisé votre réservation, vous recevrez un e-mail de confirmation contenant un bon."
+"After finalizing your booking, you will receive an email confirmation "
+"containing a voucher."
+msgstr ""
+"Après avoir finalisé votre réservation, vous recevrez un e-mail de "
+"confirmation contenant un bon."
 
 #: .\templates\help-center.html:57 .\templates\mainpage\faq.html:31
 msgid ""
-"This voucher will include your booking number and all necessary details for your upcoming trip."
-msgstr "Ce bon comprendra votre numéro de réservation et tous les détails nécessaires pour votre prochain voyage."
+"This voucher will include your booking number and all necessary details for "
+"your upcoming trip."
+msgstr ""
+"Ce bon comprendra votre numéro de réservation et tous les détails "
+"nécessaires pour votre prochain voyage."
 
 #: .\templates\help-center.html:58 .\templates\mainpage\faq.html:32
 msgid ""
-"If you do not receive the confirmation email, please reach out to our manager via email at "
-msgstr "Si vous ne recevez pas l'e-mail de confirmation, veuillez contacter notre responsable par e-mail à l'adresse "
+"If you do not receive the confirmation email, please reach out to our "
+"manager via email at "
+msgstr ""
+"Si vous ne recevez pas l'e-mail de confirmation, veuillez contacter notre "
+"responsable par e-mail à l'adresse "
 
 #: .\templates\help-center.html:58 .\templates\mainpage\faq.html:32
 msgid " or through our online chat support."
@@ -463,40 +623,67 @@ msgstr "Comment puis-je trouver mon chauffeur?"
 
 #: .\templates\help-center.html:68 .\templates\mainpage\faq.html:42
 msgid ""
-"Important Note: Your designated driver will greet you with a name sign showing the first and last names you specified during your reservation."
-msgstr "Remarque importante : votre chauffeur désigné vous accueillera avec une pancarte indiquant le prénom et le nom que vous avez spécifiés lors de votre réservation."
+"Important Note: Your designated driver will greet you with a name sign "
+"showing the first and last names you specified during your reservation."
+msgstr ""
+"Remarque importante : votre chauffeur désigné vous accueillera avec une "
+"pancarte indiquant le prénom et le nom que vous avez spécifiés lors de votre "
+"réservation."
 
 #: .\templates\help-center.html:69 .\templates\mainpage\faq.html:43
 msgid ""
-"During airport transfers, your driver will be awaiting your arrival at the exit of the arrivals area, following the passport control and baggage claim sections."
-msgstr "Lors des transferts aéroport, votre chauffeur attendra votre arrivée à la sortie de la zone des arrivées, en suivant les sections de contrôle des passeports et de récupération des bagages."
+"During airport transfers, your driver will be awaiting your arrival at the "
+"exit of the arrivals area, following the passport control and baggage claim "
+"sections."
+msgstr ""
+"Lors des transferts aéroport, votre chauffeur attendra votre arrivée à la "
+"sortie de la zone des arrivées, en suivant les sections de contrôle des "
+"passeports et de récupération des bagages."
 
 #: .\templates\help-center.html:70 .\templates\mainpage\faq.html:44
 msgid "For hotel transfers, your driver will be positioned in the lobby area."
-msgstr "Pour les transferts à l'hôtel, votre chauffeur sera positionné dans le hall."
+msgstr ""
+"Pour les transferts à l'hôtel, votre chauffeur sera positionné dans le hall."
 
 #: .\templates\help-center.html:71 .\templates\mainpage\faq.html:45
 msgid ""
-"Comprehensive instructions for the meeting point can be accessed in your trip confirmation voucher. Additionally, you will find the driver's contact number provided therein."
-msgstr "Des instructions complètes pour le point de rendez-vous sont accessibles dans votre bon de confirmation de voyage. De plus, vous y trouverez le numéro de contact du chauffeur."
+"Comprehensive instructions for the meeting point can be accessed in your "
+"trip confirmation voucher. Additionally, you will find the driver's contact "
+"number provided therein."
+msgstr ""
+"Des instructions complètes pour le point de rendez-vous sont accessibles "
+"dans votre bon de confirmation de voyage. De plus, vous y trouverez le "
+"numéro de contact du chauffeur."
 
 #: .\templates\help-center.html:76 .\templates\mainpage\faq.html:50
 msgid "What happens if my flight details change or is seriosly delayed?"
-msgstr "Que se passe-t-il si les détails de mon vol changent ou sont sérieusement retardés?"
+msgstr ""
+"Que se passe-t-il si les détails de mon vol changent ou sont sérieusement "
+"retardés?"
 
 #: .\templates\help-center.html:81 .\templates\mainpage\faq.html:55
 msgid "We monitor all flights so we will do our best to arrive in time."
-msgstr "Nous surveillons tous les vols afin que nous fassions de notre mieux pour arriver à temps."
+msgstr ""
+"Nous surveillons tous les vols afin que nous fassions de notre mieux pour "
+"arriver à temps."
 
 #: .\templates\help-center.html:84 .\templates\mainpage\faq.html:58
 msgid ""
-"If your flight is seriosly delayed just email or call us and keep in touch until we have the new details."
-msgstr "Si votre vol est sérieusement retardé, envoyez-nous simplement un e-mail ou appelez-nous et restez en contact jusqu'à ce que nous ayons les nouveaux détails."
+"If your flight is seriosly delayed just email or call us and keep in touch "
+"until we have the new details."
+msgstr ""
+"Si votre vol est sérieusement retardé, envoyez-nous simplement un e-mail ou "
+"appelez-nous et restez en contact jusqu'à ce que nous ayons les nouveaux "
+"détails."
 
 #: .\templates\help-center.html:87 .\templates\mainpage\faq.html:61
 msgid ""
-"If your fligth details is changed please call or email us and we will update your booking with new details."
-msgstr "Si les détails de votre vol sont modifiés, veuillez nous appeler ou nous envoyer un e-mail et nous mettrons à jour votre réservation avec de nouveaux détails."
+"If your fligth details is changed please call or email us and we will update "
+"your booking with new details."
+msgstr ""
+"Si les détails de votre vol sont modifiés, veuillez nous appeler ou nous "
+"envoyer un e-mail et nous mettrons à jour votre réservation avec de nouveaux "
+"détails."
 
 #: .\templates\help-center.html:93 .\templates\mainpage\faq.html:67
 msgid "Will my driver carry my luggage?"
@@ -504,7 +691,9 @@ msgstr "Mon chauffeur portera-t-il mes bagages?"
 
 #: .\templates\help-center.html:97 .\templates\mainpage\faq.html:71
 msgid "Yes, your driver will always offer to help carry your bags and luggage."
-msgstr "Oui, votre chauffeur vous proposera toujours de vous aider à porter vos sacs et bagages."
+msgstr ""
+"Oui, votre chauffeur vous proposera toujours de vous aider à porter vos sacs "
+"et bagages."
 
 #: .\templates\includes\footer.html:18
 msgid "Follow Us"
@@ -619,46 +808,6 @@ msgstr "Confidentialité"
 msgid "Book via Chat"
 msgstr "Réserver par chat"
 
-#: .\templates\includes\header.html:12
-msgid "Transfer Service"
-msgstr "Service de transfert"
-
-#: .\templates\includes\header.html:13
-#: .\templates\includes\mobile_menu.html:12
-#: .\templates\mainpage\fleet4.html:8
-msgid "Our Fleet"
-msgstr "Notre flotte"
-
-#: .\templates\includes\header.html:14
-#: .\templates\includes\mobile_menu.html:14
-msgid "Contact"
-msgstr "Contact"
-
-#: .\templates\includes\header.html:33
-msgid "English"
-msgstr "Anglais"
-
-#: .\templates\includes\header.html:34
-msgid "Russian"
-msgstr "Russe"
-
-#: .\templates\includes\header.html:35
-msgid "Spanish"
-msgstr "Espagnol"
-
-#: .\templates\includes\header.html:36
-msgid "French"
-msgstr "Français"
-
-#: .\templates\includes\header.html:37
-msgid "Italian"
-msgstr "Italien"
-
-#: .\templates\includes\header.html:42
-#: .\templates\includes\mobile_menu.html:13
-msgid "Help"
-msgstr "Aide"
-
 #: .\templates\index.html:11
 msgid "Comfortable transfers from airports and hotels in Italy"
 msgstr "Transferts confortables depuis les aéroports et les hôtels en Italie"
@@ -669,7 +818,9 @@ msgstr "transfert, Italie, transferts privés, transfert aéroport"
 
 #: .\templates\index.html:20
 msgid "TransfersLux – Comfortable transfers from airports and hotels in Italy"
-msgstr "TransfersLux – Transferts confortables depuis les aéroports et les hôtels en Italie"
+msgstr ""
+"TransfersLux – Transferts confortables depuis les aéroports et les hôtels en "
+"Italie"
 
 #: .\templates\mainpage\fleet4.html:17
 msgid "For a couple or a family with a child"
@@ -697,8 +848,11 @@ msgstr "Choisissez votre itinéraire et votre véhicule"
 
 #: .\templates\mainpage\how-it-works3.html:16
 msgid ""
-"Enter your pickup &amp; dropoff locations and choose a vehicle of any capacity."
-msgstr "Entrez votre ramassage et votre lieu de rendez-vous. lieux de dépôt et choisissez un véhicule de n’importe quelle capacité."
+"Enter your pickup &amp; dropoff locations and choose a vehicle of any "
+"capacity."
+msgstr ""
+"Entrez votre ramassage et votre lieu de rendez-vous. lieux de dépôt et "
+"choisissez un véhicule de n’importe quelle capacité."
 
 #: .\templates\mainpage\how-it-works3.html:24
 msgid "Complete the Booking Form"
@@ -706,8 +860,11 @@ msgstr "Remplissez le formulaire de réservation"
 
 #: .\templates\mainpage\how-it-works3.html:27
 msgid ""
-"As soon as your booking is complete, you will receive an email about you ride."
-msgstr "Dès que votre réservation est terminée, vous recevrez un e-mail concernant votre trajet."
+"As soon as your booking is complete, you will receive an email about you "
+"ride."
+msgstr ""
+"Dès que votre réservation est terminée, vous recevrez un e-mail concernant "
+"votre trajet."
 
 #: .\templates\mainpage\how-it-works3.html:35
 msgid "Enjoy Your Ride"
@@ -715,8 +872,11 @@ msgstr "Profitez de votre balade"
 
 #: .\templates\mainpage\how-it-works3.html:38
 msgid ""
-"After your ride has taken place, we would appreciate it if you could rate your car and driver."
-msgstr "Une fois votre trajet effectué, nous apprécierions que vous puissiez évaluer votre voiture et votre chauffeur."
+"After your ride has taken place, we would appreciate it if you could rate "
+"your car and driver."
+msgstr ""
+"Une fois votre trajet effectué, nous apprécierions que vous puissiez évaluer "
+"votre voiture et votre chauffeur."
 
 #: .\templates\mainpage\search.html:10
 msgid "Free cancellation and changes"
@@ -770,8 +930,11 @@ msgstr "Écoutez ce que disent nos incroyables clients"
 
 #: .\templates\mainpage\testimonials2.html:10
 msgid ""
-"People and companies from more than 50 countries trust us with their trip for a comfortable transfer in Italy"
-msgstr "Des personnes et des entreprises de plus de 50 pays nous confient leur voyage pour un transfert confortable en Italie"
+"People and companies from more than 50 countries trust us with their trip "
+"for a comfortable transfer in Italy"
+msgstr ""
+"Des personnes et des entreprises de plus de 50 pays nous confient leur "
+"voyage pour un transfert confortable en Italie"
 
 #: .\templates\mainpage\testimonials2.html:13
 msgid "See all reviews"
@@ -783,8 +946,13 @@ msgstr "Nous veillons à ce que chacun de vos voyages soit confortable"
 
 #: .\templates\mainpage\why-us2.html:13
 msgid ""
-"A transfer service, akin to a tourist service, where you can book a private transfer from airports, train stations, or hotels, with a professional driver."
-msgstr "Un service de transfert, semblable à un service touristique, où vous pouvez réserver un transfert privé depuis les aéroports, gares ou hôtels, avec un chauffeur professionnel."
+"A transfer service, akin to a tourist service, where you can book a private "
+"transfer from airports, train stations, or hotels, with a professional "
+"driver."
+msgstr ""
+"Un service de transfert, semblable à un service touristique, où vous pouvez "
+"réserver un transfert privé depuis les aéroports, gares ou hôtels, avec un "
+"chauffeur professionnel."
 
 #: .\templates\mainpage\why-us2.html:22
 msgid "Luxury Cars"

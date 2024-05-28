@@ -592,80 +592,27 @@ def nexi(request):
     # Генерация PDF и сохранение в MEDIA_ROOT
     # str_id = str(session_id)
     # voucher_name = f"voucher_{str_id}.pdf"
-    subject = 'Your booking was submitted successfully'
-    from_email = settings.DEFAULT_FROM_EMAIL
-    to = [email, from_email]
-    subject = 'Your booking was submitted successfully'
+    if request.language_code == 'it':
+        subject = 'La tua prenotazione è stata inviata con successo'
+    elif request.language_code == 'fr':
+        subject = 'Votre réservation a été soumise avec succès'
+    elif request.language_code == 'es':
+        subject = 'Su reserva fue enviada exitosamente'
+    elif request.language_code == 'ru':
+        subject = 'Ваше бронирование было успешно отправлено'
+    else:
+        subject = 'Your booking was submitted successfully'
     from_email = settings.DEFAULT_FROM_EMAIL
     to = [email, from_email]
     # Рендеринг HTML-шаблона1
-    html_content = render_to_string('booking/booking-received.html', context)
-    # Отправка письма
-    send_mail(
-        subject=subject,
-        message='',  # Текстовое сообщение которые не поддерживают HTML
-        from_email=settings.DEFAULT_FROM_EMAIL,
-        recipient_list=to,
-        html_message=html_content,
-        fail_silently=False,
-    )
-    return render(request, 'booking/booking-received.html', context)
-
-
-def link_callback(uri, rel):
-    result = finders.find(uri)
-    if result:
-        if not isinstance(result, (list, tuple)):
-            result = [result]
-            result = list(os.path.realpath(path) for path in result)
-            path = result[0]
-    else:
-        sUrl = settings.STATIC_URL
-        sRoot = settings.STATIC_ROOT
-        mUrl = settings.MEDIA_URL
-        mRoot = settings.MEDIA_ROOT
-        if uri.startswith(mUrl):
-            path = os.path.join(mRoot, uri.replace(mUrl, ""))
-        elif uri.startswith(sUrl):
-            path = os.path.join(sRoot, uri.replace(sUrl, ""))
-        else:
-            return uri
-        # make sure that file exists
-        if not os.path.isfile(path):
-            raise RuntimeError(
-                'media URI must start with %s or %s' % (sUrl, mUrl))
-    return path
-
-
-def emailtest(request):
-    # PDF xhtml2pdf
-    # HTML
-    context = {}
-    html_content = render_to_string("booking/booking-received.html", context)
-    text_content = strip_tags(html_content)
-    # PDF
-    template = get_template("booking/booking-received.html")
-    html = template.render(context)
-    result = BytesIO()
-    pdf = pisa.CreatePDF(BytesIO(html.encode("UTF-8")),
-                         dest=result,
-                         link_callback=link_callback)
-    if pdf.err:
-        return HttpResponse('Error occurred while generating PDF', status=500)
-    pdf_value = result.getvalue()
-    result.close()
-    subject = 'TEST PDF'
-    from_email = 'support@transferslux.com'
-    recepients = 'shooroop87@mail.ru'
+    html_content = render_to_string('email/email.html', context)
     email_message = EmailMultiAlternatives(subject,
-                                           text_content,
+                                           html_content,
                                            from_email,
-                                           to=[recepients])
-    # Attach the PDF file
+                                           to=to)
     email_message.content_subtype = 'html'
-    email_message.attach('report.pdf', pdf_value, 'application/pdf')
     email_message.send()
-    return render(request, 'index.html')
+    return render(request, 'booking/booking-received.html', context)
 
 
 def about(request):

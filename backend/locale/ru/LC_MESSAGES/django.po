@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-24 15:48+0300\n"
+"POT-Creation-Date: 2024-05-28 17:00+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -114,7 +114,7 @@ msgid "Notes for the chauffeur"
 msgstr "Заметки для водителя"
 
 #: .\templates\booking\booking-extra.html:120
-#: .\templates\booking\booking-passenger.html:131
+#: .\templates\booking\booking-passenger.html:133
 msgid "Continue"
 msgstr "Продолжить"
 
@@ -144,7 +144,7 @@ msgstr "Телефон*"
 msgid "Passengers*"
 msgstr "Пассажиры*"
 
-#: .\templates\booking\booking-passenger.html:111
+#: .\templates\booking\booking-passenger.html:110
 #: .\templates\booking\booking-vehicle.html:73
 #: .\templates\booking\booking-vehicle.html:102
 #: .\templates\booking\booking-vehicle.html:131
@@ -153,7 +153,7 @@ msgstr "Пассажиры*"
 msgid "Luggage"
 msgstr "Багаж"
 
-#: .\templates\booking\booking-passenger.html:123
+#: .\templates\booking\booking-passenger.html:125
 msgid "Notes to driver"
 msgstr "Заметки водителю"
 
@@ -190,84 +190,133 @@ msgstr "Политика конфиденциальности"
 msgid "Book Now"
 msgstr "Забронировать"
 
-#: .\templates\booking\booking-received.html:33
+#: .\templates\booking\booking-received.html:35
+#: .\templates\includes\header.html:12
+msgid "Transfer Service"
+msgstr "Услуги трансфера"
+
+#: .\templates\booking\booking-received.html:36
+#: .\templates\includes\header.html:13
+#: .\templates\includes\mobile_menu.html:12
+#: .\templates\mainpage\fleet4.html:8
+msgid "Our Fleet"
+msgstr "Автомобили"
+
+#: .\templates\booking\booking-received.html:37
+#: .\templates\includes\header.html:14
+#: .\templates\includes\mobile_menu.html:14
+msgid "Contact"
+msgstr "Контакты"
+
+#: .\templates\booking\booking-received.html:56
+#: .\templates\includes\header.html:33
+msgid "English"
+msgstr "Английский"
+
+#: .\templates\booking\booking-received.html:57
+#: .\templates\includes\header.html:34
+msgid "Russian"
+msgstr "Русский"
+
+#: .\templates\booking\booking-received.html:58
+#: .\templates\includes\header.html:35
+msgid "Spanish"
+msgstr "Испанский"
+
+#: .\templates\booking\booking-received.html:59
+#: .\templates\includes\header.html:36
+msgid "French"
+msgstr "Французский"
+
+#: .\templates\booking\booking-received.html:60
+#: .\templates\includes\header.html:37
+msgid "Italian"
+msgstr "Итальянский"
+
+#: .\templates\booking\booking-received.html:65
+#: .\templates\includes\header.html:42
+#: .\templates\includes\mobile_menu.html:13
+msgid "Help"
+msgstr "Помощь"
+
+#: .\templates\booking\booking-received.html:77
 msgid "Your booking was submitted successfully!"
 msgstr "Ваше бронирование прошло успешно!"
 
-#: .\templates\booking\booking-received.html:34
+#: .\templates\booking\booking-received.html:78
 msgid "Booking details has been sent to"
 msgstr "Детали бронирования отправлены"
 
-#: .\templates\booking\booking-received.html:37
+#: .\templates\booking\booking-received.html:81
 msgid "Order Number"
 msgstr "Номер бронирования"
 
-#: .\templates\booking\booking-received.html:38
+#: .\templates\booking\booking-received.html:82
 msgid "Today"
 msgstr "Сегодня"
 
-#: .\templates\booking\booking-received.html:39
+#: .\templates\booking\booking-received.html:83
 #: .\templates\booking\sidebar_after.html:48
 msgid "Total"
 msgstr "Итого"
 
-#: .\templates\booking\booking-received.html:40
+#: .\templates\booking\booking-received.html:84
 msgid "Payment Method"
 msgstr "Способ оплаты"
 
-#: .\templates\booking\booking-received.html:40
+#: .\templates\booking\booking-received.html:84
 msgid "To the driver by card or cash"
 msgstr "Водителю картой или наличными"
 
-#: .\templates\booking\booking-received.html:44
+#: .\templates\booking\booking-received.html:88
 msgid "Reservation Information"
 msgstr "Информация о бронировании"
 
-#: .\templates\booking\booking-received.html:46
+#: .\templates\booking\booking-received.html:90
 msgid "Pick Up Address"
 msgstr "Откуда"
 
-#: .\templates\booking\booking-received.html:47
+#: .\templates\booking\booking-received.html:91
 msgid "Drop Off Address"
 msgstr "Куда"
 
-#: .\templates\booking\booking-received.html:48
+#: .\templates\booking\booking-received.html:92
 msgid "Pick Up Date"
 msgstr "Дата"
 
-#: .\templates\booking\booking-received.html:49
+#: .\templates\booking\booking-received.html:93
 msgid "Pick Up Time"
 msgstr "Время"
 
-#: .\templates\booking\booking-received.html:53
+#: .\templates\booking\booking-received.html:97
 msgid "Selected Car"
 msgstr "Выбранный автомобиль"
 
-#: .\templates\booking\booking-received.html:57
+#: .\templates\booking\booking-received.html:101
 msgid "Class"
 msgstr "Класс"
 
-#: .\templates\booking\booking-received.html:61
+#: .\templates\booking\booking-received.html:105
 msgid "Passenger Information"
 msgstr "Информация о пассажире"
 
-#: .\templates\booking\booking-received.html:63
+#: .\templates\booking\booking-received.html:107
 msgid "First name"
 msgstr "Имя"
 
-#: .\templates\booking\booking-received.html:64
+#: .\templates\booking\booking-received.html:108
 msgid "Last name"
 msgstr "Фамилия"
 
-#: .\templates\booking\booking-received.html:65
+#: .\templates\booking\booking-received.html:109
 msgid "Email"
 msgstr "Email"
 
-#: .\templates\booking\booking-received.html:66
+#: .\templates\booking\booking-received.html:110
 msgid "Phone"
 msgstr "Телефон"
 
-#: .\templates\booking\booking-received.html:67
+#: .\templates\booking\booking-received.html:111
 msgid "Special Requirements"
 msgstr "Пожелания"
 
@@ -409,6 +458,89 @@ msgstr "Для турагентств и корпоративных клиент
 #: .\templates\contacts.html:76
 msgid "For taxi companies"
 msgstr "Для компаний такси"
+
+#: .\templates\email\email.html:94
+#, fuzzy
+#| msgid "Comfortable transfers from airports and hotels in Italy"
+msgid "Comfortable transfers in Italy"
+msgstr "Комфортабельный трансфер из аэропортов и отелей в Италии"
+
+#: .\templates\email\email.html:140
+msgid "Hello,"
+msgstr "Здравствуйте,"
+
+#: .\templates\email\email.html:141
+msgid "Thank you for booking. See your order confirmation below."
+msgstr "Спасибо за бронирование! Ниже подробные данные о бронировании."
+
+#: .\templates\email\email.html:146
+msgid "Your booking order"
+msgstr "Ваше бронирование"
+
+#: .\templates\email\email.html:173
+msgid "Passengers details"
+msgstr "Информация о пассажире"
+
+#: .\templates\email\email.html:174
+msgid "Name:"
+msgstr "Имя*"
+
+#: .\templates\email\email.html:175
+msgid "Surname:"
+msgstr "Фамилия:"
+
+#: .\templates\email\email.html:176
+msgid "Phone:"
+msgstr "Телефон:"
+
+#: .\templates\email\email.html:177
+msgid "Email:"
+msgstr "Email:"
+
+#: .\templates\email\email.html:198
+#| msgid "Passengers details"
+msgid "Transfer details"
+msgstr "Информация о трансфере"
+
+#: .\templates\email\email.html:199
+msgid "From:"
+msgstr "Откуда:"
+
+#: .\templates\email\email.html:200
+msgid "To:"
+msgstr "Куда:"
+
+#: .\templates\email\email.html:201
+msgid "Date:"
+msgstr "Дата:"
+
+#: .\templates\email\email.html:202
+msgid "Time:"
+msgstr "Время:"
+
+#: .\templates\email\email.html:203
+msgid "Car class:"
+msgstr "Класс:"
+
+#: .\templates\email\email.html:204
+msgid "Total price:"
+msgstr "Время в пути:"
+
+#: .\templates\email\email.html:205
+msgid "N. passengers:"
+msgstr "Кол-во пассажиров:"
+
+#: .\templates\email\email.html:206
+msgid "N. luggage:"
+msgstr "Кол-во багажа:"
+
+#: .\templates\email\email.html:207
+msgid "Flight/Train:"
+msgstr "Номер самолета/поезда:"
+
+#: .\templates\email\email.html:208
+msgid "Notes:"
+msgstr "Дополнительная информация:"
 
 #: .\templates\help-center.html:33 .\templates\mainpage\faq.html:7
 msgid "Frequently Asked Questions"
@@ -666,46 +798,6 @@ msgstr "Политика конфиденциальности"
 #: .\templates\includes\footer.html:85
 msgid "Book via Chat"
 msgstr "Онлайн чат"
-
-#: .\templates\includes\header.html:12
-msgid "Transfer Service"
-msgstr "Услуги трансфера"
-
-#: .\templates\includes\header.html:13
-#: .\templates\includes\mobile_menu.html:12
-#: .\templates\mainpage\fleet4.html:8
-msgid "Our Fleet"
-msgstr "Автомобили"
-
-#: .\templates\includes\header.html:14
-#: .\templates\includes\mobile_menu.html:14
-msgid "Contact"
-msgstr "Контакты"
-
-#: .\templates\includes\header.html:33
-msgid "English"
-msgstr "Английский"
-
-#: .\templates\includes\header.html:34
-msgid "Russian"
-msgstr "Русский"
-
-#: .\templates\includes\header.html:35
-msgid "Spanish"
-msgstr "Испанский"
-
-#: .\templates\includes\header.html:36
-msgid "French"
-msgstr "Французский"
-
-#: .\templates\includes\header.html:37
-msgid "Italian"
-msgstr "Итальянский"
-
-#: .\templates\includes\header.html:42
-#: .\templates\includes\mobile_menu.html:13
-msgid "Help"
-msgstr "Помощь"
 
 #: .\templates\index.html:11
 msgid "Comfortable transfers from airports and hotels in Italy"
