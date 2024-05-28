@@ -1,22 +1,16 @@
 import json
 import math
-import os
 import re
 import uuid
 from datetime import datetime
-from io import BytesIO
 
 import googlemaps
 from api.forms import DetailsForm, ExtrasForm, SearchForm, VehicleForm
 from api.models import Booking, Search
 from django.conf import settings
-from django.contrib.staticfiles import finders
-from django.core.mail import EmailMultiAlternatives, send_mail
-from django.http import HttpResponse
+from django.core.mail import EmailMultiAlternatives
 from django.shortcuts import redirect, render
-from django.template.loader import get_template, render_to_string
-from django.utils.html import strip_tags
-from xhtml2pdf import pisa
+from django.template.loader import render_to_string
 
 google_api_key = settings.GOOGLE_MAPS_API_KEY
 
