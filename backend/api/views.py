@@ -258,7 +258,7 @@ def details(request):
             bst = int(booster_seat) * 20
             fl = int(flowers) * 70
             extra_total = int(cst) + int(bst) + int(fl)
-            total = rate + extra_total
+            total = float(rate) + float(extra_total)
             # Create a dictionary with the fields
             query = {
                 'from_short': from_short,
