@@ -39,13 +39,13 @@
     <div class="border-bottom mt-30 mb-25"> </div>
     <div class="mt-0">
       <span class="text-14 color-grey">{% trans "Extra Options" %}</span><br>
-      {% if child_seat > 0 %}
+      {% if child_seat != '0' %}
       <span class="text-14-medium color-text">{{ child_seat }} x {% trans "Child Seat" %} - {{ child_seat_total }}EUR</span><br>
       {% endif %}
-      {% if booster_seat > 0 %}
+      {% if booster_seat != '0' %}
       <span class="text-14-medium color-text">{{ booster_seat }} x {% trans "Booster Seat" %} - {{ booster_seat_total }}EUR</span><br>
       {% endif %}
-      {% if flowers > 0 %}
+      {% if flowers != '0' %}
       <span class="text-14-medium color-text">{{ flowers }} x {% trans "Flowers" %} - {{ flowers_total }}EUR</span>
       {% endif %}          
     </div>

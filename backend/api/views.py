@@ -255,11 +255,11 @@ def details(request):
             to_time = query.get('to_time')
             session_id = query.get('session_id')
 
-            total = rate + child_seat * 15 + booster_seat * 20 + flowers * 70
-            child_seat_total = child_seat * 15
-            booster_seat_total = booster_seat * 20
-            flowers_total = flowers * 70
-            extra_total = child_seat_total + booster_seat_total + flowers_total
+            total = rate + int(child_seat) * 15 + int(booster_seat) * 20 + int(flowers) * 70
+            child_seat_total = int(child_seat) * 15
+            booster_seat_total = int(booster_seat) * 20
+            flowers_total = int(flowers) * 70
+            extra_total = int(child_seat_total) + int(booster_seat_total) + int(flowers_total)
 
             # Create a dictionary with the fields
             query = {
