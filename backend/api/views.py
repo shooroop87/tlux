@@ -509,7 +509,7 @@ def nexi(request):
     to_time = query.get('to_time')
     car_class = query.get('car_class')
     rate = query.get('rate')
-    total = query.get('rate')
+    total = query.get('total')
     distance = query.get('distance')
     travel_time = query.get('travel_time')
     flight = query.get('flight')
@@ -575,6 +575,7 @@ def nexi(request):
         'to_hidden': to_hidden,
         'car_class': car_class,
         'rate': rate,
+        'total': total,
         'distance': distance,
         'travel_time': travel_time,
         'to_date': to_date,
