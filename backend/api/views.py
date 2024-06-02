@@ -402,7 +402,7 @@ def payment(request):
             x_url = "?" + urlencode(query)
             success_url = urljoin(merchantServerUrl, "success/") + x_url
             cancel_url = urljoin(merchantServerUrl, "error/")
-            # Create a dictionary with the fields
+            # Create a dictionary with the fields1
             query = {
                 'from_short': from_short,
                 'from_hidden': from_hidden,
