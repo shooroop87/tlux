@@ -400,8 +400,8 @@ def payment(request):
             merchantServerUrl = HTTP_HOST + XPAY_LINK
             # Urls
             x_url = "?" + urlencode(query)
-            success_url = urljoin(merchantServerUrl, "payment_success/") + x_url
-            cancel_url = urljoin(merchantServerUrl, "payment_error/")
+            success_url = urljoin(merchantServerUrl, "success/") + x_url
+            cancel_url = urljoin(merchantServerUrl, "error/")
             # Create a dictionary with the fields
             query = {
                 'from_short': from_short,
@@ -506,8 +506,8 @@ def payment(request):
             merchantServerUrl = HTTP_HOST + XPAY_LINK
             # Urls
             x_url = "?" + urlencode(query)
-            success_url = urljoin(merchantServerUrl, "payment_success/") + x_url
-            cancel_url = urljoin(merchantServerUrl, "payment_error/")
+            success_url = urljoin(merchantServerUrl, "success/") + x_url
+            cancel_url = urljoin(merchantServerUrl, "error/")
             context = {
                 'from_short': from_short,
                 'from_hidden': from_hidden,
@@ -568,8 +568,8 @@ def payment(request):
     merchantServerUrl = HTTP_HOST + XPAY_LINK
     # Urls
     x_url = "?" + urlencode(query)
-    success_url = urljoin(merchantServerUrl, "payment_success/") + x_url
-    cancel_url = urljoin(merchantServerUrl, "payment_error/")
+    success_url = urljoin(merchantServerUrl, "success/") + x_url
+    cancel_url = urljoin(merchantServerUrl, "error/")
     context = {
         'from_short': from_short,
         'from_hidden': from_hidden,
