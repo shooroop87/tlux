@@ -3,7 +3,6 @@ import json
 import math
 import re
 import sys
-import time
 import uuid
 from datetime import datetime
 from urllib.parse import urljoin
@@ -387,15 +386,21 @@ def payment(request):
             rate = float(rate)
             importo = round(rate * 100 * 0.30, 0)
             # Calcolo MAC
-            mac_str = 'codTrans=' + str(codTrans) + 'divisa=' + str(divisa) + 'importo=' + str(importo) + str(CHIAVESEGRETA_TEST)
+            codTrans_str = 'codTrans=' + str(codTrans)
+            divisa_str = 'divisa=' + str(divisa)
+            importo_str = 'importo=' + str(importo)
+            chiave_str = str(CHIAVESEGRETA_TEST)
+            mac_str = codTrans_str + divisa_str + importo_str + chiave_str
             mac = hashlib.sha1(mac_str.encode('utf8')).hexdigest()
             # Payment gateway
-            HTTP_HOST = "transferslux.com"
-            requestUrl = "https://int-ecommerce.nexi.it/ecomm/ecomm/DispatcherServlet"
-            # requestUrl_XXX = "https://ecommerce.nexi.it/ecomm/ecomm/DispatcherServlet"
-            merchantServerUrl = "https://" + HTTP_HOST + "/xpay/pagamento_semplice_python/codice_base/"
+            HTTP_HOST = "https://transferslux.com"
+            NEXI_HOST = "https://int-ecommerce.nexi.it"
+            requestUrl = NEXI_HOST + "/ecomm/ecomm/DispatcherServlet"
+            XPAY_LINK = "/xpay/pagamento_semplice_python/codice_base/"
+            merchantServerUrl = HTTP_HOST + XPAY_LINK
             # Urls
-            success_url = urljoin(merchantServerUrl, "payment_success/") + "?" + urlencode(query)
+            x_url = "?" + urlencode(query)
+            success_url = urljoin(merchantServerUrl, "payment_success/") + x_url
             cancel_url = urljoin(merchantServerUrl, "payment_error/")
             # Create a dictionary with the fields
             query = {
@@ -487,15 +492,21 @@ def payment(request):
             rate = float(rate)
             importo = round(rate * 100 * 0.30, 0)
             # Calcolo MAC
-            mac_str = 'codTrans=' + str(codTrans) + 'divisa=' + str(divisa) + 'importo=' + str(importo) + str(CHIAVESEGRETA_TEST)
+            codTrans_str = 'codTrans=' + str(codTrans)
+            divisa_str = 'divisa=' + str(divisa)
+            importo_str = 'importo=' + str(importo)
+            chiave_str = str(CHIAVESEGRETA_TEST)
+            mac_str = codTrans_str + divisa_str + importo_str + chiave_str
             mac = hashlib.sha1(mac_str.encode('utf8')).hexdigest()
             # Payment gateway
-            HTTP_HOST = "transferslux.com"
-            requestUrl = "https://int-ecommerce.nexi.it/ecomm/ecomm/DispatcherServlet"
-            # requestUrl_XXX = "https://ecommerce.nexi.it/ecomm/ecomm/DispatcherServlet"
-            merchantServerUrl = "https://" + HTTP_HOST + "/xpay/pagamento_semplice_python/codice_base/"
+            HTTP_HOST = "https://transferslux.com"
+            NEXI_HOST = "https://int-ecommerce.nexi.it"
+            requestUrl = NEXI_HOST + "/ecomm/ecomm/DispatcherServlet"
+            XPAY_LINK = "/xpay/pagamento_semplice_python/codice_base/"
+            merchantServerUrl = HTTP_HOST + XPAY_LINK
             # Urls
-            success_url = urljoin(merchantServerUrl, "payment_success/") + "?" + urlencode(query)
+            x_url = "?" + urlencode(query)
+            success_url = urljoin(merchantServerUrl, "payment_success/") + x_url
             cancel_url = urljoin(merchantServerUrl, "payment_error/")
             context = {
                 'from_short': from_short,
@@ -543,15 +554,21 @@ def payment(request):
     rate = float(rate)
     importo = round(rate * 100 * 0.30, 0)
     # Calcolo MAC
-    mac_str = 'codTrans=' + str(codTrans) + 'divisa=' + str(divisa) + 'importo=' + str(importo) + str(CHIAVESEGRETA_TEST)
+    codTrans_str = 'codTrans=' + str(codTrans)
+    divisa_str = 'divisa=' + str(divisa)
+    importo_str = 'importo=' + str(importo)
+    chiave_str = str(CHIAVESEGRETA_TEST)
+    mac_str = codTrans_str + divisa_str + importo_str + chiave_str
     mac = hashlib.sha1(mac_str.encode('utf8')).hexdigest()
     # Payment gateway
-    HTTP_HOST = "transferslux.com"
-    requestUrl = "https://int-ecommerce.nexi.it/ecomm/ecomm/DispatcherServlet"
-    # requestUrl_XXX = "https://ecommerce.nexi.it/ecomm/ecomm/DispatcherServlet"
-    merchantServerUrl = "https://" + HTTP_HOST + "/xpay/pagamento_semplice_python/codice_base/"
+    HTTP_HOST = "https://transferslux.com"
+    NEXI_HOST = "https://int-ecommerce.nexi.it"
+    requestUrl = NEXI_HOST + "/ecomm/ecomm/DispatcherServlet"
+    XPAY_LINK = "/xpay/pagamento_semplice_python/codice_base/"
+    merchantServerUrl = HTTP_HOST + XPAY_LINK
     # Urls
-    success_url = urljoin(merchantServerUrl, "payment_success/") + "?" + urlencode(query)
+    x_url = "?" + urlencode(query)
+    success_url = urljoin(merchantServerUrl, "payment_success/") + x_url
     cancel_url = urljoin(merchantServerUrl, "payment_error/")
     context = {
         'from_short': from_short,
@@ -588,11 +605,6 @@ def payment_success(request):
     billing_lastname = request.POST.get("billing_lastname")
     billing_company = request.POST.get("billing_company")
     billing_address = request.POST.get("billing_address")
-    # Transactions
-    codTrans = request.GET.get('codTrans')
-    importo = request.GET.get('importo')
-    divisa = request.GET.get('divisa')
-    mac = request.GET.get('mac')
     # Query
     query = request.session['search_query']
     from_short = query.get('from_short')

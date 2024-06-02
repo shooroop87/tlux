@@ -9,7 +9,6 @@ urlpatterns = [
     path('booking-extra/', views.extras, name='extras'),
     path('booking-passenger/', views.details, name='details'),
     path('booking-payment/', views.payment, name='payment'),
-    #path('pay/', views.nexi, name='nexi'),
     path('payment_success/', views.payment_success, name='payment_success'),
     path('payment_error/', views.payment_error, name='payment_error'),
     path('about/', views.about, name='about'),
