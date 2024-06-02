@@ -11,7 +11,7 @@ load_dotenv(find_dotenv())
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = str(os.getenv("DJANGO_SECRET_KEY"))
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = str(os.getenv("DJANGO_ALLOWED_HOSTS")).split(' ')
 
@@ -19,6 +19,9 @@ CSRF_TRUSTED_ORIGINS = ['https://*.transferslux.com',
                         'https://transferslux.com/',
                         'https://transferslux.com',
                         'https://transferslux.com/ru/',
+                        'https://transferslux.com/it/',
+                        'https://transferslux.com/fr/',
+                        'https://transferslux.com/es/',
                         'https://localhost',
                         'http://127.0.0.1']
 

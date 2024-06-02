@@ -1,8 +1,17 @@
+import hashlib
 import json
 import math
 import re
+import sys
+import time
 import uuid
 from datetime import datetime
+from urllib.parse import urljoin
+
+if sys.version_info >= (3,):
+    from urllib.parse import urlencode
+else:
+    from urllib import urlencode
 
 import googlemaps
 from api.forms import DetailsForm, ExtrasForm, SearchForm, VehicleForm
@@ -342,9 +351,6 @@ def details(request):
 def payment(request):
     if request.method == 'POST':
         form = DetailsForm(request.POST)
-        # breakpoint()
-        # print(form)
-        # print(form.is_valid())
         if form.is_valid():
             name = form.cleaned_data["name"]
             lastname = form.cleaned_data["lastname"]
@@ -364,11 +370,6 @@ def payment(request):
             to_time = query.get('to_time')
             car_class = query.get('car_class')
             rate = query.get('rate')
-            total = query.get('total')
-            child_seat_total = query.get('child_seat_total')
-            booster_seat_total = query.get('booster_seat_total')
-            flowers_total = query.get('flowers_total')
-            extra_total = query.get('extra_total')
             distance = query.get('distance')
             travel_time = query.get('travel_time')
             flight = query.get('flight')
@@ -377,7 +378,25 @@ def payment(request):
             flowers = query.get('flowers')
             notes_extra = query.get('notes_extra')
             session_id = query.get('session_id')
-
+            # Settings
+            ALIAS_TEST = 'ALIAS_WEB_00082258'
+            CHIAVESEGRETA_TEST = 'Y665ESJRJEK38D6D1MJJGCYAUQR2J8SV'
+            current_datetime = datetime.today().strftime('%Y%m%d%H%M%S')
+            codTrans = 'TESTPS_' + current_datetime
+            divisa = 'EUR'
+            rate = float(rate)
+            importo = round(rate * 100 * 0.30, 0)
+            # Calcolo MAC
+            mac_str = 'codTrans=' + str(codTrans) + 'divisa=' + str(divisa) + 'importo=' + str(importo) + str(CHIAVESEGRETA_TEST)
+            mac = hashlib.sha1(mac_str.encode('utf8')).hexdigest()
+            # Payment gateway
+            HTTP_HOST = "transferslux.com"
+            requestUrl = "https://int-ecommerce.nexi.it/ecomm/ecomm/DispatcherServlet"
+            # requestUrl_XXX = "https://ecommerce.nexi.it/ecomm/ecomm/DispatcherServlet"
+            merchantServerUrl = "https://" + HTTP_HOST + "/xpay/pagamento_semplice_python/codice_base/"
+            # Urls
+            success_url = urljoin(merchantServerUrl, "payment_success/") + "?" + urlencode(query)
+            cancel_url = urljoin(merchantServerUrl, "payment_error/")
             # Create a dictionary with the fields
             query = {
                 'from_short': from_short,
@@ -386,11 +405,6 @@ def payment(request):
                 'to_hidden': to_hidden,
                 'car_class': car_class,
                 'rate': rate,
-                'total': total,
-                'child_seat_total': child_seat_total,
-                'booster_seat_total': booster_seat_total,
-                'flowers_total': flowers_total,
-                'extra_total': extra_total,
                 'distance': distance,
                 'travel_time': travel_time,
                 'to_date': to_date,
@@ -407,7 +421,11 @@ def payment(request):
                 'passengers': passengers,
                 'luggage': luggage,
                 'notes_details': notes_details,
-                'session_id': session_id
+                'session_id': session_id,
+                'importo': importo,
+                'divisa': divisa,
+                'codTrans': codTrans,
+                'mac': mac,
             }
             context = {
                 'from_short': from_short,
@@ -416,11 +434,6 @@ def payment(request):
                 'to_hidden': to_hidden,
                 'car_class': car_class,
                 'rate': rate,
-                'total': total,
-                'child_seat_total': child_seat_total,
-                'booster_seat_total': booster_seat_total,
-                'flowers_total': flowers_total,
-                'extra_total': extra_total,
                 'distance': distance,
                 'travel_time': travel_time,
                 'to_date': to_date,
@@ -436,12 +449,21 @@ def payment(request):
                 'phone': phone,
                 'passengers': passengers,
                 'luggage': luggage,
-                'notes_details': notes_details
+                'notes_details': notes_details,
+                'alias': ALIAS_TEST,
+                'importo': importo,
+                'divisa': divisa,
+                'codTrans': codTrans,
+                'requestUrl': requestUrl,
+                'url': success_url,
+                'url_back': cancel_url,
+                'mac': mac,
             }
             # Store the query in the session
             request.session['search_query'] = query
-            redirect('api:nexi')
+            return render(request, 'booking/booking-payment.html', context)
         else:
+            # Create a dictionary with the fields
             name = request.POST.get("name")
             lastname = request.POST.get("lastname")
             query = request.session['search_query']
@@ -452,15 +474,29 @@ def payment(request):
             to_hidden = query.get('to_hidden')
             to_date = query.get('to_date')
             to_time = query.get('to_time')
-            rate = query.get('rate')
-            total = query.get('total')
-            child_seat_total = query.get('child_seat_total')
-            booster_seat_total = query.get('booster_seat_total')
-            flowers_total = query.get('flowers_total')
-            extra_total = query.get('extra_total')
             car_class = query.get('car_class')
+            rate = query.get('rate')
             distance = query.get('distance')
             travel_time = query.get('travel_time')
+            # Settings
+            ALIAS_TEST = 'ALIAS_WEB_00082258'
+            CHIAVESEGRETA_TEST = 'Y665ESJRJEK38D6D1MJJGCYAUQR2J8SV'
+            current_datetime = datetime.today().strftime('%Y%m%d%H%M%S')
+            codTrans = 'TESTPS_' + current_datetime
+            divisa = 'EUR'
+            rate = float(rate)
+            importo = round(rate * 100 * 0.30, 0)
+            # Calcolo MAC
+            mac_str = 'codTrans=' + str(codTrans) + 'divisa=' + str(divisa) + 'importo=' + str(importo) + str(CHIAVESEGRETA_TEST)
+            mac = hashlib.sha1(mac_str.encode('utf8')).hexdigest()
+            # Payment gateway
+            HTTP_HOST = "transferslux.com"
+            requestUrl = "https://int-ecommerce.nexi.it/ecomm/ecomm/DispatcherServlet"
+            # requestUrl_XXX = "https://ecommerce.nexi.it/ecomm/ecomm/DispatcherServlet"
+            merchantServerUrl = "https://" + HTTP_HOST + "/xpay/pagamento_semplice_python/codice_base/"
+            # Urls
+            success_url = urljoin(merchantServerUrl, "payment_success/") + "?" + urlencode(query)
+            cancel_url = urljoin(merchantServerUrl, "payment_error/")
             context = {
                 'from_short': from_short,
                 'from_hidden': from_hidden,
@@ -468,17 +504,20 @@ def payment(request):
                 'to_hidden': to_hidden,
                 'car_class': car_class,
                 'rate': rate,
-                'total': total,
-                'child_seat_total': child_seat_total,
-                'booster_seat_total': booster_seat_total,
-                'flowers_total': flowers_total,
-                'extra_total': extra_total,
                 'distance': distance,
                 'travel_time': travel_time,
                 'to_date': to_date,
                 'to_time': to_time,
                 'name': name,
-                'lastname': lastname
+                'lastname': lastname,
+                'alias': ALIAS_TEST,
+                'importo': importo,
+                'divisa': divisa,
+                'codTrans': codTrans,
+                'requestUrl': requestUrl,
+                'url': success_url,
+                'url_back': cancel_url,
+                'mac': mac,
             }
             return render(request, 'booking/booking-payment.html', context)
     # If not post show page
@@ -493,13 +532,27 @@ def payment(request):
     to_time = query.get('to_time')
     car_class = query.get('car_class')
     rate = query.get('rate')
-    total = query.get('total')
-    child_seat_total = query.get('child_seat_total')
-    booster_seat_total = query.get('booster_seat_total')
-    flowers_total = query.get('flowers_total')
-    extra_total = query.get('extra_total')
     distance = query.get('distance')
     travel_time = query.get('travel_time')
+    # Settings
+    ALIAS_TEST = 'ALIAS_WEB_00082258'
+    CHIAVESEGRETA_TEST = 'Y665ESJRJEK38D6D1MJJGCYAUQR2J8SV'
+    current_datetime = datetime.today().strftime('%Y%m%d%H%M%S')
+    codTrans = 'TESTPS_' + current_datetime
+    divisa = 'EUR'
+    rate = float(rate)
+    importo = round(rate * 100 * 0.30, 0)
+    # Calcolo MAC
+    mac_str = 'codTrans=' + str(codTrans) + 'divisa=' + str(divisa) + 'importo=' + str(importo) + str(CHIAVESEGRETA_TEST)
+    mac = hashlib.sha1(mac_str.encode('utf8')).hexdigest()
+    # Payment gateway
+    HTTP_HOST = "transferslux.com"
+    requestUrl = "https://int-ecommerce.nexi.it/ecomm/ecomm/DispatcherServlet"
+    # requestUrl_XXX = "https://ecommerce.nexi.it/ecomm/ecomm/DispatcherServlet"
+    merchantServerUrl = "https://" + HTTP_HOST + "/xpay/pagamento_semplice_python/codice_base/"
+    # Urls
+    success_url = urljoin(merchantServerUrl, "payment_success/") + "?" + urlencode(query)
+    cancel_url = urljoin(merchantServerUrl, "payment_error/")
     context = {
         'from_short': from_short,
         'from_hidden': from_hidden,
@@ -507,39 +560,41 @@ def payment(request):
         'to_hidden': to_hidden,
         'car_class': car_class,
         'rate': rate,
-        'total': total,
-        'child_seat_total': child_seat_total,
-        'booster_seat_total': booster_seat_total,
-        'flowers_total': flowers_total,
-        'extra_total': extra_total,
         'distance': distance,
         'travel_time': travel_time,
         'to_date': to_date,
         'to_time': to_time,
         'name': name,
-        'lastname': lastname
+        'lastname': lastname,
+        'alias': ALIAS_TEST,
+        'importo': importo,
+        'divisa': divisa,
+        'codTrans': codTrans,
+        'requestUrl': requestUrl,
+        'url': success_url,
+        'url_back': cancel_url,
+        'mac': mac,
     }
     return render(request, 'booking/booking-payment.html', context)
 
 
-def nexi(request):
+def payment_success(request):
     terms = request.POST.get("terms")
     if terms == 'on':
         terms_ = True
     else:
         terms_ = False
-    # print(terms)
-    # breakpoint()
     billing_name = request.POST.get("billing_name")
-    # breakpoint()
-    # print(billing_name)
     billing_lastname = request.POST.get("billing_lastname")
     billing_company = request.POST.get("billing_company")
     billing_address = request.POST.get("billing_address")
+    # Transactions
+    codTrans = request.GET.get('codTrans')
+    importo = request.GET.get('importo')
+    divisa = request.GET.get('divisa')
+    mac = request.GET.get('mac')
     # Query
     query = request.session['search_query']
-    # breakpoint()
-    # print(query)
     from_short = query.get('from_short')
     from_hidden = query.get('from_hidden')
     to_short = query.get('to_short')
@@ -670,6 +725,10 @@ def nexi(request):
     email_message.content_subtype = 'html'
     email_message.send()
     return render(request, 'booking/booking-received.html', context)
+
+
+def payment_error(request):
+    pass
 
 
 def about(request):

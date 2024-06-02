@@ -53,8 +53,15 @@
           <div class="box-row-tab mt-50">
             <div class="box-tab-left">
               <div class="box-content-detail"> 
-              <form method="post" enctype="multipart/form-data" action="{% url 'api:nexi' %}">
+              <form method="post" enctype="multipart/form-data" action="{{ requestUrl }}">
                 {% csrf_token %}
+                <input type="hidden" name="alias" value="{{ alias }}">
+                <input type="hidden" name="importo" value="{{ importo }}">
+                <input type="hidden" name="divisa" value="{{ divisa }}">
+                <input type="hidden" name="codTrans" value="{{ codTrans }}">
+                <input type="hidden" name="url" value="{{ url }}">
+                <input type="hidden" name="url_back" value="{{ url_back }}">
+                <input type="hidden" name="mac" value="{{ mac }}">
                 <h3 class="heading-24-medium color-text mb-30 wow fadeInUp">{% trans "Billing Address" %}</h3>
                 <div class="form-contact form-comment wow fadeInUp"> 
                   
