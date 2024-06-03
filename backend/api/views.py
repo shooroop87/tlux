@@ -478,7 +478,11 @@ def payment(request):
     importo = round(rate * 100 * 0.30, 0)
     importo = int(importo)
     # Calcolo MAC
-    mac_str = 'codTrans=' + str(codTrans) + 'divisa=' + str(divisa) + 'importo=' + str(importo) + str(CHIAVESEGRETA_TEST)
+    codtrans_str = 'codTrans=' + str(codTrans)
+    divisa_str = 'divisa=' + str(divisa)
+    importo_str = 'importo=' + str(importo)
+    chiave_str = str(CHIAVESEGRETA_TEST)
+    mac_str = codtrans_str + divisa_str + importo_str + chiave_str
     mac = hashlib.sha1(mac_str.encode('utf8')).hexdigest()
     # Payment gateway
     HTTP_HOST = "http://transferslux.com"
@@ -554,9 +558,9 @@ def payment_success(request):
         "esito": "OK",
         "importo": importo,
         "divisa": divisa,
-        "data": "",
-        "orario": "",
-        "codAut": "",
+        "data": data,
+        "orario": orario,
+        "codAut": codAut,
         "mac": mac,
     }
     requiredParams = ['codTrans',
@@ -718,33 +722,6 @@ def payment_success(request):
     email_message.content_subtype = 'html'
     email_message.send()
     return render(request, 'booking/booking-received.html', context)
-
-
-def tests(request):
-    HTTP_HOST = "transferslux.com"
-    requestUrl = "https://int-ecommerce.nexi.it/ecomm/ecomm/DispatcherServlet"
-    merchantServerUrl = "https://" + HTTP_HOST + "/xpay/pagamento_semplice_python/codice_base/"
-    ALIAS = 'ALIAS_WEB_00082258'
-    CHIAVESEGRETA = 'Y665ESJRJEK38D6D1MJJGCYAUQR2J8SV'
-    current_datetime = datetime.today().strftime('%Y%m%d%H%M%S')
-    codTrans = 'TESTPS_' + current_datetime
-    divisa = 'EUR'
-    importo = 100
-    # Calcolo MAC
-    mac_str = 'codTrans=' + str(codTrans) + 'divisa=' + str(divisa) + 'importo=' + str(importo) + str(CHIAVESEGRETA)
-    mac = hashlib.sha1(mac_str.encode('utf8')).hexdigest()
-    context = {
-        'alias': ALIAS,
-        'importo': importo,
-        'divisa': divisa,
-        'requestUrl': requestUrl,
-        'merchantServerUrl': merchantServerUrl,
-        'codTrans': codTrans,
-        'url': merchantServerUrl + "esito.py",
-        'url_back': merchantServerUrl + "annullo.py",
-        'mac': mac,
-    }
-    return render(request, 'test_payments.html', context)
 
 
 def payment_error(request):
