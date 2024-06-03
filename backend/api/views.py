@@ -266,6 +266,7 @@ def details(request):
             bst = int(booster_seat) * 20
             fl = int(flowers) * 70
             extra_total = int(cst) + int(bst) + int(fl)
+            rate = rate.replace(',', '.')
             total = float(rate) + float(extra_total)
             # Create a dictionary with the fields
             query = {
@@ -369,6 +370,7 @@ def payment(request):
             to_time = query.get('to_time')
             car_class = query.get('car_class')
             rate = query.get('rate')
+            total = query.get('total')
             distance = query.get('distance')
             travel_time = query.get('travel_time')
             flight = query.get('flight')
@@ -466,6 +468,7 @@ def payment(request):
     to_time = query.get('to_time')
     car_class = query.get('car_class')
     rate = query.get('rate')
+    total = query.get('total')
     distance = query.get('distance')
     travel_time = query.get('travel_time')
     # Settings
@@ -474,8 +477,9 @@ def payment(request):
     current_datetime = datetime.today().strftime('%Y%m%d%H%M%S')
     codTrans = 'TESTPS_' + current_datetime
     divisa = 'EUR'
-    rate = float(rate)
-    importo = round(rate * 100 * 0.30, 0)
+    total = total.replace(',', '.')
+    total = float(total)
+    importo = round(total * 100 * 0.30, 0)
     importo = int(importo)
     # Calcolo MAC
     codtras_str = 'codTrans=' + str(codTrans)
@@ -694,7 +698,6 @@ def payment_success(request):
     codAut = request.GET.get('codAut')
     divisa = 'EUR'
     mac = request.GET.get('mac')
-    breakpoint()
     CHIAVESEGRETA_TEST = 'Y665ESJRJEK38D6D1MJJGCYAUQR2J8SV'
     param_from_request = {
         "codTrans": codTrans,
