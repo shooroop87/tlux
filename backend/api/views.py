@@ -550,9 +550,7 @@ def payment_success(request):
     codAut = request.GET.get('codAut')
     divisa = 'EUR'
     mac = request.GET.get('mac')
-    breakpoint()
     CHIAVESEGRETA_TEST = 'Y665ESJRJEK38D6D1MJJGCYAUQR2J8SV'
-    chiave_str = str(CHIAVESEGRETA_TEST)
     param_from_request = {
         "codTrans": codTrans,
         "esito": "OK",
