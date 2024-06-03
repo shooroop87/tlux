@@ -3,6 +3,7 @@ import json
 import math
 import re
 import sys
+import time
 import uuid
 from datetime import datetime
 from urllib.parse import urljoin
@@ -478,11 +479,7 @@ def payment(request):
     importo = round(rate * 100 * 0.30, 0)
     importo = int(importo)
     # Calcolo MAC
-    codtrans_str = 'codTrans=' + str(codTrans)
-    divisa_str = 'divisa=' + str(divisa)
-    importo_str = 'importo=' + str(importo)
-    chiave_str = str(CHIAVESEGRETA_TEST)
-    mac_str = codtrans_str + divisa_str + importo_str + chiave_str
+    mac_str = 'codTrans=' + str(codTrans) + 'divisa=' + str(divisa) + 'importo=' + str(importo) + str(CHIAVESEGRETA_TEST)
     mac = hashlib.sha1(mac_str.encode('utf8')).hexdigest()
     # Payment gateway
     HTTP_HOST = "http://transferslux.com"
@@ -542,6 +539,155 @@ def payment_success(request):
     billing_lastname = request.POST.get("billing_lastname")
     billing_company = request.POST.get("billing_company")
     billing_address = request.POST.get("billing_address")
+    # Transactions
+    codTrans = request.GET.get('codTrans')
+    importo = request.GET.get('importo')
+    divisa = request.GET.get('divisa')
+    mac = request.GET.get('mac')
+    # Query
+    query = request.session['search_query']
+    from_short = query.get('from_short')
+    from_hidden = query.get('from_hidden')
+    to_short = query.get('to_short')
+    to_hidden = query.get('to_hidden')
+    to_date = query.get('to_date')
+    to_time = query.get('to_time')
+    car_class = query.get('car_class')
+    rate = query.get('rate')
+    total = query.get('total')
+    child_seat_total = query.get('child_seat_total')
+    booster_seat_total = query.get('booster_seat_total')
+    flowers_total = query.get('flowers_total')
+    extra_total = query.get('extra_total')
+    distance = query.get('distance')
+    travel_time = query.get('travel_time')
+    flight = query.get('flight')
+    child_seat = query.get('child_seat')
+    booster_seat = query.get('booster_seat')
+    flowers = query.get('flowers')
+    notes_extra = query.get('notes_extra')
+    name = query.get('name')
+    lastname = query.get('lastname')
+    email = query.get('email')
+    phone = query.get('phone')
+    passengers = query.get('passengers')
+    luggage = query.get('luggage')
+    notes_details = query.get('notes_details')
+    session_id = query.get('session_id')
+    # Save Booking
+    instance = Booking(
+        session_id=session_id,
+        from_hidden=from_hidden,
+        to_hidden=to_hidden,
+        from_short=from_short,
+        to_short=to_short,
+        to_date=to_date,
+        to_time=to_time,
+        distance=distance,
+        travel_time=travel_time,
+        car_class=car_class,
+        rate=rate,
+        flight=flight,
+        child_seat=child_seat,
+        booster_seat=booster_seat,
+        flowers=flowers,
+        notes_extra=notes_extra,
+        name=name,
+        lastname=lastname,
+        email=email,
+        phone=phone,
+        passengers=passengers,
+        luggage=luggage,
+        notes_details=notes_details,
+        billing_name=billing_name,
+        billing_lastname=billing_lastname,
+        billing_company=billing_company,
+        billing_address=billing_address,
+        terms=terms_
+    )
+    instance.save()
+    # Get booking ID
+    booking_data = Booking.objects.get(session_id=session_id)
+    # breakpoint()
+    field_name = booking_data._meta.fields[0].name
+    # print(field_name)
+    booking_id = getattr(booking_data, field_name)
+    # print(booking_id)
+    # Make context
+    notes_details = notes_details + '\n' + notes_extra
+    context = {
+        'booking_id': booking_id,
+        'session_id': session_id,
+        'from_short': from_short,
+        'from_hidden': from_hidden,
+        'to_short': to_short,
+        'to_hidden': to_hidden,
+        'car_class': car_class,
+        'rate': rate,
+        'total': total,
+        'child_seat_total': child_seat_total,
+        'booster_seat_total': booster_seat_total,
+        'flowers_total': flowers_total,
+        'extra_total': extra_total,
+        'distance': distance,
+        'travel_time': travel_time,
+        'to_date': to_date,
+        'to_time': to_time,
+        'flight': flight,
+        'child_seat': child_seat,
+        'booster_seat': booster_seat,
+        'flowers': flowers,
+        'notes_extra': notes_extra,
+        'name': name,
+        'lastname': lastname,
+        'email': email,
+        'phone': phone,
+        'passengers': passengers,
+        'luggage': luggage,
+        'notes_details': notes_details,
+        'billing_name': billing_name,
+        'billing_lastname': billing_lastname,
+        'billing_company': billing_company,
+        'billing_address': billing_address,
+        'terms': terms
+    }
+    # Генерация PDF и сохранение в MEDIA_ROOT
+    # str_id = str(session_id)
+    # voucher_name = f"voucher_{str_id}.pdf"
+    language_code = get_language_from_request(request)
+    if language_code == 'it':
+        subject = 'La tua prenotazione è stata inviata con successo'
+    elif language_code == 'fr':
+        subject = 'Votre réservation a été soumise avec succès'
+    elif language_code == 'es':
+        subject = 'Su reserva fue enviada exitosamente'
+    elif language_code == 'ru':
+        subject = 'Ваше бронирование было успешно отправлено'
+    else:
+        subject = 'Your booking was submitted successfully'
+    from_email = settings.DEFAULT_FROM_EMAIL
+    to = [email, from_email]
+    # Рендеринг HTML-шаблона1
+    html_content = render_to_string('email/email.html', context)
+    email_message = EmailMultiAlternatives(subject,
+                                           html_content,
+                                           from_email,
+                                           to=to)
+    email_message.content_subtype = 'html'
+    email_message.send()
+    return render(request, 'booking/booking-received.html', context)
+
+
+def payment_success(request):
+    terms = request.POST.get("terms")
+    if terms == 'on':
+        terms_ = True
+    else:
+        terms_ = False
+    billing_name = request.POST.get("billing_name")
+    billing_lastname = request.POST.get("billing_lastname")
+    billing_company = request.POST.get("billing_company")
+    billing_address = request.POST.get("billing_address")
     # Transaction
     codTrans = request.GET.get('codTrans')
     importo = request.GET.get('importo')
@@ -550,15 +696,17 @@ def payment_success(request):
     codAut = request.GET.get('codAut')
     divisa = 'EUR'
     mac = request.GET.get('mac')
+    breakpoint()
     CHIAVESEGRETA_TEST = 'Y665ESJRJEK38D6D1MJJGCYAUQR2J8SV'
+    chiave_str = str(CHIAVESEGRETA_TEST)
     param_from_request = {
         "codTrans": codTrans,
         "esito": "OK",
         "importo": importo,
         "divisa": divisa,
-        "data": data,
-        "orario": orario,
-        "codAut": codAut,
+        "data": "",
+        "orario": "",
+        "codAut": "",
         "mac": mac,
     }
     requiredParams = ['codTrans',
