@@ -477,6 +477,8 @@ def payment(request):
     current_datetime = datetime.today().strftime('%Y%m%d%H%M%S')
     codTrans = 'TESTPS_' + current_datetime
     divisa = 'EUR'
+    if total is None:
+        total = '0'
     total = total.replace(',', '.')
     total = float(total)
     importo = round(total * 100 * 0.30, 0)
