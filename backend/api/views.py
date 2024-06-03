@@ -3,7 +3,6 @@ import json
 import math
 import re
 import sys
-import time
 import uuid
 from datetime import datetime
 from urllib.parse import urljoin
@@ -479,7 +478,11 @@ def payment(request):
     importo = round(rate * 100 * 0.30, 0)
     importo = int(importo)
     # Calcolo MAC
-    mac_str = 'codTrans=' + str(codTrans) + 'divisa=' + str(divisa) + 'importo=' + str(importo) + str(CHIAVESEGRETA_TEST)
+    codtras_str = 'codTrans=' + str(codTrans)
+    divisa_str = 'divisa=' + str(divisa)
+    import_str = 'importo=' + str(importo)
+    chiave_str = str(CHIAVESEGRETA_TEST)
+    mac_str = codtras_str + divisa_str + import_str + chiave_str
     mac = hashlib.sha1(mac_str.encode('utf8')).hexdigest()
     # Payment gateway
     HTTP_HOST = "http://transferslux.com"
@@ -698,15 +701,14 @@ def payment_success(request):
     mac = request.GET.get('mac')
     breakpoint()
     CHIAVESEGRETA_TEST = 'Y665ESJRJEK38D6D1MJJGCYAUQR2J8SV'
-    chiave_str = str(CHIAVESEGRETA_TEST)
     param_from_request = {
         "codTrans": codTrans,
         "esito": "OK",
         "importo": importo,
         "divisa": divisa,
-        "data": "",
-        "orario": "",
-        "codAut": "",
+        "data": data,
+        "orario": orario,
+        "codAut": codAut,
         "mac": mac,
     }
     requiredParams = ['codTrans',
