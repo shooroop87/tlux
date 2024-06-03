@@ -542,11 +542,6 @@ def payment_success(request):
     billing_lastname = request.POST.get("billing_lastname")
     billing_company = request.POST.get("billing_company")
     billing_address = request.POST.get("billing_address")
-    # Transactions
-    codTrans = request.GET.get('codTrans')
-    importo = request.GET.get('importo')
-    divisa = request.GET.get('divisa')
-    mac = request.GET.get('mac')
     # Query
     query = request.session['search_query']
     from_short = query.get('from_short')
