@@ -377,31 +377,15 @@ def payment(request):
             flowers = query.get('flowers')
             notes_extra = query.get('notes_extra')
             session_id = query.get('session_id')
-            # Settings
-            ALIAS_TEST = 'ALIAS_WEB_00082258'
-            CHIAVESEGRETA_TEST = 'Y665ESJRJEK38D6D1MJJGCYAUQR2J8SV'
-            current_datetime = datetime.today().strftime('%Y%m%d%H%M%S')
-            codTrans = 'TESTPS_' + current_datetime
-            divisa = 'EUR'
-            rate = float(rate)
-            importo = round(rate * 100 * 0.30, 0)
-            # Calcolo MAC
-            codTrans_str = 'codTrans=' + str(codTrans)
-            divisa_str = 'divisa=' + str(divisa)
-            importo_str = 'importo=' + str(importo)
-            chiave_str = str(CHIAVESEGRETA_TEST)
-            mac_str = codTrans_str + divisa_str + importo_str + chiave_str
-            mac = hashlib.sha1(mac_str.encode('utf8')).hexdigest()
-            # Payment gateway
-            HTTP_HOST = "https://transferslux.com"
-            NEXI_HOST = "https://int-ecommerce.nexi.it"
-            requestUrl = NEXI_HOST + "/ecomm/ecomm/DispatcherServlet"
-            XPAY_LINK = "/xpay/pagamento_semplice_python/codice_base/"
-            merchantServerUrl = HTTP_HOST + XPAY_LINK
-            # Urls
-            x_url = "?" + urlencode(query)
-            success_url = urljoin(merchantServerUrl, "success/") + x_url
-            cancel_url = urljoin(merchantServerUrl, "error/")
+            # Get transactions
+            ALIAS_TEST = query.get('alias')
+            importo = query.get('importo')
+            divisa = query.get('divisa')
+            codTrans = query.get('codTrans')
+            requestUrl = query.get('requestUrl')
+            success_url = query.get('success_url')
+            cancel_url = query.get('cancel_url')
+            mac = query.get('mac')
             # Create a dictionary with the fields1
             query = {
                 'from_short': from_short,
@@ -427,9 +411,13 @@ def payment(request):
                 'luggage': luggage,
                 'notes_details': notes_details,
                 'session_id': session_id,
+                'alias': ALIAS_TEST,
                 'importo': importo,
                 'divisa': divisa,
                 'codTrans': codTrans,
+                'requestUrl': requestUrl,
+                'url': success_url,
+                'url_back': cancel_url,
                 'mac': mac,
             }
             context = {
@@ -466,71 +454,6 @@ def payment(request):
             }
             # Store the query in the session
             request.session['search_query'] = query
-            return render(request, 'booking/booking-payment.html', context)
-        else:
-            # Create a dictionary with the fields
-            name = request.POST.get("name")
-            lastname = request.POST.get("lastname")
-            query = request.session['search_query']
-            # Access individual fields from the dictionary
-            from_short = query.get('from_short')
-            from_hidden = query.get('from_hidden')
-            to_short = query.get('to_short')
-            to_hidden = query.get('to_hidden')
-            to_date = query.get('to_date')
-            to_time = query.get('to_time')
-            car_class = query.get('car_class')
-            rate = query.get('rate')
-            distance = query.get('distance')
-            travel_time = query.get('travel_time')
-            # Settings
-            ALIAS_TEST = 'ALIAS_WEB_00082258'
-            CHIAVESEGRETA_TEST = 'Y665ESJRJEK38D6D1MJJGCYAUQR2J8SV'
-            current_datetime = datetime.today().strftime('%Y%m%d%H%M%S')
-            codTrans = 'TESTPS_' + current_datetime
-            divisa = 'EUR'
-            rate = float(rate)
-            importo = round(rate * 100 * 0.30, 0)
-            # Calcolo MAC
-            codTrans_str = 'codTrans=' + str(codTrans)
-            divisa_str = 'divisa=' + str(divisa)
-            importo_str = 'importo=' + str(importo)
-            chiave_str = str(CHIAVESEGRETA_TEST)
-            mac_str = codTrans_str + divisa_str + importo_str + chiave_str
-            mac = hashlib.sha1(mac_str.encode('utf8')).hexdigest()
-            # Payment gateway
-            HTTP_HOST = "https://transferslux.com"
-            NEXI_HOST = "https://int-ecommerce.nexi.it"
-            requestUrl = NEXI_HOST + "/ecomm/ecomm/DispatcherServlet"
-            XPAY_LINK = "/xpay/pagamento_semplice_python/codice_base/"
-            merchantServerUrl = HTTP_HOST + XPAY_LINK
-            # Urls
-            x_url = "?" + urlencode(query)
-            success_url = urljoin(merchantServerUrl, "success/") + x_url
-            cancel_url = urljoin(merchantServerUrl, "error/")
-            context = {
-                'from_short': from_short,
-                'from_hidden': from_hidden,
-                'to_short': to_short,
-                'to_hidden': to_hidden,
-                'car_class': car_class,
-                'rate': rate,
-                'distance': distance,
-                'travel_time': travel_time,
-                'to_date': to_date,
-                'to_time': to_time,
-                'name': name,
-                'lastname': lastname,
-                'alias': ALIAS_TEST,
-                'importo': importo,
-                'divisa': divisa,
-                'codTrans': codTrans,
-                'requestUrl': requestUrl,
-                'url': success_url,
-                'url_back': cancel_url,
-                'mac': mac,
-            }
-            return render(request, 'booking/booking-payment.html', context)
     # If not post show page
     name = request.POST.get("name")
     lastname = request.POST.get("lastname")
@@ -553,15 +476,12 @@ def payment(request):
     divisa = 'EUR'
     rate = float(rate)
     importo = round(rate * 100 * 0.30, 0)
+    importo = int(importo)
     # Calcolo MAC
-    codTrans_str = 'codTrans=' + str(codTrans)
-    divisa_str = 'divisa=' + str(divisa)
-    importo_str = 'importo=' + str(importo)
-    chiave_str = str(CHIAVESEGRETA_TEST)
-    mac_str = codTrans_str + divisa_str + importo_str + chiave_str
+    mac_str = 'codTrans=' + str(codTrans) + 'divisa=' + str(divisa) + 'importo=' + str(importo) + str(CHIAVESEGRETA_TEST)
     mac = hashlib.sha1(mac_str.encode('utf8')).hexdigest()
     # Payment gateway
-    HTTP_HOST = "https://transferslux.com"
+    HTTP_HOST = "http://transferslux.com"
     NEXI_HOST = "https://int-ecommerce.nexi.it"
     requestUrl = NEXI_HOST + "/ecomm/ecomm/DispatcherServlet"
     XPAY_LINK = "/xpay/pagamento_semplice_python/codice_base/"
@@ -570,6 +490,18 @@ def payment(request):
     x_url = "?" + urlencode(query)
     success_url = urljoin(merchantServerUrl, "success/") + x_url
     cancel_url = urljoin(merchantServerUrl, "error/")
+    request.session['search_query'].update({
+        'alias': ALIAS_TEST,
+        'importo': importo,
+        'divisa': divisa,
+        'requestUrl': requestUrl,
+        'merchantServerUrl': merchantServerUrl,
+        'codTrans': codTrans,
+        'url': success_url,
+        'url_back': cancel_url,
+        'mac': mac,
+    })
+    request.session.modified = True
     context = {
         'from_short': from_short,
         'from_hidden': from_hidden,
@@ -586,8 +518,9 @@ def payment(request):
         'alias': ALIAS_TEST,
         'importo': importo,
         'divisa': divisa,
-        'codTrans': codTrans,
         'requestUrl': requestUrl,
+        'merchantServerUrl': merchantServerUrl,
+        'codTrans': codTrans,
         'url': success_url,
         'url_back': cancel_url,
         'mac': mac,
@@ -605,6 +538,54 @@ def payment_success(request):
     billing_lastname = request.POST.get("billing_lastname")
     billing_company = request.POST.get("billing_company")
     billing_address = request.POST.get("billing_address")
+    # Transaction
+    codTrans = request.GET.get('codTrans')
+    importo = request.GET.get('importo')
+    data = request.GET.get('data')
+    orario = request.GET.get('orario')
+    codAut = request.GET.get('codAut')
+    divisa = 'EUR'
+    mac = request.GET.get('mac')
+    breakpoint()
+    CHIAVESEGRETA_TEST = 'Y665ESJRJEK38D6D1MJJGCYAUQR2J8SV'
+    chiave_str = str(CHIAVESEGRETA_TEST)
+    param_from_request = {
+        "codTrans": codTrans,
+        "esito": "OK",
+        "importo": importo,
+        "divisa": divisa,
+        "data": "",
+        "orario": "",
+        "codAut": "",
+        "mac": mac,
+    }
+    requiredParams = ['codTrans',
+                      'esito',
+                      'importo',
+                      'divisa',
+                      'data',
+                      'orario',
+                      'codAut',
+                      'mac']
+    for param in requiredParams:
+        if param not in param_from_request:
+            raise ValueError("Parametro {} mancante".format(param))
+    # Calcolo MAC con i parametri di ritorno
+    mac_str = 'codTrans=' + param_from_request['codTrans'] + \
+        'esito=' + param_from_request['esito'] + \
+        'importo=' + param_from_request['importo'] + \
+        'divisa=' + param_from_request['divisa'] + \
+        'data=' + param_from_request['data'] + \
+        'orario=' + param_from_request['orario'] + \
+        'codAut=' + param_from_request['codAut'] + \
+        CHIAVESEGRETA_TEST
+    macCalculated = hashlib.sha1(mac_str.encode('utf8')).hexdigest()
+    # Verifico corrispondeza MAC
+    if macCalculated != param_from_request['mac']:
+        raise ValueError('Errore MAC')
+    # Nel caso in cui non ci siano errori gestisco il parametro esito
+    if param_from_request['esito'] == 'OK':
+        print('Transazione andato bene!')
     # Query
     query = request.session['search_query']
     from_short = query.get('from_short')
@@ -737,6 +718,33 @@ def payment_success(request):
     email_message.content_subtype = 'html'
     email_message.send()
     return render(request, 'booking/booking-received.html', context)
+
+
+def tests(request):
+    HTTP_HOST = "transferslux.com"
+    requestUrl = "https://int-ecommerce.nexi.it/ecomm/ecomm/DispatcherServlet"
+    merchantServerUrl = "https://" + HTTP_HOST + "/xpay/pagamento_semplice_python/codice_base/"
+    ALIAS = 'ALIAS_WEB_00082258'
+    CHIAVESEGRETA = 'Y665ESJRJEK38D6D1MJJGCYAUQR2J8SV'
+    current_datetime = datetime.today().strftime('%Y%m%d%H%M%S')
+    codTrans = 'TESTPS_' + current_datetime
+    divisa = 'EUR'
+    importo = 100
+    # Calcolo MAC
+    mac_str = 'codTrans=' + str(codTrans) + 'divisa=' + str(divisa) + 'importo=' + str(importo) + str(CHIAVESEGRETA)
+    mac = hashlib.sha1(mac_str.encode('utf8')).hexdigest()
+    context = {
+        'alias': ALIAS,
+        'importo': importo,
+        'divisa': divisa,
+        'requestUrl': requestUrl,
+        'merchantServerUrl': merchantServerUrl,
+        'codTrans': codTrans,
+        'url': merchantServerUrl + "esito.py",
+        'url_back': merchantServerUrl + "annullo.py",
+        'mac': mac,
+    }
+    return render(request, 'test_payments.html', context)
 
 
 def payment_error(request):
