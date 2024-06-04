@@ -379,10 +379,10 @@ def payment(request):
             notes_extra = query.get('notes_extra')
             session_id = query.get('session_id')
             # Get transactions
-            ALIAS_TEST = query.get('alias')
+            ALIAS_TEST = 'ALIAS_WEB_00082258'
             total = str(total).replace(',', '.')
             importo = float(total)
-            divisa = query.get('divisa')
+            divisa = 'EUR'
             codTrans = query.get('codTrans')
             requestUrl = query.get('requestUrl')
             success_url = query.get('success_url')
@@ -457,9 +457,11 @@ def payment(request):
             # Store the query in the session
             request.session['search_query'] = query
     # If not post show page
+    # Extract query
+    query = request.session['search_query']
+    # Fields
     name = request.POST.get("name")
     lastname = request.POST.get("lastname")
-    query = request.session['search_query']
     from_short = query.get('from_short')
     from_hidden = query.get('from_hidden')
     to_short = query.get('to_short')
@@ -468,12 +470,20 @@ def payment(request):
     to_time = query.get('to_time')
     car_class = query.get('car_class')
     rate = query.get('rate')
-    total = query.get('total')
-    if total is None:
-        total = '0'
-    total = str(total).replace(',', '.')
-    total = float(total)
+    child_seat = query.get('child_seat')
+    booster_seat = query.get('booster_seat')
+    flowers = query.get('flowers')
+    cst = int(child_seat) * 15
+    bst = int(booster_seat) * 20
+    fl = int(flowers) * 70
+    extra_total = int(cst) + int(bst) + int(fl)
+    # print(extra_total)
+    rate = str(rate).replace(',', '.')
+    # print(rate)
+    total = float(rate) + float(extra_total)
+    # print(total)
     importo = round(total * 100 * 0.30, 0)
+    # print(importo)
     importo = int(importo)
     distance = query.get('distance')
     travel_time = query.get('travel_time')
@@ -483,6 +493,7 @@ def payment(request):
     current_datetime = datetime.today().strftime('%Y%m%d%H%M%S')
     codTrans = 'TESTPS_' + current_datetime
     divisa = 'EUR'
+    # Calcolo MAC
     # Calcolo MAC
     codtras_str = 'codTrans=' + str(codTrans)
     divisa_str = 'divisa=' + str(divisa)
@@ -496,6 +507,8 @@ def payment(request):
     requestUrl = NEXI_HOST + "/ecomm/ecomm/DispatcherServlet"
     XPAY_LINK = "/xpay/pagamento_semplice_python/codice_base/"
     merchantServerUrl = HTTP_HOST + XPAY_LINK
+    success_url = urljoin(merchantServerUrl, "success/")
+    cancel_url = urljoin(merchantServerUrl, "error/")
     request.session['search_query'].update({
         'alias': ALIAS_TEST,
         'importo': importo,
@@ -506,12 +519,28 @@ def payment(request):
         'url': success_url,
         'url_back': cancel_url,
         'mac': mac,
+        'total': total,
+    })
+    request.session.modified = True
+    x_url = "?" + urlencode(query)
+    success_url = urljoin(merchantServerUrl, "success/") + x_url
+    request.session['search_query'].update({
+        'alias': ALIAS_TEST,
+        'importo': importo,
+        'divisa': divisa,
+        'requestUrl': requestUrl,
+        'merchantServerUrl': merchantServerUrl,
+        'codTrans': codTrans,
+        'url': success_url,
+        'url_back': cancel_url,
+        'mac': mac,
+        'total': total,
     })
     request.session.modified = True
     # Urls
-    x_url = "?" + urlencode(query)
-    success_url = urljoin(merchantServerUrl, "success/") + x_url
-    cancel_url = urljoin(merchantServerUrl, "error/")
+    # query1 = request.session['search_query']
+    # breakpoint()
+    # print(query1)
     context = {
         'from_short': from_short,
         'from_hidden': from_hidden,
@@ -519,6 +548,7 @@ def payment(request):
         'to_hidden': to_hidden,
         'car_class': car_class,
         'rate': rate,
+        'total': total,
         'distance': distance,
         'travel_time': travel_time,
         'to_date': to_date,
