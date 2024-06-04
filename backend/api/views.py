@@ -487,9 +487,9 @@ def payment(request):
     importo = int(importo)
     distance = query.get('distance')
     travel_time = query.get('travel_time')
-    # Settings
-    ALIAS_TEST = 'ALIAS_WEB_00082258'
-    CHIAVESEGRETA_TEST = 'Y665ESJRJEK38D6D1MJJGCYAUQR2J8SV'
+    # Settings1
+    ALIAS_TEST = 'payment_3780564'
+    CHIAVESEGRETA_TEST = '9086Wh56532BG7oV6giEUW2510201H68WAqc831G'
     current_datetime = datetime.today().strftime('%Y%m%d%H%M%S')
     codTrans = 'TESTPS_' + current_datetime
     divisa = 'EUR'
