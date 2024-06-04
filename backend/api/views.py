@@ -494,7 +494,6 @@ def payment(request):
     codTrans = 'TESTPS_' + current_datetime
     divisa = 'EUR'
     # Calcolo MAC
-    # Calcolo MAC
     codtras_str = 'codTrans=' + str(codTrans)
     divisa_str = 'divisa=' + str(divisa)
     import_str = 'importo=' + str(importo)

@@ -53,7 +53,7 @@
           <div class="box-row-tab mt-50">
             <div class="box-tab-left">
               <div class="box-content-detail"> 
-              <form method="post" enctype="multipart/form-data" action="{{ requestUrl }}">
+              <form method="post" action="{{ requestUrl }}">
                 {% csrf_token %}
                 <input type="hidden" name="alias" value="{{ alias }}">
                 <input type="hidden" name="importo" value="{{ importo }}">
