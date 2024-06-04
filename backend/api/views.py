@@ -488,24 +488,23 @@ def payment(request):
     distance = query.get('distance')
     travel_time = query.get('travel_time')
     # Settings
+    HTTP_HOST = "transferslux.com"
+    requestUrl = "https://ecommerce.nexi.it/ecomm/ecomm/DispatcherServlet"
+    merchantServerUrl = "https://" + HTTP_HOST
+    # Alias e chiave segreta
     ALIAS_TEST = 'payment_3780564'
     CHIAVESEGRETA_TEST = '9086Wh56532BG7oV6giEUW2510201H68WAqc831G'
+    # Correct format strin
     current_datetime = datetime.today().strftime('%Y%m%d%H%M%S')
+    # print(current_datetime)
     codTrans = 'TESTPS_' + current_datetime
     divisa = 'EUR'
+    # importo = 6600
     # Calcolo MAC
-    codtras_str = 'codTrans=' + str(codTrans)
-    divisa_str = 'divisa=' + str(divisa)
-    import_str = 'importo=' + str(importo)
-    chiave_str = str(CHIAVESEGRETA_TEST)
-    mac_str = codtras_str + divisa_str + import_str + chiave_str
+    mac_str = 'codTrans=' + str(codTrans) + 'divisa=' + str(divisa) + 'importo=' + str(importo) + str(CHIAVESEGRETA_TEST)
     mac = hashlib.sha1(mac_str.encode('utf8')).hexdigest()
-    # Payment gateway
-    HTTP_HOST = "http://transferslux.com"
-    NEXI_HOST = "https://ecommerce.nexi.it"
-    requestUrl = NEXI_HOST + "/ecomm/ecomm/DispatcherServlet"
-    XPAY_LINK = "/xpay/pagamento_semplice_python/codice_base/"
-    merchantServerUrl = HTTP_HOST + XPAY_LINK
+    success_url = urljoin(merchantServerUrl, "success/")
+    cancel_url = urljoin(merchantServerUrl, "error/")
     request.session['search_query'].update({
         'alias': ALIAS_TEST,
         'importo': importo,

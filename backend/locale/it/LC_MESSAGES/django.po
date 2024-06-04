@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-28 22:38+0300\n"
+"POT-Creation-Date: 2024-06-04 14:28+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -124,12 +124,12 @@ msgid "Passenger Details"
 msgstr "Dettagli del passeggero"
 
 #: .\templates\booking\booking-passenger.html:65
-#: .\templates\booking\booking-payment.html:64
+#: .\templates\booking\booking-payment.html:71
 msgid "Name*"
 msgstr "Nome*"
 
 #: .\templates\booking\booking-passenger.html:71
-#: .\templates\booking\booking-payment.html:70
+#: .\templates\booking\booking-payment.html:77
 msgid "Last Name*"
 msgstr "Cognome*"
 
@@ -158,38 +158,39 @@ msgstr "Bagaglio"
 msgid "Notes to driver"
 msgstr "Note per l'autista"
 
-#: .\templates\booking\booking-payment.html:58
+#: .\templates\booking\booking-payment.html:65
 msgid "Billing Address"
 msgstr "Indirizzo di fatturazione"
 
-#: .\templates\booking\booking-payment.html:76
+#: .\templates\booking\booking-payment.html:83
 msgid "Company (Optional)"
 msgstr "Compagnia (opzionale)"
 
-#: .\templates\booking\booking-payment.html:82
+#: .\templates\booking\booking-payment.html:89
 msgid "Address (Optional)"
 msgstr "Indirizzo (facoltativo)"
 
-#: .\templates\booking\booking-payment.html:93
+#: .\templates\booking\booking-payment.html:100
 msgid "I accept"
 msgstr "Accetto"
 
-#: .\templates\booking\booking-payment.html:93
+#: .\templates\booking\booking-payment.html:100
 msgid "the Terms and Conditions"
 msgstr "i Termini e Condizioni"
 
-#: .\templates\booking\booking-payment.html:93
+#: .\templates\booking\booking-payment.html:100
 msgid "and"
 msgstr "e"
 
-#: .\templates\booking\booking-payment.html:93
+#: .\templates\booking\booking-payment.html:100
 #: .\templates\privacy-policy.html:31 .\templates\privacy-policy.html:35
 msgid "Privacy Policy"
 msgstr "Informativa sulla privacy"
 
-#: .\templates\booking\booking-payment.html:98
-msgid "Book Now"
-msgstr "Prenota ora"
+#: .\templates\booking\booking-payment.html:105
+#, python-format
+msgid "Book Now (Prepayment 30%%)"
+msgstr "Prenota ora (pagamento anticipato 30%%)"
 
 #: .\templates\booking\booking-received.html:35
 #: .\templates\includes\header.html:12
@@ -1023,3 +1024,6 @@ msgstr "professionisti"
 #: .\templates\terms-and-conditions.html:35
 msgid "Term and Conditions"
 msgstr "Termini e condizioni"
+
+#~ msgid "Book Now"
+#~ msgstr "Prenota ora"
