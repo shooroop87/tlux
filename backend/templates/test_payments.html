@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pagamento Nexi</title>
+</head>
+<body>
+    <form method="post" action="{{ requestUrl }}">
+        {% csrf_token %}
+        <input type="hidden" name="alias" value="{{ alias }}">
+        <input type="hidden" name="importo" value="{{ importo }}">
+        <input type="hidden" name="divisa" value="{{ divisa }}">
+        <input type="hidden" name="codTrans" value="{{ codTrans }}">
+        <input type="hidden" name="url" value="{{ url }}">
+        <input type="hidden" name="url_back" value="{{ url_back }}">
+        <input type="hidden" name="mac" value="{{ mac }}">
+        <button type="submit">Book Now</button>
+    </form>
+</body>
+</html>
