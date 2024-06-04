@@ -339,7 +339,6 @@ def details(request):
         'to_hidden': to_hidden,
         'car_class': car_class,
         'rate': rate,
-        'total': total,
         'distance': distance,
         'travel_time': travel_time,
         'to_date': to_date,
@@ -381,7 +380,8 @@ def payment(request):
             session_id = query.get('session_id')
             # Get transactions
             ALIAS_TEST = query.get('alias')
-            importo = query.get('importo')
+            total = total.replace(',', '.')
+            importo = float(total)
             divisa = query.get('divisa')
             codTrans = query.get('codTrans')
             requestUrl = query.get('requestUrl')
@@ -469,6 +469,11 @@ def payment(request):
     car_class = query.get('car_class')
     rate = query.get('rate')
     total = query.get('total')
+    if total is None:
+        total = '0'
+    total = total.replace(',', '.')
+    importo = round(total * 100 * 0.30, 0)
+    importo = int(importo)
     distance = query.get('distance')
     travel_time = query.get('travel_time')
     # Settings
@@ -477,12 +482,6 @@ def payment(request):
     current_datetime = datetime.today().strftime('%Y%m%d%H%M%S')
     codTrans = 'TESTPS_' + current_datetime
     divisa = 'EUR'
-    if total is None:
-        total = '0'
-    total = total.replace(',', '.')
-    total = float(total)
-    importo = round(total * 100 * 0.30, 0)
-    importo = int(importo)
     # Calcolo MAC
     codtras_str = 'codTrans=' + str(codTrans)
     divisa_str = 'divisa=' + str(divisa)
@@ -496,10 +495,6 @@ def payment(request):
     requestUrl = NEXI_HOST + "/ecomm/ecomm/DispatcherServlet"
     XPAY_LINK = "/xpay/pagamento_semplice_python/codice_base/"
     merchantServerUrl = HTTP_HOST + XPAY_LINK
-    # Urls
-    x_url = "?" + urlencode(query)
-    success_url = urljoin(merchantServerUrl, "success/") + x_url
-    cancel_url = urljoin(merchantServerUrl, "error/")
     request.session['search_query'].update({
         'alias': ALIAS_TEST,
         'importo': importo,
@@ -512,6 +507,10 @@ def payment(request):
         'mac': mac,
     })
     request.session.modified = True
+    # Urls
+    x_url = "?" + urlencode(query)
+    success_url = urljoin(merchantServerUrl, "success/") + x_url
+    cancel_url = urljoin(merchantServerUrl, "error/")
     context = {
         'from_short': from_short,
         'from_hidden': from_hidden,
