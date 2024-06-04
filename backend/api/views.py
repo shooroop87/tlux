@@ -472,6 +472,7 @@ def payment(request):
     if total is None:
         total = '0'
     total = str(total).replace(',', '.')
+    total = float(total)
     importo = round(total * 100 * 0.30, 0)
     importo = int(importo)
     distance = query.get('distance')
