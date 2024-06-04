@@ -501,8 +501,18 @@ def payment(request):
     divisa = 'EUR'
     # importo = 6600
     # Calcolo MAC
-    mac_str = 'codTrans=' + str(codTrans) + 'divisa=' + str(divisa) + 'importo=' + str(importo) + str(CHIAVESEGRETA_TEST)
+    codtras_str = 'codTrans=' + str(codTrans)
+    divisa_str = 'divisa=' + str(divisa)
+    import_str = 'importo=' + str(importo)
+    chiave_str = str(CHIAVESEGRETA_TEST)
+    mac_str = codtras_str + divisa_str + import_str + chiave_str
     mac = hashlib.sha1(mac_str.encode('utf8')).hexdigest()
+    # Payment gateway
+    HTTP_HOST = "http://transferslux.com"
+    NEXI_HOST = "https://ecommerce.nexi.it"
+    requestUrl = NEXI_HOST + "/ecomm/ecomm/DispatcherServlet"
+    XPAY_LINK = "/xpay/pagamento_semplice_python/codice_base/"
+    merchantServerUrl = HTTP_HOST + XPAY_LINK
     success_url = urljoin(merchantServerUrl, "success/")
     cancel_url = urljoin(merchantServerUrl, "error/")
     request.session['search_query'].update({

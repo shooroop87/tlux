@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-04 14:28+0300\n"
+"POT-Creation-Date: 2024-06-04 15:01+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -267,8 +267,8 @@ msgid "Payment Method"
 msgstr "Способ оплаты"
 
 #: .\templates\booking\booking-received.html:84
-msgid "To the driver by card or cash"
-msgstr "Водителю картой или наличными"
+msgid "Prepayment 30%%"
+msgstr "Предоплата 30%%"
 
 #: .\templates\booking\booking-received.html:88
 msgid "Reservation Information"
@@ -1020,6 +1020,9 @@ msgstr "с лицензией"
 #: .\templates\terms-and-conditions.html:35
 msgid "Term and Conditions"
 msgstr "Условиями и положениями"
+
+#~ msgid "To the driver by card or cash"
+#~ msgstr "Водителю картой или наличными"
 
 #~ msgid "Book Now"
 #~ msgstr "Забронировать"

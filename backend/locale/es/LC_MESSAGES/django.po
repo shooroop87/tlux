@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-04 14:28+0300\n"
+"POT-Creation-Date: 2024-06-04 15:01+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -269,8 +269,8 @@ msgid "Payment Method"
 msgstr "Método de pago"
 
 #: .\templates\booking\booking-received.html:84
-msgid "To the driver by card or cash"
-msgstr "Al conductor con tarjeta o efectivo"
+msgid "Prepayment 30%%"
+msgstr "Prepago 30%%"
 
 #: .\templates\booking\booking-received.html:88
 msgid "Reservation Information"
@@ -1023,6 +1023,9 @@ msgstr "Conductores de automóviles"
 #: .\templates\terms-and-conditions.html:35
 msgid "Term and Conditions"
 msgstr "Términos y Condiciones"
+
+#~ msgid "To the driver by card or cash"
+#~ msgstr "Al conductor con tarjeta o efectivo"
 
 #~ msgid "Book Now"
 #~ msgstr "Reservar ahora"
