@@ -266,7 +266,7 @@ def details(request):
             bst = int(booster_seat) * 20
             fl = int(flowers) * 70
             extra_total = int(cst) + int(bst) + int(fl)
-            rate = rate.replace(',', '.')
+            rate = str(rate).replace(',', '.')
             total = float(rate) + float(extra_total)
             # Create a dictionary with the fields
             query = {
@@ -380,7 +380,7 @@ def payment(request):
             session_id = query.get('session_id')
             # Get transactions
             ALIAS_TEST = query.get('alias')
-            total = total.replace(',', '.')
+            total = str(total).replace(',', '.')
             importo = float(total)
             divisa = query.get('divisa')
             codTrans = query.get('codTrans')
@@ -471,7 +471,7 @@ def payment(request):
     total = query.get('total')
     if total is None:
         total = '0'
-    total = total.replace(',', '.')
+    total = str(total).replace(',', '.')
     importo = round(total * 100 * 0.30, 0)
     importo = int(importo)
     distance = query.get('distance')
