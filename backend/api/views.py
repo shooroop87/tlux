@@ -846,7 +846,7 @@ def payment_success(request):
     # Make context
     try:
         notes_details = notes_details + '\n' + notes_extra
-    except:
+    except Exception as error:
         notes_details = ''
     context = {
         'booking_id': booking_id,
