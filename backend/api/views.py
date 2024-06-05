@@ -844,7 +844,10 @@ def payment_success(request):
     booking_id = getattr(booking_data, field_name)
     # print(booking_id)
     # Make context
-    notes_details = notes_details + '\n' + notes_extra
+    try:
+        notes_details = notes_details + '\n' + notes_extra
+    except:
+        notes_details = ''
     context = {
         'booking_id': booking_id,
         'session_id': session_id,
