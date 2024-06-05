@@ -722,8 +722,6 @@ def payment_success(request):
     terms = request.POST.get("terms")
     if terms == 'on':
         terms_ = True
-    else:
-        terms_ = False
     billing_name = request.POST.get("billing_name")
     billing_lastname = request.POST.get("billing_lastname")
     billing_company = request.POST.get("billing_company")
@@ -847,6 +845,7 @@ def payment_success(request):
     try:
         notes_details = notes_details + '\n' + notes_extra
     except Exception as error:
+        print(error)
         notes_details = ''
     context = {
         'booking_id': booking_id,
@@ -888,15 +887,14 @@ def payment_success(request):
     # str_id = str(session_id)
     # voucher_name = f"voucher_{str_id}.pdf"
     language_code = get_language_from_request(request)
-    if language_code == 'it':
-        subject = 'La tua prenotazione è stata inviata con successo'
-    elif language_code == 'fr':
-        subject = 'Votre réservation a été soumise avec succès'
-    elif language_code == 'es':
-        subject = 'Su reserva fue enviada exitosamente'
-    elif language_code == 'ru':
-        subject = 'Ваше бронирование было успешно отправлено'
-    else:
+    subjects = {
+        'it': 'La tua prenotazione è stata inviata con successo',
+        'fr': 'Votre réservation a été soumise avec succès',
+        'es': 'Su reserva fue enviada exitosamente',
+        'ru': 'Ваше бронирование было успешно отправлено'
+    }
+    subject = subjects[language_code]
+    if subject is None:
         subject = 'Your booking was submitted successfully'
     from_email = settings.DEFAULT_FROM_EMAIL
     to = [email, from_email]
