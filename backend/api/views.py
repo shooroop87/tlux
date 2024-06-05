@@ -987,7 +987,7 @@ def tests(request):
     })
     request.session.modified = True
     context = {
-       'from_short': 'Милан',
+        'from_short': 'Милан',
         'car_class': 'Premium',
         'rate': '100',
         'name': 'TEST',
