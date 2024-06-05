@@ -987,13 +987,19 @@ def tests(request):
     })
     request.session.modified = True
     context = {
+       'from_short': 'Милан',
+        'car_class': 'Premium',
+        'rate': '100',
+        'name': 'TEST',
         'alias': ALIAS,
         'importo': importo,
         'divisa': divisa,
+        'requestUrl': requestUrl,
+        'merchantServerUrl': merchantServerUrl,
         'codTrans': codTrans,
         'url': success_url,
         'url_back': cancel_url,
-        'mac': mac,
+        'mac': mac
     }
     return render(request, 'test_payments.html', context)
 
