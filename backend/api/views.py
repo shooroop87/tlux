@@ -720,8 +720,12 @@ def payment_success(request):
 
 def payment_success(request):
     terms = request.POST.get("terms")
-    if terms == 'on':
-        terms_ = True
+    terms_dict = {
+        'on': True
+    }
+    terms_ = terms_dict[terms]
+    if terms_ is None:
+        terms_ = False
     billing_name = request.POST.get("billing_name")
     billing_lastname = request.POST.get("billing_lastname")
     billing_company = request.POST.get("billing_company")
