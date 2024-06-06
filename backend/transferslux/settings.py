@@ -131,6 +131,7 @@ USE_L10N = True
 USE_TZ = True
 
 LANGUAGES = [
+    ('en', gl('English')),
     ('it', gl('Italian')),
     ('es', gl('Spanish')),
     ('fr', gl('French')),
