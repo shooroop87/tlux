@@ -30,8 +30,6 @@ google_api_key = settings.GOOGLE_MAPS_API_KEY
 def index(request):
     if request.method == 'POST':
         form = SearchForm(request.POST)
-        # breakpoint()
-        # print(form)
         if form.is_valid():
             from_short = form.cleaned_data["from_short"]
             from_hidden = form.cleaned_data["from_hidden"]
@@ -40,7 +38,6 @@ def index(request):
             to_date = form.cleaned_data["to_date"]
             to_time = form.cleaned_data["to_time"]
             session_id = uuid.uuid4()
-            # Create a dictionary with the fields
             query = {
                 'from_short': from_short,
                 'from_hidden': from_hidden,
@@ -50,16 +47,10 @@ def index(request):
                 'to_time': to_time,
                 'session_id': str(session_id),
             }
-            # print(query)
-            # breakpoint()
-
-            # Store the query in the session
             request.session['search_query'] = query
             return redirect('api:vehicle')
-
     else:
         form = SearchForm()
-
     return render(request, 'index.html', {'form': form})
 
 
