@@ -362,6 +362,7 @@ def payment(request):
             except ValidationError as e:
                 print("bad email, details:", e)
                 messages.error(request, "Email is not correct")
+                return render(request, 'booking/booking-passenger.html')
             else:
                 print("good email")
             phone = form.cleaned_data["phone"]
