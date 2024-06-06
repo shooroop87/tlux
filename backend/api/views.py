@@ -357,116 +357,115 @@ def payment(request):
             name = form.cleaned_data["name"]
             lastname = form.cleaned_data["lastname"]
             email = form.cleaned_data["email"]
+            phone = form.cleaned_data["phone"]
+            passengers = form.cleaned_data["passengers"]
+            luggage = form.cleaned_data["luggage"]
+            notes_details = form.cleaned_data["notes_details"]
             try:
                 validate_email(email)
             except ValidationError as e:
                 print("bad email, details:", e)
                 messages.error(request, "Email is not correct")
-                return render(request, 'booking/booking-passenger.html')
             else:
                 print("good email")
-            phone = form.cleaned_data["phone"]
-            passengers = form.cleaned_data["passengers"]
-            luggage = form.cleaned_data["luggage"]
-            notes_details = form.cleaned_data["notes_details"]
-            # Query
-            query = request.session['search_query']
-            # Access individual fields from the dictionary
-            from_short = query.get('from_short')
-            from_hidden = query.get('from_hidden')
-            to_short = query.get('to_short')
-            to_hidden = query.get('to_hidden')
-            to_date = query.get('to_date')
-            to_time = query.get('to_time')
-            car_class = query.get('car_class')
-            rate = query.get('rate')
-            total = query.get('total')
-            distance = query.get('distance')
-            travel_time = query.get('travel_time')
-            flight = query.get('flight')
-            child_seat = query.get('child_seat')
-            booster_seat = query.get('booster_seat')
-            flowers = query.get('flowers')
-            notes_extra = query.get('notes_extra')
-            session_id = query.get('session_id')
-            # Get transactions
-            ALIAS_TEST = 'payment_3780564'
-            total = str(total).replace(',', '.')
-            importo = float(total)
-            divisa = 'EUR'
-            codTrans = query.get('codTrans')
-            requestUrl = query.get('requestUrl')
-            success_url = query.get('success_url')
-            cancel_url = query.get('cancel_url')
-            mac = query.get('mac')
-            # Create a dictionary with the fields1
-            query = {
-                'from_short': from_short,
-                'from_hidden': from_hidden,
-                'to_short': to_short,
-                'to_hidden': to_hidden,
-                'car_class': car_class,
-                'rate': rate,
-                'distance': distance,
-                'travel_time': travel_time,
-                'to_date': to_date,
-                'to_time': to_time,
-                'flight': flight,
-                'child_seat': child_seat,
-                'booster_seat': booster_seat,
-                'flowers': flowers,
-                'notes_extra': notes_extra,
-                'name': name,
-                'lastname': lastname,
-                'email': email,
-                'phone': phone,
-                'passengers': passengers,
-                'luggage': luggage,
-                'notes_details': notes_details,
-                'session_id': session_id,
-                'alias': ALIAS_TEST,
-                'importo': importo,
-                'divisa': divisa,
-                'codTrans': codTrans,
-                'requestUrl': requestUrl,
-                'url': success_url,
-                'url_back': cancel_url,
-                'mac': mac,
-            }
-            context = {
-                'from_short': from_short,
-                'from_hidden': from_hidden,
-                'to_short': to_short,
-                'to_hidden': to_hidden,
-                'car_class': car_class,
-                'rate': rate,
-                'distance': distance,
-                'travel_time': travel_time,
-                'to_date': to_date,
-                'to_time': to_time,
-                'flight': flight,
-                'child_seat': child_seat,
-                'booster_seat': booster_seat,
-                'flowers': flowers,
-                'notes_extra': notes_extra,
-                'name': name,
-                'lastname': lastname,
-                'email': email,
-                'phone': phone,
-                'passengers': passengers,
-                'luggage': luggage,
-                'notes_details': notes_details,
-                'alias': ALIAS_TEST,
-                'importo': importo,
-                'divisa': divisa,
-                'codTrans': codTrans,
-                'requestUrl': requestUrl,
-                'url': success_url,
-                'url_back': cancel_url,
-                'mac': mac,
-            }
-            # Store the query in the session
-            request.session['search_query'] = query
+                # Query
+                query = request.session['search_query']
+                # Access individual fields from the dictionary
+                from_short = query.get('from_short')
+                from_hidden = query.get('from_hidden')
+                to_short = query.get('to_short')
+                to_hidden = query.get('to_hidden')
+                to_date = query.get('to_date')
+                to_time = query.get('to_time')
+                car_class = query.get('car_class')
+                rate = query.get('rate')
+                total = query.get('total')
+                distance = query.get('distance')
+                travel_time = query.get('travel_time')
+                flight = query.get('flight')
+                child_seat = query.get('child_seat')
+                booster_seat = query.get('booster_seat')
+                flowers = query.get('flowers')
+                notes_extra = query.get('notes_extra')
+                session_id = query.get('session_id')
+                # Get transactions
+                ALIAS_TEST = 'ALIAS_WEB_00082258'
+                total = str(total).replace(',', '.')
+                importo = float(total)
+                divisa = 'EUR'
+                codTrans = query.get('codTrans')
+                requestUrl = query.get('requestUrl')
+                success_url = query.get('success_url')
+                cancel_url = query.get('cancel_url')
+                mac = query.get('mac')
+                # Create a dictionary with the fields1
+                query = {
+                    'from_short': from_short,
+                    'from_hidden': from_hidden,
+                    'to_short': to_short,
+                    'to_hidden': to_hidden,
+                    'car_class': car_class,
+                    'rate': rate,
+                    'distance': distance,
+                    'travel_time': travel_time,
+                    'to_date': to_date,
+                    'to_time': to_time,
+                    'flight': flight,
+                    'child_seat': child_seat,
+                    'booster_seat': booster_seat,
+                    'flowers': flowers,
+                    'notes_extra': notes_extra,
+                    'name': name,
+                    'lastname': lastname,
+                    'email': email,
+                    'phone': phone,
+                    'passengers': passengers,
+                    'luggage': luggage,
+                    'notes_details': notes_details,
+                    'session_id': session_id,
+                    'alias': ALIAS_TEST,
+                    'importo': importo,
+                    'divisa': divisa,
+                    'codTrans': codTrans,
+                    'requestUrl': requestUrl,
+                    'url': success_url,
+                    'url_back': cancel_url,
+                    'mac': mac,
+                }
+                context = {
+                    'from_short': from_short,
+                    'from_hidden': from_hidden,
+                    'to_short': to_short,
+                    'to_hidden': to_hidden,
+                    'car_class': car_class,
+                    'rate': rate,
+                    'distance': distance,
+                    'travel_time': travel_time,
+                    'to_date': to_date,
+                    'to_time': to_time,
+                    'flight': flight,
+                    'child_seat': child_seat,
+                    'booster_seat': booster_seat,
+                    'flowers': flowers,
+                    'notes_extra': notes_extra,
+                    'name': name,
+                    'lastname': lastname,
+                    'email': email,
+                    'phone': phone,
+                    'passengers': passengers,
+                    'luggage': luggage,
+                    'notes_details': notes_details,
+                    'alias': ALIAS_TEST,
+                    'importo': importo,
+                    'divisa': divisa,
+                    'codTrans': codTrans,
+                    'requestUrl': requestUrl,
+                    'url': success_url,
+                    'url_back': cancel_url,
+                    'mac': mac,
+                }
+                # Store the query in the session
+                request.session['search_query'] = query
     # If not post show page
     # Extract query
     query = request.session['search_query']
