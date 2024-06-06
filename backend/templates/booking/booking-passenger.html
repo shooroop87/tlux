@@ -73,10 +73,13 @@
                         </div>
                       </div>
                       <div class="col-lg-6">
-                        <div class="form-group"> 
+                        
                           <label class="form-label" for="email">{% trans "Email*" %}</label>
                           <input class="form-control" id="email" name="email" type="text" required>
                         </div>
+                        {% for message in messages %}
+                          <label>{{ message }}</label>
+                        {% endfor %}
                       </div>
                       <div class="col-lg-6">
                         <div class="form-group"> 

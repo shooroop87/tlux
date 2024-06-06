@@ -16,7 +16,10 @@ import googlemaps
 from api.forms import DetailsForm, ExtrasForm, SearchForm, VehicleForm
 from api.models import Booking, Search
 from django.conf import settings
+from django.contrib import messages
+from django.core.exceptions import ValidationError
 from django.core.mail import EmailMultiAlternatives
+from django.core.validators import validate_email
 from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
 from django.utils.translation import get_language_from_request
@@ -354,6 +357,13 @@ def payment(request):
             name = form.cleaned_data["name"]
             lastname = form.cleaned_data["lastname"]
             email = form.cleaned_data["email"]
+            try:
+                validate_email(email)
+            except ValidationError as e:
+                print("bad email, details:", e)
+                messages.error(request, "Email is not correct")
+            else:
+                print("good email")
             phone = form.cleaned_data["phone"]
             passengers = form.cleaned_data["passengers"]
             luggage = form.cleaned_data["luggage"]
