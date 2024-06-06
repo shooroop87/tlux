@@ -584,7 +584,7 @@ def payment_success(request):
     codAut = request.GET.get('codAut')
     divisa = 'EUR'
     mac = request.GET.get('mac')
-    CHIAVESEGRETA_TEST = '9086Wh56532BG7oV6giEUW2510201H68WAqc831G'7
+    CHIAVESEGRETA_TEST = '9086Wh56532BG7oV6giEUW2510201H68WAqc831G'
     # CHIAVESEGRETA_TEST = 'Y665ESJRJEK38D6D1MJJGCYAUQR2J8SV'
     param_from_request = {
         "codTrans": codTrans,
