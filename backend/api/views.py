@@ -380,7 +380,7 @@ def payment(request):
                 notes_extra = query.get('notes_extra')
                 session_id = query.get('session_id')
                 # Get transactions
-                ALIAS_TEST = 'ALIAS_WEB_00082258'
+                ALIAS_TEST = 'payment_3780564'
                 total = str(total).replace(',', '.')
                 importo = float(total)
                 divisa = 'EUR'
@@ -491,10 +491,10 @@ def payment(request):
     # Settings
     merchantServerUrl = "https://transferslux.com"
     # Alias e chiave segreta
-    ALIAS_TEST = 'ALIAS_WEB_00082258'
-    CHIAVESEGRETA_TEST = 'Y665ESJRJEK38D6D1MJJGCYAUQR2J8SV'
-    # ALIAS_TEST = 'payment_3780564'
-    # CHIAVESEGRETA_TEST = '9086Wh56532BG7oV6giEUW2510201H68WAqc831G'
+    # ALIAS_TEST = 'ALIAS_WEB_00082258'
+    # CHIAVESEGRETA_TEST = 'Y665ESJRJEK38D6D1MJJGCYAUQR2J8SV'
+    ALIAS_TEST = 'payment_3780564'
+    CHIAVESEGRETA_TEST = '9086Wh56532BG7oV6giEUW2510201H68WAqc831G'
     # Correct format strin
     current_datetime = datetime.today().strftime('%Y%m%d%H%M%S')
     # print(current_datetime)
@@ -509,7 +509,7 @@ def payment(request):
     mac_str = codtras_str + divisa_str + import_str + chiave_str
     mac = hashlib.sha1(mac_str.encode('utf8')).hexdigest()
     # Payment gateway
-    NEXI_HOST = "https://int-ecommerce.nexi.it"
+    NEXI_HOST = "https://ecommerce.nexi.it"
     requestUrl = NEXI_HOST + "/ecomm/ecomm/DispatcherServlet"
     success_url = urljoin(merchantServerUrl, "success/")
     cancel_url = urljoin(merchantServerUrl, "error/")
@@ -540,9 +540,6 @@ def payment(request):
     })
     request.session.modified = True
     # Urls
-    # query1 = request.session['search_query']
-    # breakpoint()
-    # print(query1)
     context = {
         'from_short': from_short,
         'from_hidden': from_hidden,
@@ -587,8 +584,8 @@ def payment_success(request):
     codAut = request.GET.get('codAut')
     divisa = 'EUR'
     mac = request.GET.get('mac')
-    # CHIAVESEGRETA_TEST = '9086Wh56532BG7oV6giEUW2510201H68WAqc831G'7
-    CHIAVESEGRETA_TEST = 'Y665ESJRJEK38D6D1MJJGCYAUQR2J8SV'
+    CHIAVESEGRETA_TEST = '9086Wh56532BG7oV6giEUW2510201H68WAqc831G'7
+    # CHIAVESEGRETA_TEST = 'Y665ESJRJEK38D6D1MJJGCYAUQR2J8SV'
     param_from_request = {
         "codTrans": codTrans,
         "esito": "OK",
