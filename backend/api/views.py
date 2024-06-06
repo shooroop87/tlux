@@ -490,10 +490,10 @@ def payment(request):
     # Settings
     merchantServerUrl = "https://transferslux.com"
     # Alias e chiave segreta
-    # ALIAS_TEST = 'ALIAS_WEB_00082258'
-    # CHIAVESEGRETA_TEST = 'Y665ESJRJEK38D6D1MJJGCYAUQR2J8SV'
-    ALIAS_TEST = 'payment_3780564'
-    CHIAVESEGRETA_TEST = '9086Wh56532BG7oV6giEUW2510201H68WAqc831G'
+    ALIAS_TEST = 'ALIAS_WEB_00082258'
+    CHIAVESEGRETA_TEST = 'Y665ESJRJEK38D6D1MJJGCYAUQR2J8SV'
+    # ALIAS_TEST = 'payment_3780564'
+    # CHIAVESEGRETA_TEST = '9086Wh56532BG7oV6giEUW2510201H68WAqc831G'
     # Correct format strin
     current_datetime = datetime.today().strftime('%Y%m%d%H%M%S')
     # print(current_datetime)
@@ -508,7 +508,7 @@ def payment(request):
     mac_str = codtras_str + divisa_str + import_str + chiave_str
     mac = hashlib.sha1(mac_str.encode('utf8')).hexdigest()
     # Payment gateway
-    NEXI_HOST = "https://ecommerce.nexi.it"
+    NEXI_HOST = "https://int-ecommerce.nexi.it"
     requestUrl = NEXI_HOST + "/ecomm/ecomm/DispatcherServlet"
     success_url = urljoin(merchantServerUrl, "success/")
     cancel_url = urljoin(merchantServerUrl, "error/")
