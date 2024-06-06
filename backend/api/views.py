@@ -586,7 +586,8 @@ def payment_success(request):
     codAut = request.GET.get('codAut')
     divisa = 'EUR'
     mac = request.GET.get('mac')
-    CHIAVESEGRETA_TEST = '9086Wh56532BG7oV6giEUW2510201H68WAqc831G'
+    # CHIAVESEGRETA_TEST = '9086Wh56532BG7oV6giEUW2510201H68WAqc831G'7
+    CHIAVESEGRETA_TEST = 'Y665ESJRJEK38D6D1MJJGCYAUQR2J8SV'
     param_from_request = {
         "codTrans": codTrans,
         "esito": "OK",
@@ -783,76 +784,6 @@ def help(request):
 
 def contacts(request):
     return render(request, 'contacts.html')
-
-
-def tests(request):
-    ALIAS = "ALIAS_WEB_00082258"
-    CHIAVESEGRETA = "Y665ESJRJEK38D6D1MJJGCYAUQR2J8SV"
-    # Parametri per calcolo MAC
-    codTrans = "TESTPS_" + datetime.today().strftime('%Y%m%d%H%M%s')
-    divisa = "EUR"
-    importo = 100
-    # Calcolo MAC
-    codtras_str = 'codTrans=' + str(codTrans)
-    divisa_str = 'divisa=' + str(divisa)
-    import_str = 'importo=' + str(importo)
-    chiave_str = str(CHIAVESEGRETA)
-    mac_str = codtras_str + divisa_str + import_str + chiave_str
-    mac = hashlib.sha1(mac_str.encode('utf8')).hexdigest()
-    # Payment gateway
-    HTTP_HOST = "https://transferslux.com"
-    NEXI_HOST = "https://int-ecommerce.nexi.it"
-    merchantServerUrl = HTTP_HOST
-    requestUrl = NEXI_HOST + "/ecomm/ecomm/DispatcherServlet"
-    success_url = urljoin(merchantServerUrl, "success/")
-    cancel_url = urljoin(merchantServerUrl, "error/")
-    query = {
-        'from_short': 'Милан',
-        'car_class': 'Premium',
-        'rate': '100',
-        'name': 'TEST',
-        'alias': ALIAS,
-        'importo': importo,
-        'divisa': divisa,
-        'codTrans': codTrans,
-        'requestUrl': requestUrl,
-        'url': success_url,
-        'url_back': cancel_url,
-        'mac': mac,
-    }
-    request.session['search_query'] = query
-    x_url = "?" + urlencode(query)
-    success_url = urljoin(merchantServerUrl, "success/") + x_url
-    request.session['search_query'].update({
-        'from_short': 'Милан',
-        'car_class': 'Premium',
-        'rate': '100',
-        'name': 'TEST',
-        'alias': ALIAS,
-        'importo': importo,
-        'divisa': divisa,
-        'requestUrl': requestUrl,
-        'codTrans': codTrans,
-        'url': success_url,
-        'url_back': cancel_url,
-        'mac': mac
-    })
-    request.session.modified = True
-    context = {
-        'from_short': 'Милан',
-        'car_class': 'Premium',
-        'rate': '100',
-        'name': 'TEST',
-        'alias': ALIAS,
-        'importo': importo,
-        'divisa': divisa,
-        'requestUrl': requestUrl,
-        'codTrans': codTrans,
-        'url': success_url,
-        'url_back': cancel_url,
-        'mac': mac
-    }
-    return render(request, 'test_payments.html', context)
 
 
 def page_not_found(request, exception):
