@@ -149,7 +149,7 @@ STATIC_URL = '/static/'
 # в контейнере это будет /app/collected_static
 STATIC_ROOT = BASE_DIR / 'collected_static'
 # Теперь при вызове команды python manage.py collectstatic
-# Django будет копировать все статические файлы в директорию collected_static
+# Django будет копировать все статические файлы collected_static
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
