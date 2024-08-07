@@ -25,13 +25,6 @@
               <h2 class="heading-52-medium color-white wow fadeInUp">{% trans "Your Personal" %} <br class="d-none d-lg-block">{% trans "Transfer From Airports and Hotels in Italy" %}</h2>
             </div>
           </div>
-          <div class="swiper-slide">
-            <div class="box-cover-image" style="background-image: url('https://transferslux.com/static/slider/banner4.webp'), url('https://transferslux.com/static/slider/banner4.jpg');"></div>
-            <div class="box-banner-info"> 
-              <p class="text-16 color-white wow fadeInUp">{% trans "Traveling with bulky items" %} </p>
-              <h2 class="heading-52-medium color-white wow fadeInUp">{% trans "Your Personal" %} <br class="d-none d-lg-block">{% trans "Transfer From Airports and Hotels in Italy" %}</h2>
-            </div>
-          </div>
         </div>
         <div class="box-pagination-button">
           <div class="swiper-button-prev swiper-button-prev-banner"></div>
@@ -54,21 +47,21 @@
       <div class="search-item search-date"> 
         <div class="search-icon"> <span class="item-icon icon-date"> </span></div>
         <div class="search-inputs"> 
-          <label class="text-14 color-grey">{% trans "Date" %}</label>
+          <label class="text-14 color-grey" for="to_date">{% trans "Date" %}</label>
           <input class="search-input datepicker" type="text" name="to_date" id="to_date" value="{% now "N j, Y" %}">
         </div>
       </div>
       <div class="search-item search-time"> 
         <div class="search-icon"> <span class="item-icon icon-time"> </span></div>
         <div class="search-inputs"> 
-          <label class="text-14 color-grey">{% trans "Time" %}</label>
+          <label class="text-14 color-grey" for="to_time">{% trans "Time" %}</label>
           <input class="search-input timepicker" type="text" name="to_time" id="to_time" value="{% now "H:i" %}">
         </div>
       </div>
       <div class="search-item search-from"> 
         <div class="search-icon"> <span class="item-icon icon-from"> </span></div>
         <div class="search-inputs"> 
-          <label class="text-14 color-grey">{% trans "From" %}</label>
+          <label class="text-14 color-grey" for="from_short">{% trans "From" %}</label>
           <input class="search-input dropdown-location" id="id_from" name="from_short" type="text" placeholder="{% trans "City or Airport" %}" required>
           <input type="hidden" id="id_from_hidden" name="from_hidden" class="form-control">
           
@@ -77,7 +70,7 @@
       <div class="search-item search-to"> 
         <div class="search-icon"> <span class="item-icon icon-to"> </span></div>
         <div class="search-inputs"> 
-          <label class="text-14 color-grey">{% trans "To" %}</label>
+          <label class="text-14 color-grey" for="to_short">{% trans "To" %}</label>
           <input class="search-input dropdown-location" id="id_to" name="to_short" type="text" placeholder="{% trans "City or Airport" %}" required>
           <input type="hidden" id="id_to_hidden" name="to_hidden" class="form-control">
           
