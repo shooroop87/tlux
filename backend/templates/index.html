@@ -6,17 +6,13 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <meta name="msapplication-TileColor" content="#0E0E0E">
-      <meta name="template-color" content="#0E0E0E">
       <meta name="description" content="{% trans "Comfortable transfers from airports and hotels in Italy" %}">
       <meta name="keywords" content="{% trans "transfer, italy, private transfers, airport transfer" %}">
-      <!-- Google fonts -->
       <link rel="preconnect" href="https://fonts.googleapis.com">
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
       <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500&display=swap" rel="stylesheet">
-  
-      <link rel="shortcut icon" type="image/x-icon" href="{% static 'imgs/template/favicon.png' %}">
       <link rel="stylesheet" href="https://transferslux.com/static/css/style.css">
+      <link rel="shortcut icon" type="image/x-icon" href="{% static 'imgs/template/favicon.png' %}">
       <title>{% trans "TransfersLux – Comfortable transfers from airports and hotels in Italy" %}</title>
       <style>
         .messages {
@@ -34,19 +30,13 @@
       </style> 
       <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUvfhW4zGD9sUWWtRvo-QHReeRVUcfb18&libraries=places&loading=async&callback=initMap"></script>
       <script>
-  
         async function initMap() {
         //alert("ok");
-      
         const card = document.getElementById("pac-card");
         const options = {
           fields: ["formatted_address", "geometry", "name"],
           strictBounds: false,
         };
-      
-        // const autocomplete = new google.maps.places.Autocomplete(input, options);
-      
-        // NEW
         const googleComponents = [
           { googleComponent: `sublocality_level_1`, id: `city-address-field` },
           { googleComponent: `locality`, id: `city-address-field` },
@@ -57,17 +47,14 @@
         const autocompleteFormFieldFrom = document.getElementById(`id_from`);
         const autocompleteFromFieldFrom_hidden = document.getElementById(`id_from_hidden`);
         const autocompleteFrom = new google.maps.places.Autocomplete(autocompleteFormFieldFrom, options);
-      
         google.maps.event.clearInstanceListeners(autocompleteFormFieldFrom);
         autocompleteFrom.addListener("place_changed", () => {
-      
           const place_from = autocompleteFrom.getPlace();
           //console.log(place_from)
           //console.log(place_from.formatted_address)
           //console.log(place_from.name)
           autocompleteFormFieldFrom.value = place_from.name;
           autocompleteFromFieldFrom_hidden.value = place_from.formatted_address;
-          
         });
         // TO
         const autocompleteFormFieldTo = document.getElementById(`id_to`);
@@ -75,21 +62,13 @@
         const autocompleteTo = new google.maps.places.Autocomplete(autocompleteFormFieldTo, options);
         google.maps.event.clearInstanceListeners(autocompleteFormFieldTo);
         autocompleteTo.addListener("place_changed", () => {
-      
           const place_to = autocompleteTo.getPlace();
           autocompleteFormFieldTo.value = place_to.name;
           autocompleteFromFieldTo_hidden.value = place_to.formatted_address;
-          
-      
-      
         });
       
       }
-      
-      
-      
       window.initMap = initMap;
-      
       </script>
     </head>
   <body>
@@ -100,12 +79,9 @@
       {% include 'mainpage/search.html' %}
       {% include 'mainpage/how-it-works3.html' %}
       {% include 'mainpage/fleet4.html' %}
-      
       {% include 'mainpage/why-us2.html' %}
       {% include 'mainpage/testimonials2.html' %}
       {% include 'mainpage/faq.html' %}
-      
-      
     </main>
     {% include 'includes/footer.html' %}
     <script src="{% static '/js/vendors/modernizr-3.6.0.min.js' %}"></script>
@@ -167,6 +143,5 @@
       gtag('js', new Date());
       gtag('config', 'AW-604109330');
     </script>
-    
       </body>
     </html>
