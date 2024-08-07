@@ -17,9 +17,7 @@ from api.forms import DetailsForm, ExtrasForm, SearchForm, VehicleForm
 from api.models import Booking, Search
 from django.conf import settings
 from django.contrib import messages
-from django.core.exceptions import ValidationError
 from django.core.mail import EmailMultiAlternatives
-from django.core.validators import validate_email
 from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
 from django.utils.translation import get_language_from_request
@@ -222,7 +220,7 @@ def details(request):
 
             # Query
             query = request.session.get('search_query', {})
-
+            
             # Calculate costs
             cst = int(child_seat) * 15
             bst = int(booster_seat) * 20
@@ -230,6 +228,7 @@ def details(request):
             extra_total = int(cst) + int(bst) + int(fl)
 
             # Convert rate and calculate total
+            rate = query.get('rate')
             rate = str(rate).replace(',', '.')
             total = float(rate) + float(extra_total)
 
@@ -308,6 +307,7 @@ def payment(request):
 
             # Retrieve session data
             query = request.session.get('search_query', {})
+            total = query.get('total')
 
             # Payment gateway settings
             ALIAS_TEST = 'payment_3780564'
