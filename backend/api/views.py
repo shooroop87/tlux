@@ -220,7 +220,7 @@ def details(request):
 
             # Query
             query = request.session.get('search_query', {})
-            
+
             # Calculate costs
             cst = int(child_seat) * 15
             bst = int(booster_seat) * 20
