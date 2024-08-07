@@ -13,7 +13,7 @@
       <!-- Google fonts -->
       <link rel="preconnect" href="https://fonts.googleapis.com">
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-      <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500&display=swap" rel="stylesheet">
   
       <link rel="shortcut icon" type="image/x-icon" href="{% static 'imgs/template/favicon.png' %}">
       <link rel="stylesheet" href="https://transferslux.com/static/css/style.css">
@@ -108,9 +108,9 @@
       
     </main>
     {% include 'includes/footer.html' %}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/3.6.0/modernizr.min.js"></script>
+    <script src="{% static '/js/vendors/modernizr-3.6.0.min.js' %}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://code.jquery.com/jquery-migrate-3.6.0.min.js"></script>
+    <script src="{% static '/js/vendors/jquery-migrate-3.3.0.min.js' %}></script>
     <script src="{% static '/js/vendors/wow.js' %}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.5.6/swiper-bundle.min.js"></script>
@@ -135,8 +135,24 @@
     </script>
     <noscript><div><img src="https://mc.yandex.ru/watch/88729492" style="position:absolute; left:-9999px;" alt=""></div></noscript>
     <!-- /Yandex.Metrika counter -->
-    {% if request.LANGUAGE_CODE == 'ru' %}<script src="//code.jivosite.com/widget/JNDQtmFd5D" async></script>
-    {% else %}<script src="//code.jivosite.com/widget/tVkFYVL5Kl" async></script>
+    {% if request.LANGUAGE_CODE == 'ru' %}
+    <script>
+    window.addEventListener('load', function() {
+        var script = document.createElement('script');
+        script.src = 'https://code.jivosite.com/widget/JNDQtmFd5D';
+        script.async = true;
+        document.body.appendChild(script);
+    });
+    </script>
+    {% else %}
+    <script>
+    window.addEventListener('load', function() {
+        var script = document.createElement('script');
+        script.src = 'https://code.jivosite.com/widget/tVkFYVL5Kl';
+        script.async = true;
+        document.body.appendChild(script);
+    });
+    </script>
     {% endif %}
     <script type="text/javascript">
     jQuery(document).ready(function($) {
