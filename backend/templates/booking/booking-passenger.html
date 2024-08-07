@@ -31,12 +31,12 @@
         <div class="container-sub"> 
           <div class="box-booking-tabs"> 
             <div class="item-tab wow fadeInUp"><a href="#">
-                <div class="box-tab-step">
+                <div class="box-tab-step active">
                   <div class="icon-tab"> <span class="icon-book icon-vehicle"> </span><span class="text-tab">{% trans "Vehicle " %}</span></div>
                   <div class="number-tab"> <span>01</span></div>
                 </div></a></div>
-            <div class="item-tab wow fadeInUp"><a href="javascript:history.back()">
-                <div class="box-tab-step">
+            <div class="item-tab wow fadeInUp"><a href="#">
+                <div class="box-tab-step active">
                   <div class="icon-tab"> <span class="icon-book icon-extra"> </span><span class="text-tab">{% trans "Extras " %}</span></div>
                   <div class="number-tab"> <span>02</span></div>
                 </div></a></div>
@@ -75,7 +75,7 @@
                       <div class="col-lg-6">
                         <div class="form-group"> 
                           <label class="form-label" for="email">{% trans "Email*" %}</label>
-                          <input class="form-control" id="email" name="email" type="text" required>
+                          <input class="form-control" id="email" name="email" type="email" required>
                         </div>
                       </div>
                       <div class="col-lg-6">
@@ -94,29 +94,8 @@
                         <div class="form-group">
                           <label class="form-label" for="passengers">{% trans "Passengers*" %}</label>
                           <select class="form-control" id="passengers" name="passengers" required>
-                            {% if car_class == 'Business Van/SUV' %}
-                            <option value="1" selected="selected">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option> 
-                            {% else %}
-                            <option value="1" selected="selected">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            {% endif %}
-                          </select>
-                        </div>
-                      </div>
-                      <div class="col-lg-6">
-                        <div class="form-group"> 
-                          <label class="form-label" for="luggage">{% trans "Luggage" %}</label>
-                          <select class="form-control" id="luggage" name="luggage">
-                            {% if car_class == 'Business Van/SUV' %}
-                            <option value="1" selected="selected">1</option>
+                            <option value=""></option>
+                            <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
                             <option value="4">4</option>
@@ -124,10 +103,26 @@
                             <option value="6">6</option>
                             <option value="7">7</option>
                             <option value="8">8</option>
-                            {% else %}
-                            <option value="1" selected="selected">1</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group"> 
+                          <label class="form-label" for="luggage">{% trans "Luggage" %}</label>
+                          <select class="form-control" id="luggage" name="luggage">
+                            <option value=""></option>
+                            <option value="1">1 </option>
                             <option value="2">2</option>
-                            {% endif %}
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
                           </select>
                         </div>
                       </div>
@@ -163,6 +158,7 @@
     <script src="{% static '/js/vendors/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static '/js/vendors/waypoints.js' %}"></script>
     <script src="{% static '/js/vendors/wow.js' %}"></script>
+    <script src="{% static '/js/vendors/magnific-popup.js' %}"></script>
     <script src="{% static '/js/vendors/perfect-scrollbar.min.js' %}"></script>
     <script src="{% static '/js/vendors/select2.min.js' %}"></script>
     <script src="{% static '/js/vendors/isotope.js' %}"></script>
@@ -170,31 +166,13 @@
     <script src="{% static '/js/vendors/swiper-bundle.min.js' %}"></script>
     <script src="{% static '/js/vendors/noUISlider.js' %}"></script>
     <script src="{% static '/js/vendors/slider.js' %}"></script>
-    <script src="{% static '/js/vendors/jquery.elevatezoom.js' %}"></script>
+    <!-- Count down-->
+    <script src="{% static '/js/vendors/counterup.js' %}"></script>
+    <script src="{% static '/js/vendors/jquery.countdown.min.js' %}"></script>
+    <!-- Count down--><script src="{% static '/js/vendors/jquery.elevatezoom.js' %}"></script>
     <script src="{% static '/js/vendors/slick.js' %}"></script>
     <script src="{% static '/js/vendors/jquery-ui.js' %}"></script>
     <script src="{% static '/js/vendors/jquery.timepicker.min.js' %}"></script>
     <script src="{% static '/js/main.js' %}"></script>
-    <!-- Yandex.Metrika counter -->
-    <script type="text/javascript" >
-      (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-      m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-      (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-    
-      ym(88729492, "init", {
-           clickmap:true,
-           trackLinks:true,
-           accurateTrackBounce:true,
-           webvisor:true
-      });
-    </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/88729492" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-    <!-- /Yandex.Metrika counter -->
-    <script src="//code.jivosite.com/widget/tVkFYVL5Kl" async></script>
-    <script type="text/javascript">
-    jQuery(document).ready(function($) {
-     $(window).scrollTop(0);
-    });
-    </script>
   </body>
 </html>

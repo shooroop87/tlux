@@ -5,28 +5,28 @@
       <div class="swiper-container swiper-banner-1 pb-0">
         <div class="swiper-wrapper">
           <div class="swiper-slide">
-            <div class="box-cover-image" style="background-image:url(http://transferslux.com/static/slider/banner.jpg)"></div>
+            <div class="box-cover-image" style="background-image: url('http://transferslux.com/static/slider/banner.webp'), url('http://transferslux.com/static/slider/banner.jpg');"></div>
             <div class="box-banner-info"> 
               <p class="text-16 color-white wow fadeInUp">{% trans "Free cancellation and changes" %}</p>
               <h2 class="heading-52-medium color-white wow fadeInUp">{% trans "Your Personal" %} <br class="d-none d-lg-block">{% trans "Transfer From Airports and Hotels in Italy" %}</h2>
             </div>
           </div>
           <div class="swiper-slide">
-            <div class="box-cover-image" style="background-image:url(http://transferslux.com/static/slider/banner2.jpg)"></div>
+            <div class="box-cover-image" style="background-image: url('http://transferslux.com/static/slider/banner2.webp'), url('http://transferslux.com/static/slider/banner2.jpg');"></div>
             <div class="box-banner-info"> 
               <p class="text-16 color-white wow fadeInUp">{% trans "24/7 support in English and licensed drivers" %}</p>
               <h2 class="heading-52-medium color-white wow fadeInUp">{% trans "Your Personal" %} <br class="d-none d-lg-block">{% trans "Transfer From Airports and Hotels in Italy" %}</h2>
             </div>
           </div>
           <div class="swiper-slide">
-            <div class="box-cover-image" style="background-image:url(http://transferslux.com/static/slider/banner3.jpg)"></div>
+            <div class="box-cover-image" style="background-image: url('http://transferslux.com/static/slider/banner3.webp'), url('http://transferslux.com/static/slider/banner3.jpg');"></div>
             <div class="box-banner-info"> 
               <p class="text-16 color-white wow fadeInUp">{% trans "Wait time if your flight is delayed" %}</p>
               <h2 class="heading-52-medium color-white wow fadeInUp">{% trans "Your Personal" %} <br class="d-none d-lg-block">{% trans "Transfer From Airports and Hotels in Italy" %}</h2>
             </div>
           </div>
           <div class="swiper-slide">
-            <div class="box-cover-image" style="background-image:url(http://transferslux.com/static/slider/banner4.jpg)"></div>
+            <div class="box-cover-image" style="background-image: url('http://transferslux.com/static/slider/banner4.webp'), url('http://transferslux.com/static/slider/banner4.jpg');"></div>
             <div class="box-banner-info"> 
               <p class="text-16 color-white wow fadeInUp">{% trans "Traveling with bulky items" %} </p>
               <h2 class="heading-52-medium color-white wow fadeInUp">{% trans "Your Personal" %} <br class="d-none d-lg-block">{% trans "Transfer From Airports and Hotels in Italy" %}</h2>
@@ -40,6 +40,14 @@
         </div>
       </div>
     </div>
+    <!-- Блок для отображения сообщений -->
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
     <form method="post" enctype="multipart/form-data" action="{% url 'api:index' %}">
         {% csrf_token %}
     <div class="box-search-ride wow fadeInUp">
@@ -62,7 +70,7 @@
         <div class="search-inputs"> 
           <label class="text-14 color-grey">{% trans "From" %}</label>
           <input class="search-input dropdown-location" id="id_from" name="from_short" type="text" placeholder="{% trans "City or Airport" %}" required>
-          <input type="hidden" id="id_from_hidden" name="from_hidden" class="form-control"/>
+          <input type="hidden" id="id_from_hidden" name="from_hidden" class="form-control">
           
         </div>
       </div>
@@ -71,12 +79,12 @@
         <div class="search-inputs"> 
           <label class="text-14 color-grey">{% trans "To" %}</label>
           <input class="search-input dropdown-location" id="id_to" name="to_short" type="text" placeholder="{% trans "City or Airport" %}" required>
-          <input type="hidden" id="id_to_hidden" name="to_hidden" class="form-control"/>
+          <input type="hidden" id="id_to_hidden" name="to_hidden" class="form-control">
           
         </div>
       </div>
-      <div class="search-item search-button"> 
-        <button class="btn btn-search" type="submit"> <img src="{% static '/imgs/template/icons/search.svg' %}">{% trans "Show prices" %}</button>
+      <div class="search-item search-button">
+        <button class="btn btn-search" type="submit"> <img src="{% static '/imgs/template/icons/search.svg' %}" alt="">{% trans "Show prices" %}</button>
       </div>
     </div>
     </form>

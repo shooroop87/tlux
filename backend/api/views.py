@@ -37,18 +37,32 @@ def index(request):
             to_hidden = form.cleaned_data["to_hidden"]
             to_date = form.cleaned_data["to_date"]
             to_time = form.cleaned_data["to_time"]
-            session_id = uuid.uuid4()
-            query = {
-                'from_short': from_short,
-                'from_hidden': from_hidden,
-                'to_short': to_short,
-                'to_hidden': to_hidden,
-                'to_date': to_date,
-                'to_time': to_time,
-                'session_id': str(session_id),
-            }
-            request.session['search_query'] = query
-            return redirect('api:vehicle')
+            # Сообщение о заполнении полей
+            language_code = get_language_from_request(request)
+            errors = {
+                'it': 'Si prega di compilare tutti i campi obbligatori',
+                'fr': 'Veuillez remplir tous les champs requis',
+                'es': 'Por favor, rellene todos los campos obligatorios',
+                'ru': 'Пожалуйста, заполните все обязательные поля'}
+            error_message = errors[language_code]
+            if error_message is None:
+                error_message = 'Please fill in all required fields'
+            # Если поля не заполнено, вернуть ошибку
+            if not all([from_short, to_short, to_date, to_time]):
+                messages.error(request, error_message)
+            else:
+                session_id = uuid.uuid4()
+                query = {
+                    'from_short': from_short,
+                    'from_hidden': from_hidden,
+                    'to_short': to_short,
+                    'to_hidden': to_hidden,
+                    'to_date': to_date,
+                    'to_time': to_time,
+                    'session_id': str(session_id),
+                }
+                request.session['search_query'] = query
+                return redirect('api:vehicle')
     else:
         form = SearchForm()
     return render(request, 'index.html', {'form': form})
@@ -111,28 +125,20 @@ def vehicle(request):
                               'Мальпенса',
                               'Миланский аэропорт',
                               '21010 Ферно, Варезе, Италия']
-        checked_from = 'False'
-        checked_to = 'False'
-        checked = 'False'
-        for item in milan_bergamo_rule:
-            match_from = re.search(item, from_hidden)
-            if match_from:
-                checked_from = 'True'
-            match_to = re.search(item, to_hidden)
-            if match_to:
-                checked_to = 'True'
-            if (checked_from == 'True' and checked_to == 'True'):
-                checked = 'True'
-        if checked == 'True':
+        checked_from = any(
+            re.search(item,
+                      from_hidden,
+                      re.IGNORECASE) for item in milan_bergamo_rule)
+        checked_to = any(
+            re.search(item,
+                      to_hidden,
+                      re.IGNORECASE) for item in milan_bergamo_rule)
+        checked = checked_from and checked_to
+        if checked:
             cost = 100
-        if cost <= 50:
-            cost_e = 50
-            cost_s = 50 * 1.5
-            cost_v = 50 * 1.2
-        else:
-            cost_e = cost
-            cost_s = cost * 1.5
-            cost_v = cost * 1.2
+        cost_e = max(50, cost)
+        cost_s = cost_e * 1.5
+        cost_v = cost_e * 1.2
         context = {
             'from_short': from_short,
             'from_hidden': from_hidden,
@@ -146,17 +152,9 @@ def vehicle(request):
             'to_date': to_date,
             'to_time': to_time,
         }
-        query = {
-            'from_short': from_short,
-            'from_hidden': from_hidden,
-            'to_short': to_short,
-            'to_hidden': to_hidden,
-            'distance': distance_km,
-            'travel_time': travel_time,
-            'to_date': to_date,
-            'to_time': to_time,
-            'session_id': session_id
-        }
+        # Update query
+        query.update({'distance': distance_km, 'travel_time': travel_time})
+        request.session['search_query'] = query
         # Save search
         instance = Search(
             from_hidden=from_hidden,
@@ -184,46 +182,25 @@ def extras(request):
         if form.is_valid():
             car_class = form.cleaned_data["car_class"]
             rate = form.cleaned_data["rate"]
-            # Query
-            query = request.session['search_query']
-            # Access individual fields from the dictionary
-            from_short = query.get('from_short')
-            from_hidden = query.get('from_hidden')
-            to_short = query.get('to_short')
-            to_hidden = query.get('to_hidden')
-            to_short = query.get('to_short')
-            to_short = query.get('to_short')
-            distance = query.get('distance')
-            travel_time = query.get('travel_time')
-            to_date = query.get('to_date')
-            to_time = query.get('to_time')
-            session_id = query.get('session_id')
+            # Retrieve query from session
+            query = request.session.get('search_query', {})
             context = {
-                'from_short': from_short,
-                'from_hidden': from_hidden,
-                'to_short': to_short,
-                'to_hidden': to_hidden,
-                'distance': distance,
-                'travel_time': travel_time,
-                'to_date': to_date,
-                'to_time': to_time,
+                'from_short': query['from_short'],
+                'from_hidden': query['from_hidden'],
+                'to_short': query['to_short'],
+                'to_hidden': query['to_hidden'],
+                'distance': query['distance'],
+                'travel_time': query['travel_time'],
+                'to_date': query['to_date'],
+                'to_time': query['to_time'],
                 'car_class': car_class,
                 'rate': rate
             }
-            # Create a dictionary with the fields
-            query = {
-                'from_short': from_short,
-                'from_hidden': from_hidden,
-                'to_short': to_short,
-                'to_hidden': to_hidden,
+            # Update query
+            query.update({
                 'car_class': car_class,
                 'rate': rate,
-                'to_date': to_date,
-                'to_time': to_time,
-                'distance': distance,
-                'travel_time': travel_time,
-                'session_id': session_id
-            }
+            })
             request.session['search_query'] = query
             return render(request, 'booking/booking-extra.html', context)
     else:
@@ -242,101 +219,75 @@ def details(request):
             booster_seat = form.cleaned_data["booster_seat"]
             flowers = form.cleaned_data["flowers"]
             notes_extra = form.cleaned_data["notes_extra"]
+
             # Query
-            query = request.session['search_query']
-            # Access individual fields from the dictionary
-            from_short = query.get('from_short')
-            from_hidden = query.get('from_hidden')
-            to_short = query.get('to_short')
-            to_hidden = query.get('to_hidden')
-            car_class = query.get('car_class')
-            rate = query.get('rate')
-            distance = query.get('distance')
-            travel_time = query.get('travel_time')
-            to_date = query.get('to_date')
-            to_time = query.get('to_time')
-            session_id = query.get('session_id')
+            query = request.session.get('search_query', {})
+
+            # Calculate costs
             cst = int(child_seat) * 15
             bst = int(booster_seat) * 20
             fl = int(flowers) * 70
             extra_total = int(cst) + int(bst) + int(fl)
+
+            # Convert rate and calculate total
             rate = str(rate).replace(',', '.')
             total = float(rate) + float(extra_total)
-            # Create a dictionary with the fields
-            query = {
-                'from_short': from_short,
-                'from_hidden': from_hidden,
-                'to_short': to_short,
-                'to_hidden': to_hidden,
-                'car_class': car_class,
-                'rate': rate,
+
+            # Update query dictionary
+            query.update({
                 'total': total,
                 'child_seat_total': cst,
                 'booster_seat_total': bst,
                 'flowers_total': fl,
                 'extra_total': extra_total,
-                'distance': distance,
-                'travel_time': travel_time,
-                'to_date': to_date,
-                'to_time': to_time,
                 'flight': flight,
                 'child_seat': child_seat,
                 'booster_seat': booster_seat,
                 'flowers': flowers,
                 'notes_extra': notes_extra,
-                'session_id': session_id
-            }
-            context = {
-                'from_short': from_short,
-                'from_hidden': from_hidden,
-                'to_short': to_short,
-                'to_hidden': to_hidden,
-                'car_class': car_class,
-                'rate': rate,
-                'total': total,
-                'child_seat_total': cst,
-                'booster_seat_total': bst,
-                'flowers_total': fl,
-                'extra_total': extra_total,
-                'distance': distance,
-                'travel_time': travel_time,
-                'to_date': to_date,
-                'to_time': to_time,
-                'flight': flight,
-                'child_seat': child_seat,
-                'booster_seat': booster_seat,
-                'flowers': flowers,
-                'notes_extra': notes_extra,
-            }
-            # Store the query in the session
+            })
+
+            # Store updated query in session
             request.session['search_query'] = query
+
+            # Prepare context
+            context = {
+                'from_short': query.get('from_short'),
+                'from_hidden': query.get('from_hidden'),
+                'to_short': query.get('to_short'),
+                'to_hidden': query.get('to_hidden'),
+                'car_class': query.get('car_class'),
+                'rate': query.get('rate'),
+                'total': total,
+                'child_seat_total': cst,
+                'booster_seat_total': bst,
+                'flowers_total': fl,
+                'extra_total': extra_total,
+                'distance': query.get('distance'),
+                'travel_time': query.get('travel_time'),
+                'to_date': query.get('to_date'),
+                'to_time': query.get('to_time'),
+                'flight': flight,
+                'child_seat': child_seat,
+                'booster_seat': booster_seat,
+                'flowers': flowers,
+                'notes_extra': notes_extra,
+            }
             return render(request, 'booking/booking-passenger.html', context)
 
-    # Query
-    query = request.session['search_query']
-    # Access individual fields from the dictionary
-    from_short = query.get('from_short')
-    from_hidden = query.get('from_hidden')
-    to_short = query.get('to_short')
-    to_hidden = query.get('to_hidden')
-    car_class = query.get('car_class')
-    rate = query.get('rate')
-    distance = query.get('distance')
-    travel_time = query.get('travel_time')
-    to_date = query.get('to_date')
-    to_time = query.get('to_time')
-    session_id = query.get('session_id')
+    # If not POST, prepare context from session query
+    query = request.session.get('search_query', {})
     context = {
-        'from_short': from_short,
-        'from_hidden': from_hidden,
-        'to_short': to_short,
-        'to_hidden': to_hidden,
-        'car_class': car_class,
-        'rate': rate,
-        'distance': distance,
-        'travel_time': travel_time,
-        'to_date': to_date,
-        'to_time': to_time,
+        'from_short': query.get('from_short'),
+        'from_hidden': query.get('from_hidden'),
+        'to_short': query.get('to_short'),
+        'to_hidden': query.get('to_hidden'),
+        'car_class': query.get('car_class'),
+        'rate': query.get('rate'),
+        'distance': query.get('distance'),
+        'travel_time': query.get('travel_time'),
+        'to_date': query.get('to_date'),
+        'to_time': query.get('to_time'),
     }
     return render(request, 'booking/booking-passenger.html', context)
 
@@ -345,162 +296,81 @@ def payment(request):
     if request.method == 'POST':
         form = DetailsForm(request.POST)
         if form.is_valid():
-            name = form.cleaned_data["name"]
-            lastname = form.cleaned_data["lastname"]
-            email = form.cleaned_data["email"]
-            phone = form.cleaned_data["phone"]
-            passengers = form.cleaned_data["passengers"]
-            luggage = form.cleaned_data["luggage"]
-            notes_details = form.cleaned_data["notes_details"]
-            try:
-                validate_email(email)
-            except ValidationError as e:
-                print("bad email, details:", e)
-                messages.error(request, "Email is not correct")
-            else:
-                print("good email")
-                # Query
-                query = request.session['search_query']
-                # Access individual fields from the dictionary
-                from_short = query.get('from_short')
-                from_hidden = query.get('from_hidden')
-                to_short = query.get('to_short')
-                to_hidden = query.get('to_hidden')
-                to_date = query.get('to_date')
-                to_time = query.get('to_time')
-                car_class = query.get('car_class')
-                rate = query.get('rate')
-                total = query.get('total')
-                distance = query.get('distance')
-                travel_time = query.get('travel_time')
-                flight = query.get('flight')
-                child_seat = query.get('child_seat')
-                booster_seat = query.get('booster_seat')
-                flowers = query.get('flowers')
-                notes_extra = query.get('notes_extra')
-                session_id = query.get('session_id')
-                # Get transactions
-                ALIAS_TEST = 'payment_3780564'
-                total = str(total).replace(',', '.')
-                importo = float(total)
-                divisa = 'EUR'
-                codTrans = query.get('codTrans')
-                requestUrl = query.get('requestUrl')
-                success_url = query.get('success_url')
-                cancel_url = query.get('cancel_url')
-                mac = query.get('mac')
-                # Create a dictionary with the fields1
-                query = {
-                    'from_short': from_short,
-                    'from_hidden': from_hidden,
-                    'to_short': to_short,
-                    'to_hidden': to_hidden,
-                    'car_class': car_class,
-                    'rate': rate,
-                    'distance': distance,
-                    'travel_time': travel_time,
-                    'to_date': to_date,
-                    'to_time': to_time,
-                    'flight': flight,
-                    'child_seat': child_seat,
-                    'booster_seat': booster_seat,
-                    'flowers': flowers,
-                    'notes_extra': notes_extra,
-                    'name': name,
-                    'lastname': lastname,
-                    'email': email,
-                    'phone': phone,
-                    'passengers': passengers,
-                    'luggage': luggage,
-                    'notes_details': notes_details,
-                    'session_id': session_id,
-                    'alias': ALIAS_TEST,
-                    'importo': importo,
-                    'divisa': divisa,
-                    'codTrans': codTrans,
-                    'requestUrl': requestUrl,
-                    'url': success_url,
-                    'url_back': cancel_url,
-                    'mac': mac,
-                }
-                context = {
-                    'from_short': from_short,
-                    'from_hidden': from_hidden,
-                    'to_short': to_short,
-                    'to_hidden': to_hidden,
-                    'car_class': car_class,
-                    'rate': rate,
-                    'distance': distance,
-                    'travel_time': travel_time,
-                    'to_date': to_date,
-                    'to_time': to_time,
-                    'flight': flight,
-                    'child_seat': child_seat,
-                    'booster_seat': booster_seat,
-                    'flowers': flowers,
-                    'notes_extra': notes_extra,
-                    'name': name,
-                    'lastname': lastname,
-                    'email': email,
-                    'phone': phone,
-                    'passengers': passengers,
-                    'luggage': luggage,
-                    'notes_details': notes_details,
-                    'alias': ALIAS_TEST,
-                    'importo': importo,
-                    'divisa': divisa,
-                    'codTrans': codTrans,
-                    'requestUrl': requestUrl,
-                    'url': success_url,
-                    'url_back': cancel_url,
-                    'mac': mac,
-                }
-                # Store the query in the session
-                request.session['search_query'] = query
+            # Extract form data
+            cleaned_data = form.cleaned_data
+            name = cleaned_data["name"]
+            lastname = cleaned_data["lastname"]
+            email = cleaned_data["email"]
+            phone = cleaned_data["phone"]
+            passengers = cleaned_data["passengers"]
+            luggage = cleaned_data["luggage"]
+            notes_details = cleaned_data["notes_details"]
+
+            # Retrieve session data
+            query = request.session.get('search_query', {})
+
+            # Payment gateway settings
+            ALIAS_TEST = 'payment_3780564'
+            total = str(total).replace(',', '.')
+            importo = float(total)
+            divisa = 'EUR'
+            codTrans = query.get('codTrans')
+            requestUrl = query.get('requestUrl')
+            success_url = query.get('success_url')
+            cancel_url = query.get('cancel_url')
+            mac = query.get('mac')
+
+            # Update session query
+            query.update({
+                'name': name,
+                'lastname': lastname,
+                'email': email,
+                'phone': phone,
+                'passengers': passengers,
+                'luggage': luggage,
+                'notes_details': notes_details,
+                'total': total,
+                'alias': ALIAS_TEST,
+                'importo': importo,
+                'divisa': divisa,
+                'requestUrl': requestUrl,
+                'codTrans': codTrans,
+                'url': success_url,
+                'url_back': cancel_url,
+                'mac': mac,
+            })
+            request.session['search_query'] = query
+
     # If not post show page
-    # Extract query
-    query = request.session['search_query']
-    # Fields
+    # Fields from request
     name = request.POST.get("name")
     lastname = request.POST.get("lastname")
-    from_short = query.get('from_short')
-    from_hidden = query.get('from_hidden')
-    to_short = query.get('to_short')
-    to_hidden = query.get('to_hidden')
-    to_date = query.get('to_date')
-    to_time = query.get('to_time')
-    car_class = query.get('car_class')
-    rate = query.get('rate')
-    child_seat = query.get('child_seat')
-    booster_seat = query.get('booster_seat')
-    flowers = query.get('flowers')
-    cst = int(child_seat) * 15
-    bst = int(booster_seat) * 20
-    fl = int(flowers) * 70
-    extra_total = int(cst) + int(bst) + int(fl)
-    # print(extra_total)
-    rate = str(rate).replace(',', '.')
-    # print(rate)
-    total = float(rate) + float(extra_total)
-    # print(total)
-    importo = round(total * 100 * 0.30, 0)
-    # print(importo)
-    importo = int(importo)
-    distance = query.get('distance')
-    travel_time = query.get('travel_time')
-    # Settings
-    merchantServerUrl = "https://transferslux.com"
-    # Alias e chiave segreta
-    # ALIAS_TEST = 'ALIAS_WEB_00082258'
-    # CHIAVESEGRETA_TEST = 'Y665ESJRJEK38D6D1MJJGCYAUQR2J8SV'
+
+    # Retrieve session data
+    query = request.session.get('search_query', {})
+
+    # Calculate additional charges
+    child_seat = int(query.get('child_seat', 0))
+    booster_seat = int(query.get('booster_seat', 0))
+    flowers = int(query.get('flowers', 0))
+    cst = child_seat * 15
+    bst = booster_seat * 20
+    fl = flowers * 70
+    extra_total = cst + bst + fl
+
+    # Calculate total cost
+    rate = float(str(query.get('rate', '0')).replace(',', '.'))
+    total = rate + extra_total
+
+    # Payment gateway settings
     ALIAS_TEST = 'payment_3780564'
     CHIAVESEGRETA_TEST = '9086Wh56532BG7oV6giEUW2510201H68WAqc831G'
-    # Correct format strin
     current_datetime = datetime.today().strftime('%Y%m%d%H%M%S')
-    # print(current_datetime)
     codTrans = 'TESTPS_' + current_datetime
     divisa = 'EUR'
-    # importo = 6600
+    importo = round(total * 100 * 0.30, 0)
+    importo = int(importo)
+
     # Calcolo MAC
     codtras_str = 'codTrans=' + str(codTrans)
     divisa_str = 'divisa=' + str(divisa)
@@ -508,11 +378,15 @@ def payment(request):
     chiave_str = str(CHIAVESEGRETA_TEST)
     mac_str = codtras_str + divisa_str + import_str + chiave_str
     mac = hashlib.sha1(mac_str.encode('utf8')).hexdigest()
-    # Payment gateway
+
+    # URLs
+    merchantServerUrl = "https://transferslux.com"
     NEXI_HOST = "https://ecommerce.nexi.it"
-    requestUrl = NEXI_HOST + "/ecomm/ecomm/DispatcherServlet"
+    requestUrl = f"{NEXI_HOST}/ecomm/ecomm/DispatcherServlet"
     success_url = urljoin(merchantServerUrl, "success/")
     cancel_url = urljoin(merchantServerUrl, "error/")
+
+    # Update session query
     request.session['search_query'].update({
         'alias': ALIAS_TEST,
         'importo': importo,
@@ -524,7 +398,7 @@ def payment(request):
         'mac': mac,
         'total': total,
     })
-    request.session.modified = True
+    # Urls
     x_url = "?" + urlencode(query)
     success_url = urljoin(merchantServerUrl, "success/") + x_url
     request.session['search_query'].update({
@@ -539,19 +413,19 @@ def payment(request):
         'total': total,
     })
     request.session.modified = True
-    # Urls
+    # Context render
     context = {
-        'from_short': from_short,
-        'from_hidden': from_hidden,
-        'to_short': to_short,
-        'to_hidden': to_hidden,
-        'car_class': car_class,
+        'from_short': query.get('from_short'),
+        'from_hidden': query.get('from_hidden'),
+        'to_short': query.get('to_short'),
+        'to_hidden': query.get('to_hidden'),
+        'car_class': query.get('car_class'),
         'rate': rate,
         'total': total,
-        'distance': distance,
-        'travel_time': travel_time,
-        'to_date': to_date,
-        'to_time': to_time,
+        'distance': query.get('distance'),
+        'travel_time': query.get('travel_time'),
+        'to_date': query.get('to_date'),
+        'to_time': query.get('to_time'),
         'name': name,
         'lastname': lastname,
         'alias': ALIAS_TEST,
@@ -567,197 +441,137 @@ def payment(request):
 
 
 def payment_success(request):
-    terms = request.POST.get("terms")
-    if terms is not None:
-        terms_ = True
-    else:
-        terms_ = False
-    billing_name = request.POST.get("billing_name")
-    billing_lastname = request.POST.get("billing_lastname")
-    billing_company = request.POST.get("billing_company")
-    billing_address = request.POST.get("billing_address")
-    # Transaction
-    codTrans = request.GET.get('codTrans')
-    importo = request.GET.get('importo')
-    data = request.GET.get('data')
-    orario = request.GET.get('orario')
-    codAut = request.GET.get('codAut')
-    divisa = 'EUR'
-    mac = request.GET.get('mac')
+    terms_ = bool(request.POST.get("terms"))
+
+    billing_data = {
+        "name": request.POST.get("billing_name"),
+        "lastname": request.POST.get("billing_lastname"),
+        "company": request.POST.get("billing_company"),
+        "address": request.POST.get("billing_address"),
+    }
+
+    transaction_data = {
+        "codTrans": request.GET.get('codTrans'),
+        "importo": request.GET.get('importo'),
+        "data": request.GET.get('data'),
+        "orario": request.GET.get('orario'),
+        "codAut": request.GET.get('codAut'),
+        "mac": request.GET.get('mac'),
+        "divisa": 'EUR',
+    }
+
+    # Check if all required params are present
+    required_params = ['codTrans',
+                       'importo',
+                       'data',
+                       'orario',
+                       'codAut',
+                       'mac']
+    if not all(transaction_data.get(param) for param in required_params):
+        raise ValueError("Missing required parameters")
+
+    # Calculate MAC
     CHIAVESEGRETA_TEST = '9086Wh56532BG7oV6giEUW2510201H68WAqc831G'
-    # CHIAVESEGRETA_TEST = 'Y665ESJRJEK38D6D1MJJGCYAUQR2J8SV'
-    param_from_request = {
-        "codTrans": codTrans,
-        "esito": "OK",
-        "importo": importo,
-        "divisa": divisa,
-        "data": data,
-        "orario": orario,
-        "codAut": codAut,
-        "mac": mac,
-    }
-    requiredParams = ['codTrans',
-                      'esito',
-                      'importo',
-                      'divisa',
-                      'data',
-                      'orario',
-                      'codAut',
-                      'mac']
-    for param in requiredParams:
-        if param not in param_from_request:
-            raise ValueError("Parametro {} mancante".format(param))
-    # Calcolo MAC con i parametri di ritorno
-    mac_str = 'codTrans=' + param_from_request['codTrans'] + \
-        'esito=' + param_from_request['esito'] + \
-        'importo=' + param_from_request['importo'] + \
-        'divisa=' + param_from_request['divisa'] + \
-        'data=' + param_from_request['data'] + \
-        'orario=' + param_from_request['orario'] + \
-        'codAut=' + param_from_request['codAut'] + \
-        CHIAVESEGRETA_TEST
-    macCalculated = hashlib.sha1(mac_str.encode('utf8')).hexdigest()
-    # Verifico corrispondeza MAC
-    if macCalculated != param_from_request['mac']:
-        raise ValueError('Errore MAC')
-    # Nel caso in cui non ci siano errori gestisco il parametro esito
-    if param_from_request['esito'] == 'OK':
-        print('Transazione andato bene!')
-    # Query
-    query = request.session['search_query']
-    from_short = query.get('from_short')
-    from_hidden = query.get('from_hidden')
-    to_short = query.get('to_short')
-    to_hidden = query.get('to_hidden')
-    to_date = query.get('to_date')
-    to_time = query.get('to_time')
-    car_class = query.get('car_class')
-    rate = query.get('rate')
-    total = query.get('total')
-    child_seat_total = query.get('child_seat_total')
-    booster_seat_total = query.get('booster_seat_total')
-    flowers_total = query.get('flowers_total')
-    extra_total = query.get('extra_total')
-    distance = query.get('distance')
-    travel_time = query.get('travel_time')
-    flight = query.get('flight')
-    child_seat = query.get('child_seat')
-    booster_seat = query.get('booster_seat')
-    flowers = query.get('flowers')
-    notes_extra = query.get('notes_extra')
-    name = query.get('name')
-    lastname = query.get('lastname')
-    email = query.get('email')
-    phone = query.get('phone')
-    passengers = query.get('passengers')
-    luggage = query.get('luggage')
-    notes_details = query.get('notes_details')
-    session_id = query.get('session_id')
-    # Save Booking
-    instance = Booking(
-        session_id=session_id,
-        from_hidden=from_hidden,
-        to_hidden=to_hidden,
-        from_short=from_short,
-        to_short=to_short,
-        to_date=to_date,
-        to_time=to_time,
-        distance=distance,
-        travel_time=travel_time,
-        car_class=car_class,
-        rate=rate,
-        flight=flight,
-        child_seat=child_seat,
-        booster_seat=booster_seat,
-        flowers=flowers,
-        notes_extra=notes_extra,
-        name=name,
-        lastname=lastname,
-        email=email,
-        phone=phone,
-        passengers=passengers,
-        luggage=luggage,
-        notes_details=notes_details,
-        billing_name=billing_name,
-        billing_lastname=billing_lastname,
-        billing_company=billing_company,
-        billing_address=billing_address,
-        terms=terms_
-    )
-    instance.save()
-    # Get booking ID
-    booking_data = Booking.objects.get(session_id=session_id)
-    # breakpoint()
-    field_name = booking_data._meta.fields[0].name
-    # print(field_name)
-    booking_id = getattr(booking_data, field_name)
-    # print(booking_id)
-    # Make context
-    try:
-        notes_details = notes_details + '\n' + notes_extra
-    except Exception as error:
-        print(error)
-        notes_details = ''
-    context = {
-        'booking_id': booking_id,
-        'session_id': session_id,
-        'from_short': from_short,
-        'from_hidden': from_hidden,
-        'to_short': to_short,
-        'to_hidden': to_hidden,
-        'car_class': car_class,
-        'rate': rate,
-        'total': total,
-        'child_seat_total': child_seat_total,
-        'booster_seat_total': booster_seat_total,
-        'flowers_total': flowers_total,
-        'extra_total': extra_total,
-        'distance': distance,
-        'travel_time': travel_time,
-        'to_date': to_date,
-        'to_time': to_time,
-        'flight': flight,
-        'child_seat': child_seat,
-        'booster_seat': booster_seat,
-        'flowers': flowers,
-        'notes_extra': notes_extra,
-        'name': name,
-        'lastname': lastname,
-        'email': email,
-        'phone': phone,
-        'passengers': passengers,
-        'luggage': luggage,
-        'notes_details': notes_details,
-        'billing_name': billing_name,
-        'billing_lastname': billing_lastname,
-        'billing_company': billing_company,
-        'billing_address': billing_address,
-        'terms': terms_
-    }
-    # Генерация PDF и сохранение в MEDIA_ROOT
-    # str_id = str(session_id)
-    # voucher_name = f"voucher_{str_id}.pdf"
-    language_code = get_language_from_request(request)
-    subjects = {
-        'it': 'La tua prenotazione è stata inviata con successo',
-        'fr': 'Votre réservation a été soumise avec succès',
-        'es': 'Su reserva fue enviada exitosamente',
-        'ru': 'Ваше бронирование было успешно отправлено'
-    }
-    subject = subjects[language_code]
-    if subject is None:
-        subject = 'Your booking was submitted successfully'
-    from_email = settings.DEFAULT_FROM_EMAIL
-    to = [email, from_email]
-    # Рендеринг HTML-шаблона1
-    html_content = render_to_string('email/email.html', context)
-    email_message = EmailMultiAlternatives(subject,
-                                           html_content,
-                                           from_email,
-                                           to=to)
-    email_message.content_subtype = 'html'
-    email_message.send()
-    return render(request, 'booking/booking-received.html', context)
+    mac_str = (f"codTrans={transaction_data['codTrans']}"
+               f"esito=OK"
+               f"importo={transaction_data['importo']}"
+               f"divisa={transaction_data['divisa']}"
+               f"data={transaction_data['data']}"
+               f"orario={transaction_data['orario']}"
+               f"codAut={transaction_data['codAut']}"
+               f"{CHIAVESEGRETA_TEST}")
+    mac_calculated = hashlib.sha1(mac_str.encode('utf8')).hexdigest()
+
+    if mac_calculated != transaction_data['mac']:
+        raise ValueError('MAC mismatch error')
+
+    # Handle booking information
+    if request.session.get('search_query'):
+        query = request.session['search_query']
+        booking_data = {
+            'session_id': query.get('session_id'),
+            'from_short': query.get('from_short'),
+            'from_hidden': query.get('from_hidden'),
+            'to_short': query.get('to_short'),
+            'to_hidden': query.get('to_hidden'),
+            'to_date': query.get('to_date'),
+            'to_time': query.get('to_time'),
+            'car_class': query.get('car_class'),
+            'rate': query.get('rate'),
+            'flight': query.get('flight'),
+            'distance': query.get('distance'),
+            'travel_time': query.get('travel_time'),
+            'child_seat': query.get('child_seat'),
+            'booster_seat': query.get('booster_seat'),
+            'flowers': query.get('flowers'),
+            'notes_extra': query.get('notes_extra', ''),
+            'name': query.get('name'),
+            'lastname': query.get('lastname'),
+            'email': query.get('email'),
+            'phone': query.get('phone'),
+            'passengers': query.get('passengers'),
+            'luggage': query.get('luggage'),
+            'notes_details': query.get('notes_details', ''),
+            'billing_name': billing_data['name'],
+            'billing_lastname': billing_data['lastname'],
+            'billing_company': billing_data['company'],
+            'billing_address': billing_data['address'],
+            'terms': terms_
+        }
+
+        # Save Booking
+        instance = Booking(**booking_data)
+        instance.save()
+
+        # Retrieve booking ID
+        booking_id = instance.id
+
+        # Update notes_details with notes_extra
+        booking_data['notes_details'] = (
+            booking_data['notes_details'] + '\n' + booking_data['notes_extra']
+        )
+
+        # Prepare context for emails and response
+        context = {
+            **booking_data,
+            'booking_id': booking_id,
+        }
+
+        # Get language code
+        language_code = get_language_from_request(request)
+        subjects = {
+            'it': 'La tua prenotazione è stata inviata con successo',
+            'fr': 'Votre réservation a été soumise avec succès',
+            'es': 'Su reserva fue enviada exitosamente',
+            'ru': 'Ваше бронирование было успешно отправлено',
+            'en': 'Your booking was submitted successfully'
+        }
+        subject = subjects.get(language_code,
+                               'Your booking was submitted successfully')
+
+        # Admin email
+        admin_subject = 'Подтверждение бронирования (для админа)'
+        admin_email_content = render_to_string('email/email.html', context)
+        email_message = EmailMultiAlternatives(admin_subject,
+                                               admin_email_content,
+                                               settings.DEFAULT_FROM_EMAIL,
+                                               settings.DEFAULT_FROM_EMAIL)
+        email_message.content_subtype = 'html'
+        email_message.send()
+
+        # Customer email
+        customer_email_content = render_to_string('email/email.html', context)
+        email_message = EmailMultiAlternatives(subject,
+                                               customer_email_content,
+                                               booking_data['email'],
+                                               settings.DEFAULT_FROM_EMAIL)
+        email_message.content_subtype = 'html'
+        email_message.send()
+        return render(request, 'booking/booking-received.html', context)
+
+    else:
+        return render(request, 'booking/booking-error.html',
+                      {'error': 'Booking data not found in session'})
 
 
 def payment_error(request):

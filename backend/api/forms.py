@@ -26,7 +26,10 @@ class ExtrasForm(forms.Form):
 class DetailsForm(forms.Form):
     name = forms.CharField()
     lastname = forms.CharField()
-    email = forms.CharField()
+    email = forms.EmailField(
+        error_messages={'invalid':
+                        'Пожалуйста, введите корректный email адрес.'}
+                        )
     phone = forms.CharField()
     passengers = forms.CharField()
     luggage = forms.CharField(required=False)
