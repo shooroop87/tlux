@@ -122,7 +122,8 @@ def vehicle(request):
                               'Аэропорт',
                               'Мальпенса',
                               'Миланский аэропорт',
-                              '21010 Ферно, Варезе, Италия']
+                              '21010 Ферно, Варезе, Италия',
+                              'Aeri']
         checked_from = any(
             re.search(item,
                       from_hidden,
@@ -131,7 +132,7 @@ def vehicle(request):
             re.search(item,
                       to_hidden,
                       re.IGNORECASE) for item in milan_bergamo_rule)
-        checked = checked_from and checked_to
+        checked = checked_from or checked_to
         if checked:
             cost = 100
         cost_e = max(50, cost)
