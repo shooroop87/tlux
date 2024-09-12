@@ -534,7 +534,12 @@ def payment_success(request):
         instance.save()
 
         # Retrieve booking ID
-        booking_id = instance.id
+        session_id = query.get('session_id')
+        booking_data = Booking.objects.get(session_id=session_id)
+        # breakpoint()
+        field_name = booking_data._meta.fields[0].name
+        # print(field_name)
+        booking_id = getattr(booking_data, field_name)
 
         # Update notes_details with notes_extra
         booking_data['notes_details'] = (
