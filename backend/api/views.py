@@ -420,6 +420,10 @@ def payment(request):
         'total': total,
     })
     request.session.modified = True
+
+    # Calculate total cost
+    rate = float(str(query.get('rate', '0')).replace(',', '.'))
+    total = rate + extra_total
     # Context render
     context = {
         'from_short': query.get('from_short'),
@@ -427,6 +431,13 @@ def payment(request):
         'to_short': query.get('to_short'),
         'to_hidden': query.get('to_hidden'),
         'car_class': query.get('car_class'),
+        'child_seat': child_seat,
+        'booster_seat': booster_seat,
+        'flowers': flowers,
+        'extra_total': extra_total,
+        'child_seat_total': cst,
+        'booster_seat_total': bst,
+        'flowers_total': fl,
         'rate': rate,
         'total': total,
         'distance': query.get('distance'),
@@ -557,6 +568,7 @@ def payment_success(request):
             'to_time': query.get('to_time'),
             'car_class': query.get('car_class'),
             'rate': query.get('rate'),
+            'total': query.get('total'),
             'flight': query.get('flight'),
             'distance': query.get('distance'),
             'travel_time': query.get('travel_time'),
@@ -624,10 +636,6 @@ def payment_success(request):
 
 
 def payment_error(request):
-    pass
-
-
-def test(request):
     pass
 
 
