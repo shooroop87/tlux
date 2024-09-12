@@ -363,8 +363,12 @@ def payment(request):
     total = rate + extra_total
 
     # Payment gateway settings
-    ALIAS_TEST = 'payment_3780564'
-    CHIAVESEGRETA_TEST = '9086Wh56532BG7oV6giEUW2510201H68WAqc831G'
+    # PROD
+    # ALIAS_TEST = 'payment_3780564'
+    # CHIAVESEGRETA_TEST = '9086Wh56532BG7oV6giEUW2510201H68WAqc831G'
+    # TEST
+    ALIAS_TEST = 'ALIAS_WEB_00082258'
+    CHIAVESEGRETA_TEST = 'Y665ESJRJEK38D6D1MJJGCYAUQR2J8SV'
     current_datetime = datetime.today().strftime('%Y%m%d%H%M%S')
     codTrans = 'TESTPS_' + current_datetime
     divisa = 'EUR'
@@ -381,7 +385,10 @@ def payment(request):
 
     # URLs
     merchantServerUrl = "https://transferslux.com"
-    NEXI_HOST = "https://ecommerce.nexi.it"
+    # PROD
+    # NEXI_HOST = "https://ecommerce.nexi.it"
+    # TEST
+    NEXI_HOST = "https://int-ecommerce.nexi.it"
     requestUrl = f"{NEXI_HOST}/ecomm/ecomm/DispatcherServlet"
     success_url = urljoin(merchantServerUrl, "success/")
     cancel_url = urljoin(merchantServerUrl, "error/")
@@ -471,7 +478,10 @@ def payment_success(request):
         raise ValueError("Missing required parameters")
 
     # Calculate MAC
-    CHIAVESEGRETA_TEST = '9086Wh56532BG7oV6giEUW2510201H68WAqc831G'
+    # PROD
+    # CHIAVESEGRETA_TEST = '9086Wh56532BG7oV6giEUW2510201H68WAqc831G'
+    # TEST
+    CHIAVESEGRETA_TEST = 'Y665ESJRJEK38D6D1MJJGCYAUQR2J8SV'
     mac_str = (f"codTrans={transaction_data['codTrans']}"
                f"esito=OK"
                f"importo={transaction_data['importo']}"
@@ -575,6 +585,10 @@ def payment_success(request):
 
 
 def payment_error(request):
+    pass
+
+
+def test(request):
     pass
 
 
