@@ -386,9 +386,9 @@ def payment(request):
     # URLs
     merchantServerUrl = "https://transferslux.com"
     # PROD
-    # NEXI_HOST = "https://ecommerce.nexi.it"
+    NEXI_HOST = "https://ecommerce.nexi.it"
     # TEST
-    NEXI_HOST = "https://int-ecommerce.nexi.it"
+    # NEXI_HOST = "https://int-ecommerce.nexi.it"
     requestUrl = f"{NEXI_HOST}/ecomm/ecomm/DispatcherServlet"
     success_url = urljoin(merchantServerUrl, "success/")
     cancel_url = urljoin(merchantServerUrl, "error/")
@@ -575,7 +575,7 @@ def payment_success(request):
             'child_seat': query.get('child_seat'),
             'booster_seat': query.get('booster_seat'),
             'flowers': query.get('flowers'),
-            'notes_extra': query.get('notes_extra',
+            'notes_extra': query.get('notes_extra'),
             'name': query.get('name'),
             'lastname': query.get('lastname'),
             'email': query.get('email'),
