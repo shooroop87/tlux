@@ -23,8 +23,8 @@ msgid "Oops! It looks like you're lost."
 msgstr "¡Ups! Parece que estás perdido."
 
 #: .\templates\500.html:33
-msgid "¡Ups! Algo va mal en el servidor."
-msgstr "Oups ! Un problème est survenu sur le serveur."
+msgid "Oops! Something goes wrong on server."
+msgstr "¡Ups! Algo va mal en el servidor."
 
 #: .\templates\booking\booking-payment-error.html:33
 msgid "Payment failed"
@@ -39,10 +39,6 @@ msgstr "Intente realizar la reserva y el pago nuevamente."
 #: .\templates\404.html:35
 msgid "Go Back to Homepage"
 msgstr "Volver a la página principal"
-
-#: .\templates\500.html:33
-msgid "¡Ups! Algo va mal en el servidor."
-msgstr "Oups ! Un problème est survenu sur le serveur."
 
 #: .\templates\500.html:34
 msgid "Please try again."
