@@ -34,11 +34,9 @@ msgstr "Pago fallido"
 msgid "Please try make booking and payment again."
 msgstr "Intente realizar la reserva y el pago nuevamente."
 
-#: .\templates\booking\booking-payment-error.html:35
-msgid "Please try make booking and payment again."
-msgstr "Veuillez essayer d'effectuer à nouveau la réservation et le paiement."
-
+#: .\templates\500.html:35
 #: .\templates\booking\booking-payment-error.html:36
+#: .\templates\404.html:35
 msgid "Go Back to Homepage"
 msgstr "Volver a la página principal"
 
@@ -50,20 +48,12 @@ msgstr "Oups ! Un problème est survenu sur le serveur."
 msgid "Please try again."
 msgstr "Por favor, inténtalo de nuevo."
 
-#: .\templates\500.html:35
-msgid "Go Back to Homepage"
-msgstr "Volver a la página principal"
-
 #: .\templates\404.html:34
 msgid ""
 "The page you're looking for isn't available. Try to search again or use the "
 "go to."
 msgstr ""
 "La página que estás buscando no está disponible. Intente buscar nuevamente."
-
-#: .\templates\404.html:35
-msgid "Go Back to Homepage"
-msgstr "Volver a la página principal"
 
 #: .\templates\about.html:31 .\templates\includes\footer.html:29
 msgid "About Us"

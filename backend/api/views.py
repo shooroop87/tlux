@@ -609,7 +609,8 @@ def payment_success(request):
         email_message = EmailMultiAlternatives(admin_subject,
                                                admin_email_content,
                                                'support@transferslux.com',
-                                               ['autistasobrio@gmail.com'])
+                                               ['autistasobrio@gmail.com',
+                                                'job@andreyegorov.com'])
         email_message.content_subtype = 'html'
         email_message.send()
 
