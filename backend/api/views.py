@@ -525,14 +525,14 @@ def payment_success(request):
             'child_seat': query.get('child_seat'),
             'booster_seat': query.get('booster_seat'),
             'flowers': query.get('flowers'),
-            'notes_extra': query.get('notes_extra', ''),
+            'notes_extra': query.get('notes_extra'),
             'name': query.get('name'),
             'lastname': query.get('lastname'),
             'email': query.get('email'),
             'phone': query.get('phone'),
             'passengers': query.get('passengers'),
             'luggage': query.get('luggage'),
-            'notes_details': query.get('notes_details', ''),
+            'notes_details': query.get('notes_details'),
             'billing_name': billing_data['name'],
             'billing_lastname': billing_data['lastname'],
             'billing_company': billing_data['company'],
@@ -553,9 +553,9 @@ def payment_success(request):
         booking_id = getattr(booking_data, field_name)
 
         # Update notes_details with notes_extra
-        notes_details = query.get('notes_details', '')
-        notes_extra = query.get('notes_extra', '')
-        notes_details_upd = notes_details + '\n' + notes_extra
+        notes_details = query.get('notes_details')
+        notes_extra = query.get('notes_extra')
+        notes_details_upd = notes_details + ', ' + notes_extra
 
         # Prepare context for emails and response
         context = {
@@ -575,7 +575,7 @@ def payment_success(request):
             'child_seat': query.get('child_seat'),
             'booster_seat': query.get('booster_seat'),
             'flowers': query.get('flowers'),
-            'notes_extra': query.get('notes_extra', ''),
+            'notes_extra': query.get('notes_extra',
             'name': query.get('name'),
             'lastname': query.get('lastname'),
             'email': query.get('email'),
