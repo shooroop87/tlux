@@ -595,18 +595,19 @@ def payment_success(request):
         admin_subject = 'Подтверждение бронирования (для админа)'
         admin_email_content = render_to_string('email/email.html', context)
         email_message = EmailMultiAlternatives(admin_subject,
-                                               admin_email_content,
-                                               settings.DEFAULT_FROM_EMAIL,
-                                               settings.DEFAULT_FROM_EMAIL)
+                                               'autistasobrio@gmail.com',
+                                               'support@transferslux.com',
+                                               'support@transferslux.com')
         email_message.content_subtype = 'html'
         email_message.send()
 
         # Customer email
         customer_email_content = render_to_string('email/email.html', context)
+        customer_email = query.get('email')
         email_message = EmailMultiAlternatives(subject,
                                                customer_email_content,
-                                               booking_data['email'],
-                                               settings.DEFAULT_FROM_EMAIL)
+                                               customer_email,
+                                               'support@transferslux.com')
         email_message.content_subtype = 'html'
         email_message.send()
         return render(request, 'booking/booking-received.html', context)
