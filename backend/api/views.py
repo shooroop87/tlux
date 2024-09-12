@@ -542,14 +542,41 @@ def payment_success(request):
         booking_id = getattr(booking_data, field_name)
 
         # Update notes_details with notes_extra
-        booking_data['notes_details'] = (
-            booking_data['notes_details'] + '\n' + booking_data['notes_extra']
-        )
+        notes_details = query.get('notes_details', '')
+        notes_extra = query.get('notes_extra', '')
+        notes_details_upd = notes_details + '\n' + notes_extra
 
         # Prepare context for emails and response
         context = {
-            **booking_data,
-            'booking_id': booking_id,
+            'session_id': query.get('session_id'),
+            'from_short': query.get('from_short'),
+            'from_hidden': query.get('from_hidden'),
+            'to_short': query.get('to_short'),
+            'to_hidden': query.get('to_hidden'),
+            'to_date': query.get('to_date'),
+            'to_time': query.get('to_time'),
+            'car_class': query.get('car_class'),
+            'rate': query.get('rate'),
+            'flight': query.get('flight'),
+            'distance': query.get('distance'),
+            'travel_time': query.get('travel_time'),
+            'child_seat': query.get('child_seat'),
+            'booster_seat': query.get('booster_seat'),
+            'flowers': query.get('flowers'),
+            'notes_extra': query.get('notes_extra', ''),
+            'name': query.get('name'),
+            'lastname': query.get('lastname'),
+            'email': query.get('email'),
+            'phone': query.get('phone'),
+            'passengers': query.get('passengers'),
+            'luggage': query.get('luggage'),
+            'notes_details': notes_details_upd,
+            'billing_name': billing_data['name'],
+            'billing_lastname': billing_data['lastname'],
+            'billing_company': billing_data['company'],
+            'billing_address': billing_data['address'],
+            'terms': terms_,
+            'booking_id': booking_id
         }
 
         # Get language code
