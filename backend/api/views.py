@@ -555,7 +555,7 @@ def payment_success(request):
         # Update notes_details with notes_extra
         notes_details = query.get('notes_details')
         notes_extra = query.get('notes_extra')
-        notes_details_upd = notes_details + ', ' + notes_extra
+        notes_details_upd = notes_extra + ' ' + notes_details
 
         # Prepare context for emails and response
         context = {
