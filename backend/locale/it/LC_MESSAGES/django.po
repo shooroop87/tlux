@@ -22,6 +22,30 @@ msgstr ""
 msgid "Oops! It looks like you're lost."
 msgstr "Ops! Sembra che tu sia perso."
 
+#: .\templates\500.html:33
+msgid "Oops! Something goes wrong on server."
+msgstr "Oops! Qualcosa è andato storto sul server."
+
+#: .\templates\500.html:34
+msgid "Please try again."
+msgstr "Riprova più tardi."
+
+#: .\templates\500.html:35
+msgid "Go Back to Homepage"
+msgstr "Torna alla home page"
+
+#: .\templates\booking\booking-payment-error.html:33
+msgid "Payment failed"
+msgstr "Pagamento non è andato a buon fine"
+
+#: .\templates\booking\booking-payment-error.html:35
+msgid "Please try make booking and payment again."
+msgstr "Prova a effettuare nuovamente la prenotazione e il pagamento."
+
+#: .\templates\booking\booking-payment-error.html:36
+msgid "Go Back to Homepage"
+msgstr "Torna alla home page"
+
 #: .\templates\404.html:34
 msgid ""
 "The page you're looking for isn't available. Try to search again or use the "

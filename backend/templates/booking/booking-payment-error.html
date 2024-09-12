@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" data-x="html" data-x-toggle="html-overflow-hidden">
+    {% load static %}
+    {% load i18n %}
+<head>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="msapplication-TileColor" content="#0E0E0E">
+    <meta name="template-color" content="#0E0E0E">
+    <meta name="description" content="Index page">
+    <meta name="keywords" content="index, page">
+    <meta name="author" content="">
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'imgs/template/favicon.png' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>TransfersLux</title>
+  </head>
+  <body>
+    {% include 'includes/header.html' %}
+    {% include 'includes/mobile_menu.html' %}
+    <main class="main">
+      
+      <section class="section mt-120 mb-100"> 
+        <div class="container-sub">
+          <div class="box-completed-booking">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;"> <img class="mb-20" src="https://transferslux.com/static/imgs/page/booking/completed.png" alt="Booking completed">
+              <h4 class="heading-24-medium color-text mb-10">{% trans "Payment failed" %}</h4>
+            </div>
+            <p class="color-text text-16 mb-25 wow fadeInUp">{% trans "Please try make booking and payment again." %}</p>
+            <a class="btn btn-primary pl-50 pr-50 wow fadeInUp" href="{% url 'api:index' %}">{% trans "Go Back to Homepage" %}
+              <svg class="icon-16 ml-5" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+    {% include 'includes/footer.html' %}
+    <script src="{% static '/js/vendors/modernizr-3.6.0.min.js' %}"></script>
+    <script src="{% static '/js/vendors/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static '/js/vendors/jquery-migrate-3.3.0.min.js' %}"></script>
+    <script src="{% static '/js/vendors/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static '/js/vendors/waypoints.js' %}"></script>
+    <script src="{% static '/js/vendors/wow.js' %}"></script>
+    <script src="{% static '/js/vendors/magnific-popup.js' %}"></script>
+    <script src="{% static '/js/vendors/perfect-scrollbar.min.js' %}"></script>
+    <script src="{% static '/js/vendors/select2.min.js' %}"></script>
+    <script src="{% static '/js/vendors/isotope.js' %}"></script>
+    <script src="{% static '/js/vendors/scrollup.js' %}"></script>
+    <script src="{% static '/js/vendors/swiper-bundle.min.js' %}"></script>
+    <script src="{% static '/js/vendors/noUISlider.js' %}"></script>
+    <script src="{% static '/js/vendors/slider.js' %}"></script>
+    <!-- Count down-->
+    <script src="{% static '/js/vendors/counterup.js' %}"></script>
+    <script src="{% static '/js/vendors/jquery.countdown.min.js' %}"></script>
+    <!-- Count down--><script src="{% static '/js/vendors/jquery.elevatezoom.js' %}"></script>
+    <script src="{% static '/js/vendors/slick.js' %}"></script>
+    <script src="{% static '/js/vendors/jquery-ui.js' %}"></script>
+    <script src="{% static '/js/vendors/jquery.timepicker.min.js' %}"></script>
+    <script src="{% static '/js/main.js' %}"></script>
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+      (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+      m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+      (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+      ym(88729492, "init", {
+           clickmap:true,
+           trackLinks:true,
+           accurateTrackBounce:true,
+           webvisor:true
+      });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/88729492" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    <script src="//code.jivosite.com/widget/tVkFYVL5Kl" async></script>
+    <script type="text/javascript">
+    jQuery(document).ready(function($) {
+     $(window).scrollTop(0);
+    });
+    </script>
+  </body>
+</html>

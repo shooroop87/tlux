@@ -631,12 +631,11 @@ def payment_success(request):
         return render(request, 'booking/booking-received.html', context)
 
     else:
-        return render(request, 'booking/booking-error.html',
-                      {'error': 'Booking data not found in session'})
+        return render(request, 'booking/booking-payment-error.html')
 
 
 def payment_error(request):
-    pass
+    return render(request, 'booking/booking-payment-error.html')
 
 
 def about(request):
@@ -661,3 +660,7 @@ def contacts(request):
 
 def page_not_found(request, exception):
     return render(request, '404.html', {'path': request.path}, status=404)
+
+
+def internal_server_error(request, exception):
+    return render(request, '500.html', {'path': request.path}, status=500)

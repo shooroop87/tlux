@@ -8,6 +8,7 @@ from django.contrib.sitemaps.views import sitemap
 from django.urls import include, path
 
 handler404 = 'api.views.page_not_found'
+handler500 = 'api.views.internal_server_error'
 
 sitemaps = {
     'static': StaticViewSitemap
