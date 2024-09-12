@@ -54,7 +54,6 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'transferslux.urls'
 
-
 # Путь к директории с шаблонами вынесен в переменную:
 TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 
