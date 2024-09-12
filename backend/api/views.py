@@ -596,8 +596,8 @@ def payment_success(request):
         admin_email_content = render_to_string('email/email.html', context)
         email_message = EmailMultiAlternatives(admin_subject,
                                                admin_email_content,
-                                               'autistasobrio@gmail.com',
-                                               'support@transferslux.com')
+                                               'support@transferslux.com',
+                                               ['autistasobrio@gmail.com'])
         email_message.content_subtype = 'html'
         email_message.send()
 
@@ -608,10 +608,12 @@ def payment_success(request):
             customer_email_striped = customer_email.strip()
         except Exception:
             customer_email_striped = customer_email
+        to = []
+        to.append(customer_email_striped)
         email_message = EmailMultiAlternatives(subject,
                                                customer_email_content,
-                                               customer_email_striped,
-                                               'support@transferslux.com')
+                                               'support@transferslux.com',
+                                               to)
         email_message.content_subtype = 'html'
         email_message.send()
         return render(request, 'booking/booking-received.html', context)
