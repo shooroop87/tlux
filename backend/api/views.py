@@ -662,5 +662,5 @@ def page_not_found(request, exception):
     return render(request, '404.html', {'path': request.path}, status=404)
 
 
-def internal_server_error(request, exception):
-    return render(request, '500.html', {'path': request.path}, status=500)
+def internal_server_error(request, *args, **argv):
+    return render(request, '500.html', status=500)
