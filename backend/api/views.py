@@ -606,7 +606,7 @@ def payment_success(request):
         customer_email = query.get('email')
         try:
             customer_email_striped = customer_email.strip()
-        except:
+        except Exception:
             customer_email_striped = customer_email
         email_message = EmailMultiAlternatives(subject,
                                                customer_email_content,
