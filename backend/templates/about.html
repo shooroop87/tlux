@@ -9,9 +9,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="msapplication-TileColor" content="#0E0E0E">
     <meta name="template-color" content="#0E0E0E">
-    <meta name="description" content="Index page">
-    <meta name="keywords" content="index, page">
-    <meta name="author" content="Transferslux">
+    <meta name="description" content="{% trans "Comfortable transfers from airports and hotels in Italy" %}">
+    <meta name="keywords" content="{% trans "transfersLux, transfers, about us" %}">
     <!-- Google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,7 +18,7 @@
 
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'imgs/template/favicon.png' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <title>TransfersLux</title>
+    <title>{% trans "TransfersLux – About Us" %}</title>
   </head>
   <body>
     {% include 'includes/header.html' %}
@@ -39,50 +38,15 @@
       <section class="section">
         <div class="container-sub"> 
           <div class="mt-60"> 
-            <h2 class="heading-44-medium mb-30 color-text title-fleet wow fadeInUp">We reimagine the way the world moves for the better</h2>
+            <h2 class="heading-44-medium mb-30 color-text title-fleet wow fadeInUp">{% trans "We reimagine the way the world moves for the better" %}</h2>
             <div class="content-single wow fadeInUp"> 
-              <p>We offer luxury chauffeur driven airport transfers and pickups to London. Exceptional Safe, Meet and Greet. One hour of complimentary wait time and flight tracking. Professional Drivers & Vehicles. Fixed prices on airport transfers. VIP service, get your quote today!</p>
-              <p>Et, morbi at sagittis vehicula rutrum. Lacus tortor, quam arcu mi et, at lectus leo nunc. Mattis cras auctor vel pharetra tempor. Rhoncus pellentesque habitant ac tempor. At aliquam euismod est in praesent ornare etiam id. Faucibus libero sit vehicula sed condimentum. Vitae in nam porttitor rutrum sed aliquam donec sed. Sapien facilisi lectus.</p>
+              <p>{% trans "Transferslux.com is a site where one can book a luxury chauffeur driven transfers to get from or to the airport, between two tourist italian destinations or other italian locations popular with tourists." %}</p>
               <ul class="list-ticks list-ticks-small">
-                <li class="text-16 mb-20">100% Luxurious Fleet</li>
-                <li class="text-16 mb-20">All Our Fleet Are Fully Valeted & Serviced</li>
-                <li class="text-16 mb-20">A Safe & Secure Journey</li>
-                <li class="text-16 mb-20">Comfortable And Enjoyable</li>
-                <li class="text-16 mb-20">Clean, Polite & Knowledgeable</li>
+                <li class="text-16 mb-20">{% trans "100% Luxurious Fleet" %}</li>
+                <li class="text-16 mb-20">{% trans "All Our Fleet Are Fully Valeted & Serviced" %}</li>
+                <li class="text-16 mb-20">{% trans "A Safe & Secure Journey" %}</li>
+                <li class="text-16 mb-20">{% trans "Comfortable And Enjoyable" %}</li>
               </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section class="section mb-30 mt-80 box-showcase">
-        <div class="bg-showcase pt-100 pb-70">
-          <div class="container-sub"> 
-            <div class="row align-items-center"> 
-              <div class="col-lg-6 mb-30"> 
-                <h2 class="heading-44-medium color-white wow fadeInUp">Showcase some impressive numbers.</h2>
-              </div>
-              <div class="col-lg-6">
-                <div class="row align-items-center">
-                  <div class="col-4 mb-30 wow fadeInUp">
-                    <div class="box-number"> 
-                      <h2 class="heading-44-medium color-white">285</h2>
-                      <p class="text-20 color-white">Vehicles</p>
-                    </div>
-                  </div>
-                  <div class="col-4 mb-30 wow fadeInUp">
-                    <div class="box-number"> 
-                      <h2 class="heading-44-medium color-white">97</h2>
-                      <p class="text-20 color-white">Awards</p>
-                    </div>
-                  </div>
-                  <div class="col-sm-4 col-12 mb-30 wow fadeInUp">
-                    <div class="box-number"> 
-                      <h2 class="heading-44-medium color-white">13K</h2>
-                      <p class="text-20 color-white">Happy Customer</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -90,39 +54,39 @@
       <section class="section mt-110"> 
         <div class="container-sub"> 
           <div class="text-center">
-            <h2 class="heading-44-medium color-text wow fadeInUp">Make Your Trip Your Way With Us</h2>
+            <h2 class="heading-44-medium color-text wow fadeInUp">{% trans "Make Your Trip Your Way With Us" %}</h2>
           </div>
           <div class="row mt-50 cardIconStyleCircle"> 
             <div class="col-lg-4">
               <div class="cardIconTitleDesc wow fadeInUp">
-                <div class="cardIcon"><img src="assets/imgs/page/homepage1/safe.svg" alt=""></div>
+                <div class="cardIcon"><img src="{% static 'assets/imgs/page/homepage1/safe.svg' %}" alt="Safety First" loading="lazy"></div>
                 <div class="cardTitle">
-                  <h5 class="text-20-medium color-text">Safety First</h5>
+                  <h5 class="text-20-medium color-text">{% trans "Safety First" %}</h5>
                 </div>
                 <div class="cardDesc">
-                  <p class="text-16 color-text">Both you and your shipments will travel with professional drivers. Always with the highest quality standards.</p>
+                  <p class="text-16 color-text">{% trans "Our top priority is your well-being, with professional drivers, well-maintained vehicles, and strict adherence to safety standards." %}</p>
                 </div>
               </div>
             </div>
             <div class="col-lg-4">
               <div class="cardIconTitleDesc wow fadeInUp">
-                <div class="cardIcon"><img src="assets/imgs/page/homepage1/price.svg" alt=""></div>
+                <div class="cardIcon"><img src="{% static 'assets/imgs/page/homepage1/price.svg' %}" alt="Prices With No Surprises" loading="lazy"></div>
                 <div class="cardTitle">
-                  <h5 class="text-20-medium color-text">Prices With No Surprises</h5>
+                  <h5 class="text-20-medium color-text">{% trans "Prices With No Surprises" %}</h5>
                 </div>
                 <div class="cardDesc">
-                  <p class="text-16 color-text">Both you and your shipments will travel with professional drivers. Always with the highest quality standards.</p>
+                  <p class="text-16 color-text">{% trans "Enjoy clear, upfront rates with no hidden fees. What you see is what you pay, ensuring a stress-free booking and travel experience." %}</p>
                 </div>
               </div>
             </div>
             <div class="col-lg-4"> 
               <div class="cardIconTitleDesc wow fadeInUp">
-                <div class="cardIcon"><img src="assets/imgs/page/homepage1/vehicle.svg" alt=""></div>
+                <div class="cardIcon"><img src="{% static 'assets/imgs/page/homepage1/vehicle.svg' %}" alt="Private Travel Solutions" loading="lazy"></div>
                 <div class="cardTitle">
                   <h5 class="text-20-medium color-text">Private Travel Solutions</h5>
                 </div>
                 <div class="cardDesc">
-                  <p class="text-16 color-text">Both you and your shipments will travel with professional drivers. Always with the highest quality standards.</p>
+                  <p class="text-16 color-text">{% trans Experience personalized, exclusive travel with our tailored transfer services, designed to meet your unique needs for a seamless journey." %}</p>
                 </div>
               </div>
             </div>
@@ -130,195 +94,81 @@
         </div>
       </section>
       <div class="mb-90"></div>
-      <section class="section pt-120 pb-20 bg-primary bg-how-it-works"> 
-        <div class="container-sub"> 
-          <h2 class="heading-44-medium color-white mb-60 wow fadeInUp">How It Works</h2>
-          <div class="row"> 
-            <div class="col-lg-6 order-lg-last">
-              <div class="box-main-slider"> 
-                <div class="detail-gallery wow fadeInUp">
-                  <div class="main-image-slider">
-                    <figure><img src="assets/imgs/page/homepage1/laptop.png" alt=""></figure>
-                    <figure><img src="assets/imgs/page/homepage1/desktop.png" alt=""></figure>
-                    <figure><img src="assets/imgs/page/homepage1/desktop2.png" alt=""></figure>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-6 order-lg-first justify-content-between position-z3 wow fadeInUp">
-              <ul class="slider-nav-thumbnails list-how"> 
-                <li> <span class="line-white"></span>
-                  <h4 class="text-20-medium mb-20">Create Your Route</h4>
-                  <p class="text-16">Enter your pickup & dropoff locations or the number of hours you wish to book a car and driver for</p>
-                </li>
-                <li> <span class="line-white"></span>
-                  <h4 class="text-20-medium mb-20">Choose Vehicle For You</h4>
-                  <p class="text-16">On the day of your ride, you will receive two email and SMS updates - one informing you that.</p>
-                </li>
-                <li> <span class="line-white"></span>
-                  <h4 class="text-20-medium mb-20">Enjoy The Journey</h4>
-                  <p class="text-16">After your ride has taken place, we would appreciate it if you could rate your car and driver.</p>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section class="section pt-130 pb-100 bg-2 box-testimonials">
-        <div class="container-sub"> 
-          <div class="row"> 
-            <div class="col-lg-5 col-md-6 mb-30">
-              <div class="box-swiper"> 
-                <div class="swiper-container swiper-group-testimonials pb-50">
-                  <div class="swiper-wrapper">
-                    <div class="swiper-slide"> 
-                      <div class="cardQuote wow fadeInUp">
-                        <div class="box-quote"> 
-                          <div class="icon-quote bg-secondary"> </div>
-                          <div class="info-quote"> 
-                            <h5 class="color-text text-18-medium">Jonathan Miller</h5>
-                            <p class="color-text text-14">Web Developer</p>
-                          </div>
-                        </div>
-                        <div class="content-quote color-text">
-                           I really can recommend this theme, because it’s coded very well and  it’s really easy to build your own website!</div>
-                      </div>
-                    </div>
-                    <div class="swiper-slide"> 
-                      <div class="cardQuote wow fadeInUp">
-                        <div class="box-quote"> 
-                          <div class="icon-quote bg-secondary"> </div>
-                          <div class="info-quote"> 
-                            <h5 class="color-text text-18-medium">Jonathan Miller</h5>
-                            <p class="color-text text-14">Web Developer</p>
-                          </div>
-                        </div>
-                        <div class="content-quote color-text">
-                           I really can recommend this theme, because it’s coded very well and  it’s really easy to build your own website!</div>
-                      </div>
-                    </div>
-                    <div class="swiper-slide"> 
-                      <div class="cardQuote wow fadeInUp">
-                        <div class="box-quote"> 
-                          <div class="icon-quote bg-secondary"> </div>
-                          <div class="info-quote"> 
-                            <h5 class="color-text text-18-medium">Jonathan Miller</h5>
-                            <p class="color-text text-14">Web Developer</p>
-                          </div>
-                        </div>
-                        <div class="content-quote color-text">
-                           I really can recommend this theme, because it’s coded very well and  it’s really easy to build your own website!</div>
-                      </div>
-                    </div>
-                    <div class="swiper-slide"> 
-                      <div class="cardQuote wow fadeInUp">
-                        <div class="box-quote"> 
-                          <div class="icon-quote"> </div>
-                          <div class="info-quote"> 
-                            <h5 class="color-text text-18-medium">Jonathan Miller</h5>
-                            <p class="color-text text-14">Web Developer</p>
-                          </div>
-                        </div>
-                        <div class="content-quote color-text">
-                           I really can recommend this theme, because it’s coded very well and  it’s really easy to build your own website!</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="box-pagination-testimonials mt-40 swiper-pagination-grey"> <span class="firstNumber"></span><span class="lastNumber"></span>
-                    <div class="swiper-pagination swiper-pagination-testimonials"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-7 col-md-6 mb-30 text-lg-end text-center d-none d-md-block">
-              <div class="box-video wow fadeInUp"> <a class="btn btn-play popup-youtube hover-up" href="https://www.youtube.com/watch?v=sVPYIRF9RCQ"></a><img src="assets/imgs/page/about/img1.png" alt=""></div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section class="section pt-65 pb-35 border-bottom"> 
-        <div class="container-sub"> 
-          <div class="row align-items-center">
-            <div class="col-xl-3 col-lg-4 mb-30"> 
-              <h3 class="color-primary wow fadeInUp">The partners who sell<br class="d-none d-lg-block">our products</h3>
-            </div>
-            <div class="col-xl-9 col-lg-8 mb-30">
-              <ul class="list-logos d-flex align-item-center wow fadeInUp"> 
-                <li><img src="assets/imgs/slider/logo/air.svg" alt=""></li>
-                <li><img src="assets/imgs/slider/logo/eb.svg" alt=""></li>
-                <li><img src="assets/imgs/slider/logo/nba.svg" alt=""></li>
-                <li><img src="assets/imgs/slider/logo/nla.svg" alt=""></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section class="section pt-80 mb-30">
+      <section class="section pt-80 bg-faqs pb-60">
         <div class="container-sub">
           <div class="box-faqs">
             <div class="text-center"> 
-              <h2 class="color-brand-1 mb-20 wow fadeInUp">Frequently Asked Questions</h2>
+              <h2 class="color-brand-1 mb-20 wow fadeInUp">{% trans "Frequently Asked Questions" %}</h2>
             </div>
             <div class="mt-60 mb-40">
               <div class="accordion wow fadeInUp" id="accordionFAQ">
                 <div class="accordion-item">
-                  <h5 class="accordion-header" id="headingOne">
-                    <button class="accordion-button text-heading-5" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">How do I create an account?</button>
-                  </h5>
+                  <p class="accordion-header" id="headingOne">
+                    <button class="accordion-button text-heading-5" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">{% trans "How do I book a transfer?" %}</button>
+                  </p>
                   <div class="accordion-collapse collapse show" id="collapseOne" aria-labelledby="headingOne" data-bs-parent="#accordionFAQ">
-                    <div class="accordion-body">Sad ipscing elitrsed diamnonu myeir mod, sadipscing elitrsed dia morem ipsum dolor situamet consetetur loutrytru hury. Lorem ipsum dolor sitametco nsetetur sa cingelitrse diamonu eirmoid, sad ipscing elitrstrud diamtre ute riyutroui tout.</div>
+                    <div class="accordion-body">
+                      {% trans "Please choose your starting location in the <b>Pick up location</b> field and your destination in the <b>Drop off location</b> field." %}
+                      {% trans "You have the option to either type the name of the place or provide the specific address." %}
+                      {% trans "Utilize the dropdown suggestions to streamline and simplify your search process." %}
+                      {% trans "Afterward, proceed by clicking on the <b>Show Prices</b> button. Choose the desired transfer class and select <b>Book</b> to proceed with your reservation." %}
+                    </div>
                   </div>
                 </div>
                 <div class="accordion-item">
-                  <h5 class="accordion-header" id="headingTwo">
-                    <button class="accordion-button text-heading-5 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">How do I earn Easy Ride Rewards points?</button>
-                  </h5>
+                  <p class="accordion-header" id="headingTwo">
+                    <button class="accordion-button text-heading-5 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">{% trans "How can I verify if my order has been successfully processed?" %}</button>
+                  </p>
                   <div class="accordion-collapse collapse" id="collapseTwo" aria-labelledby="headingTwo" data-bs-parent="#accordionFAQ">
-                    <div class="accordion-body">Sad ipscing elitrsed diamnonu myeir mod, sadipscing elitrsed dia morem ipsum dolor situamet consetetur loutrytru hury. Lorem ipsum dolor sitametco nsetetur sa cingelitrse diamonu eirmoid, sad ipscing elitrstrud diamtre ute riyutroui tout.</div>
+                    <div class="accordion-body">
+                      {% trans "After finalizing your booking, you will receive an email confirmation containing a voucher." %}
+                      {% trans "This voucher will include your booking number and all necessary details for your upcoming trip." %}
+                      {% trans "If you do not receive the confirmation email, please reach out to our manager via email at " %}<a href="mailto:support@transfersLux.com">support@transfersLux.com</a>{% trans " or through our online chat support." %}
+                    </div>
                   </div>
                 </div>
                 <div class="accordion-item">
-                  <h5 class="accordion-header" id="headingThree">
-                    <button class="accordion-button text-heading-5 collapsed text-heading-5 type=" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">How can I add my credit card on the app for payments?</button>
-                  </h5>
+                  <p class="accordion-header" id="headingThree">
+                    <button class="accordion-button text-heading-5 collapsed text-heading-5 type=" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">{% trans "How can I find my driver?" %}</button>
+                  </p>
                   <div class="accordion-collapse collapse" id="collapseThree" aria-labelledby="headingThree" data-bs-parent="#accordionFAQ">
-                    <div class="accordion-body">Sad ipscing elitrsed diamnonu myeir mod, sadipscing elitrsed dia morem ipsum dolor situamet consetetur loutrytru hury. Lorem ipsum dolor sitametco nsetetur sa cingelitrse diamonu eirmoid, sad ipscing elitrstrud diamtre ute riyutroui tout.</div>
-                  </div>
+                    <div class="accordion-body">
+                      {% trans "Important Note: Your designated driver will greet you with a name sign showing the first and last names you specified during your reservation." %}
+                      {% trans "During airport transfers, your driver will be awaiting your arrival at the exit of the arrivals area, following the passport control and baggage claim sections." %}
+                      {% trans "For hotel transfers, your driver will be positioned in the lobby area." %}
+                      {% trans "Comprehensive instructions for the meeting point can be accessed in your trip confirmation voucher. Additionally, you will find the driver's contact number provided therein." %}
+                    </div>
                 </div>
                 <div class="accordion-item">
-                  <h5 class="accordion-header" id="headingFour">
-                    <button class="accordion-button text-heading-5 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">How do I become a Captain?</button>
-                  </h5>
+                  <p class="accordion-header" id="headingFour">
+                    <button class="accordion-button text-heading-5 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">{% trans "What happens if my flight details change or is seriosly delayed?" %}</button>
+                  </p>
                   <div class="accordion-collapse collapse" id="collapseFour" aria-labelledby="headingFour" data-bs-parent="#accordionFAQ">
-                    <div class="accordion-body">Sad ipscing elitrsed diamnonu myeir mod, sadipscing elitrsed dia morem ipsum dolor situamet consetetur loutrytru hury. Lorem ipsum dolor sitametco nsetetur sa cingelitrse diamonu eirmoid, sad ipscing elitrstrud diamtre ute riyutroui tout.</div>
-                  </div>
+                    <div class="accordion-body">
+                        <p class="text-15">
+                          {% trans "We monitor all flights so we will do our best to arrive in time." %}
+                        </p>
+                        <p class="text-15">
+                          {% trans "If your flight is seriosly delayed just email or call us and keep in touch until we have the new details." %}
+                        </p>
+                        <p class="text-15">
+                          {% trans "If your fligth details is changed please call or email us and we will update your booking with new details." %}
+                        </p>
+                      </div>
                 </div>
                 <div class="accordion-item">
-                  <h5 class="accordion-header" id="headingFive">
-                    <button class="accordion-button text-heading-5 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">Where can I get more information, support or make a claim?     </button>
-                  </h5>
+                  <p class="accordion-header" id="headingFive">
+                    <button class="accordion-button text-heading-5 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">{% trans "Will my driver carry my luggage?" %}</button>
+                  </p>
                   <div class="accordion-collapse collapse" id="collapseFive" aria-labelledby="headingFive" data-bs-parent="#accordionFAQ">
-                    <div class="accordion-body">Sad ipscing elitrsed diamnonu myeir mod, sadipscing elitrsed dia morem ipsum dolor situamet consetetur loutrytru hury. Lorem ipsum dolor sitametco nsetetur sa cingelitrse diamonu eirmoid, sad ipscing elitrstrud diamtre ute riyutroui tout.</div>
+                    <div class="accordion-body">
+                      {% trans "Yes, your driver will always offer to help carry your bags and luggage." %}
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
-      <section class="section mt-50 bg-download-3 bg-secondary"> 
-        <div class="container-sub"> 
-          <h2 class="heading-44-medium color-white mb-20 wow fadeInUp">Download the app</h2>
-          <p class="color-white text-16 mb-60 wow fadeInUp">Have a personal driver at your fingertips no matter where you <br class="d-none d-md-block">are with our easy-to-use smartphone app.</p>
-          <div class="box-button-download"> <a class="btn btn-download mr-15 hover-up wow fadeInUp" href="#">
-              <div class="inner-download">
-                <div class="icon-download"> <img src="assets/imgs/template/icons/apple-icon.svg" alt=""></div>
-                <div class="info-download"> <span class="text-download-top">Download on the</span><span class="text-14-medium">Apple Store</span></div>
-              </div></a><a class="btn btn-download hover-up wow fadeInUp" href="#">
-              <div class="inner-download">
-                <div class="icon-download"> <img src="assets/imgs/template/icons/google-icon.svg" alt=""></div>
-                <div class="info-download"> <span class="text-download-top">Download on the</span><span class="text-14-medium">Apple Store</span></div>
-              </div></a></div>
         </div>
       </section>
     </main>
