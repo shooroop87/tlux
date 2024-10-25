@@ -102,38 +102,27 @@ def vehicle(request):
             # print(travel_time_h)
             # travel_time_min = re.findall('\d+', travel_time)[0]
 
-        milan_bergamo_rule = ['Milan',
-                              'milan',
-                              'milano',
-                              'Milano',
-                              'Malpensa',
-                              'malpensa',
-                              'Airport',
-                              'airport',
-                              'bergamo',
-                              'Bergamo',
-                              'Orio al Serio BG',
-                              'Orio al Serio',
-                              'BGY',
-                              'Aeroporto',
-                              'MXP',
-                              'aeruporto',
-                              'аэропорт',
-                              'Аэропорт',
-                              'Мальпенса',
-                              'Миланский аэропорт',
-                              '21010 Ферно, Варезе, Италия',
-                              'Aeri']
-        checked_from = any(
-            re.search(item,
-                      from_hidden,
-                      re.IGNORECASE) for item in milan_bergamo_rule)
-        checked_to = any(
-            re.search(item,
-                      to_hidden,
-                      re.IGNORECASE) for item in milan_bergamo_rule)
-        checked = checked_from or checked_to
-        if checked:
+        # Условие проверки на маршруты Милан-Бергамо или Милан-Мальпенса
+        milan_bergamo_pattern = re.compile(
+            (
+                r'(milan|milano|милан).*?'
+                r'(bergamo|бергамо|orio al serio|bgy)'
+            ),
+            re.IGNORECASE
+        )
+        milan_malpensa_pattern = re.compile(
+            (
+                r'(milan|milano|милан).*?'
+                r'(malpensa|аэропорт|airport|мальпенса|малпенса|mxp)'
+            ),
+            re.IGNORECASE
+        )
+        if (milan_bergamo_pattern.search(from_hidden)
+            and milan_bergamo_pattern.search(to_hidden)
+            ) or (
+            milan_malpensa_pattern.search(from_hidden)
+            and milan_malpensa_pattern.search(to_hidden)
+        ):
             cost = 100
         cost_e = max(50, cost)
         cost_s = cost_e * 1.5
