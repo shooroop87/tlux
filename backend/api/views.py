@@ -102,7 +102,6 @@ def vehicle(request):
             # print(travel_time_h)
             # travel_time_min = re.findall('\d+', travel_time)[0]
 
-        # Условие проверки на маршруты Милан-Бергамо или Милан-Мальпенса
         milan_bergamo_pattern = re.compile(
             (
                 r'(milan|milano|милан).*?'
