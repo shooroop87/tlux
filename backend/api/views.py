@@ -102,26 +102,37 @@ def vehicle(request):
             # print(travel_time_h)
             # travel_time_min = re.findall('\d+', travel_time)[0]
 
-        milan_bergamo_pattern = re.compile(
-            (
-                r'(milan|milano|милан).*?'
-                r'(bergamo|бергамо|orio al serio|bgy)'
-            ),
+        # Шаблон для Милана, учитывающий разные написания
+        milan_pattern = re.compile(
+            r'(milan|milano|милан)',
             re.IGNORECASE
         )
-        milan_malpensa_pattern = re.compile(
-            (
-                r'(milan|milano|милан).*?'
-                r'(malpensa|аэропорт|airport|мальпенса|малпенса|mxp)'
-            ),
+
+        # Шаблон для Бергамо, учитывающий различные варианты написания
+        bergamo_pattern = re.compile(
+            r'(bergamo|бергамо|orio al serio|bgy|'
+            r'аэропорт\sбергамо|via aeroporto.*orio al serio|'
+            r'airport|аэропорт|aeroporto)',
             re.IGNORECASE
         )
-        if (milan_bergamo_pattern.search(from_hidden)
-            and milan_bergamo_pattern.search(to_hidden)
-            ) or (
-            milan_malpensa_pattern.search(from_hidden)
-            and milan_malpensa_pattern.search(to_hidden)
-        ):
+
+        # Шаблон для Мальпенсы, учитывающий различные варианты написания
+        malpensa_pattern = re.compile(
+            r'(malpensa|мальпенса|малпенса|mxp|'
+            r'аэропорт\sмальпенса|aeroporto di milano malpensa|'
+            r'malpensa\sairport|milan malpensa airport|'
+            r'airport|аэропорт|aeroporto)',
+            re.IGNORECASE
+        )
+        if (
+           (milan_pattern.search(from_hidden)
+            and bergamo_pattern.search(to_hidden))
+            or (bergamo_pattern.search(from_hidden)
+                and milan_pattern.search(to_hidden))
+            or (milan_pattern.search(from_hidden)
+                and malpensa_pattern.search(to_hidden))
+            or (malpensa_pattern.search(from_hidden)
+                and milan_pattern.search(to_hidden))):
             cost = 100
         cost_e = max(50, cost)
         cost_s = cost_e * 1.5
