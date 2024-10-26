@@ -125,22 +125,21 @@ def vehicle(request):
             r'21010|ferno|варезе|италия)',
             re.IGNORECASE
         )
-        if (
-            (milan_pattern.search(from_hidden)
-             and bergamo_pattern.search(to_hidden))
-            or (bergamo_pattern.search(from_hidden)
-                and milan_pattern.search(to_hidden))
-            or (milan_pattern.search(from_hidden)
-                and malpensa_pattern.search(to_hidden))
-            or (malpensa_pattern.search(from_hidden)
-                and milan_pattern.search(to_hidden))
-            or (
-                from_hidden.lower() == 'malpensa'
-                and all(word in to_hidden.lower()
-                        for word in ['21010', 'ферно', 'варезе', 'италия'])
-            )
-        ):
+        # Проверка соответствия направлений с паттернами
+        if (milan_pattern.search(from_hidden)
+                and bergamo_pattern.search(to_hidden)):
             cost = 100
+        elif (milan_pattern.search(from_hidden)
+                and malpensa_pattern.search(to_hidden)):
+            cost = 100
+        elif (malpensa_pattern.search(from_hidden)
+                and milan_pattern.search(to_hidden)):
+            cost = 100
+        elif (bergamo_pattern.search(from_hidden)
+              and milan_pattern.search(to_hidden)):
+            cost = 100
+        else:
+            print("Стоимость не установлена.")
         cost_e = max(50, cost)
         cost_s = cost_e * 1.5
         cost_v = cost_e * 1.2
