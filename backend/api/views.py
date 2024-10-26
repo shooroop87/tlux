@@ -121,18 +121,25 @@ def vehicle(request):
             r'(malpensa|мальпенса|малпенса|mxp|'
             r'аэропорт\sмальпенса|aeroporto di milano malpensa|'
             r'malpensa\sairport|milan malpensa airport|'
-            r'airport|аэропорт|aeroporto)',
+            r'airport|аэропорт|aeroporto|'
+            r'21010|ferno|варезе|италия)',
             re.IGNORECASE
         )
         if (
-           (milan_pattern.search(from_hidden)
-            and bergamo_pattern.search(to_hidden))
+            (milan_pattern.search(from_hidden)
+             and bergamo_pattern.search(to_hidden))
             or (bergamo_pattern.search(from_hidden)
                 and milan_pattern.search(to_hidden))
             or (milan_pattern.search(from_hidden)
                 and malpensa_pattern.search(to_hidden))
             or (malpensa_pattern.search(from_hidden)
-                and milan_pattern.search(to_hidden))):
+                and milan_pattern.search(to_hidden))
+            or (
+                from_hidden.lower() == 'malpensa'
+                and all(word in to_hidden.lower()
+                        for word in ['21010', 'ферно', 'варезе', 'италия'])
+            )
+        ):
             cost = 100
         cost_e = max(50, cost)
         cost_s = cost_e * 1.5
