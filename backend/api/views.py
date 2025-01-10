@@ -1,5 +1,4 @@
 import hashlib
-import json
 import math
 import re
 import sys
@@ -79,21 +78,8 @@ def vehicle(request):
         session_id = query.get('session_id')
         # Perform your search logic here based on the query
         gmaps = googlemaps.Client(key=google_api_key)
-        now = datetime.now()
 
         # gtp 2025-01-10 предложил использовать только 1-н метод
-        #calculate = json.dumps(gmaps.distance_matrix(origins=from_hidden,
-                                                     #destinations=to_hidden,
-                                                     #mode="driving",
-                                                     #language="en",
-                                                     #departure_time="now",
-                                                     #traffic_model="best_guess"))
-        #calculate2 = json.loads(calculate)
-        #distance = calculate2['rows'][0]['elements'][0]['distance']['value']
-        # km
-        #distance_km = round(distance / 1000, 1)
-        #cost = math.ceil((distance / 1000) * 2)
-
         directions_result = gmaps.directions(
             origin=from_hidden,
             destination=to_hidden,
