@@ -80,27 +80,37 @@ def vehicle(request):
         # Perform your search logic here based on the query
         gmaps = googlemaps.Client(key=google_api_key)
         now = datetime.now()
-        calculate = json.dumps(gmaps.distance_matrix(from_hidden,
-                                                     to_hidden,
-                                                     mode="driving",
-                                                     departure_time=now))
-        calculate2 = json.loads(calculate)
-        distance = calculate2['rows'][0]['elements'][0]['distance']['value']
-        # km
-        distance_km = round(distance / 1000, 1)
-        cost = math.ceil((distance / 1000) * 2)
 
-        directions_result = gmaps.directions(from_hidden,
-                                             to_hidden,
-                                             mode='driving')
+        # gtp 2025-01-10 предложил использовать только 1-н метод
+        #calculate = json.dumps(gmaps.distance_matrix(origins=from_hidden,
+                                                     #destinations=to_hidden,
+                                                     #mode="driving",
+                                                     #language="en",
+                                                     #departure_time="now",
+                                                     #traffic_model="best_guess"))
+        #calculate2 = json.loads(calculate)
+        #distance = calculate2['rows'][0]['elements'][0]['distance']['value']
+        # km
+        #distance_km = round(distance / 1000, 1)
+        #cost = math.ceil((distance / 1000) * 2)
+
+        directions_result = gmaps.directions(
+            origin=from_hidden,
+            destination=to_hidden,
+            mode="driving",
+            departure_time="now",
+            traffic_model="best_guess"
+        )
 
         # Extract travel time from the directions result
         if directions_result:
             route = directions_result[0]['legs'][0]
+            distance_km = round(route['distance']['value'] / 1000, 1)
             travel_time = route['duration']['text']
-            # travel_time_h = math.floor(travel_time_value/3600)
-            # print(travel_time_h)
-            # travel_time_min = re.findall('\d+', travel_time)[0]
+
+            # Расчёт базовой стоимости по километражу
+            base_cost_per_km = 2  # Стоимость за километр
+            cost = math.ceil(distance_km * base_cost_per_km)
 
         # Шаблон для Милана, учитывающий разные написания
         milan_pattern = re.compile(
@@ -119,30 +129,34 @@ def vehicle(request):
         # Шаблон для Мальпенсы, учитывающий различные варианты написания
         malpensa_pattern = re.compile(
             r'(malpensa|мальпенса|малпенса|mxp|'
-            r'аэропорт\sмальпенса|aeroporto di milano malpensa|'
-            r'malpensa\sairport|milan malpensa airport|'
+            r'аэропорт\sмальпенса|aeroporto malpensa|'
+            r'malpensa\sairport|malpensa airport|'
             r'airport|аэропорт|aeroporto|'
             r'21010|ferno|варезе|италия)',
             re.IGNORECASE
         )
-        # Проверка соответствия направлений с паттернами
+        # Проверка на маршруты к/из аэропортов
         if (milan_pattern.search(from_hidden)
-                and bergamo_pattern.search(to_hidden)):
+            and bergamo_pattern.search(to_hidden)):
             cost = 100
         elif (milan_pattern.search(from_hidden)
-                and malpensa_pattern.search(to_hidden)):
+              and malpensa_pattern.search(to_hidden)):
             cost = 100
         elif (malpensa_pattern.search(from_hidden)
-                and milan_pattern.search(to_hidden)):
+              and milan_pattern.search(to_hidden)):
             cost = 100
         elif (bergamo_pattern.search(from_hidden)
               and milan_pattern.search(to_hidden)):
             cost = 100
         else:
-            print("Стоимость не установлена.")
+            # Логика для маршрутов вне аэропортов (расчёт по километражу)
+            print("Стоимость рассчитывается по километражу.")
+
+        # Дополнительные классы автомобилей
         cost_e = max(50, cost)
         cost_s = cost_e * 1.5
         cost_v = cost_e * 1.2
+
         context = {
             'from_short': from_short,
             'from_hidden': from_hidden,
