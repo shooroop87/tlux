@@ -123,17 +123,13 @@ def vehicle(request):
         )
         # Проверка на маршруты к/из аэропортов
         if (milan_pattern.search(from_hidden)
-              and bergamo_pattern.search(to_hidden)):
-            cost = 100
+              and bergamo_pattern.search(to_hidden)): cost = 100
         elif (milan_pattern.search(from_hidden)
-              and malpensa_pattern.search(to_hidden)):
-            cost = 100
+              and malpensa_pattern.search(to_hidden)): cost = 100
         elif (malpensa_pattern.search(from_hidden)
-              and milan_pattern.search(to_hidden)):
-            cost = 100
+              and milan_pattern.search(to_hidden)): cost = 100
         elif (bergamo_pattern.search(from_hidden)
-              and milan_pattern.search(to_hidden)):
-            cost = 100
+              and milan_pattern.search(to_hidden)): cost = 100
         else:
             # Логика для маршрутов вне аэропортов (расчёт по километражу)
             print("Стоимость рассчитывается по километражу.")
