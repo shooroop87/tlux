@@ -99,13 +99,13 @@ def vehicle(request):
             cost = math.ceil(distance_km * base_cost_per_km)
 
         # Шаблон для Милана, учитывающий разные написания
-        milan_pattern = re.compile(
+        mp = re.compile(
             r'(milan|milano|милан)',
             re.IGNORECASE
         )
 
         # Шаблон для Бергамо, учитывающий различные варианты написания
-        bergamo_pattern = re.compile(
+        bp = re.compile(
             r'(bergamo|бергамо|orio al serio|bgy|'
             r'аэропорт\sбергамо|via aeroporto.*orio al serio|'
             r'airport|аэропорт|aeroporto)',
@@ -113,7 +113,7 @@ def vehicle(request):
         )
 
         # Шаблон для Мальпенсы, учитывающий различные варианты написания
-        malpensa_pattern = re.compile(
+        ap = re.compile(
             r'(malpensa|мальпенса|малпенса|mxp|'
             r'аэропорт\sмальпенса|aeroporto malpensa|'
             r'malpensa\sairport|malpensa airport|'
@@ -122,20 +122,15 @@ def vehicle(request):
             re.IGNORECASE
         )
         # Проверка на маршруты к/из аэропортов
-        if (milan_pattern.search(from_hidden) and
-            bergamo_pattern.search(to_hidden)):
+        if (mp.search(from_hidden) and bp.search(to_hidden)):
             cost = 100
-        elif (milan_pattern.search(from_hidden) and
-              malpensa_pattern.search(to_hidden)):
+        elif (mp.search(from_hidden) and ap.search(to_hidden)):
             cost = 100
-        elif (malpensa_pattern.search(from_hidden) and
-              milan_pattern.search(to_hidden)):
+        elif (ap.search(from_hidden) and mp.search(to_hidden)):
             cost = 100
-        elif (bergamo_pattern.search(from_hidden) and
-              milan_pattern.search(to_hidden)):
+        elif (bp.search(from_hidden) and mp.search(to_hidden)):
             cost = 100
         else:
-            # Логика для маршрутов вне аэропортов (расчёт по километражу)
             print("Стоимость рассчитывается по километражу.")
 
         # Дополнительные классы автомобилей
