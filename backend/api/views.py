@@ -65,7 +65,7 @@ def index(request):
     return render(request, 'index.html', {'form': form})
 
 
-def vehicle(request):
+def vehicle(request): # noqa: C901
     if 'search_query' in request.session:
         query = request.session['search_query']
         # Access individual fields from the dictionary
@@ -103,13 +103,6 @@ def vehicle(request):
             r'(21010\sФерно,\sВарезе,\sИталия|'
             r'21010\sFerno,\sVarese,\sItaly|'
             r'21010\sFerno,\sVarese,\sItalia)',
-            re.IGNORECASE
-        )
-        # Шаблон странного случая
-        cm = re.compile(
-            r'(22100\sКомо,\sИталия|'
-            r'22100\sComo,\sItaly|'
-            r'22100\sComo,\sItalia)',
             re.IGNORECASE
         )
         zm = re.compile(
