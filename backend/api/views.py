@@ -118,30 +118,41 @@ def vehicle(request):
             r'3920\sZermatt,\sSvizzera)',
             re.IGNORECASE
         )
+        # Замена адресов, если они относятся к Церматт
+        if zm.search(from_hidden):
+            from_hidden_adj = "Hofstrasse 40, 4000 Täsch, Svizzera"
+            directions_result = gmaps.directions(
+                origin=from_hidden_adj,
+                destination=to_hidden,
+                mode="driving",
+                departure_time="now",
+                traffic_model="best_guess"
+            )
+        elif zm.search(to_hidden):
+            to_hidden_adj = "Hofstrasse 40, 4000 Täsch, Svizzera"
+            directions_result = gmaps.directions(
+                origin=from_hidden_adj,
+                destination=to_hidden_adj,
+                mode="driving",
+                departure_time="now",
+                traffic_model="best_guess"
+            )
         # gtp 2025-01-10 предложил использовать только 1-н метод
-        directions_result = gmaps.directions(
-            origin=from_hidden,
-            destination=to_hidden,
-            mode="driving",
-            departure_time="now",
-            traffic_model="best_guess"
-        )
-        if directions_result is not None and len(directions_result) > 0:
+        else:
+            directions_result = gmaps.directions(
+                origin=from_hidden,
+                destination=to_hidden,
+                mode="driving",
+                departure_time="now",
+                traffic_model="best_guess"
+            )
+        if directions_result:
             route = directions_result[0]['legs'][0]
             km = round(route['distance']['value'] / 1000, 1)
             travel_time = route['duration']['text']
             # Расчёт базовой стоимости по километражу
             base_cost_per_km = 2  # Стоимость за километр
             cost = math.ceil(km * base_cost_per_km)
-        else:
-            if (
-                (cm.search(from_hidden) and zm.search(to_hidden))
-                or (zm.search(from_hidden) and cm.search(to_hidden))
-            ):
-                km = 204
-                travel_time = "2 ore 57 min"
-                base_cost_per_km = 2
-                cost = math.ceil(km * base_cost_per_km)
         # Проверка на маршруты к/из аэропортов
         # Из Милана в Бергамо и наоборот
         if (mp.search(from_hidden) and bp.search(to_hidden)) and km <= 70:
