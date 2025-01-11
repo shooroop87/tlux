@@ -173,7 +173,7 @@ def vehicle(request):
             to_short=to_short,
             to_date=to_date,
             to_time=to_time,
-            distance=distance_km,
+            distance=km,
             travel_time=travel_time,
             session_id=session_id
         )
