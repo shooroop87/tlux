@@ -134,8 +134,10 @@ def vehicle(request):
             base_cost_per_km = 2  # Стоимость за километр
             cost = math.ceil(km * base_cost_per_km)
         else:
-            if (cm.search(from_hidden) and zm.search(to_hidden)) or \
-                (zm.search(from_hidden) and cm.search(to_hidden)):
+            if (
+                (cm.search(from_hidden) and zm.search(to_hidden)) or
+                (zm.search(from_hidden) and cm.search(to_hidden))
+            ):
                 km = 204
                 travel_time = "2 ore 57 min"
                 base_cost_per_km = 2
