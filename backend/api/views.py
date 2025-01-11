@@ -65,7 +65,7 @@ def index(request):
     return render(request, 'index.html', {'form': form})
 
 
-def vehicle(request): # noqa: C901
+def vehicle(request):  # noqa: C901
     if 'search_query' in request.session:
         query = request.session['search_query']
         # Access individual fields from the dictionary
