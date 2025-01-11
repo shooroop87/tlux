@@ -121,7 +121,7 @@ def vehicle(request):
         # Шаблон для Мальпенсы - но Ферно Варезе
         fv = re.compile(
             r'(21010\sФерно,\sВарезе,\sИталия|'
-            r'21010\sFerno,\sVarese,\sItaly',
+            r'21010\sFerno,\sVarese,\sItaly|'
             r'21010\sFerno,\sVarese,\sItalia)',
             re.IGNORECASE
         )
