@@ -78,26 +78,7 @@ def vehicle(request):
         session_id = query.get('session_id')
         # Perform your search logic here based on the query
         gmaps = googlemaps.Client(key=google_api_key)
-
-        # gtp 2025-01-10 предложил использовать только 1-н метод
-        directions_result = gmaps.directions(
-            origin=from_hidden,
-            destination=to_hidden,
-            mode="driving",
-            departure_time="now",
-            traffic_model="best_guess"
-        )
-
-        # Extract travel time from the directions result
-        if directions_result:
-            route = directions_result[0]['legs'][0]
-            km = round(route['distance']['value'] / 1000, 1)
-            travel_time = route['duration']['text']
-
-            # Расчёт базовой стоимости по километражу
-            base_cost_per_km = 2  # Стоимость за километр
-            cost = math.ceil(km * base_cost_per_km)
-
+        
         # Шаблон для Милана, учитывающий разные написания
         mp = re.compile(
             r'(milan|milano|милан)',
@@ -125,6 +106,56 @@ def vehicle(request):
             r'21010\sFerno,\sVarese,\sItalia)',
             re.IGNORECASE
         )
+        # Шаблон странного случая
+        cm = re.compile(
+            r'(22100\sКомо,\sИталия|'
+            r'22100\sComo,\sItaly|'
+            r'22100\sComo,\sItalia)',
+            re.IGNORECASE
+        )
+        zm = re.compile(
+            r'(3920\sЦерматт,\sШвейцария|'
+            r'3920\sZermatt,\sSwitzerland|'
+            r'3920\sZermatt,\sSvizzera)',
+            re.IGNORECASE
+        )
+
+        # gtp 2025-01-10 предложил использовать только 1-н метод
+        directions_result = gmaps.directions(
+            origin=from_hidden,
+            destination=to_hidden,
+            mode="driving",
+            departure_time="now",
+            traffic_model="best_guess"
+        )
+
+        if not directions_result:
+            if (cm.search(from_hidden) and zm.search(to_hidden)) or \
+            (zm.search(from_hidden) and cm.search(to_hidden)):
+                km = 204
+                travel_time = "2 ore 57 min"
+                base_cost_per_km = 2
+                cost = math.ceil(km * base_cost_per_km)
+
+        # Extract travel time from the directions result
+        if (not directions_result
+            and from_hidden == '22100 Комо, Италия'
+            and to_hidden == '3920 Церматт, Швейцария'):
+            km = 204
+            travel_time = '2 ore 57 min'
+            base_cost_per_km = 2
+            cost = math.ceil(km * base_cost_per_km)
+
+        if directions_result:
+            route = directions_result[0]['legs'][0]
+            km = round(route['distance']['value'] / 1000, 1)
+            travel_time = route['duration']['text']
+
+            # Расчёт базовой стоимости по километражу
+            base_cost_per_km = 2  # Стоимость за километр
+            cost = math.ceil(km * base_cost_per_km)
+
+        
         # Проверка на маршруты к/из аэропортов
         # Из Милана в Бергамо и наоборот
         if (mp.search(from_hidden) and bp.search(to_hidden)) and km <= 70:
