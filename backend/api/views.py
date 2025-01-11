@@ -91,19 +91,18 @@ def vehicle(request):
         # Extract travel time from the directions result
         if directions_result:
             route = directions_result[0]['legs'][0]
-            distance_km = round(route['distance']['value'] / 1000, 1)
+            km = round(route['distance']['value'] / 1000, 1)
             travel_time = route['duration']['text']
 
             # Расчёт базовой стоимости по километражу
             base_cost_per_km = 2  # Стоимость за километр
-            cost = math.ceil(distance_km * base_cost_per_km)
+            cost = math.ceil(km * base_cost_per_km)
 
         # Шаблон для Милана, учитывающий разные написания
         mp = re.compile(
             r'(milan|milano|милан)',
             re.IGNORECASE
         )
-
         # Шаблон для Бергамо, учитывающий различные варианты написания
         bp = re.compile(
             r'(bergamo|бергамо|orio al serio|bgy|'
@@ -111,24 +110,36 @@ def vehicle(request):
             r'airport|аэропорт|aeroporto)',
             re.IGNORECASE
         )
-
         # Шаблон для Мальпенсы, учитывающий различные варианты написания
         ap = re.compile(
             r'(malpensa|мальпенса|малпенса|mxp|'
-            r'аэропорт\sмальпенса|aeroporto malpensa|'
-            r'malpensa\sairport|malpensa airport|'
-            r'airport|аэропорт|aeroporto|'
-            r'21010|ferno|варезе|италия)',
+            r'аэропорт\sмальпенса|aeroporto di milano malpensa|'
+            r'malpensa\sairport|milan malpensa airport|'
+            r'airport|аэропорт|aeroporto)',
+            re.IGNORECASE
+        )
+        # Шаблон для Мальпенсы - но Ферно Варезе
+        fv = re.compile(
+            r'(21010\sФерно,\sВарезе,\sИталия|'
+            r'21010\sFerno,\sVarese,\sItaly',
+            r'21010\sFerno,\sVarese,\sItalia)',
             re.IGNORECASE
         )
         # Проверка на маршруты к/из аэропортов
-        if (mp.search(from_hidden) and bp.search(to_hidden)):
+        # Из Милана в Бергамо и наоборот
+        if (mp.search(from_hidden) and bp.search(to_hidden)) and km <= 70:
             cost = 100
-        elif (mp.search(from_hidden) and ap.search(to_hidden)):
+        elif (bp.search(from_hidden) and mp.search(to_hidden)) and km <= 70:
             cost = 100
-        elif (ap.search(from_hidden) and mp.search(to_hidden)):
+        # Из Милана в аэропорт и наоброт
+        elif (mp.search(from_hidden) and ap.search(to_hidden)) and km <= 70:
             cost = 100
-        elif (bp.search(from_hidden) and mp.search(to_hidden)):
+        elif (ap.search(from_hidden) and mp.search(to_hidden)) and km <= 70:
+            cost = 100
+        # Из Милана в Ферно Верезе
+        elif (mp.search(from_hidden) and fv.search(to_hidden)) and km <= 70:
+            cost = 100
+        elif (fv.search(from_hidden) and mp.search(to_hidden)) and km <= 70:
             cost = 100
         else:
             print("Стоимость рассчитывается по километражу.")
@@ -146,13 +157,13 @@ def vehicle(request):
             'cost_e': cost_e,
             'cost_s': cost_s,
             'cost_v': cost_v,
-            'distance': distance_km,
+            'distance': km,
             'travel_time': travel_time,
             'to_date': to_date,
             'to_time': to_time,
         }
         # Update query
-        query.update({'distance': distance_km, 'travel_time': travel_time})
+        query.update({'distance': km, 'travel_time': travel_time})
         request.session['search_query'] = query
         # Save search
         instance = Search(
