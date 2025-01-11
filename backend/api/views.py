@@ -78,7 +78,6 @@ def vehicle(request):
         session_id = query.get('session_id')
         # Perform your search logic here based on the query
         gmaps = googlemaps.Client(key=google_api_key)
-        
         # Шаблон для Милана, учитывающий разные написания
         mp = re.compile(
             r'(milan|milano|милан)',
@@ -119,7 +118,6 @@ def vehicle(request):
             r'3920\sZermatt,\sSvizzera)',
             re.IGNORECASE
         )
-
         # gtp 2025-01-10 предложил использовать только 1-н метод
         directions_result = gmaps.directions(
             origin=from_hidden,
@@ -128,7 +126,6 @@ def vehicle(request):
             departure_time="now",
             traffic_model="best_guess"
         )
-
         if not directions_result:
             if (cm.search(from_hidden) and zm.search(to_hidden)) or \
             (zm.search(from_hidden) and cm.search(to_hidden)):
@@ -136,7 +133,6 @@ def vehicle(request):
                 travel_time = "2 ore 57 min"
                 base_cost_per_km = 2
                 cost = math.ceil(km * base_cost_per_km)
-
         # Extract travel time from the directions result
         if (not directions_result
             and from_hidden == '22100 Комо, Италия'
@@ -145,17 +141,13 @@ def vehicle(request):
             travel_time = '2 ore 57 min'
             base_cost_per_km = 2
             cost = math.ceil(km * base_cost_per_km)
-
         if directions_result:
             route = directions_result[0]['legs'][0]
             km = round(route['distance']['value'] / 1000, 1)
             travel_time = route['duration']['text']
-
             # Расчёт базовой стоимости по километражу
             base_cost_per_km = 2  # Стоимость за километр
             cost = math.ceil(km * base_cost_per_km)
-
-        
         # Проверка на маршруты к/из аэропортов
         # Из Милана в Бергамо и наоборот
         if (mp.search(from_hidden) and bp.search(to_hidden)) and km <= 70:
@@ -174,12 +166,10 @@ def vehicle(request):
             cost = 100
         else:
             print("Стоимость рассчитывается по километражу.")
-
         # Дополнительные классы автомобилей
         cost_e = max(50, cost)
         cost_s = cost_e * 1.5
         cost_v = cost_e * 1.2
-
         context = {
             'from_short': from_short,
             'from_hidden': from_hidden,
