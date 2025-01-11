@@ -126,28 +126,20 @@ def vehicle(request):
             departure_time="now",
             traffic_model="best_guess"
         )
-        if not directions_result:
-            if (cm.search(from_hidden) and zm.search(to_hidden)) or \
-            (zm.search(from_hidden) and cm.search(to_hidden)):
-                km = 204
-                travel_time = "2 ore 57 min"
-                base_cost_per_km = 2
-                cost = math.ceil(km * base_cost_per_km)
-        # Extract travel time from the directions result
-        if (not directions_result
-            and from_hidden == '22100 Комо, Италия'
-            and to_hidden == '3920 Церматт, Швейцария'):
-            km = 204
-            travel_time = '2 ore 57 min'
-            base_cost_per_km = 2
-            cost = math.ceil(km * base_cost_per_km)
-        if directions_result:
+        if directions_result is not None and len(directions_result) > 0:
             route = directions_result[0]['legs'][0]
             km = round(route['distance']['value'] / 1000, 1)
             travel_time = route['duration']['text']
             # Расчёт базовой стоимости по километражу
             base_cost_per_km = 2  # Стоимость за километр
             cost = math.ceil(km * base_cost_per_km)
+        else:
+            if (cm.search(from_hidden) and zm.search(to_hidden)) or \
+                (zm.search(from_hidden) and cm.search(to_hidden)):
+                km = 204
+                travel_time = "2 ore 57 min"
+                base_cost_per_km = 2
+                cost = math.ceil(km * base_cost_per_km)
         # Проверка на маршруты к/из аэропортов
         # Из Милана в Бергамо и наоборот
         if (mp.search(from_hidden) and bp.search(to_hidden)) and km <= 70:
