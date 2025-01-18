@@ -111,6 +111,17 @@ def vehicle(request):  # noqa: C901
             r'3920\sZermatt,\sSvizzera)',
             re.IGNORECASE
         )
+        geneva = re.compile(
+            r'(geneva|женева|gva|geneva airport|'
+            r'аэропорт\sженева|aeroport de geneve)',
+            re.IGNORECASE)
+        lyon = re.compile(
+            r'(lyon|лион|lys|lyon airport|'
+            r'аэропорт\sлион|aeroport de lyon)',
+            re.IGNORECASE)
+        courchevel = re.compile(
+            r'(courchevel|куршевель)',
+            re.IGNORECASE)
         # Замена адресов, если они относятся к Церматт
         if zm.search(from_hidden):
             from_hidden_adj = "Hofstrasse 40, 4000 Täsch, Svizzera"
@@ -165,9 +176,19 @@ def vehicle(request):  # noqa: C901
         else:
             print("Стоимость рассчитывается по километражу.")
         # Дополнительные классы автомобилей
-        cost_e = max(50, cost)
-        cost_s = cost_e * 1.5
-        cost_v = cost_e * 1.2
+        if (geneva.search(from_hidden) and courchevel.search(to_hidden)) or (courchevel.search(from_hidden) and geneva.search(to_hidden)):  # noqa: E501
+            cost_e = 500  # Седан
+            cost_v = 550  # Минибус
+            cost_s = 750  # S-класс
+        elif (lyon.search(from_hidden) and courchevel.search(to_hidden)) or (courchevel.search(from_hidden) and lyon.search(to_hidden)):  # noqa: E501
+            cost_e = 500  # Седан
+            cost_v = 550  # Минибус
+            cost_s = 750  # S-класс
+        else:
+        # Для остальных маршрутов расчет по километражу
+            cost_e = max(50, cost)
+            cost_s = cost_e * 1.5
+            cost_v = cost_e * 1.2
         context = {
             'from_short': from_short,
             'from_hidden': from_hidden,
