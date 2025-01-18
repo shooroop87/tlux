@@ -185,7 +185,7 @@ def vehicle(request):  # noqa: C901
             cost_v = 550  # Минибус
             cost_s = 750  # S-класс
         else:
-        # Для остальных маршрутов расчет по километражу
+            # Для остальных маршрутов расчет по километражу
             cost_e = max(50, cost)
             cost_s = cost_e * 1.5
             cost_v = cost_e * 1.2
