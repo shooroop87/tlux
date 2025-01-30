@@ -113,8 +113,10 @@ def vehicle(request):  # noqa: C901
         )
         geneva = re.compile(
             r'(geneva|женева|gva|geneva airport|'
-            r'аэропорт\sженева|aeroport de geneve)',
-            re.IGNORECASE)
+            r'аэропорт\sженева|aeroport de geneve|'
+            r'genève|aéroport de genève)',
+            re.IGNORECASE
+        )
         lyon = re.compile(
             r'(lyon|лион|lys|lyon airport|'
             r'аэропорт\sлион|aeroport de lyon)',
