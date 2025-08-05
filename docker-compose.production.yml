@@ -4,7 +4,7 @@ volumes:
   pg_data_production:
   static_volume:
   media:
-
+  redis_data:
 
 services:
   db:
@@ -12,21 +12,159 @@ services:
     env_file: .env
     volumes:
       - pg_data_production:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres}"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+  redis:
+    image: redis:7
+    volumes:
+      - redis_data:/data
+    # Конфигурация Redis для автоматической чистки
+    command: redis-server --appendonly yes --maxmemory 512mb --maxmemory-policy allkeys-lru
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
 
   backend:
     image: egorovdocker/transferslux_backend
     env_file: .env
     volumes:
-      - static_volume:/backend_static
+      - static_volume:/app/collected_static
       - media:/app/media/
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # Автообновление данных трансферов каждые 12 часов
+  transfers-updater:
+    image: egorovdocker/transferslux_backend
+    env_file: .env
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    command: >
+      sh -c "
+        echo 'Setting up automatic transfers updater...' &&
+        echo '0 6 * * * cd /app && python manage.py refresh_all_transfers --clear-cache >> /tmp/transfers.log 2>&1' > /tmp/crontab &&
+        echo '0 18 * * * cd /app && python manage.py refresh_all_transfers >> /tmp/transfers.log 2>&1' >> /tmp/crontab &&
+        crontab /tmp/crontab &&
+        echo 'Cron jobs installed. Transfers will auto-update at 6:00 and 18:00 daily.' &&
+        crontab -l &&
+        crond -f -l 2
+      "
+    restart: unless-stopped
 
   gateway:
     image: egorovdocker/transferslux_gateway
     env_file: .env
     volumes:
-      - static_volume:/staticfiles/
+      - static_volume:/staticfiles
       - media:/app/media/
     ports:
       - 8000:80
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+  # === СЕРВИСЫ ОБСЛУЖИВАНИЯ ===
+  
+  # Еженедельная чистка Redis кэша
+  redis-cleaner:
+    image: redis:7
+    env_file: .env
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: "no"
+    profiles: ["maintenance"]
+    command: >
+      sh -c "
+        echo 'Starting Redis cache cleanup...' &&
+        redis-cli -h redis --eval - 0 <<EOF
+        local keys = redis.call('keys', 'cache:*')
+        for i=1,#keys,5000 do
+            redis.call('del', unpack(keys, i, math.min(i+4999, #keys)))
+        end
+        return #keys
+        EOF
+        echo 'Redis cache cleaned'
+      "
+
+  # Еженедельный бэкап базы данных
+  db-backup:
+    image: postgres:13.10
+    env_file: .env
+    volumes:
+      - ./backups:/backups
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: "no"
+    profiles: ["maintenance"]
+    command: >
+      sh -c "
+        echo 'Creating database backup...' &&
+        pg_dump -h db -U ${POSTGRES_USER:-postgres} ${POSTGRES_DB:-transferslux} > /backups/backup_$(date +%Y%m%d_%H%M%S).sql &&
+        echo 'Database backup created' &&
+        find /backups -name 'backup_*.sql' -mtime +7 -delete &&
+        echo 'Old backups cleaned up'
+      "
+
+  # Очистка старых медиа файлов и логов
+  file-cleaner:
+    image: alpine:latest
+    volumes:
+      - media:/app/media/
+      - ./logs:/app/logs
+    restart: "no"
+    profiles: ["maintenance"]
+    command: >
+      sh -c "
+        echo 'Cleaning old files...' &&
+        find /app/media/temp -type f -mtime +7 -delete 2>/dev/null || true &&
+        find /app/logs -name '*.log' -mtime +30 -delete 2>/dev/null || true &&
+        echo 'File cleanup completed'
+      "
+
+  # Мониторинг системы
+  system-monitor:
+    image: alpine:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    restart: "no"
+    profiles: ["monitoring"]
+    command: >
+      sh -c "
+        apk add --no-cache docker-cli &&
+        echo 'System Resource Usage:' &&
+        docker stats --no-stream --format 'table {{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}\t{{.MemPerc}}' &&
+        echo '' &&
+        echo 'Volume Usage:' &&
+        docker system df -v | grep -E '(VOLUME NAME|transferslux)' || true
+      "
+
+  # Автоматическая очистка Docker системы
+  docker-cleaner:
+    image: docker:cli
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: "no"
+    profiles: ["maintenance"]
+    command: >
+      sh -c "
+        echo 'Cleaning Docker system...' &&
+        docker system prune -f &&
+        echo 'Docker system cleaned'
+      "

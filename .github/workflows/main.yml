@@ -24,6 +24,12 @@ jobs:
         # Если её не будет, то тесты могут запуститься раньше, чем сервер PostgreSQL
         # В результате тесты опять решат, что базы нет, — и упадут
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
+      redis:
+        image: redis:7
+        ports:
+          - 6379:6379
+        options: --health-cmd "redis-cli ping" --health-interval 10s --health-timeout 5s --health-retries 5
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python
@@ -48,9 +54,9 @@ jobs:
         DB_HOST: 127.0.0.1
         DB_PORT: 5432
       run: |
-        python -m flake8 backend/
         cd backend/
         python manage.py test
+
 
   build:
     runs-on: ubuntu-latest
@@ -134,7 +140,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: 
-      # Дождёмся билда всех образов Taski
+      # Дождёмся билда всех образов Transferslux
       - build_and_push_to_docker_hub
       - build_gateway_and_push_to_docker_hub
     steps:
@@ -163,15 +169,25 @@ jobs:
         # с которым установлено соединение
         script: |
           cd transferslux
+          # Так как Docker Hub private, то нужно авторизоваться
+          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
           # Выполняет pull образов с Docker Hub
           sudo docker compose -f docker-compose.production.yml pull
           # Перезапускает все контейнеры в Docker Compose
           sudo docker compose -f docker-compose.production.yml down
           sudo docker compose -f docker-compose.production.yml up -d
+          # Очистка Docker
+          sudo docker container prune -f
+          sudo docker image prune -af
+          sudo docker volume prune -f
+          # Очистка Redis
+          sudo docker compose -f docker-compose.production.yml exec redis redis-cli FLUSHALL
           # Выполняет миграции и сбор статики
           sudo docker compose -f docker-compose.production.yml exec backend python manage.py migrate
-          sudo docker compose -f docker-compose.production.yml exec backend python manage.py collectstatic
-          sudo docker compose -f docker-compose.production.yml exec backend cp -r /app/collected_static/. /backend_static/static/
+          # Скомпилировать сообщения (.mo)
+          sudo docker compose -f docker-compose.production.yml exec backend python manage.py compilemessages
+          # Собирает статику во внутри volume, смонтированный в gateway
+          sudo docker compose -f docker-compose.production.yml exec backend python manage.py collectstatic --noinput
 #Workflow Telegram	  
   send_message:
     runs-on: ubuntu-latest

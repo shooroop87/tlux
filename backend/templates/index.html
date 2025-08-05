@@ -28,7 +28,8 @@
             background-color: #f8d7da;
         }
       </style> 
-      <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUvfhW4zGD9sUWWtRvo-QHReeRVUcfb18&libraries=places&loading=async&callback=initMap"></script>
+      <!-- Google Maps API - используем переменную из context_processors -->
+      <script async src="https://maps.googleapis.com/maps/api/js?key={{ google_maps_api_key }}&libraries=places&loading=async&callback=initMap"></script>
       <script>
         async function initMap() {
         const card = document.getElementById("pac-card");
