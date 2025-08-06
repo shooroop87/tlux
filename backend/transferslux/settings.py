@@ -14,7 +14,7 @@ SECRET_KEY = os.getenv("SECRET_KEY", "1insecure1-1default1")
 # DEBUG выключает кэш
 DEBUG = False
 
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "localhost 127.0.0.1 217.154.121.7").split()
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "localhost 127.0.0.1 backend db 217.154.121.7 transferslux.com www.transferslux.com").split()
 
 CSRF_TRUSTED_ORIGINS = [
     "https://*.transferslux.com",
