@@ -135,7 +135,7 @@ DEFAULT_CHARSET = "utf-8"
 FILE_CHARSET = "utf-8"
 
 # Internationalization
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en'
 TIME_ZONE = 'UTC'
 
 # Локализация языков

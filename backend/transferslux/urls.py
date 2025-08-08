@@ -23,6 +23,7 @@ urlpatterns = [
 # Основные URL-паттерны вашего приложения
 urlpatterns += i18n_patterns(
     path('', include(('api.urls', 'api'), namespace='api')),
+    prefix_default_language=False,   # ← вот это ключ
 )
 
 if settings.DEBUG:
