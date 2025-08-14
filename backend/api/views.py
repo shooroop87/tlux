@@ -5,6 +5,8 @@ import sys
 import uuid
 from datetime import datetime
 from urllib.parse import urljoin
+import logging
+logger = logging.getLogger(__name__)
 
 if sys.version_info >= (3,):
     from urllib.parse import urlencode
@@ -40,7 +42,9 @@ def index(request):
                 'it': 'Si prega di compilare tutti i campi obbligatori',
                 'fr': 'Veuillez remplir tous les champs requis',
                 'es': 'Por favor, rellene todos los campos obligatorios',
-                'ru': 'Пожалуйста, заполните все обязательные поля'}
+                'ru': 'Пожалуйста, заполните все обязательные поля',
+                'en': 'Please fill in all required fields'
+            }
             error_message = errors[language_code]
             if error_message is None:
                 error_message = 'Please fill in all required fields'
@@ -364,7 +368,7 @@ def payment(request):
             total = query.get('total')
 
             # Payment gateway settings
-            ALIAS_TEST = 'payment_3780564'
+            ALIAS_TEST = 'ALIAS_WEB_00082258'
             total = str(total).replace(',', '.')
             importo = float(total)
             divisa = 'EUR'
@@ -418,11 +422,11 @@ def payment(request):
 
     # Payment gateway settings
     # PROD
-    ALIAS_TEST = 'payment_3780564'
-    CHIAVESEGRETA_TEST = '9086Wh56532BG7oV6giEUW2510201H68WAqc831G'
+    # ALIAS_TEST = 'payment_3780564'
+    # CHIAVESEGRETA_TEST = '9086Wh56532BG7oV6giEUW2510201H68WAqc831G'
     # TEST
-    # ALIAS_TEST = 'ALIAS_WEB_00082258'
-    # CHIAVESEGRETA_TEST = 'Y665ESJRJEK38D6D1MJJGCYAUQR2J8SV'
+    ALIAS_TEST = 'ALIAS_WEB_00082258'
+    CHIAVESEGRETA_TEST = 'Y665ESJRJEK38D6D1MJJGCYAUQR2J8SV'
     current_datetime = datetime.today().strftime('%Y%m%d%H%M%S')
     codTrans = 'TESTPS_' + current_datetime
     divisa = 'EUR'
@@ -438,14 +442,14 @@ def payment(request):
     mac = hashlib.sha1(mac_str.encode('utf8')).hexdigest()
 
     # URLs
-    merchantServerUrl = "https://transferslux.com"
+    merchantServerUrl = settings.SITE_BASE_URL.rstrip("/")
     # PROD
-    NEXI_HOST = "https://ecommerce.nexi.it"
+    # NEXI_HOST = "https://ecommerce.nexi.it"
     # TEST
-    # NEXI_HOST = "https://int-ecommerce.nexi.it"
+    NEXI_HOST = "https://int-ecommerce.nexi.it"
     requestUrl = f"{NEXI_HOST}/ecomm/ecomm/DispatcherServlet"
-    success_url = urljoin(merchantServerUrl, "success/")
-    cancel_url = urljoin(merchantServerUrl, "error/")
+    success_url = urljoin(merchantServerUrl + "/", "success/")
+    cancel_url  = urljoin(merchantServerUrl + "/", "error/")
 
     # Update session query
     request.session['search_query'].update({
@@ -460,8 +464,8 @@ def payment(request):
         'total': total,
     })
     # Urls
-    x_url = "?" + urlencode(query)
-    success_url = urljoin(merchantServerUrl, "success/") + x_url
+    # x_url = "?" + urlencode(query)
+    # success_url = urljoin(merchantServerUrl, "success/") + x_url
     request.session['search_query'].update({
         'alias': ALIAS_TEST,
         'importo': importo,
@@ -513,6 +517,13 @@ def payment(request):
 
 
 def payment_success(request):
+    # Лог входящих параметров от Nexi
+    logger.info("Nexi return: method=%s GET=%s", request.method, dict(request.GET))
+
+    # В ответе Nexi два mac — берём последний
+    mac_values = request.GET.getlist('mac') or request.POST.getlist('mac')
+    mac_from_gateway = mac_values[-1] if mac_values else None
+
     terms_ = bool(request.POST.get("terms"))
 
     billing_data = {
@@ -523,13 +534,13 @@ def payment_success(request):
     }
 
     transaction_data = {
-        "codTrans": request.GET.get('codTrans'),
-        "importo": request.GET.get('importo'),
-        "data": request.GET.get('data'),
-        "orario": request.GET.get('orario'),
-        "codAut": request.GET.get('codAut'),
-        "mac": request.GET.get('mac'),
-        "divisa": 'EUR',
+        "codTrans": request.GET.get('codTrans') or request.POST.get('codTrans'),
+        "importo":  request.GET.get('importo')  or request.POST.get('importo'),
+        "data":     request.GET.get('data')     or request.POST.get('data'),
+        "orario":   request.GET.get('orario')   or request.POST.get('orario'),
+        "codAut":   request.GET.get('codAut')   or request.POST.get('codAut'),
+        "mac":      mac_from_gateway,
+        "divisa":  'EUR',
     }
 
     # Check if all required params are present
@@ -539,26 +550,36 @@ def payment_success(request):
                        'orario',
                        'codAut',
                        'mac']
-    if not all(transaction_data.get(param) for param in required_params):
-        raise ValueError("Missing required parameters")
+    if not all(transaction_data.get(p) for p in required_params):
+        missing = [p for p in required_params if not transaction_data.get(p)]
+        logger.error("Missing required parameters: %s", missing)
+        return render(request, 'booking/booking-payment-error.html',
+                      {'reason': f"Missing params: {', '.join(missing)}"}, status=400)
 
     # Calculate MAC
     # PROD
-    CHIAVESEGRETA_TEST = '9086Wh56532BG7oV6giEUW2510201H68WAqc831G'
+    # CHIAVESEGRETA_TEST = '9086Wh56532BG7oV6giEUW2510201H68WAqc831G'
     # TEST
     # CHIAVESEGRETA_TEST = 'Y665ESJRJEK38D6D1MJJGCYAUQR2J8SV'
-    mac_str = (f"codTrans={transaction_data['codTrans']}"
-               f"esito=OK"
-               f"importo={transaction_data['importo']}"
-               f"divisa={transaction_data['divisa']}"
-               f"data={transaction_data['data']}"
-               f"orario={transaction_data['orario']}"
-               f"codAut={transaction_data['codAut']}"
-               f"{CHIAVESEGRETA_TEST}")
+    # секрет: сначала из settings (если ты вынес в .env), иначе явно тестовый
+    secret = getattr(settings, "NEXI_SECRET", None) or 'Y665ESJRJEK38D6D1MJJGCYAUQR2J8SV'  # TEST
+
+    mac_str = (
+        f"codTrans={transaction_data['codTrans']}"
+        f"esito=OK"
+        f"importo={transaction_data['importo']}"
+        f"divisa={transaction_data['divisa']}"
+        f"data={transaction_data['data']}"
+        f"orario={transaction_data['orario']}"
+        f"codAut={transaction_data['codAut']}"
+        f"{secret}"
+    )
     mac_calculated = hashlib.sha1(mac_str.encode('utf8')).hexdigest()
 
     if mac_calculated != transaction_data['mac']:
-        raise ValueError('MAC mismatch error')
+        logger.error("MAC mismatch: calc=%s given=%s", mac_calculated, transaction_data['mac'])
+        return render(request, 'booking/booking-payment-error.html',
+                      {'reason': 'MAC mismatch'}, status=400)
 
     # Handle booking information
     if request.session.get('search_query'):
@@ -607,9 +628,9 @@ def payment_success(request):
         booking_id = getattr(booking_data, field_name)
 
         # Update notes_details with notes_extra
-        notes_details = query.get('notes_details')
-        notes_extra = query.get('notes_extra')
-        notes_details_upd = notes_extra + ' ' + notes_details
+        notes_details = query.get('notes_details') or ''
+        notes_extra = query.get('notes_extra') or ''
+        notes_details_upd = (notes_extra + ' ' + notes_details).strip()
 
         # Prepare context for emails and response
         context = {
@@ -656,33 +677,37 @@ def payment_success(request):
         }
         subject = subjects.get(language_code,
                                'Your booking was submitted successfully')
+        
+        from_email = getattr(settings, "DEFAULT_FROM_EMAIL", "support@transferslux.com")
 
         # Admin email
-        admin_subject = 'Подтверждение бронирования (для админа)'
-        admin_email_content = render_to_string('email/email.html', context)
-        email_message = EmailMultiAlternatives(admin_subject,
-                                               admin_email_content,
-                                               'support@transferslux.com',
-                                               ['autistasobrio@gmail.com',
-                                                'job@andreyegorov.com'])
-        email_message.content_subtype = 'html'
-        email_message.send()
+        try:
+            admin_email_content = render_to_string('email/email.html', context)
+            email_message = EmailMultiAlternatives(
+                'Подтверждение бронирования (для админа)',
+                admin_email_content, from_email,
+                ['autistasobrio@gmail.com', 'job@andreyegorov.com']
+            )
+            email_message.content_subtype = 'html'
+            email_message.send()
+        except Exception as e:
+            logger.exception("Admin email send failed: %s", e)
 
         # Customer email
-        customer_email_content = render_to_string('email/email.html', context)
-        customer_email = query.get('email')
         try:
-            customer_email_striped = customer_email.strip()
-        except Exception:
-            customer_email_striped = customer_email
-        to = []
-        to.append(customer_email_striped)
-        email_message = EmailMultiAlternatives(subject,
-                                               customer_email_content,
-                                               'support@transferslux.com',
-                                               to)
-        email_message.content_subtype = 'html'
-        email_message.send()
+            customer_email_content = render_to_string('email/email.html', context)
+            customer = (query.get('email') or '').strip()
+            if customer:
+                email_message = EmailMultiAlternatives(
+                subject, customer_email_content, from_email, [customer]
+                )
+                email_message.content_subtype = 'html'
+                email_message.send()
+            else:
+                logger.warning("Customer email empty; skip sending")
+        except Exception as e:
+            logger.exception("Customer email send failed: %s", e)
+
         return render(request, 'booking/booking-received.html', context)
 
     else:

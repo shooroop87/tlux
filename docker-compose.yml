@@ -1,48 +1,47 @@
-# Файл docker-compose.yml
+# docker-compose.yml
 
-# Версия docker-compose
-version: '3'
-
-# Перечень volume - то, что не меняется после пересборки контейнера
 volumes:
   pg_data:
   static:
   media:
 
-# Перечень контейнеров
-# Все контейнеры, описанные в docker-compose.yml, будут запущены в сети (Docker network). 
-# Эту сеть Docker Compose создаст автоматически, описывать её в конфиге необязательно.
 services:
   db:
-    # Из какого образа запустить контейнер:
     image: postgres:13.10
-    # Файл (или список файлов) с переменными окружения
     env_file: .env
-    # Какой volume подключить для этого контейнера
     volumes:
-      - pg_data:/var/lib/postgresql/pg_data
-  # Имя и описание контейнера с бэкендом
+      # ВАЖНО: корректный путь данных Postgres
+      - pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-postgres}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
   backend:
-    # Из какого Dockerfile собирать образ для этого контейнера:
     build: ./backend/
     env_file: .env
-    # Какой volume подключить для этого контейнера
-    volumes:
-      - static:/backend_static
-      - media:/app/media/
-    # Какие контейнеры нужно запустить до старта этого контейнера:
     depends_on:
-      - db
-  # Имя и описание контейнера с Nginx
-  gateway:
-    # Сбилдить и запустить образ, 
-    # описанный в Dockerfile в папке gateway
-    build: ./gateway/
-    # Ключ ports устанавливает
-    # перенаправление всех запросов с порта 8000 хоста
-    # на порт 80 контейнера.
+      db:
+        condition: service_healthy
+    # Скрипт ниже применит миграции и соберёт статику
+    entrypoint: ["/app/entrypoint.sh"]
+    command: ["gunicorn", "transferslux.wsgi:application", "--bind", "0.0.0.0:8000", "--workers=3"]
     volumes:
+      # Статика будет собираться в /app/collected_static
+      - static:/app/collected_static
+      # Медиа — на volume
+      - media:/app/media/
+    expose:
+      - "8000"
+
+  gateway:
+    build: ./gateway/
+    depends_on:
+      - backend
+    volumes:
+      # Nginx будет читать статику отсюда (путь должен совпасть с его конфигом)
       - static:/staticfiles/
       - media:/app/media/
     ports:
-      - 8000:80
+      - "8000:80"

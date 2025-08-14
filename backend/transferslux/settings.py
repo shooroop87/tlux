@@ -11,17 +11,54 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("SECRET_KEY", "1insecure1-1default1")
 
+# Nexi settings
+SITE_BASE_URL = os.getenv("SITE_BASE_URL", "http://localhost:8000")
+
+NEXI_ENV = os.getenv("NEXI_ENV", "dev").lower()
+
+NEXI = {
+    "dev": {
+        "ALIAS": os.getenv("NEXI_ALIAS_DEV", ""),
+        "SECRET": os.getenv("NEXI_SECRET_DEV", ""),
+        "HOST": os.getenv("NEXI_HOST_DEV", "https://int-ecommerce.nexi.it"),
+    },
+    "prod": {
+        "ALIAS": os.getenv("NEXI_ALIAS_PROD", ""),
+        "SECRET": os.getenv("NEXI_SECRET_PROD", ""),
+        "HOST": os.getenv("NEXI_HOST_PROD", "https://ecommerce.nexi.it"),
+    },
+}
+
+# Удобные «плоские» синонимы под текущую среду
+NEXI_ALIAS = NEXI[NEXI_ENV]["ALIAS"]
+NEXI_SECRET = NEXI[NEXI_ENV]["SECRET"]
+NEXI_HOST = NEXI[NEXI_ENV]["HOST"]
+
+# Почта (отправитель по умолчанию)
+DEFAULT_FROM_EMAIL = os.getenv("EMAIL_FROM", os.getenv("EMAIL_HOST_USER_DJANGO", "no-reply@example.com"))
+
 # DEBUG выключает кэш
 DEBUG = False
 
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "localhost 127.0.0.1 backend db 217.154.121.7 transferslux.com www.transferslux.com").split()
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "localhost 127.0.0.1 0.0.0.0 backend gateway db 217.154.121.7 transferslux.com www.transferslux.com").split()
 
+# Настройки для работы за прокси
+USE_X_FORWARDED_HOST = True
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
+# Django 4+ требует полные origin'ы (со схемой и портом)
 CSRF_TRUSTED_ORIGINS = [
-    "https://*.transferslux.com",
     "https://transferslux.com",
+    "https://www.transferslux.com",
+    "https://*.transferslux.com",
     "http://localhost",
+    "http://localhost:8000",
     "http://127.0.0.1",
     "http://127.0.0.1:8000",
+    "http://0.0.0.0",
+    "http://0.0.0.0:8000",
+    "http://backend",   # если заходишь через nginx → backend
+    "http://gateway",   # если открываешь gateway по имени
 ]
 
 # Application definition
@@ -34,6 +71,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',  # Для переводов чисел, дат и т.д.
     'django.contrib.sitemaps',
+    'post_office',
     'api.apps.ApiConfig',
     'meta',  # Meta теги для SEO
 ]
@@ -233,10 +271,7 @@ LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
     "formatters": {
-        "verbose": {
-            "format": "{levelname} {asctime} {module} {message}",
-            "style": "{",
-        },
+        "verbose": {"format": "{levelname} {asctime} {name} {message}", "style": "{"},
     },
     "handlers": {
         "transfers_file": {
@@ -252,15 +287,35 @@ LOGGING = {
         },
     },
     "loggers": {
+        # Лог всех 404/500 от Django
+        "django.request": {
+            "handlers": ["console", "transfers_file"],
+            "level": "WARNING",   # WARNING покажет 404; ERROR — 500/tracebacks
+            "propagate": False,
+        },
+        # CSRF, security и т.п.
+        "django.security.csrf": {
+            "handlers": ["console", "transfers_file"],
+            "level": "WARNING",
+            "propagate": False,
+        },
+        # Твой код (вся app api)
+        "api": {
+            "handlers": ["console", "transfers_file"],
+            "level": "INFO",
+            "propagate": False,
+        },
+        # Оставь, если используешь этот модуль
         "services.transfer_service": {
-            "handlers": ["transfers_file", "console"],
+            "handlers": ["console", "transfers_file"],
             "level": "INFO",
             "propagate": True,
         },
     },
+    # Корневой — чтоб INFO тоже было видно
     "root": {
-        "handlers": ["console"],
-        "level": "ERROR",
+        "handlers": ["console", "transfers_file"],
+        "level": "INFO",
     },
 }
 
