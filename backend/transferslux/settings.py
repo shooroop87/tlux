@@ -112,7 +112,7 @@ ROOT_URLCONF = 'transferslux.urls'
 # Путь к директории с шаблонами вынесен в переменную:
 TEMPLATES_DIR = BASE_DIR / 'templates'
 
-# Путь к переводам:
+# Путь к переводам
 LOCALE_PATHS = [BASE_DIR / 'locale']
 
 # Google API
