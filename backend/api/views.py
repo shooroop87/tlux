@@ -6,12 +6,13 @@ import uuid
 from datetime import datetime
 from urllib.parse import urljoin
 import logging
+
 logger = logging.getLogger(__name__)
 
 if sys.version_info >= (3,):
-    from urllib.parse import urlencode
+    from urllib.parse import urlencode  # noqa: F401
 else:
-    from urllib import urlencode
+    from urllib import urlencode  # type: ignore  # noqa: F401
 
 import googlemaps
 from api.forms import DetailsForm, ExtrasForm, SearchForm, VehicleForm
@@ -45,10 +46,8 @@ def index(request):
                 'ru': 'Пожалуйста, заполните все обязательные поля',
                 'en': 'Please fill in all required fields'
             }
-            error_message = errors[language_code]
-            if error_message is None:
-                error_message = 'Please fill in all required fields'
-            # Если поля не заполнено, вернуть ошибку
+            error_message = errors.get(language_code, 'Please fill in all required fields')
+            # Если поля не заполнены, вернуть ошибку
             if not all([from_short, to_short, to_date, to_time]):
                 messages.error(request, error_message)
             else:
@@ -70,66 +69,69 @@ def index(request):
 
 
 def vehicle(request):  # noqa: C901
-    if 'search_query' in request.session:
-        query = request.session['search_query']
-        # Access individual fields from the dictionary
-        from_short = query.get('from_short')
-        from_hidden = query.get('from_hidden')
-        to_short = query.get('to_short')
-        to_hidden = query.get('to_hidden')
-        to_date = query.get('to_date')
-        to_time = query.get('to_time')
-        session_id = query.get('session_id')
-        # Perform your search logic here based on the query
-        gmaps = googlemaps.Client(key=google_api_key)
-        # Шаблон для Милана, учитывающий разные написания
-        mp = re.compile(
-            r'(milan|milano|милан)',
-            re.IGNORECASE
-        )
-        # Шаблон для Бергамо, учитывающий различные варианты написания
-        bp = re.compile(
-            r'(bergamo|бергамо|orio al serio|bgy|'
-            r'аэропорт\sбергамо|via aeroporto.*orio al serio|'
-            r'airport|аэропорт|aeroporto)',
-            re.IGNORECASE
-        )
-        # Шаблон для Мальпенсы, учитывающий различные варианты написания
-        ap = re.compile(
-            r'(malpensa|мальпенса|малпенса|mxp|'
-            r'аэропорт\sмальпенса|aeroporto di milano malpensa|'
-            r'malpensa\sairport|milan malpensa airport|'
-            r'airport|аэропорт|aeroporto)',
-            re.IGNORECASE
-        )
-        # Шаблон для Мальпенсы - но Ферно Варезе
-        fv = re.compile(
-            r'(21010\sФерно,\sВарезе,\sИталия|'
-            r'21010\sFerno,\sVarese,\sItaly|'
-            r'21010\sFerno,\sVarese,\sItalia)',
-            re.IGNORECASE
-        )
-        zm = re.compile(
-            r'(3920\sЦерматт,\sШвейцария|'
-            r'3920\sZermatt,\sSwitzerland|'
-            r'3920\sZermatt,\sSvizzera)',
-            re.IGNORECASE
-        )
-        geneva = re.compile(
-            r'(geneva|женева|gva|geneva airport|'
-            r'аэропорт\sженева|aeroport de geneve|'
-            r'genève|aéroport de genève)',
-            re.IGNORECASE
-        )
-        lyon = re.compile(
-            r'(lyon|лион|lys|lyon airport|'
-            r'аэропорт\sлион|aeroport de lyon)',
-            re.IGNORECASE)
-        courchevel = re.compile(
-            r'(courchevel|куршевель)',
-            re.IGNORECASE)
-        # Замена адресов, если они относятся к Церматт
-        if zm.search(from_hidden):
+    if 'search_query' not in request.session:
+        return redirect('api:index')
+
+    query = request.session['search_query']
+    # Access individual fields from the dictionary
+    from_short = query.get('from_short')
+    from_hidden = query.get('from_hidden')
+    to_short = query.get('to_short')
+    to_hidden = query.get('to_hidden')
+    to_date = query.get('to_date')
+    to_time = query.get('to_time')
+    session_id = query.get('session_id')
+    # Perform your search logic here based on the query
+    gmaps = googlemaps.Client(key=google_api_key)
+    # Шаблон для Милана, учитывающий разные написания
+    mp = re.compile(
+        r'(milan|milano|милан)',
+        re.IGNORECASE
+    )
+    # Шаблон для Бергамо, учитывающий различные варианты написания
+    bp = re.compile(
+        r'(bergamo|бергамо|orio al serio|bgy|'
+        r'аэропорт\sбергамо|via aeroporto.*orio al serio|'
+        r'airport|аэропорт|aeroporto)',
+        re.IGNORECASE
+    )
+    # Шаблон для Мальпенсы, учитывающий различные варианты написания
+    ap = re.compile(
+        r'(malpensa|мальпенса|малпенса|mxp|'
+        r'аэропорт\sмальпенса|aeroporto di milano malpensa|'
+        r'malpensa\sairport|milan malpensa airport|'
+        r'airport|аэропорт|aeroporto)',
+        re.IGNORECASE
+    )
+    # Шаблон для Мальпенсы - но Ферно Варезе
+    fv = re.compile(
+        r'(21010\sФерно,\sВарезе,\sИталия|'
+        r'21010\sFerno,\sVarese,\sItaly|'
+        r'21010\sFerno,\sVarese,\sItalia)',
+        re.IGNORECASE
+    )
+    zm = re.compile(
+        r'(3920\sЦерматт,\sШвейцария|'
+        r'3920\sZermatt,\sSwitzerland|'
+        r'3920\sZermatt,\sSvizzera)',
+        re.IGNORECASE
+    )
+    geneva = re.compile(
+        r'(geneva|женева|gva|geneva airport|'
+        r'аэропорт\sженева|aeroport de geneve|'
+        r'genève|aéroport de genève)',
+        re.IGNORECASE
+    )
+    lyon = re.compile(
+        r'(lyon|лион|lys|lyon airport|'
+        r'аэропорт\sлион|aeroport de lyon)',
+        re.IGNORECASE)
+    courchevel = re.compile(
+        r'(courchevel|куршевель)',
+        re.IGNORECASE)
+    # Замена адресов, если они относятся к Церматт
+    try:
+        if zm.search(from_hidden or ""):
             from_hidden_adj = "Hofstrasse 40, 4000 Täsch, Svizzera"
             directions_result = gmaps.directions(
                 origin=from_hidden_adj,
@@ -138,7 +140,7 @@ def vehicle(request):  # noqa: C901
                 departure_time="now",
                 traffic_model="best_guess"
             )
-        elif zm.search(to_hidden):
+        elif zm.search(to_hidden or ""):
             to_hidden_adj = "Hofstrasse 40, 4000 Täsch, Svizzera"
             directions_result = gmaps.directions(
                 origin=from_hidden,
@@ -147,7 +149,6 @@ def vehicle(request):  # noqa: C901
                 departure_time="now",
                 traffic_model="best_guess"
             )
-        # gtp 2025-01-10 предложил использовать только 1-н метод
         else:
             directions_result = gmaps.directions(
                 origin=from_hidden,
@@ -156,62 +157,77 @@ def vehicle(request):  # noqa: C901
                 departure_time="now",
                 traffic_model="best_guess"
             )
-        if directions_result:
+    except Exception as e:
+        logger.exception("Google Maps directions error: %s", e)
+        directions_result = None
+
+    km = 0.0
+    travel_time = ""
+    cost = 0
+
+    if directions_result:
+        try:
             route = directions_result[0]['legs'][0]
             km = round(route['distance']['value'] / 1000, 1)
             travel_time = route['duration']['text']
             # Расчёт базовой стоимости по километражу
             base_cost_per_km = 2  # Стоимость за километр
             cost = math.ceil(km * base_cost_per_km)
-        # Проверка на маршруты к/из аэропортов
-        # Из Милана в Бергамо и наоборот
-        if (mp.search(from_hidden) and bp.search(to_hidden)) and km <= 70:
-            cost = 100
-        elif (bp.search(from_hidden) and mp.search(to_hidden)) and km <= 70:
-            cost = 100
-        # Из Милана в аэропорт и наоброт
-        elif (mp.search(from_hidden) and ap.search(to_hidden)) and km <= 70:
-            cost = 100
-        elif (ap.search(from_hidden) and mp.search(to_hidden)) and km <= 70:
-            cost = 100
-        # Из Милана в Ферно Верезе
-        elif (mp.search(from_hidden) and fv.search(to_hidden)) and km <= 70:
-            cost = 100
-        elif (fv.search(from_hidden) and mp.search(to_hidden)) and km <= 70:
-            cost = 100
-        else:
-            print("Стоимость рассчитывается по километражу.")
-        # Дополнительные классы автомобилей
-        if (geneva.search(from_hidden) and courchevel.search(to_hidden)) or (courchevel.search(from_hidden) and geneva.search(to_hidden)):  # noqa: E501
-            cost_e = 500  # Седан
-            cost_v = 550  # Минибус
-            cost_s = 750  # S-класс
-        elif (lyon.search(from_hidden) and courchevel.search(to_hidden)) or (courchevel.search(from_hidden) and lyon.search(to_hidden)):  # noqa: E501
-            cost_e = 500  # Седан
-            cost_v = 550  # Минибус
-            cost_s = 750  # S-класс
-        else:
-            # Для остальных маршрутов расчет по километражу
-            cost_e = max(50, cost)
-            cost_s = cost_e * 1.5
-            cost_v = cost_e * 1.2
-        context = {
-            'from_short': from_short,
-            'from_hidden': from_hidden,
-            'to_short': to_short,
-            'to_hidden': to_hidden,
-            'cost_e': cost_e,
-            'cost_s': cost_s,
-            'cost_v': cost_v,
-            'distance': km,
-            'travel_time': travel_time,
-            'to_date': to_date,
-            'to_time': to_time,
-        }
-        # Update query
-        query.update({'distance': km, 'travel_time': travel_time})
-        request.session['search_query'] = query
-        # Save search
+        except Exception as e:
+            logger.exception("Failed to parse route: %s", e)
+
+    # Проверка на маршруты к/из аэропортов
+    # Из Милана в Бергамо и наоборот
+    if (mp.search(from_hidden or "") and bp.search(to_hidden or "")) and km <= 70:
+        cost = 100
+    elif (bp.search(from_hidden or "") and mp.search(to_hidden or "")) and km <= 70:
+        cost = 100
+    # Из Милана в аэропорт и наоборот
+    elif (mp.search(from_hidden or "") and ap.search(to_hidden or "")) and km <= 70:
+        cost = 100
+    elif (ap.search(from_hidden or "") and mp.search(to_hidden or "")) and km <= 70:
+        cost = 100
+    # Из Милана в Ферно Верезе
+    elif (mp.search(from_hidden or "") and fv.search(to_hidden or "")) and km <= 70:
+        cost = 100
+    elif (fv.search(from_hidden or "") and mp.search(to_hidden or "")) and km <= 70:
+        cost = 100
+    else:
+        logger.info("Стоимость рассчитывается по километражу.")
+
+    # Дополнительные классы автомобилей
+    if (geneva.search(from_hidden or "") and courchevel.search(to_hidden or "")) or (courchevel.search(from_hidden or "") and geneva.search(to_hidden or "")):  # noqa: E501
+        cost_e = 500  # Седан
+        cost_v = 550  # Минибус
+        cost_s = 750  # S-класс
+    elif (lyon.search(from_hidden or "") and courchevel.search(to_hidden or "")) or (courchevel.search(from_hidden or "") and lyon.search(to_hidden or "")):  # noqa: E501
+        cost_e = 500  # Седан
+        cost_v = 550  # Минибус
+        cost_s = 750  # S-класс
+    else:
+        # Для остальных маршрутов расчет по километражу
+        cost_e = max(50, cost)
+        cost_s = int(math.ceil(cost_e * 1.5))
+        cost_v = int(math.ceil(cost_e * 1.2))
+
+    context = {
+        'from_short': from_short,
+        'from_hidden': from_hidden,
+        'to_short': to_short,
+        'to_hidden': to_hidden,
+        'cost_e': cost_e,
+        'cost_s': cost_s,
+        'cost_v': cost_v,
+        'distance': km,
+        'travel_time': travel_time,
+        'to_date': to_date,
+        'to_time': to_time,
+    }
+    # Update query
+    query.update({'distance': km, 'travel_time': travel_time})
+    request.session['search_query'] = query
+    # Save search
+    try:
         instance = Search(
             from_hidden=from_hidden,
             to_hidden=to_hidden,
@@ -224,12 +240,10 @@ def vehicle(request):  # noqa: C901
             session_id=session_id
         )
         instance.save()
-        # Save query to pass next page
-        request.session['search_query'] = query
-        # Render next page
-        return render(request, 'booking/booking-vehicle.html', context)
-    else:
-        return redirect('api:index')
+    except Exception as e:
+        logger.exception("Failed to save Search: %s", e)
+    # Render next page
+    return render(request, 'booking/booking-vehicle.html', context)
 
 
 def extras(request):
@@ -267,8 +281,6 @@ def extras(request):
 def details(request):
     if request.method == 'POST':
         form = ExtrasForm(request.POST)
-        # breakpoint()
-        # print(form)
         if form.is_valid():
             flight = form.cleaned_data["flight"]
             child_seat = form.cleaned_data["child_seat"]
@@ -350,62 +362,35 @@ def details(request):
 
 
 def payment(request):
+    # Базовые настройки Nexi (переключаются .env → settings.NEXI_ENV)
+    alias = settings.NEXI_ALIAS
+    secret = settings.NEXI_SECRET
+    nexi_host = settings.NEXI_HOST
+    nexi_env = getattr(settings, 'NEXI_ENV', 'dev').lower()
+
     if request.method == 'POST':
         form = DetailsForm(request.POST)
         if form.is_valid():
             # Extract form data
             cleaned_data = form.cleaned_data
-            name = cleaned_data["name"]
-            lastname = cleaned_data["lastname"]
-            email = cleaned_data["email"]
-            phone = cleaned_data["phone"]
-            passengers = cleaned_data["passengers"]
-            luggage = cleaned_data["luggage"]
-            notes_details = cleaned_data["notes_details"]
-
             # Retrieve session data
             query = request.session.get('search_query', {})
-            total = query.get('total')
-
-            # Payment gateway settings
-            ALIAS_TEST = 'ALIAS_WEB_00082258'
-            total = str(total).replace(',', '.')
-            importo = float(total)
-            divisa = 'EUR'
-            codTrans = query.get('codTrans')
-            requestUrl = query.get('requestUrl')
-            success_url = query.get('success_url')
-            cancel_url = query.get('cancel_url')
-            mac = query.get('mac')
-
-            # Update session query
+            # Сохраняем пассажирские данные в сессию
             query.update({
-                'name': name,
-                'lastname': lastname,
-                'email': email,
-                'phone': phone,
-                'passengers': passengers,
-                'luggage': luggage,
-                'notes_details': notes_details,
-                'total': total,
-                'alias': ALIAS_TEST,
-                'importo': importo,
-                'divisa': divisa,
-                'requestUrl': requestUrl,
-                'codTrans': codTrans,
-                'url': success_url,
-                'url_back': cancel_url,
-                'mac': mac,
+                'name': cleaned_data["name"],
+                'lastname': cleaned_data["lastname"],
+                'email': cleaned_data["email"],
+                'phone': cleaned_data["phone"],
+                'passengers': cleaned_data["passengers"],
+                'luggage': cleaned_data["luggage"],
+                'notes_details': cleaned_data["notes_details"],
             })
             request.session['search_query'] = query
 
-    # If not post show page
-    # Fields from request
-    name = request.POST.get("name")
-    lastname = request.POST.get("lastname")
-
     # Retrieve session data
     query = request.session.get('search_query', {})
+    if not query:
+        return redirect('api:index')
 
     # Calculate additional charges
     child_seat = int(query.get('child_seat', 0))
@@ -420,40 +405,27 @@ def payment(request):
     rate = float(str(query.get('rate', '0')).replace(',', '.'))
     total = rate + extra_total
 
-    # Payment gateway settings
-    # PROD
-    # ALIAS_TEST = 'payment_3780564'
-    # CHIAVESEGRETA_TEST = '9086Wh56532BG7oV6giEUW2510201H68WAqc831G'
-    # TEST
-    ALIAS_TEST = 'ALIAS_WEB_00082258'
-    CHIAVESEGRETA_TEST = 'Y665ESJRJEK38D6D1MJJGCYAUQR2J8SV'
-    current_datetime = datetime.today().strftime('%Y%m%d%H%M%S')
-    codTrans = 'TESTPS_' + current_datetime
+    # Параметры платежа (Nexi принимает сумму в младших единицах, EUR→центы)
+    DEPOSIT_FACTOR = 0.30  # 30% предоплата — оставь/измени по бизнес-логике
+    importo = int(round(total * 100 * DEPOSIT_FACTOR, 0))
     divisa = 'EUR'
-    importo = round(total * 100 * 0.30, 0)
-    importo = int(importo)
+    current_datetime = datetime.today().strftime('%Y%m%d%H%M%S')
+    prefix = 'PS' if nexi_env == 'prod' else 'TESTPS'
+    codTrans = f'{prefix}_{current_datetime}'
 
-    # Calcolo MAC
-    codtras_str = 'codTrans=' + str(codTrans)
-    divisa_str = 'divisa=' + str(divisa)
-    import_str = 'importo=' + str(importo)
-    chiave_str = str(CHIAVESEGRETA_TEST)
-    mac_str = codtras_str + divisa_str + import_str + chiave_str
+    # Calcolo MAC (INIT): порядок полей важен
+    mac_str = f'codTrans={codTrans}divisa={divisa}importo={importo}{secret}'
     mac = hashlib.sha1(mac_str.encode('utf8')).hexdigest()
 
     # URLs
     merchantServerUrl = settings.SITE_BASE_URL.rstrip("/")
-    # PROD
-    # NEXI_HOST = "https://ecommerce.nexi.it"
-    # TEST
-    NEXI_HOST = "https://int-ecommerce.nexi.it"
-    requestUrl = f"{NEXI_HOST}/ecomm/ecomm/DispatcherServlet"
+    requestUrl = f"{nexi_host}/ecomm/ecomm/DispatcherServlet"
     success_url = urljoin(merchantServerUrl + "/", "success/")
-    cancel_url  = urljoin(merchantServerUrl + "/", "error/")
+    cancel_url = urljoin(merchantServerUrl + "/", "error/")
 
-    # Update session query
-    request.session['search_query'].update({
-        'alias': ALIAS_TEST,
+    # Update session query (один раз)
+    query.update({
+        'alias': alias,
         'importo': importo,
         'divisa': divisa,
         'requestUrl': requestUrl,
@@ -463,25 +435,9 @@ def payment(request):
         'mac': mac,
         'total': total,
     })
-    # Urls
-    # x_url = "?" + urlencode(query)
-    # success_url = urljoin(merchantServerUrl, "success/") + x_url
-    request.session['search_query'].update({
-        'alias': ALIAS_TEST,
-        'importo': importo,
-        'divisa': divisa,
-        'requestUrl': requestUrl,
-        'codTrans': codTrans,
-        'url': success_url,
-        'url_back': cancel_url,
-        'mac': mac,
-        'total': total,
-    })
+    request.session['search_query'] = query
     request.session.modified = True
 
-    # Calculate total cost
-    rate = float(str(query.get('rate', '0')).replace(',', '.'))
-    total = rate + extra_total
     # Context render
     context = {
         'from_short': query.get('from_short'),
@@ -502,9 +458,10 @@ def payment(request):
         'travel_time': query.get('travel_time'),
         'to_date': query.get('to_date'),
         'to_time': query.get('to_time'),
-        'name': name,
-        'lastname': lastname,
-        'alias': ALIAS_TEST,
+        'name': query.get('name'),
+        'lastname': query.get('lastname'),
+        # Параметры формы для Nexi
+        'alias': alias,
         'importo': importo,
         'divisa': divisa,
         'requestUrl': requestUrl,
@@ -518,11 +475,13 @@ def payment(request):
 
 def payment_success(request):
     # Лог входящих параметров от Nexi
-    logger.info("Nexi return: method=%s GET=%s", request.method, dict(request.GET))
+    logger.info("Nexi return: method=%s GET=%s POST=%s", request.method, dict(request.GET), dict(request.POST))
 
     # В ответе Nexi два mac — берём последний
     mac_values = request.GET.getlist('mac') or request.POST.getlist('mac')
     mac_from_gateway = mac_values[-1] if mac_values else None
+
+    esito = request.GET.get('esito') or request.POST.get('esito')
 
     terms_ = bool(request.POST.get("terms"))
 
@@ -541,32 +500,23 @@ def payment_success(request):
         "codAut":   request.GET.get('codAut')   or request.POST.get('codAut'),
         "mac":      mac_from_gateway,
         "divisa":  'EUR',
+        "esito":    esito,
     }
 
     # Check if all required params are present
-    required_params = ['codTrans',
-                       'importo',
-                       'data',
-                       'orario',
-                       'codAut',
-                       'mac']
+    required_params = ['codTrans', 'importo', 'data', 'orario', 'codAut', 'mac', 'esito']
     if not all(transaction_data.get(p) for p in required_params):
         missing = [p for p in required_params if not transaction_data.get(p)]
         logger.error("Missing required parameters: %s", missing)
         return render(request, 'booking/booking-payment-error.html',
                       {'reason': f"Missing params: {', '.join(missing)}"}, status=400)
 
-    # Calculate MAC
-    # PROD
-    # CHIAVESEGRETA_TEST = '9086Wh56532BG7oV6giEUW2510201H68WAqc831G'
-    # TEST
-    # CHIAVESEGRETA_TEST = 'Y665ESJRJEK38D6D1MJJGCYAUQR2J8SV'
-    # секрет: сначала из settings (если ты вынес в .env), иначе явно тестовый
-    secret = getattr(settings, "NEXI_SECRET", None) or 'Y665ESJRJEK38D6D1MJJGCYAUQR2J8SV'  # TEST
+    # Calculate MAC (callback) — берём секрет из settings, esito — из ответа
+    secret = getattr(settings, "NEXI_SECRET", "")
 
     mac_str = (
         f"codTrans={transaction_data['codTrans']}"
-        f"esito=OK"
+        f"esito={transaction_data['esito']}"
         f"importo={transaction_data['importo']}"
         f"divisa={transaction_data['divisa']}"
         f"data={transaction_data['data']}"
@@ -580,6 +530,11 @@ def payment_success(request):
         logger.error("MAC mismatch: calc=%s given=%s", mac_calculated, transaction_data['mac'])
         return render(request, 'booking/booking-payment-error.html',
                       {'reason': 'MAC mismatch'}, status=400)
+
+    if str(transaction_data['esito']).upper() != 'OK':
+        logger.warning("Payment not OK: esito=%s", transaction_data['esito'])
+        return render(request, 'booking/booking-payment-error.html',
+                      {'reason': f"Payment status: {transaction_data['esito']}"}, status=400)
 
     # Handle booking information
     if request.session.get('search_query'):
@@ -616,20 +571,27 @@ def payment_success(request):
         }
 
         # Save Booking
-        instance = Booking(**booking_data)
-        instance.save()
+        try:
+            instance = Booking(**booking_data)
+            instance.save()
+        except Exception as e:
+            logger.exception("Booking save failed: %s", e)
+            return render(request, 'booking/booking-payment-error.html',
+                          {'reason': 'Failed to save booking'}, status=500)
 
         # Retrieve booking ID
-        session_id = query.get('session_id')
-        booking_data = Booking.objects.get(session_id=session_id)
-        # breakpoint()
-        field_name = booking_data._meta.fields[0].name
-        # print(field_name)
-        booking_id = getattr(booking_data, field_name)
+        try:
+            session_id = query.get('session_id')
+            booking_data = Booking.objects.get(session_id=session_id)
+            field_name = booking_data._meta.fields[0].name
+            booking_id = getattr(booking_data, field_name)
+        except Exception as e:
+            logger.exception("Fetch booking id failed: %s", e)
+            booking_id = None
 
         # Update notes_details with notes_extra
-        notes_details = query.get('notes_details') or ''
-        notes_extra = query.get('notes_extra') or ''
+        notes_details = (query.get('notes_details') or '').strip()
+        notes_extra = (query.get('notes_extra') or '').strip()
         notes_details_upd = (notes_extra + ' ' + notes_details).strip()
 
         # Prepare context for emails and response
@@ -675,9 +637,8 @@ def payment_success(request):
             'ru': 'Ваше бронирование было успешно отправлено',
             'en': 'Your booking was submitted successfully'
         }
-        subject = subjects.get(language_code,
-                               'Your booking was submitted successfully')
-        
+        subject = subjects.get(language_code, 'Your booking was submitted successfully')
+
         from_email = getattr(settings, "DEFAULT_FROM_EMAIL", "support@transferslux.com")
 
         # Admin email
@@ -699,7 +660,7 @@ def payment_success(request):
             customer = (query.get('email') or '').strip()
             if customer:
                 email_message = EmailMultiAlternatives(
-                subject, customer_email_content, from_email, [customer]
+                    subject, customer_email_content, from_email, [customer]
                 )
                 email_message.content_subtype = 'html'
                 email_message.send()
