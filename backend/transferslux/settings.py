@@ -29,7 +29,7 @@ NEXI = {
     },
 }
 
-# Удобные «плоские» синонимы под текущую среду
+# Удобные «плоские» синонимы под текущую
 NEXI_ALIAS = NEXI[NEXI_ENV]["ALIAS"]
 NEXI_SECRET = NEXI[NEXI_ENV]["SECRET"]
 NEXI_HOST = NEXI[NEXI_ENV]["HOST"]
