@@ -23,7 +23,6 @@ services:
     image: redis:7
     volumes:
       - redis_data:/data
-    # Конфигурация Redis для автоматической чистки
     command: redis-server --appendonly yes --maxmemory 512mb --maxmemory-policy allkeys-lru
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
@@ -33,7 +32,9 @@ services:
     restart: unless-stopped
 
   backend:
-    image: egorovdocker/transferslux_backend
+    # ЯВНЫЙ тег и автоподтягивание
+    image: egorovdocker/transferslux_backend:latest
+    pull_policy: always
     env_file: .env
     volumes:
       - static_volume:/app/collected_static
@@ -43,44 +44,49 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
+    # entrypoint теперь внутри образа — ничего переопределять не надо
     restart: unless-stopped
 
   # Автообновление данных трансферов каждые 12 часов
   transfers-updater:
-    image: egorovdocker/transferslux_backend
+    # Используем тот же образ, но ВАЖНО: гасим entrypoint бэкенда
+    image: egorovdocker/transferslux_backend:latest
+    pull_policy: always
     env_file: .env
     depends_on:
       db:
         condition: service_healthy
       redis:
         condition: service_healthy
+    # <<< переопределяем entrypoint, чтобы НЕ бежали migrate/collectstatic >>>
+    entrypoint: ["/bin/sh", "-c"]
     command: >
-      sh -c "
-        echo 'Setting up automatic transfers updater...' &&
-        echo '0 6 * * * cd /app && python manage.py refresh_all_transfers --clear-cache >> /tmp/transfers.log 2>&1' > /tmp/crontab &&
-        echo '0 18 * * * cd /app && python manage.py refresh_all_transfers >> /tmp/transfers.log 2>&1' >> /tmp/crontab &&
-        crontab /tmp/crontab &&
-        echo 'Cron jobs installed. Transfers will auto-update at 6:00 and 18:00 daily.' &&
-        crontab -l &&
-        crond -f -l 2
-      "
+      echo 'Setting up automatic transfers updater...' &&
+      printf '0 6 * * * cd /app && python manage.py refresh_all_transfers --clear-cache >> /tmp/transfers.log 2>&1\n' > /tmp/crontab &&
+      printf '0 18 * * * cd /app && python manage.py refresh_all_transfers >> /tmp/transfers.log 2>&1\n' >> /tmp/crontab &&
+      crontab /tmp/crontab &&
+      echo 'Cron jobs installed. Transfers will auto-update at 6:00 and 18:00 daily.' &&
+      crond -f -l 2
     restart: unless-stopped
 
   gateway:
-    image: egorovdocker/transferslux_gateway
+    image: egorovdocker/transferslux_gateway:latest
+    pull_policy: always
     env_file: .env
     volumes:
-      - static_volume:/staticfiles
-      - media:/app/media/
+      # Раздаём статику только для чтения
+      - static_volume:/staticfiles:ro
+      # Медиа раздаём из общего тома тоже read-only
+      - media:/app/media/:ro
     ports:
-      - 8000:80
+      - "8000:80"
     depends_on:
       - backend
     restart: unless-stopped
 
   # === СЕРВИСЫ ОБСЛУЖИВАНИЯ ===
-  
-  # Еженедельная чистка Redis кэша
+  # (оставляю без изменений функционально)
+
   redis-cleaner:
     image: redis:7
     env_file: .env
@@ -92,17 +98,11 @@ services:
     command: >
       sh -c "
         echo 'Starting Redis cache cleanup...' &&
-        redis-cli -h redis --eval - 0 <<EOF
-        local keys = redis.call('keys', 'cache:*')
-        for i=1,#keys,5000 do
-            redis.call('del', unpack(keys, i, math.min(i+4999, #keys)))
-        end
-        return #keys
-        EOF
+        echo 'NOTE: consider using SCAN instead of KEYS in production for large datasets.' &&
+        redis-cli -h redis KEYS 'cache:*' | xargs -r -n 1000 redis-cli -h redis DEL || true &&
         echo 'Redis cache cleaned'
       "
 
-  # Еженедельный бэкап базы данных
   db-backup:
     image: postgres:13.10
     env_file: .env
@@ -122,7 +122,6 @@ services:
         echo 'Old backups cleaned up'
       "
 
-  # Очистка старых медиа файлов и логов
   file-cleaner:
     image: alpine:latest
     volumes:
@@ -138,7 +137,6 @@ services:
         echo 'File cleanup completed'
       "
 
-  # Мониторинг системы
   system-monitor:
     image: alpine:latest
     volumes:
@@ -155,7 +153,6 @@ services:
         docker system df -v | grep -E '(VOLUME NAME|transferslux)' || true
       "
 
-  # Автоматическая очистка Docker системы
   docker-cleaner:
     image: docker:cli
     volumes:

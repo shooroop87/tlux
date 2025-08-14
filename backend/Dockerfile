@@ -1,4 +1,3 @@
-# backend/Dockerfile
 FROM python:3.9-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
@@ -18,17 +17,19 @@ RUN pip install --no-cache-dir -r requirements.txt
 # 2) код проекта
 COPY . .
 
-# 3) компиляция переводов (если локали есть; не валимся, если их нет)
+# 3) компиляция переводов (best effort)
 RUN django-admin compilemessages -l ru -l it -l es -l fr || true
 
-# 4) каталог для собранной статики (совпадает с STATIC_ROOT)
+# 4) каталог для статики
 RUN mkdir -p /app/collected_static
 
-# 5) entrypoint: ждём БД, migrate, collectstatic
+# 5) entrypoint
 COPY entrypoint.sh /app/entrypoint.sh
 RUN chmod +x /app/entrypoint.sh
 
 EXPOSE 8000
 
-# CMD можно оставить — в docker-compose мы его переопределяем через `command:`
+# <<< ВАЖНО: теперь entrypoint реально будет выполняться >>>
+ENTRYPOINT ["/app/entrypoint.sh"]
+
 CMD ["gunicorn", "transferslux.wsgi:application", "--bind", "0.0.0.0:8000", "--workers=3"]
