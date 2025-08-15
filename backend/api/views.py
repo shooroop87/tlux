@@ -23,6 +23,7 @@ from django.core.mail import EmailMultiAlternatives
 from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
 from django.utils.translation import get_language_from_request
+from django.utils.html import strip_tags
 
 google_api_key = settings.GOOGLE_MAPS_API_KEY
 
@@ -640,16 +641,18 @@ def payment_success(request):
         subject = subjects.get(language_code, 'Your booking was submitted successfully')
 
         from_email = getattr(settings, "DEFAULT_FROM_EMAIL", "support@transferslux.com")
-
+        
         # Admin email
         try:
             admin_email_content = render_to_string('email/email.html', context)
+            plain_admin_html = strip_tags(admin_email_content)
             email_message = EmailMultiAlternatives(
                 'Подтверждение бронирования (для админа)',
-                admin_email_content, from_email,
+                plain_admin_html, from_email,
                 ['autistasobrio@gmail.com', 'job@andreyegorov.com']
             )
             email_message.content_subtype = 'html'
+            email_message.attach_alternative(admin_email_content, "text/html") 
             email_message.send()
         except Exception as e:
             logger.exception("Admin email send failed: %s", e)
@@ -657,12 +660,14 @@ def payment_success(request):
         # Customer email
         try:
             customer_email_content = render_to_string('email/email.html', context)
+            plain_customer_html = strip_tags(customer_email_content)
             customer = (query.get('email') or '').strip()
             if customer:
                 email_message = EmailMultiAlternatives(
-                    subject, customer_email_content, from_email, [customer]
+                    subject, plain_customer_html, from_email, [customer]
                 )
                 email_message.content_subtype = 'html'
+                email_message.attach_alternative(customer_email_content, "text/html") 
                 email_message.send()
             else:
                 logger.warning("Customer email empty; skip sending")
