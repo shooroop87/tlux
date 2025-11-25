@@ -1,4 +1,4 @@
-from api.sitemaps import StaticViewSitemap
+from api.sitemaps import StaticPagesSitemap
 from django.conf import settings
 from django.conf.urls import handler404
 from django.conf.urls.i18n import i18n_patterns
@@ -11,7 +11,7 @@ handler404 = 'api.views.page_not_found'
 handler500 = 'api.views.internal_server_error'
 
 sitemaps = {
-    'static': StaticViewSitemap
+    'static': StaticPagesSitemap,
 }
 
 urlpatterns = [
