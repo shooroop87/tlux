@@ -287,7 +287,7 @@ LOGGING = {
         },
     },
     "loggers": {
-        # Лог всех 404/500 от Django
+        # Лог всех 404/500
         "django.request": {
             "handlers": ["console", "transfers_file"],
             "level": "WARNING",   # WARNING покажет 404; ERROR — 500/tracebacks
