@@ -7,9 +7,9 @@ from django.conf import settings
 class MultilingualSitemap(Sitemap):
     """Базовый класс для мультиязычных sitemap"""
     protocol = 'https'
-    i18n = True  # Включает автоматическую генерацию для всех языков
-    alternates = True  # Добавляет hreflang ссылки
-    x_default = True  # Добавляет x-default
+    i18n = True
+    alternates = True
+    x_default = True
 
 
 class StaticPagesSitemap(MultilingualSitemap):
