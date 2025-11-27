@@ -61,57 +61,37 @@
     <!-- CSS -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     
-    <!-- JSON-LD Schema.org разметка -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "TransportService",
-        "name": "TransfersLux",
-        "description": "{% trans "Private airport and hotel transfers in Italy" %}",
-        "url": "https://transferslux.com",
-        "logo": "https://transferslux.com{% static 'imgs/template/logo.png' %}",
-        "image": "https://transferslux.com{% static 'imgs/og-image.jpg' %}",
-        "telephone": "+39-XXX-XXX-XXXX",
-        "email": "info@transferslux.com",
-        "areaServed": {
-            "@type": "Country",
-            "name": "Italy"
-        },
-        "serviceType": ["Airport Transfer", "Hotel Transfer", "Private Chauffeur"],
-        "provider": {
-            "@type": "Organization",
-            "name": "TransfersLux",
-            "url": "https://transferslux.com"
-        },
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "4.9",
-            "reviewCount": "150"
-        },
-        "priceRange": "€€"
-    }
-    </script>
-    
-    <!-- Дополнительная Organization разметка -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "TransfersLux",
-        "url": "https://transferslux.com",
-        "logo": "https://transferslux.com{% static 'imgs/template/logo.png' %}",
-        "sameAs": [
-            "https://www.facebook.com/transferslux",
-            "https://www.instagram.com/transferslux"
-        ],
-        "contactPoint": {
-            "@type": "ContactPoint",
-            "telephone": "+39-XXX-XXX-XXXX",
-            "contactType": "customer service",
-            "availableLanguage": ["English", "Russian", "Italian"]
-        }
-    }
-    </script>
+<!-- JSON-LD Schema.org разметка -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "TaxiService",
+    "@id": "https://transferslux.com/#business",
+    "name": "TransfersLux",
+    "description": "{% trans "Private airport and hotel transfers in Italy" %}",
+    "url": "https://transferslux.com",
+    "logo": {
+        "@type": "ImageObject",
+        "url": "https://transferslux.com{% static 'imgs/template/logo.png' %}"
+    },
+    "image": "https://transferslux.com{% static 'imgs/og-image.jpg' %}",
+    "telephone": "+393292137898",
+    "email": "info@transferslux.com",
+    "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "IT",
+        "addressLocality": "Milan"
+    },
+    "areaServed": {
+        "@type": "Country",
+        "name": "Italy"
+    },
+    "priceRange": "€€",
+    "sameAs": [
+        "https://www.instagram.com/transferslux/"
+    ]
+}
+</script>
     
     {% block extra_schema %}{% endblock %}
     
