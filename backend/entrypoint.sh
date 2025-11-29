@@ -1,6 +1,6 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 set -euo pipefail
-IFS=$(printf '\n\t')
+IFS=$'\n\t'
 
 log() { printf '%s %s\n' "[entrypoint]" "$*"; }
 
