@@ -74,7 +74,7 @@ pydyf==0.10.0
 # QR codes (для платежей)
 qrcode==7.4.2
 
-# XML processing
+# XML
 lxml==5.2.2
 
 # Utilities
