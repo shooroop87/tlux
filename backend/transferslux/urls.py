@@ -1,3 +1,4 @@
+from api import views
 from api.sitemaps import StaticPagesSitemap
 from django.conf import settings
 from django.conf.urls import handler404
@@ -17,13 +18,14 @@ sitemaps = {
 urlpatterns = [
     path('dj-admin/', admin.site.urls),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}),
+    path('robots.txt', views.robots_txt, name='robots_txt'),
     path('i18n/', include('django.conf.urls.i18n')),
 ]
 
 # Основные URL-паттерны вашего приложения
 urlpatterns += i18n_patterns(
     path('', include(('api.urls', 'api'), namespace='api')),
-    prefix_default_language=False,   # ← вот это ключ
+    prefix_default_language=False,
 )
 
 if settings.DEBUG:

@@ -34,7 +34,7 @@ NEXI_ALIAS = NEXI[NEXI_ENV]["ALIAS"]
 NEXI_SECRET = NEXI[NEXI_ENV]["SECRET"]
 NEXI_HOST = NEXI[NEXI_ENV]["HOST"]
 
-# Почта (отправитель по умолчанию)
+# Почта
 DEFAULT_FROM_EMAIL = os.getenv("EMAIL_FROM", os.getenv("EMAIL_HOST_USER_DJANGO", "no-reply@example.com"))
 
 # DEBUG

@@ -47,7 +47,6 @@ jobs:
         cd backend/
         python manage.py test
 
-
   build:
     runs-on: ubuntu-latest
     needs: tests
@@ -64,7 +63,7 @@ jobs:
       - name: Check out the repo
         uses: actions/checkout@v4
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v3
       - name: Login to Docker 
         uses: docker/login-action@v3
         with:
@@ -82,7 +81,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Set up nodeJS
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version: 18
 
@@ -93,7 +92,7 @@ jobs:
       - name: Check out the repo
         uses: actions/checkout@v4
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v3
       - name: Login to Docker 
         uses: docker/login-action@v3
         with:
@@ -115,7 +114,7 @@ jobs:
     - name: Checkout repo
       uses: actions/checkout@v4
     - name: Copy docker-compose.yml via ssh
-      uses: appleboy/scp-action@master
+      uses: appleboy/scp-action@v0.1.7
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USER }}
@@ -124,7 +123,7 @@ jobs:
         source: "docker-compose.production.yml"
         target: "transferslux"
     - name: Executing remote ssh commands to deploy
-      uses: appleboy/ssh-action@master
+      uses: appleboy/ssh-action@v1.2.0
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USER }}
@@ -132,24 +131,16 @@ jobs:
         passphrase: ${{ secrets.SSH_PASSPHRASE }}
         script: |
           cd transferslux
-          # Авторизация в Docker Hub (read-only токен для pull)
           echo "${{ secrets.DOCKERHUB_TOKEN_RO }}" | sudo docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
-          # Выполняет pull образов с Docker Hub
           sudo docker compose -f docker-compose.production.yml pull
-          # Перезапускает все контейнеры в Docker Compose
           sudo docker compose -f docker-compose.production.yml down
           sudo docker compose -f docker-compose.production.yml up -d
-          # Очистка Docker
           sudo docker container prune -f
           sudo docker image prune -af
           sudo docker volume prune -f
-          # Очистка Redis
           sudo docker compose -f docker-compose.production.yml exec redis redis-cli FLUSHALL
-          # Выполняет миграции и сбор статики
           sudo docker compose -f docker-compose.production.yml exec backend python manage.py migrate
-          # Скомпилировать сообщения (.mo)
           sudo docker compose -f docker-compose.production.yml exec backend python manage.py compilemessages
-          # Собирает статику во внутри volume, смонтированный в gateway
           sudo docker compose -f docker-compose.production.yml exec backend python manage.py collectstatic --noinput
 
   send_message:
@@ -157,8 +148,8 @@ jobs:
     needs: deploy
     steps:
     - name: Send message
-      uses: appleboy/telegram-action@master
+      uses: appleboy/telegram-action@v1.0.1
       with:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
-        message: деплои transferslux успешен!
+        message: деплой transferslux успешен!

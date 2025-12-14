@@ -17,8 +17,10 @@ else:
 import googlemaps
 from api.forms import DetailsForm, ExtrasForm, SearchForm, VehicleForm
 from api.models import Booking, Search
+from django.http import HttpResponse
 from django.conf import settings
 from django.contrib import messages
+from django.views.decorators.cache import cache_page
 from django.core.mail import EmailMultiAlternatives
 from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
@@ -684,22 +686,25 @@ def payment_error(request):
     return render(request, 'booking/booking-payment-error.html')
 
 
+@cache_page(60 * 60)  # 1 час
 def about(request):
     return render(request, 'about.html')
 
 
+@cache_page(60 * 60)
 def privacy(request):
     return render(request, 'privacy-policy.html')
 
 
+@cache_page(60 * 60)
 def terms(request):
     return render(request, 'terms-and-conditions.html')
 
-
+@cache_page(60 * 60)
 def help(request):
     return render(request, 'help-center.html')
 
-
+@cache_page(60 * 60)
 def contacts(request):
     return render(request, 'contacts.html')
 
@@ -710,3 +715,20 @@ def page_not_found(request, exception):
 
 def internal_server_error(request, *args, **argv):
     return render(request, '500.html', status=500)
+
+
+def robots_txt(request):
+    lines = [
+        "User-agent: *",
+        "Allow: /",
+        "Disallow: /dj-admin/",
+        "Disallow: /booking-vehicle/",
+        "Disallow: /booking-extra/",
+        "Disallow: /booking-passenger/",
+        "Disallow: /booking-payment/",
+        "Disallow: /success/",
+        "Disallow: /error/",
+        "",
+        "Sitemap: https://transferslux.com/sitemap.xml",
+    ]
+    return HttpResponse("\n".join(lines), content_type="text/plain")
