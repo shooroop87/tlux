@@ -27,7 +27,7 @@ from django.template.loader import render_to_string
 from django.utils.translation import get_language_from_request
 from django.utils.html import strip_tags
 
-google_api_key = settings.GOOGLE_MAPS_API_KEY
+google_directions_key = settings.GOOGLE_DIRECTIONS_KEY
 
 
 def index(request):
@@ -81,11 +81,18 @@ def vehicle(request):  # noqa: C901
     from_hidden = query.get('from_hidden')
     to_short = query.get('to_short')
     to_hidden = query.get('to_hidden')
+
+    # Добавь это для отладки
+    print("="*50)
+    print(f"FROM_HIDDEN: '{from_hidden}'")
+    print(f"TO_HIDDEN: '{to_hidden}'")
+    print("="*50)
+
     to_date = query.get('to_date')
     to_time = query.get('to_time')
     session_id = query.get('session_id')
     # Perform your search logic here based on the query
-    gmaps = googlemaps.Client(key=google_api_key)
+    gmaps = googlemaps.Client(key=google_directions_key)
     # Шаблон для Милана, учитывающий разные написания
     mp = re.compile(
         r'(milan|milano|милан)',

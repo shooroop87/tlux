@@ -37,7 +37,7 @@ NEXI_HOST = NEXI[NEXI_ENV]["HOST"]
 # Почта
 DEFAULT_FROM_EMAIL = os.getenv("EMAIL_FROM", os.getenv("EMAIL_HOST_USER_DJANGO", "no-reply@example.com"))
 
-# DEBUG
+# DEBUG MODE
 DEBUG = False
 
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "localhost 127.0.0.1 0.0.0.0 backend gateway db 217.154.121.7 transferslux.com www.transferslux.com").split()
@@ -117,6 +117,7 @@ LOCALE_PATHS = [BASE_DIR / 'locale']
 
 # Google API
 GOOGLE_MAPS_API_KEY = str(os.getenv("GOOGLE_API_KEY"))
+GOOGLE_DIRECTIONS_KEY = str(os.getenv("GOOGLE_DIRECTIONS_KEY"))
 
 TEMPLATES = [
     {
@@ -219,6 +220,10 @@ else:
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Локальная разработка - любая команда вне Docker
+if not os.environ.get('DOCKER_ENV') and any(cmd in sys.argv for cmd in ['runserver', 'migrate', 'makemigrations', 'shell', 'createsuperuser']):
+    DATABASES['default']['HOST'] = 'localhost'
 
 # Email settings
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

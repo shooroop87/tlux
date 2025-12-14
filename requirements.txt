@@ -13,7 +13,7 @@ gunicorn==20.1.0
 
 # Environment and configuration
 python-dotenv==0.21.0
-PyYAML==6.0
+PyYAML==6.0.1
 
 # HTTP requests
 requests==2.31.0
@@ -96,3 +96,5 @@ tzlocal==5.2
 # Development and testing
 django-debug-toolbar==4.3.0
 isort==5.13.2
+
+django-browser-reload==1.17.0

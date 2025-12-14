@@ -26,7 +26,7 @@
     <link rel="alternate" hreflang="es" href="https://transferslux.com/es/">
     <link rel="alternate" hreflang="fr" href="https://transferslux.com/fr/">
     <link rel="alternate" hreflang="x-default" href="https://transferslux.com/">
-
+    
     <!-- Open Graph -->
     <meta property="og:type" content="{% block og_type %}website{% endblock %}">
     <meta property="og:site_name" content="TransfersLux">
@@ -46,6 +46,9 @@
     
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'imgs/template/favicon.png' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'imgs/template/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'imgs/template/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'imgs/template/favicon-16x16.png' %}">
     
     <!-- Preconnect для оптимизации загрузки -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -112,38 +115,47 @@
     
     {% block extra_css %}{% endblock %}
     
-<!-- Google Maps API -->
-<script>
-function initAutocomplete() {
-    const fromInput = document.getElementById('id_from');
-    const fromHidden = document.getElementById('id_from_hidden');
-    const toInput = document.getElementById('id_to');
-    const toHidden = document.getElementById('id_to_hidden');
-    
-    if (fromInput) {
-        const fromAutocomplete = new google.maps.places.Autocomplete(fromInput, {
-            fields: ["formatted_address", "name"]
-        });
-        fromAutocomplete.addListener("place_changed", function() {
-            const place = fromAutocomplete.getPlace();
-            fromInput.value = place.name || '';
-            fromHidden.value = place.formatted_address || '';
-        });
-    }
-    
-    if (toInput) {
-        const toAutocomplete = new google.maps.places.Autocomplete(toInput, {
-            fields: ["formatted_address", "name"]
-        });
-        toAutocomplete.addListener("place_changed", function() {
-            const place = toAutocomplete.getPlace();
-            toInput.value = place.name || '';
-            toHidden.value = place.formatted_address || '';
-        });
-    }
-}
-</script>
-<script async src="https://maps.googleapis.com/maps/api/js?key={{ google_maps_api_key }}&libraries=places&callback=initAutocomplete"></script>
+    <!-- Google Maps API -->
+    <script async src="https://maps.googleapis.com/maps/api/js?key={{ google_maps_api_key }}&libraries=places&loading=async&callback=initMap"></script>
+    <script>
+        async function initMap() {
+            const options = {
+                fields: ["formatted_address", "geometry", "name"],
+                strictBounds: false,
+            };
+            
+            const autocompleteFormFieldFrom = document.getElementById('id_from');
+            const autocompleteFromFieldFrom_hidden = document.getElementById('id_from_hidden');
+            
+            if (autocompleteFormFieldFrom) {
+                const autocompleteFrom = new google.maps.places.Autocomplete(autocompleteFormFieldFrom, options);
+                google.maps.event.clearInstanceListeners(autocompleteFormFieldFrom);
+                autocompleteFrom.addListener("place_changed", () => {
+                    const place_from = autocompleteFrom.getPlace();
+                    autocompleteFormFieldFrom.value = place_from.name;
+                    if (autocompleteFromFieldFrom_hidden) {
+                        autocompleteFromFieldFrom_hidden.value = place_from.formatted_address;
+                    }
+                });
+            }
+            
+            const autocompleteFormFieldTo = document.getElementById('id_to');
+            const autocompleteFromFieldTo_hidden = document.getElementById('id_to_hidden');
+            
+            if (autocompleteFormFieldTo) {
+                const autocompleteTo = new google.maps.places.Autocomplete(autocompleteFormFieldTo, options);
+                google.maps.event.clearInstanceListeners(autocompleteFormFieldTo);
+                autocompleteTo.addListener("place_changed", () => {
+                    const place_to = autocompleteTo.getPlace();
+                    autocompleteFormFieldTo.value = place_to.name;
+                    if (autocompleteFromFieldTo_hidden) {
+                        autocompleteFromFieldTo_hidden.value = place_to.formatted_address;
+                    }
+                });
+            }
+        }
+        window.initMap = initMap;
+    </script>
     
     {% block extra_js_head %}{% endblock %}
 </head>
