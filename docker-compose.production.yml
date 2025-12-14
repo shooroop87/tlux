@@ -30,7 +30,6 @@ services:
     restart: unless-stopped
 
   backend:
-    # ЯВНЫЙ тег и автоподтягивание
     image: egorovdocker/transferslux_backend:latest
     pull_policy: always
     env_file: .env
@@ -42,29 +41,6 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
-    # entrypoint теперь внутри образа — ничего переопределять не надо
-    restart: unless-stopped
-
-  # Автообновление данных трансферов каждые 12 часов
-  transfers-updater:
-    # Используем тот же образ, но ВАЖНО: гасим entrypoint бэкенда
-    image: egorovdocker/transferslux_backend:latest
-    pull_policy: always
-    env_file: .env
-    depends_on:
-      db:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-    # <<< переопределяем entrypoint, чтобы НЕ бежали migrate/collectstatic >>>
-    entrypoint: ["/bin/sh", "-c"]
-    command: >
-      echo 'Setting up automatic transfers updater...' &&
-      printf '0 6 * * * cd /app && python manage.py refresh_all_transfers --clear-cache >> /tmp/transfers.log 2>&1\n' > /tmp/crontab &&
-      printf '0 18 * * * cd /app && python manage.py refresh_all_transfers >> /tmp/transfers.log 2>&1\n' >> /tmp/crontab &&
-      crontab /tmp/crontab &&
-      echo 'Cron jobs installed. Transfers will auto-update at 6:00 and 18:00 daily.' &&
-      crond -f -l 2
     restart: unless-stopped
 
   gateway:
@@ -72,9 +48,7 @@ services:
     pull_policy: always
     env_file: .env
     volumes:
-      # Раздаём статику только для чтения
       - static_volume:/staticfiles:ro
-      # Медиа раздаём из общего тома тоже read-only
       - media:/app/media/:ro
     ports:
       - "8000:80"
@@ -83,7 +57,6 @@ services:
     restart: unless-stopped
 
   # === СЕРВИСЫ ОБСЛУЖИВАНИЯ ===
-  # (оставляю без изменений функционально)
 
   redis-cleaner:
     image: redis:7
