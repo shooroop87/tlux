@@ -271,7 +271,7 @@ PAGINATE_BY = 20
 FILE_UPLOAD_PERMISSIONS = 0o644
 FILE_UPLOAD_MAX_MEMORY_SIZE = 10 * 1024 * 1024  # 10MB
 
-# Логирование
+# Logs
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
