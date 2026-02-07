@@ -396,10 +396,19 @@ def payment(request):
                 'notes_details': cleaned_data["notes_details"],
             })
             request.session['search_query'] = query
+        else:
+            return redirect('api:details')
 
     # Retrieve session data
     query = request.session.get('search_query', {})
     if not query:
+        return redirect('api:index')
+
+    required_fields = ['from_short', 'to_short', 'to_date', 'to_time',
+                       'car_class', 'rate', 'name', 'email', 'passengers']
+    missing = [f for f in required_fields if not query.get(f)]
+    if missing:
+        logger.warning("Missing session fields in payment: %s", missing)
         return redirect('api:index')
 
     # Calculate additional charges
@@ -549,6 +558,14 @@ def payment_success(request):
     # Handle booking information
     if request.session.get('search_query'):
         query = request.session['search_query']
+
+        required_fields = ['from_short', 'to_short', 'to_date', 'to_time',
+                        'car_class', 'rate', 'name', 'email', 'passengers']
+        missing = [f for f in required_fields if not query.get(f)]
+        if missing:
+            logger.warning("Missing session fields in success: %s", missing)
+            return redirect('api:index')
+        
         booking_data = {
             'session_id': query.get('session_id'),
             'from_short': query.get('from_short'),
